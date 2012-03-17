@@ -18,5 +18,6 @@ public class Connect extends DriverManagerDataSource {
 		/*this.setConnectionProperties(new Properties());
 		this.getConnectionProperties().put("useUnicode", "true");
 		this.getConnectionProperties().put("characterEncoding", "UTF-8");*/
+		
 	}
 }

@@ -69,4 +69,15 @@ public class Clube extends Entity {
 		this.loteca = loteca;
 	}
 
+	@Override
+	public String toString() {
+		return "nuSeqclube=" + getNuSeqclube() +
+			" cdClube=" + getCdClube() +
+			" nmClube=" + getNmClube();
+	}
+	
+	
+	
+	
+
 }
