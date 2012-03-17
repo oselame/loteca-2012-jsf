@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition
+	template="#{pageContext.servletContext.contextPath}/templates/template.xhtml">
+	<ui:define name="title">
+		<h:outputText value="#{msg.grupo_titulo}" />
+	</ui:define>
+
+	<ui:define name="context">
+			<h:form>
+			
+				<p:dataTable id="projetos" var="row" value="#{projetoBean.rows}"
+					rowKey="#{row.cdProjeto}" selection="#{projetoBean.entity}"
+					selectionMode="single" emptyMessage="#{msg.warning_nenhum_registro_encontrado}">
+					
+					<f:facet name="header">
+						#{msg.projeto_consultar}
+					</f:facet>
+					
+					<p:column headerText="#{msg.projeto_cdprojeto}">
+						<h:outputText value="#{row.cdProjeto}" />
+					</p:column>
+					<p:column headerText="#{msg.projeto_nmprojeto}">
+						<h:outputText value="#{row.nmProjeto}" />
+					</p:column>
+					<p:column headerText="#{msg.projeto_sgprojeto}">
+						<h:outputText value="#{row.sgProjeto}" />
+					</p:column>
+					<p:column style="width:15px">
+						<p:commandButton id="selectButton" icon="ui-icon-search" title="Editar" action="#{projetoBean.editar}" ajax="false">
+							<f:setPropertyActionListener value="#{row}" target="#{projetoBean.entity}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+				<p:messages showDetail="true" showSummary="false" />
+			</h:form>
+
+			<h:form>
+				<h:panelGrid columns="2">
+					<p:commandButton value="#{msg.button_novo}"
+						action="#{projetoBean.adicionar}" ajax="false" />
+				</h:panelGrid>
+			</h:form>
+	</ui:define>
+	
+	<ui:define name="footer">
+		rodape maluf
+	</ui:define>
+</ui:composition>
+</html>

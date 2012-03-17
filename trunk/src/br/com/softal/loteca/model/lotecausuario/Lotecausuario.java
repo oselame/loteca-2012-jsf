@@ -1,0 +1,83 @@
+package br.com.softal.loteca.model.lotecausuario;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import br.com.softal.base.model.Entity;
+import br.com.softal.loteca.model.loteca.Loteca;
+import br.com.softal.loteca.model.loteca.LotecaBean;
+import br.com.softal.loteca.model.usuario.Usuario;
+
+@SuppressWarnings("serial")
+@javax.persistence.Entity
+@Table(name = "eltclotecausuario")
+public class Lotecausuario extends Entity {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "nuseqlotecausuario")
+	@OneToMany(mappedBy = "lotecausuario")
+	private long nuSeqlotecausuario;
+
+	@Column(name = "flativo")
+	private Long flAtivo;
+	
+	@ManyToOne(optional = false, targetEntity = Usuario.class)
+	@JoinColumn(name = "cdUsuario", referencedColumnName = "cdUsuario")
+	private Usuario usuario;
+	
+	@ManyToOne(optional = false, targetEntity = Loteca.class)
+	@JoinColumn(name = "cdLoteca", referencedColumnName = "cdLoteca")
+	private Loteca loteca;
+
+	public Lotecausuario() {
+		super();
+	}
+	
+	public long getNuSeqlotecausuario() {
+		return nuSeqlotecausuario;
+	}
+
+	public void setNuSeqlotecausuario(long nuSeqlotecausuario) {
+		this.nuSeqlotecausuario = nuSeqlotecausuario;
+	}
+
+	public Long getFlAtivo() {
+		return flAtivo;
+	}
+
+	public void setFlAtivo(Long flAtivo) {
+		this.flAtivo = flAtivo;
+	}
+	
+	public Boolean getBlAtivo() {
+		return flAtivo != null && flAtivo == 1l;
+	}
+	
+	public void setBlAtivo(Boolean blAtivo) {
+		this.flAtivo = (blAtivo == null) ? 0l : (blAtivo ?  1l : 0l);
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Loteca getLoteca() {
+		return loteca;
+	}
+
+	public void setLoteca(Loteca loteca) {
+		this.loteca = loteca;
+	}
+	
+}

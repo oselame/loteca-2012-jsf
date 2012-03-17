@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition
+	template="#{pageContext.servletContext.contextPath}/templates/template.xhtml">
+	<ui:define name="title">
+		<h:outputText value="#{msg.grupo_titulo}" />
+	</ui:define>
+
+	<ui:define name="context">
+			<h:form>
+				<p:dataTable id="grupos" var="row" value="#{grupoBean.rows}"
+					rowKey="#{row.cdGrupo}" selection="#{grupoBean.entity}"
+					selectionMode="single" emptyMessage="#{msg.warning_nenhum_registro_encontrado}">
+					
+					<f:facet name="header">
+						#{msg.grupo_consultar}
+					</f:facet>
+					
+					<p:column headerText="#{msg.grupo_cdgrupo}">
+						<h:outputText value="#{row.cdGrupo}" />
+					</p:column>
+					<p:column headerText="#{msg.grupo_degrupo}">
+						<h:outputText value="#{row.deGrupo}" />
+					</p:column>
+					<p:column headerText="#{msg.grupo_nmgrupo}">
+						<h:outputText value="#{row.nmGrupo}" />
+					</p:column>
+					<p:column style="width:15px">
+						<p:commandButton id="selectButton" icon="ui-icon-search" title="Editar" action="#{grupoBean.editar}" ajax="false">
+							<f:setPropertyActionListener value="#{row}" target="#{grupoBean.entity}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+				<p:messages showDetail="true" showSummary="false" />
+			</h:form>
+
+			<h:form>
+				<h:panelGrid columns="2">
+					<p:commandButton value="#{msg.button_novo}"
+						action="#{grupoBean.adicionar}" ajax="false" />
+				</h:panelGrid>
+			</h:form>
+	</ui:define>
+</ui:composition>
+</html>

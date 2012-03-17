@@ -1,0 +1,21 @@
+@CHARSET "ISO-8859-1";
+
+.fieldGrid {
+	width: 100%;
+}
+
+.headerColumn {
+	width: 120px;
+}
+
+.detailColum {
+	width: 50%;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.alignRight {
+	text-align: right;
+}
