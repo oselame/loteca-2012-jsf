@@ -40,6 +40,7 @@ public class ClubeBean extends AbstractManegedBean<Clube> implements Serializabl
 	@Override
 	public void save() {
 		try {
+			System.out.println(getEntity().toString());
 			if (getEntity().isStatusInsert()) {
 				super.save();
 				super.getMessages().addSucessMessage("mensagem_registro_salvo_com_sucesso");
