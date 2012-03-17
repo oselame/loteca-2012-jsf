@@ -1,6 +1,7 @@
 package br.com.softal.loteca.sets;
 
 import java.util.ResourceBundle;
+
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 public class Connect extends DriverManagerDataSource {
@@ -14,5 +15,8 @@ public class Connect extends DriverManagerDataSource {
 		this.setUrl( 				jdbc.getString("url")				);
 		this.setUsername(			jdbc.getString("username")			);
 		this.setPassword(			jdbc.getString("password")			);
+		/*this.setConnectionProperties(new Properties());
+		this.getConnectionProperties().put("useUnicode", "true");
+		this.getConnectionProperties().put("characterEncoding", "UTF-8");*/
 	}
 }
