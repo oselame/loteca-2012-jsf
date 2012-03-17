@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+	<p:menu style="width: 100%"> 
+		<p:submenu label="#{msg.menu_administracao}">
+			<p:menuitem url="/pages/grupo/eltcConGrupo.xhtml" value="${msg.menu_grupos}" />
+			<p:menuitem url="/pages/action/eltcConAction.xhtml" value="${msg.menu_actions}" />
+			<p:menuitem url="/pages/grupoaction/eltcConGrupoaction.xhtml" value="${msg.menu_grupo_actions}" />
+			<p:menuitem url="/pages/projeto/eltcConProjeto.xhtml" value="${msg.menu_projetos}" />
+			<p:menuitem url="/pages/usuario/eltcConUsuario.xhtml" value="${msg.menu_usuarios}" />
+			<p:menuitem url="/pages/clube/eltcConClube.xhtml" value="${msg.menu_times}" />
+			<p:menuitem url="/pages/lotecausuario/eltcConLotecausuario.xhtml" value="${msg.menu_loteca_usuario}" />
+		</p:submenu>
+		<p:submenu label="#{msg.menu_loteca}">
+			<p:menuitem url="/pages/grupo/eltcConGrupo.xhtml" value="${msg.menu_usuarios}" />
+			<p:menuitem url="/pages/grupo/eltcConGrupo.xhtml" value="${msg.menu_concursos}" />
+		</p:submenu>
+	</p:menu>
+</h:body>
+
+</html>

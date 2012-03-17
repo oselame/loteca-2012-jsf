@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<ui:composition template="#{pageContext.servletContext.contextPath}/templates/template.xhtml">
+	<ui:define name="title">
+		<h:outputText value="#{msg.clube_titulo}" />
+	</ui:define>
+	
+	<ui:define name="context">
+		<h:form>
+			 <p:messages showDetail="true" showSummary="false" />
+			<p:panel header="#{msg.clube_cadastrar}" >
+				<h:inputHidden value="#{clubeBean.entity.status}"  />
+				<h:panelGrid columns="2" style="width:100%" columnClasses="headerColumn alignRight bold">
+					
+					<h:outputLabel value="#{msg.clube_cdloteca}:" />
+					<h:panelGroup>
+						Loteca <h:outputText value="#{clubeBean.entity.loteca.nuAno}" />
+					</h:panelGroup>
+						
+					<h:outputLabel value="#{msg.clube_cdclube}*:" />
+					<p:inputText value="#{clubeBean.entity.cdClube}" required="true" 
+						requiredMessage="#{msg.clube_cdclube_requirido}" 
+						maxlength="2" style="width: 100%" 
+						converter="javax.faces.Long"
+						converterMessage="Somente valores numéricos são permitidos"/>
+						
+					<h:outputLabel value="#{msg.clube_nmclube}*:" />
+					<p:inputText value="#{clubeBean.entity.nmClube}" required="true" 
+						requiredMessage="#{msg.clube_declube_requirido}" 
+						maxlength="100" style="width: 100%" />
+					
+				</h:panelGrid>
+				<f:facet name="footer">
+					<p:commandButton value="#{msg.button_save}" action="#{clubeBean.save}" ajax="false" />
+					<p:commandButton value="#{msg.button_novo}" action="#{clubeBean.adicionar}" ajax="false" immediate="true"/>
+					<p:commandButton value="#{msg.button_excluir}" action="#{clubeBean.excluir}" 
+						ajax="false" onclick="return confirm('#{msg.confirma_exclusao_registro}')" 
+						rendered="#{clubeBean.entity.status ne 'I'}" />
+					<p:commandButton value="#{msg.button_voltar}" action="eltcConClube" ajax="false" immediate="true"/>
+				</f:facet>
+			</p:panel>
+		</h:form>
+		
+		
+	</ui:define>
+</ui:composition>
+</html>

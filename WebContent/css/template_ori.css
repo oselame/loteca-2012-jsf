@@ -1,0 +1,58 @@
+@CHARSET "ISO-8859-1";
+
+html {
+	height: 100%;
+}
+
+body {
+	margin: 1px;
+	height: 100%;
+	background: #ddd;
+	margin-left: 0px;
+	margin-right: opx;
+}
+
+.barColumn {
+	width: 30%;
+}
+
+.contextColumn {
+	width: 70%;
+}
+
+div {
+	border-style: dotted;
+	border-width: 1px;
+}
+
+div#cabecalho {
+	width: 100%;
+	height: 100px;
+	float: left;
+}
+
+div#titulo {
+	width: 300px;
+	float: left;
+}
+
+div#logo {
+	width: 100px;
+	float: left;
+	height: 100px;
+}
+
+div#login{
+	width: 100px;
+	float: right;
+	height: 100px;
+}
+
+div#menuBar {
+	width: 180px;
+	float: left;
+}
+
+div#contextColumn {
+	float: left;
+}
