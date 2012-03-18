@@ -8,6 +8,7 @@ import javax.faces.bean.SessionScoped;
 
 import br.com.softal.base.bean.AbstractManegedBean;
 import br.com.softal.loteca.LtcServiceLocator;
+import br.com.softal.loteca.service.LotecaService;
 
 @SuppressWarnings("serial")
 @ManagedBean(name="lotecaBean")
