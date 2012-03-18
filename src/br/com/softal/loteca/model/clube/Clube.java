@@ -35,6 +35,7 @@ public class Clube extends Entity {
 
 	public Clube() {
 		super();
+		setLoteca(new Loteca());
 	}
 
 	public long getNuSeqclube() {

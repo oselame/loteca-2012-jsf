@@ -1,5 +1,7 @@
 package br.com.softal.loteca.model.lotecausuario;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,8 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.com.softal.base.model.Entity;
+import br.com.softal.loteca.model.clubeusuario.Clubeusuario;
 import br.com.softal.loteca.model.loteca.Loteca;
-import br.com.softal.loteca.model.loteca.LotecaBean;
 import br.com.softal.loteca.model.usuario.Usuario;
 
 @SuppressWarnings("serial")
@@ -35,6 +37,10 @@ public class Lotecausuario extends Entity {
 	@ManyToOne(optional = false, targetEntity = Loteca.class)
 	@JoinColumn(name = "cdLoteca", referencedColumnName = "cdLoteca")
 	private Loteca loteca;
+	
+	@OneToMany(targetEntity = Clubeusuario.class)
+	@JoinColumn(name = "nuseqlotecausuario", referencedColumnName = "nuseqlotecausuario")	
+	private List<Clubeusuario> clubeusuarios;
 
 	public Lotecausuario() {
 		super();
@@ -78,6 +84,14 @@ public class Lotecausuario extends Entity {
 
 	public void setLoteca(Loteca loteca) {
 		this.loteca = loteca;
+	}
+
+	public List<Clubeusuario> getClubeusuarios() {
+		return clubeusuarios;
+	}
+
+	public void setClubeusuarios(List<Clubeusuario> clubeusuarios) {
+		this.clubeusuarios = clubeusuarios;
 	}
 	
 }

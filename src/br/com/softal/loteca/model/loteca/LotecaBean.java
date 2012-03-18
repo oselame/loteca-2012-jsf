@@ -7,26 +7,15 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import br.com.softal.base.bean.AbstractManegedBean;
-import br.com.softal.loteca.sets.SpringFactory;
+import br.com.softal.loteca.LtcServiceLocator;
 
 @SuppressWarnings("serial")
 @ManagedBean(name="lotecaBean")
 @SessionScoped
 public class LotecaBean extends AbstractManegedBean<Loteca> implements Serializable {
-	
-	private LotecaService lotecaService;
 
 	public LotecaBean() {
 		super();
-		lotecaService = (LotecaServiceImpl) SpringFactory.getInstance().getBean("lotecaService"); 
-	}
-	
-	public String getNomesistema() {
-		try {
-			return "Loteca " + getLotecaService().findLotecaAtiva().getNuAno();
-		} catch (Exception e) {
-			return "Registro da Loteca nao definido.";
-		}
 	}
 	
 	@Override
@@ -34,12 +23,9 @@ public class LotecaBean extends AbstractManegedBean<Loteca> implements Serializa
 		setEntity(new Loteca());
 	}
 	
-	public void setLotecaService(LotecaServiceImpl lotecaService) {
-		this.lotecaService = lotecaService;
-	}
 	
 	private LotecaService getLotecaService() {
-		return lotecaService;
+		return LtcServiceLocator.getInstance().getLotecaService();
 	}
 	
 	public Loteca getLotecaativa() {

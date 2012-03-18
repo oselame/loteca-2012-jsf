@@ -1,13 +1,18 @@
 package br.com.softal.loteca.model.clube;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.ValueChangeEvent;
+import javax.faces.model.SelectItem;
 
 import br.com.softal.base.bean.AbstractManegedBean;
+import br.com.softal.loteca.LtcServiceLocator;
 import br.com.softal.loteca.model.loteca.Loteca;
 import br.com.softal.loteca.model.loteca.LotecaBean;
 
@@ -15,6 +20,8 @@ import br.com.softal.loteca.model.loteca.LotecaBean;
 @ManagedBean(name="clubeBean")
 @SessionScoped
 public class ClubeBean extends AbstractManegedBean<Clube> implements Serializable {
+	
+	private List<SelectItem> lotecas;
 	
 	@ManagedProperty(value="#{lotecaBean}")
 	private LotecaBean lotecaBean;
@@ -34,7 +41,8 @@ public class ClubeBean extends AbstractManegedBean<Clube> implements Serializabl
 	
 	@PostConstruct
 	public void init() {
-		super.findAll();
+		//--super.findAll();
+		this.carregaLotecas();
 	}
 	
 	@Override
@@ -53,6 +61,22 @@ public class ClubeBean extends AbstractManegedBean<Clube> implements Serializabl
 			e.printStackTrace();
 		}
 		init();
+	}
+	
+	public void carregaUsuariosloteca(ValueChangeEvent event) {
+		 if ((Long)event.getNewValue() != null) {
+			 getEntity().getLoteca().setCdLoteca( (Long) event.getNewValue() );
+		 }
+		//super.findAll();
+	}
+	
+	private void carregaLotecas() {
+		getLotecaBean().init();
+		List<Loteca> listaLotecas = getLotecaBean().getRows();
+		setLotecas(new ArrayList<SelectItem>());
+		for (Loteca p : listaLotecas) {
+			getLotecas().add(new SelectItem(p.getCdLoteca(), p.getNuAno().toString()));
+		}
 	}
 	
 	private Loteca getLotecaAtiva() {
@@ -85,5 +109,12 @@ public class ClubeBean extends AbstractManegedBean<Clube> implements Serializabl
 		return "eltcCadClube";
 	}
 	
+	public List<SelectItem> getLotecas() {
+		return lotecas;
+	}
+
+	public void setLotecas(List<SelectItem> lotecas) {
+		this.lotecas = lotecas;
+	}
 
 }

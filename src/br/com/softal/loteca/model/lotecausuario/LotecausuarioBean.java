@@ -29,9 +29,7 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 	
 	@ManagedProperty(value = "#{usuarioBean}")
 	private UsuarioBean usuarioBean;
-	
 	public LotecausuarioBean() {
-		
 	}
 	
 	public List<SelectItem> getLotecas() {
@@ -49,7 +47,7 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 	public void setUsuarios(List<SelectItem> usuarios) {
 		this.usuarios = usuarios;
 	}
-
+	
 	public LotecaBean getLotecaBean() {
 		return lotecaBean;
 	}
@@ -65,7 +63,7 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 	public void setUsuarioBean(UsuarioBean usuarioBean) {
 		this.usuarioBean = usuarioBean;
 	}
-
+	
 	private void carregaLotecas() {
 		getLotecaBean().init();
 		List<Loteca> listaLotecas = getLotecaBean().getRows();
@@ -89,6 +87,7 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 		setEntity(new Lotecausuario());
 		getEntity().setLoteca(new Loteca());
 		getEntity().setUsuario(new Usuario());
+		
 	}
 	
 	@PostConstruct
@@ -116,6 +115,10 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 		}
 		init();
 	}	
+	
+	public String abrirConLotecausuario() {
+		return "eltcConLotecausuario";
+	}
 	
 	public String adicionar() {
 		initializeEntity();
