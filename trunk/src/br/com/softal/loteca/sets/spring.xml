@@ -28,6 +28,7 @@
 				<value>br.com.softal.loteca.model.usuario.Usuario</value>
 				<value>br.com.softal.loteca.model.clube.Clube</value>
 				<value>br.com.softal.loteca.model.lotecausuario.Lotecausuario</value>
+				<value>br.com.softal.loteca.model.clubeusuario.Clubeusuario</value>
 			</list>
 		</property>
 		
@@ -78,7 +79,12 @@
 	<bean id="defaultService" class="br.com.softal.base.service.DefaultServiceImpl"> 
 		<property name="genericDAO" ref="genericDAO" />
 	</bean>
+	<bean id="ltcServiceImpl" class="br.com.softal.loteca.service.LtcServiceImpl"> 
+		<property name="genericDAO" ref="genericDAO" />
+	</bean>
+	
 	<bean id="lotecaService" class="br.com.softal.loteca.model.loteca.LotecaServiceImpl"> 
+		<property name="genericDAO" ref="genericDAO" />
 		<property name="lotecaDAO" ref="lotecaDAO" />
 	</bean>
 </beans>
