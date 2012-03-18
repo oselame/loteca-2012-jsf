@@ -1,5 +1,6 @@
 package br.com.softal.base.dao;
 
+@SuppressWarnings("serial")
 public class DaoException extends Exception {
 
 	public DaoException(String s) {
