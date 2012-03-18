@@ -15,5 +15,5 @@ public interface GenericDAO<E extends Entity> {
 	E findByPrimaryKey(E entity);
 
 	List<E> findAll(E entity);
-
+	
 }
