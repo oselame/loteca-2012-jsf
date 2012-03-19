@@ -71,7 +71,12 @@
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
 	<bean id="lotecaDAO" class="br.com.softal.loteca.model.loteca.HbnLotecaDAO"> 
-		<!-- Injeta esse objeto hibernateTemplate dentro do DAO -->
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="lotecausuarioDAO" class="br.com.softal.loteca.model.lotecausuario.HbnLotecausuarioDAO"> 
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="clubeDAO" class="br.com.softal.loteca.model.clube.HbnClubeDAO"> 
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
 	
@@ -79,12 +84,10 @@
 	<bean id="defaultService" class="br.com.softal.base.service.DefaultServiceImpl"> 
 		<property name="genericDAO" ref="genericDAO" />
 	</bean>
-	<bean id="ltcServiceImpl" class="br.com.softal.loteca.service.LtcServiceImpl"> 
-		<property name="genericDAO" ref="genericDAO" />
-	</bean>
-	
-	<bean id="lotecaService" class="br.com.softal.loteca.model.loteca.LotecaServiceImpl"> 
+	<bean id="lotecaService" class="br.com.softal.loteca.service.LotecaServiceImpl"> 
 		<property name="genericDAO" ref="genericDAO" />
 		<property name="lotecaDAO" ref="lotecaDAO" />
+		<property name="lotecausuarioDAO" ref="lotecausuarioDAO" />
+		<property name="clubeDAO" ref="clubeDAO" />
 	</bean>
 </beans>

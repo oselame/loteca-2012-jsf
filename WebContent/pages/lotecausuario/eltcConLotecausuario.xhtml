@@ -13,14 +13,29 @@
 
 	<ui:define name="context">
 			<h:form>
-				<p:dataTable id="lotecausuarios" var="row" value="#{lotecausuarioBean.rows}"
-					rowKey="#{row.nuSeqlotecausuario}" selection="#{lotecausuarioBean.entity}"
-					selectionMode="single" emptyMessage="#{msg.warning_nenhum_registro_encontrado}">
-					
+				<p:messages showDetail="true" showSummary="false" />
+				<p:panelGrid columns="2" style="width:100%" columnClasses="headerColumn alignRight bold">
 					<f:facet name="header">
 						#{msg.lotecausuario_consultar}
 					</f:facet>
-					
+					<h:outputLabel value="#{msg.clube_cdloteca}:" for="cdLoteca" />
+					<h:selectOneMenu value="#{lotecausuarioBean.cdLoteca}" id="cdLoteca" style="width: 100%" 
+						required="false" requiredMessage="#{msg.lotecausuario_cdloteca_requirido}" 
+						valueChangeListener="#{lotecausuarioBean.carregaUsuariosloteca}"
+						onchange="submit()" immediate="true">
+						<f:selectItem itemLabel="#{msg.selectonemenu_selecione}" itemValue="" />
+						<f:selectItems value="#{lotecausuarioBean.lotecas}" var="lot" itemLabel="#{lot.deLoteca}" itemValue="#{lot.cdLoteca}" />
+					</h:selectOneMenu>
+					<f:facet name="footer">
+						<p:commandButton value="#{msg.button_novo}"
+							action="#{lotecausuarioBean.adicionar}" ajax="false" />
+					</f:facet>
+				</p:panelGrid>
+				<br/>			
+			
+				<p:dataTable id="lotecausuarios" var="row" value="#{lotecausuarioBean.rows}"
+					rowKey="#{row.nuSeqlotecausuario}" selection="#{lotecausuarioBean.entity}"
+					selectionMode="single" emptyMessage="#{msg.warning_nenhum_registro_encontrado}">
 					<p:column headerText="#{msg.lotecausuario_cdloteca}">
 						<h:outputText value="#{row.loteca.deLoteca}" />
 					</p:column>
@@ -34,13 +49,6 @@
 					</p:column>
 				</p:dataTable>
 				<p:messages showDetail="true" showSummary="false" />
-			</h:form>
-
-			<h:form>
-				<h:panelGrid columns="2">
-					<p:commandButton value="#{msg.button_novo}"
-						action="#{lotecausuarioBean.adicionar}" ajax="false" />
-				</h:panelGrid>
 			</h:form>
 	</ui:define>
 </ui:composition>

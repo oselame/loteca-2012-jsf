@@ -20,14 +20,16 @@
 				
 					<h:outputLabel value="#{msg.lotecausuario_cdloteca}:" />
 					<h:selectOneMenu value="#{lotecausuarioBean.entity.loteca.cdLoteca}" id="cdLoteca" style="width: 100%" 
-						required="true" requiredMessage="#{msg.lotecausuario_cdloteca_requirido}">
+						required="true" requiredMessage="#{msg.lotecausuario_cdloteca_requirido}"
+						disabled="#{lotecausuarioBean.entity.status ne 'I'}">
 						<f:selectItem itemLabel="#{msg.selectonemenu_selecione}" itemValue="" />
 						<f:selectItems value="#{lotecausuarioBean.lotecas}" var="lot" itemLabel="#{lot.deLoteca}" itemValue="#{lot.cdLoteca}" />
 					</h:selectOneMenu>
 					
 					<h:outputLabel value="#{msg.lotecausuario_cdusuario}:" />
 					<h:selectOneMenu value="#{lotecausuarioBean.entity.usuario.cdUsuario}" id="cdUsuario" style="width: 100%" 
-						required="true" requiredMessage="#{msg.lotecausuario_cdusuario_requirido}">
+						required="true" requiredMessage="#{msg.lotecausuario_cdusuario_requirido}"
+						disabled="#{lotecausuarioBean.entity.status ne 'I'}">
 						<f:selectItem itemLabel="#{msg.selectonemenu_selecione}" itemValue="" />
 						<f:selectItems value="#{lotecausuarioBean.usuarios}" var="usu" itemLabel="#{usu.nmUsuario}" itemValue="#{usu.cdUsuario}" />
 					</h:selectOneMenu>
@@ -39,11 +41,13 @@
 				<f:facet name="footer">
 					<p:commandButton value="#{msg.button_save}" action="#{lotecausuarioBean.save}" ajax="false" />
 					<p:commandButton value="#{msg.button_novo}" action="#{lotecausuarioBean.adicionar}" ajax="false" immediate="true"/>
-					<p:commandButton value="#{msg.button_excluir}" action="#{lotecausuarioBean.excluir}" ajax="false" 
-						onclick="return confirm('#{msg.confirma_exclusao_registro}')" 
-						rendered="#{lotecausuarioBean.entity.status ne 'I'}"/>
 					<p:commandButton value="#{msg.button_voltar}" action="eltcConLotecausuario" ajax="false" immediate="true"/>
 				</f:facet>	
+			</p:panel>
+			<br/>
+			<p:panel header="#{msg.lotecausuario_clubes_usuario}" >
+			sdfdsa
+			s
 			</p:panel>
 		</h:form>
 	</ui:define>

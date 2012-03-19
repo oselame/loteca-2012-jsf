@@ -14,6 +14,9 @@ public interface DefaultService {
 
 	Entity findByPrimaryKey(Entity entity);
 
-	List<Entity> findAll(Entity entity);
+	//List<Entity> findAll(Entity entity);
+	
+	//<E extends Entity> List<? extends Entity> findAll(Entity entity);
+	List<? extends Entity> findAll(Entity entity);
 
 }

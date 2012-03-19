@@ -36,5 +36,9 @@ public class MessagesWeb extends Messages {
 	public void addSucessMessage(String message) {
 		this.addMessage( message );
 	}
+	
+	public void addWarningMessage(String message) {
+		this.addMessage(FacesMessage.SEVERITY_WARN, message );
+	}
 
 }
