@@ -38,7 +38,7 @@ public class Clubeusuario extends Entity {
 	private Clube clube;
 
 	@ManyToOne(optional = false, targetEntity = Lotecausuario.class)
-	@JoinColumn(name = "nuSeqlotecausuario", referencedColumnName = "nuSeqlotecausuario")
+	@JoinColumn(name = "nuSeqclubeusuario", referencedColumnName = "nuSeqclubeusuario")
 	private Lotecausuario lotecausuario;
 
 	public Clubeusuario() {

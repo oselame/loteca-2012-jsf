@@ -39,7 +39,7 @@ public class Lotecausuario extends Entity {
 	private Loteca loteca;
 	
 	@OneToMany(targetEntity = Clubeusuario.class)
-	@JoinColumn(name = "nuseqlotecausuario", referencedColumnName = "nuseqlotecausuario")	
+	@JoinColumn(name = "nuSeqlotecausuario", referencedColumnName = "nuSeqlotecausuario")	
 	private List<Clubeusuario> clubeusuarios;
 
 	public Lotecausuario() {

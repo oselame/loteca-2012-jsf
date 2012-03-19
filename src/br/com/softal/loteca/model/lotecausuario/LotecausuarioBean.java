@@ -116,26 +116,32 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 		this.carregaUsuarios();
 	}
 	
-	private void insereClubesUsuario(Long cdUsuario, Long cdLoteca) {
-		if (getEntity().getClubeusuarios() != null  && getEntity().getClubeusuarios().size() == 0) {
-			Clube clube = new Clube();
-			clube.getLoteca().setCdLoteca(cdLoteca);
-			List<Clube> clubes = (List<Clube>) LtcServiceLocator.getInstance().getLotecaService().findAll(clube);
-			for (Clube c : clubes) {
-				Clubeusuario cu = new Clubeusuario();
-				cu.setNuPontos(0l);
-				cu.setNuPosicao(c.getCdClube());
-				cu.setClube(c);
-				cu.setLotecausuario(getEntity());
-				cu.setStatusInsert();
-				LtcServiceLocator.getInstance().getLotecaService().save(cu);
-				getEntity().getClubeusuarios().add(cu);
-			}
+	private void insereClubesUsuario() {
+		Clube clube = new Clube();
+		clube.getLoteca().setCdLoteca( getEntity().getLoteca().getCdLoteca() );
+		List<Clube> clubes = (List<Clube>) LtcServiceLocator.getInstance().getLotecaService().findAll(clube);
+		getEntity().setClubeusuarios(new ArrayList<Clubeusuario>());
+		for (Clube c : clubes) {
+			Clubeusuario cu = new Clubeusuario();
+			cu.setNuPontos(0l);
+			cu.setNuPosicao(c.getCdClube());
+			cu.setClube(c);
+			cu.setLotecausuario(getEntity());
+			cu.setStatusInsert();
+			LtcServiceLocator.getInstance().getLotecaService().save(cu);
+			getEntity().getClubeusuarios().add(cu);
 		}
 	}
 	
 	private void carregaClubesUsuario() {
 		Clubeusuario cu = new Clubeusuario();
+		cu.setLotecausuario(getEntity());
+		List<Clubeusuario> lista = (List<Clubeusuario>) LtcServiceLocator.getInstance().getLotecaService().findAll( cu );
+		if (lista == null || lista.size() == 0) {
+			this.insereClubesUsuario();
+			this.carregaClubesUsuario();
+		}
+		getEntity().setClubeusuarios(lista);
 	}
 	
 	@Override
@@ -143,11 +149,10 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 		try {
 			if (getEntity().isStatusInsert()) {
 				super.save();
-				this.insereClubesUsuario(getEntity().getUsuario().getCdUsuario(), getEntity().getLoteca().getCdLoteca());
+				this.insereClubesUsuario();
 				super.getMessages().addSucessMessage("mensagem_registro_salvo_com_sucesso");
 			} else if (getEntity().isStatusUpdate()) {
 				super.update();
-				this.insereClubesUsuario(getEntity().getUsuario().getCdUsuario(), getEntity().getLoteca().getCdLoteca());
 				super.getMessages().addSucessMessage("mensagem_registro_salvo_com_sucesso");
 			}
 			getEntity().setStatusUpdate();
@@ -156,8 +161,10 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 		} catch (Exception e) {
 			super.getMessages().addWarningMessage("warning_registro_duplicado");
 			e.printStackTrace();
+		} finally {
+			init();
+			this.carregaClubesUsuario();
 		}
-		init();
 	}	
 	
 	public String abrirConLotecausuario() {
