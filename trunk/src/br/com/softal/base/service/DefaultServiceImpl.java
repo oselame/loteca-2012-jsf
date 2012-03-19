@@ -5,7 +5,7 @@ import java.util.List;
 import br.com.softal.base.dao.GenericDAOImpl;
 import br.com.softal.base.model.Entity;
 
-public class DefaultServiceImpl implements DefaultService  {
+public class DefaultServiceImpl implements DefaultService {
 	
 	private GenericDAOImpl<Entity> genericDAO;
 	

@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import br.com.softal.base.model.Entity;
 import br.com.softal.loteca.model.clube.Clube;
@@ -38,7 +39,7 @@ public class Clubeusuario extends Entity {
 	private Clube clube;
 
 	@ManyToOne(optional = false, targetEntity = Lotecausuario.class)
-	@JoinColumn(name = "nuSeqclubeusuario", referencedColumnName = "nuSeqclubeusuario")
+	@JoinColumn(name = "nuSeqlotecausuario", referencedColumnName = "nuSeqlotecausuario")
 	private Lotecausuario lotecausuario;
 
 	public Clubeusuario() {
