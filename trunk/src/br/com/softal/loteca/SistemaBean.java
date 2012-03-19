@@ -4,7 +4,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import br.com.softal.base.bean.AbstractManegedBean;
-import br.com.softal.loteca.model.loteca.LotecaService;
+import br.com.softal.loteca.service.LotecaService;
 
 @SuppressWarnings({ "serial", "rawtypes" })
 @ManagedBean(name="sistemaBean")
@@ -17,7 +17,11 @@ public class SistemaBean extends AbstractManegedBean {
 	
 	public String getNomesistema() {
 		if (nomesistema == null) {
-			nomesistema = getLotecaService().findLotecaAtiva().getDeLoteca();
+			try {
+				nomesistema = getLotecaService().findLotecaAtiva().getDeLoteca();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		return nomesistema;
 	}

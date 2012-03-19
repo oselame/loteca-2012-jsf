@@ -15,6 +15,7 @@ public class LotecaDataModel extends ListDataModel<Loteca> implements Selectable
 		super(lotecas);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public Loteca getRowData(String rowKey) {
         List<Loteca> cars = (List<Loteca>) getWrappedData();  

@@ -8,9 +8,16 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 
+import org.springframework.dao.DataIntegrityViolationException;
+
 import br.com.softal.base.bean.AbstractManegedBean;
+import br.com.softal.base.service.ServiceException;
+import br.com.softal.loteca.LtcServiceLocator;
+import br.com.softal.loteca.model.clube.Clube;
+import br.com.softal.loteca.model.clubeusuario.Clubeusuario;
 import br.com.softal.loteca.model.loteca.Loteca;
 import br.com.softal.loteca.model.loteca.LotecaBean;
 import br.com.softal.loteca.model.usuario.Usuario;
@@ -21,6 +28,7 @@ import br.com.softal.loteca.model.usuario.UsuarioBean;
 @SessionScoped
 public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implements Serializable {
 	
+	private Long cdLoteca;
 	private List<SelectItem> lotecas;
 	private List<SelectItem> usuarios;
 	
@@ -29,9 +37,19 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 	
 	@ManagedProperty(value = "#{usuarioBean}")
 	private UsuarioBean usuarioBean;
+	
+	
 	public LotecausuarioBean() {
 	}
 	
+	public Long getCdLoteca() {
+		return cdLoteca;
+	}
+
+	public void setCdLoteca(Long cdLoteca) {
+		this.cdLoteca = cdLoteca;
+	}
+
 	public List<SelectItem> getLotecas() {
 		return lotecas;
 	}
@@ -96,7 +114,28 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 		setLotecas(new ArrayList<SelectItem>());
 		this.carregaLotecas();
 		this.carregaUsuarios();
-		this.findAll();
+	}
+	
+	private void insereClubesUsuario(Long cdUsuario, Long cdLoteca) {
+		if (getEntity().getClubeusuarios() != null  && getEntity().getClubeusuarios().size() == 0) {
+			Clube clube = new Clube();
+			clube.getLoteca().setCdLoteca(cdLoteca);
+			List<Clube> clubes = (List<Clube>) LtcServiceLocator.getInstance().getLotecaService().findAll(clube);
+			for (Clube c : clubes) {
+				Clubeusuario cu = new Clubeusuario();
+				cu.setNuPontos(0l);
+				cu.setNuPosicao(c.getCdClube());
+				cu.setClube(c);
+				cu.setLotecausuario(getEntity());
+				cu.setStatusInsert();
+				LtcServiceLocator.getInstance().getLotecaService().save(cu);
+				getEntity().getClubeusuarios().add(cu);
+			}
+		}
+	}
+	
+	private void carregaClubesUsuario() {
+		Clubeusuario cu = new Clubeusuario();
 	}
 	
 	@Override
@@ -104,13 +143,18 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 		try {
 			if (getEntity().isStatusInsert()) {
 				super.save();
+				this.insereClubesUsuario(getEntity().getUsuario().getCdUsuario(), getEntity().getLoteca().getCdLoteca());
 				super.getMessages().addSucessMessage("mensagem_registro_salvo_com_sucesso");
 			} else if (getEntity().isStatusUpdate()) {
 				super.update();
+				this.insereClubesUsuario(getEntity().getUsuario().getCdUsuario(), getEntity().getLoteca().getCdLoteca());
 				super.getMessages().addSucessMessage("mensagem_registro_salvo_com_sucesso");
 			}
 			getEntity().setStatusUpdate();
+		} catch (DataIntegrityViolationException e) {
+			super.getMessages().addWarningMessage("warning_registro_duplicado");
 		} catch (Exception e) {
+			super.getMessages().addWarningMessage("warning_registro_duplicado");
 			e.printStackTrace();
 		}
 		init();
@@ -128,6 +172,7 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 
 	public String editar() {
 		getEntity().setStatusUpdate();
+		this.carregaClubesUsuario();
 		return "eltcCadLotecausuario";
 	}
 	
@@ -141,6 +186,23 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 			init();
 		}
 		return "eltcCadLotecausuario";
+	}
+	
+	public void carregaUsuariosloteca(ValueChangeEvent event) {
+		try {
+			System.out.println( event.getNewValue() );
+			if ((Long)event.getNewValue() != null) {
+				long cdLoteca = (Long) event.getNewValue();
+				List<Lotecausuario> lista = LtcServiceLocator.getInstance().getLotecaService().findAllLotecausuarioByLoteca(cdLoteca);
+				setRows(lista);
+				setCdLoteca(cdLoteca);
+			} else {
+				setCdLoteca(null);
+				setRows(new ArrayList<Lotecausuario>());
+			}
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

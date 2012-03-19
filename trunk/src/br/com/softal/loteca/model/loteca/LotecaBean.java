@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import br.com.softal.base.bean.AbstractManegedBean;
+import br.com.softal.base.service.ServiceException;
 import br.com.softal.loteca.LtcServiceLocator;
 import br.com.softal.loteca.service.LotecaService;
 
@@ -30,7 +31,12 @@ public class LotecaBean extends AbstractManegedBean<Loteca> implements Serializa
 	}
 	
 	public Loteca getLotecaativa() {
-		return getLotecaService().findLotecaAtiva();
+		try {
+			return getLotecaService().findLotecaAtiva();
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	@PostConstruct

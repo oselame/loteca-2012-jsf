@@ -12,6 +12,7 @@ import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 
 import br.com.softal.base.bean.AbstractManegedBean;
+import br.com.softal.base.service.ServiceException;
 import br.com.softal.loteca.LtcServiceLocator;
 import br.com.softal.loteca.model.loteca.Loteca;
 import br.com.softal.loteca.model.loteca.LotecaBean;
@@ -21,11 +22,24 @@ import br.com.softal.loteca.model.loteca.LotecaBean;
 @SessionScoped
 public class ClubeBean extends AbstractManegedBean<Clube> implements Serializable {
 	
+	private Long cdLoteca;
 	private List<SelectItem> lotecas;
 	
 	@ManagedProperty(value="#{lotecaBean}")
 	private LotecaBean lotecaBean;
 	
+	public ClubeBean() {
+		setLotecas(new ArrayList<SelectItem>());
+	}
+	
+	public Long getCdLoteca() {
+		return cdLoteca;
+	}
+
+	public void setCdLoteca(Long cdLoteca) {
+		this.cdLoteca = cdLoteca;
+	}
+
 	private LotecaBean getLotecaBean() {
 		return lotecaBean;
 	}
@@ -48,7 +62,6 @@ public class ClubeBean extends AbstractManegedBean<Clube> implements Serializabl
 	@Override
 	public void save() {
 		try {
-			System.out.println(getEntity().toString());
 			if (getEntity().isStatusInsert()) {
 				super.save();
 				super.getMessages().addSucessMessage("mensagem_registro_salvo_com_sucesso");
@@ -63,11 +76,21 @@ public class ClubeBean extends AbstractManegedBean<Clube> implements Serializabl
 		init();
 	}
 	
-	public void carregaUsuariosloteca(ValueChangeEvent event) {
-		 if ((Long)event.getNewValue() != null) {
-			 getEntity().getLoteca().setCdLoteca( (Long) event.getNewValue() );
-		 }
-		//super.findAll();
+	public void carregaClubesloteca(ValueChangeEvent event) {
+		try {
+			System.out.println( event.getNewValue() );
+			if ((Long)event.getNewValue() != null) {
+				long cdLoteca = (Long) event.getNewValue();
+				List<Clube> lista = LtcServiceLocator.getInstance().getLotecaService().findAllClubeByLoteca(cdLoteca);
+				setRows(lista);
+				setCdLoteca(cdLoteca);
+			} else {
+				setCdLoteca(null);
+				setRows(new ArrayList<Clube>());
+			}
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void carregaLotecas() {

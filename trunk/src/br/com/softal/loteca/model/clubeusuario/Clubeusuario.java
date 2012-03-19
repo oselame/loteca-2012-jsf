@@ -4,10 +4,14 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.com.softal.base.model.Entity;
+import br.com.softal.loteca.model.clube.Clube;
+import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
 
 @SuppressWarnings("serial")
 @javax.persistence.Entity
@@ -20,12 +24,6 @@ public class Clubeusuario extends Entity {
 	@OneToMany(mappedBy = "clubeusuario")
 	private long nuSeqclubeusuario;
 
-	@Column(name = "nuseqlotecausuario")
-	private Long nuSeqlotecausuario;
-
-	@Column(name = "nuseqclube")
-	private Long nuSeqclube;
-
 	@Column(name = "nuposicao")
 	private Long nuPosicao;
 
@@ -34,6 +32,14 @@ public class Clubeusuario extends Entity {
 
 	@Column(name = "nupontos")
 	private Long nuPontos;
+
+	@ManyToOne(optional = false, targetEntity = Clube.class)
+	@JoinColumn(name = "nuSeqclube", referencedColumnName = "nuSeqclube")
+	private Clube clube;
+
+	@ManyToOne(optional = false, targetEntity = Lotecausuario.class)
+	@JoinColumn(name = "nuSeqlotecausuario", referencedColumnName = "nuSeqlotecausuario")
+	private Lotecausuario lotecausuario;
 
 	public Clubeusuario() {
 		super();
@@ -47,20 +53,20 @@ public class Clubeusuario extends Entity {
 		this.nuSeqclubeusuario = nuSeqclubeusuario;
 	}
 
-	public Long getNuSeqlotecausuario() {
-		return nuSeqlotecausuario;
+	public Clube getClube() {
+		return clube;
 	}
 
-	public void setNuSeqlotecausuario(Long nuSeqlotecausuario) {
-		this.nuSeqlotecausuario = nuSeqlotecausuario;
+	public void setClube(Clube clube) {
+		this.clube = clube;
 	}
 
-	public Long getNuSeqclube() {
-		return nuSeqclube;
+	public Lotecausuario getLotecausuario() {
+		return lotecausuario;
 	}
 
-	public void setNuSeqclube(Long nuSeqclube) {
-		this.nuSeqclube = nuSeqclube;
+	public void setLotecausuario(Lotecausuario lotecausuario) {
+		this.lotecausuario = lotecausuario;
 	}
 
 	public Long getNuPosicao() {

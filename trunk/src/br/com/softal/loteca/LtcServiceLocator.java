@@ -1,7 +1,7 @@
 package br.com.softal.loteca;
 
 import br.com.softal.base.service.DefaultService;
-import br.com.softal.loteca.model.loteca.LotecaService;
+import br.com.softal.loteca.service.LotecaService;
 import br.com.softal.loteca.sets.SpringFactory;
 
 public class LtcServiceLocator {
@@ -18,6 +18,7 @@ public class LtcServiceLocator {
 		return ltcServiceLocator;
 	}
 
+	@SuppressWarnings("unchecked")
 	private <T extends DefaultService> T getService(Class<T> _class) {
 		String canonicalName = _class.getCanonicalName();
 		int lastDot = canonicalName.lastIndexOf(".");

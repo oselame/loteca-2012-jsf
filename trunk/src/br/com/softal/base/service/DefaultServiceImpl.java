@@ -42,8 +42,13 @@ public class DefaultServiceImpl implements DefaultService  {
 		return  genericDAO.findByPrimaryKey(entity);
 	}
 
-	@Override
+	/*@Override
 	public List<Entity> findAll(Entity entity) {
+		return  genericDAO.findAll(entity);
+	}*/
+	
+	@Override
+	public List<? extends Entity> findAll(Entity entity) {
 		return  genericDAO.findAll(entity);
 	}
 
