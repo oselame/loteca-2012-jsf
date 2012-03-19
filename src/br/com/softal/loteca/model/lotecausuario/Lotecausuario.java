@@ -3,6 +3,7 @@ package br.com.softal.loteca.model.lotecausuario;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import br.com.softal.base.model.Entity;
 import br.com.softal.loteca.model.clubeusuario.Clubeusuario;
@@ -31,15 +33,15 @@ public class Lotecausuario extends Entity {
 	private Long flAtivo;
 	
 	@ManyToOne(optional = false, targetEntity = Usuario.class)
-	@JoinColumn(name = "cdUsuario", referencedColumnName = "cdUsuario")
+	@JoinColumn(name = "cdusuario", referencedColumnName = "cdUsuario")
 	private Usuario usuario;
 	
 	@ManyToOne(optional = false, targetEntity = Loteca.class)
-	@JoinColumn(name = "cdLoteca", referencedColumnName = "cdLoteca")
+	@JoinColumn(name = "cdloteca", referencedColumnName = "cdLoteca")
 	private Loteca loteca;
 	
-	@OneToMany(targetEntity = Clubeusuario.class)
-	@JoinColumn(name = "nuSeqlotecausuario", referencedColumnName = "nuSeqlotecausuario")	
+	@OneToMany( targetEntity = Clubeusuario.class, fetch=FetchType.LAZY)
+	@JoinColumn(name = "nuSeqclubeusuario")
 	private List<Clubeusuario> clubeusuarios;
 
 	public Lotecausuario() {
