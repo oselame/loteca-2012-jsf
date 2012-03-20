@@ -8,6 +8,19 @@ import br.com.softal.base.model.Entity;
 
 public class BaseUtil {
 	
+	public static long getFlag(Long value) {
+		if (value == null) {
+			return 0l;
+		}
+		return value;
+	}
+	public static long getLongValue(Long value) {
+		if (value == null) {
+			return 0l;
+		}
+		return value;
+	}
+	
 	public static Field[] getEntityFields(Entity entity) {
 		return entity.getClass().getDeclaredFields();
 	}
