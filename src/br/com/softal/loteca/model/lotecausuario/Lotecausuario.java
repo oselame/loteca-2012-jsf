@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import br.com.softal.base.model.Entity;
 import br.com.softal.loteca.model.clubeusuario.Clubeusuario;
@@ -37,7 +36,7 @@ public class Lotecausuario extends Entity {
 	private Usuario usuario;
 	
 	@ManyToOne(optional = false, targetEntity = Loteca.class)
-	@JoinColumn(name = "cdloteca", referencedColumnName = "cdLoteca", insertable=false, updatable=false)
+	@JoinColumn(name = "cdloteca", referencedColumnName = "cdLoteca")
 	private Loteca loteca;
 	
 	@OneToMany( targetEntity = Clubeusuario.class, fetch=FetchType.LAZY)

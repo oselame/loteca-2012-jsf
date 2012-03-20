@@ -34,11 +34,11 @@ public class Clubeusuario extends Entity {
 	private Long nuPontos;
 
 	@ManyToOne(optional = false, targetEntity = Clube.class)
-	@JoinColumn(name = "nuSeqclube", referencedColumnName = "nuSeqclube", insertable=false, updatable=false)
+	@JoinColumn(name = "nuSeqclube", referencedColumnName = "nuSeqclube") //--, insertable=false, updatable=false
 	private Clube clube;
 
 	@ManyToOne(optional = false, targetEntity = Lotecausuario.class)
-	@JoinColumn(name = "nuSeqlotecausuario", referencedColumnName = "nuSeqlotecausuario", insertable=false, updatable=false)
+	@JoinColumn(name = "nuSeqlotecausuario", referencedColumnName = "nuSeqlotecausuario") //--, insertable=false, updatable=false
 	private Lotecausuario lotecausuario;
 
 	public Clubeusuario() {

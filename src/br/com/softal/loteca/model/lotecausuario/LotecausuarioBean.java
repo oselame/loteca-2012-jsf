@@ -125,10 +125,10 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 		getEntity().setClubeusuarios(new ArrayList<Clubeusuario>());
 		for (Clube c : clubes) {
 			Clubeusuario cu = new Clubeusuario();
-			cu.setNuPontos(0l);
-			cu.setNuPosicao(c.getCdClube());
 			cu.setClube(c);
 			cu.setLotecausuario(getEntity());
+			cu.setNuPontos(0l);
+			cu.setNuPosicao(c.getCdClube());
 			cu.setStatusInsert();
 			LtcServiceLocator.getInstance().getLotecaService().save(cu);
 			getEntity().getClubeusuarios().add(cu);
@@ -156,6 +156,7 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 		List<Clubeusuario> lista = getEntity().getClubeusuarios();
 		long nuPosicao = 1l;
 		for (Clubeusuario cu : lista) {
+			cu.setLotecausuario(getEntity());
 			cu.setNuPosicao(nuPosicao);
 			if (nuPosicao <= 16) {
 				cu.setFlRebaixado(0L);
