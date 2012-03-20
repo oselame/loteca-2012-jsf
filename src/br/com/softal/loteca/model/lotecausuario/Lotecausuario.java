@@ -37,11 +37,11 @@ public class Lotecausuario extends Entity {
 	private Usuario usuario;
 	
 	@ManyToOne(optional = false, targetEntity = Loteca.class)
-	@JoinColumn(name = "cdloteca", referencedColumnName = "cdLoteca")
+	@JoinColumn(name = "cdloteca", referencedColumnName = "cdLoteca", insertable=false, updatable=false)
 	private Loteca loteca;
 	
 	@OneToMany( targetEntity = Clubeusuario.class, fetch=FetchType.LAZY)
-	@JoinColumn(name = "nuSeqclubeusuario")
+	@JoinColumn(name = "nuSeqclubeusuario", insertable=false, updatable=false)
 	private List<Clubeusuario> clubeusuarios;
 
 	public Lotecausuario() {

@@ -2,6 +2,8 @@ package br.com.softal.loteca.model.lotecausuario;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -105,7 +107,7 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 		setEntity(new Lotecausuario());
 		getEntity().setLoteca(new Loteca());
 		getEntity().setUsuario(new Usuario());
-		
+		getEntity().setClubeusuarios(new ArrayList<Clubeusuario>());
 	}
 	
 	@PostConstruct
@@ -141,7 +143,28 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 			this.insereClubesUsuario();
 			this.carregaClubesUsuario();
 		}
+		Collections.sort(lista, new Comparator<Clubeusuario>() {
+			@Override
+			public int compare(Clubeusuario o1, Clubeusuario o2) {
+				return o1.getNuPosicao().compareTo(o2.getNuPosicao());
+			}
+		});
 		getEntity().setClubeusuarios(lista);
+	}
+	
+	private void atualizaClubesUsuario() {
+		List<Clubeusuario> lista = getEntity().getClubeusuarios();
+		long nuPosicao = 1l;
+		for (Clubeusuario cu : lista) {
+			cu.setNuPosicao(nuPosicao);
+			if (nuPosicao <= 16) {
+				cu.setFlRebaixado(0L);
+			} else {
+				cu.setFlRebaixado(1l);
+			}
+			LtcServiceLocator.getInstance().getLotecaService().update(cu);
+			nuPosicao++;
+		}
 	}
 	
 	@Override
@@ -153,6 +176,7 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 				super.getMessages().addSucessMessage("mensagem_registro_salvo_com_sucesso");
 			} else if (getEntity().isStatusUpdate()) {
 				super.update();
+				this.atualizaClubesUsuario();
 				super.getMessages().addSucessMessage("mensagem_registro_salvo_com_sucesso");
 			}
 			getEntity().setStatusUpdate();
