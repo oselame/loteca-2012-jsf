@@ -20,7 +20,6 @@ import org.hibernate.annotations.FetchMode;
 import br.com.softal.base.model.Entity;
 import br.com.softal.loteca.model.clubeusuario.Clubeusuario;
 import br.com.softal.loteca.model.loteca.Loteca;
-import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
 
 @SuppressWarnings("serial")
 @javax.persistence.Entity
@@ -29,7 +28,7 @@ public class Clube extends Entity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@OneToMany(mappedBy = "clube")
+	//@OneToMany(mappedBy = "clube")
 	@Column(name = "nuseqclube")
 	private long nuSeqclube;
 
@@ -40,7 +39,7 @@ public class Clube extends Entity {
 	private String nmClube;
 
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="cdLoteca", insertable=true, updatable=true)
+	@JoinColumn(name="cdloteca", insertable=true, updatable=true)
 	@Fetch(FetchMode.JOIN)
 	@Cascade(CascadeType.SAVE_UPDATE)
 	private Loteca loteca;

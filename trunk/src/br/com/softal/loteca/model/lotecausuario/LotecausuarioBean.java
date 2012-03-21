@@ -120,18 +120,16 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 	
 	private void insereClubesUsuario() {
 		Clube clube = new Clube();
-		clube.getLoteca().setCdLoteca( getEntity().getLoteca().getCdLoteca() );
+		clube.setLoteca( getEntity().getLoteca() );
 		List<Clube> clubes = (List<Clube>) LtcServiceLocator.getInstance().getLotecaService().findAll(clube);
-		getEntity().setClubeusuarios(new ArrayList<Clubeusuario>());
 		for (Clube c : clubes) {
 			Clubeusuario cu = new Clubeusuario();
-			cu.setClube(c);
-			cu.setLotecausuario(getEntity());
+			cu.setClube( c );
+			cu.setLotecausuario( getEntity() );
+			cu.getLotecausuario().setLoteca( c.getLoteca() );
 			cu.setNuPontos(0l);
-			cu.setNuPosicao(c.getCdClube());
-			cu.setStatusInsert();
+			cu.setNuPosicao( c.getCdClube() );
 			LtcServiceLocator.getInstance().getLotecaService().save(cu);
-			getEntity().getClubeusuarios().add(cu);
 		}
 	}
 	
@@ -149,7 +147,7 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 				return o1.getNuPosicao().compareTo(o2.getNuPosicao());
 			}
 		});
-		getEntity().setClubeusuarios(lista);
+		getEntity().setClubeusuarios( lista );
 	}
 	
 	private void atualizaClubesUsuario() {
@@ -173,7 +171,6 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 		try {
 			if (getEntity().isStatusInsert()) {
 				super.save();
-				this.insereClubesUsuario();
 				super.getMessages().addSucessMessage("mensagem_registro_salvo_com_sucesso");
 			} else if (getEntity().isStatusUpdate()) {
 				super.update();
@@ -183,6 +180,7 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 			getEntity().setStatusUpdate();
 		} catch (DataIntegrityViolationException e) {
 			super.getMessages().addWarningMessage("warning_registro_duplicado");
+			e.printStackTrace();
 		} catch (Exception e) {
 			super.getMessages().addWarningMessage("warning_registro_duplicado");
 			e.printStackTrace();

@@ -9,7 +9,8 @@ public class HbnLotecausuarioDAO extends GenericDAOImpl<Lotecausuario> implement
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Lotecausuario> findAllLotecausuarioByLoteca(long cdLoteca) {
-		String hql = "FROM Lotecausuario x where x.loteca.cdLoteca = " + cdLoteca;
+		String hql = "FROM Lotecausuario x " +
+			    "where x.loteca.cdLoteca = " + cdLoteca;
 		return getHibernateTemplate().find(hql);
 	}
 }
