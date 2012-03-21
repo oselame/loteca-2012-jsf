@@ -29,7 +29,7 @@ public class Usuario extends Entity {
 
 	@Id
 	@Column(name = "cdusuario")
-	@OneToMany(mappedBy = "usuario")	
+	//@OneToMany(mappedBy = "usuario")	
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long cdUsuario;
 	

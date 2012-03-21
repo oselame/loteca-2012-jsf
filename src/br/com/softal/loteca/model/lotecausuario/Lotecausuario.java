@@ -12,6 +12,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import br.com.softal.base.model.Entity;
 import br.com.softal.loteca.model.clubeusuario.Clubeusuario;
 import br.com.softal.loteca.model.loteca.Loteca;
@@ -25,22 +30,32 @@ public class Lotecausuario extends Entity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "nuseqlotecausuario")
-	@OneToMany(mappedBy = "lotecausuario")
+	//@OneToMany(mappedBy = "lotecausuario")
 	private long nuSeqlotecausuario;
 
 	@Column(name = "flativo")
 	private Long flAtivo;
 	
-	@ManyToOne(optional = false, targetEntity = Usuario.class)
-	@JoinColumn(name = "cdusuario", referencedColumnName = "cdUsuario")
+/*	@ManyToOne(optional = false, targetEntity = Usuario.class)
+	@JoinColumn(name = "cdusuario", referencedColumnName = "cdUsuario")*/
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="cdusuario", insertable=true, updatable=true)
+	@Fetch(FetchMode.JOIN)
+	@Cascade(CascadeType.SAVE_UPDATE)
 	private Usuario usuario;
 	
-	@ManyToOne(optional = false, targetEntity = Loteca.class)
-	@JoinColumn(name = "cdloteca", referencedColumnName = "cdLoteca")
+/*	@ManyToOne(optional = false, targetEntity = Loteca.class)
+	@JoinColumn(name = "cdloteca", referencedColumnName = "cdLoteca")*/
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="cdloteca", insertable=true, updatable=true)
+	@Fetch(FetchMode.JOIN)
+	@Cascade(CascadeType.SAVE_UPDATE)
 	private Loteca loteca;
 	
-	@OneToMany( targetEntity = Clubeusuario.class, fetch=FetchType.LAZY)
-	@JoinColumn(name = "nuSeqclubeusuario", insertable=false, updatable=false)
+/*	@OneToMany( targetEntity = Clubeusuario.class, fetch=FetchType.LAZY)
+	@JoinColumn(name = "nuSeqclubeusuario", insertable=false, updatable=false)*/
+	@OneToMany(mappedBy="lotecausuario", fetch=FetchType.LAZY)
+	@Cascade(CascadeType.ALL)
 	private List<Clubeusuario> clubeusuarios;
 
 	public Lotecausuario() {
