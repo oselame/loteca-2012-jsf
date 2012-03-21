@@ -1,6 +1,9 @@
 package br.com.softal.loteca.model.clube;
 
+import java.util.List;
+
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -9,8 +12,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import br.com.softal.base.model.Entity;
+import br.com.softal.loteca.model.clubeusuario.Clubeusuario;
 import br.com.softal.loteca.model.loteca.Loteca;
+import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
 
 @SuppressWarnings("serial")
 @javax.persistence.Entity
@@ -29,15 +39,22 @@ public class Clube extends Entity {
 	@Column(name = "nmclube")
 	private String nmClube;
 
-	@ManyToOne(optional = false, targetEntity = Loteca.class)
-	@JoinColumn(name = "cdLoteca", referencedColumnName = "cdLoteca")
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="cdLoteca", insertable=true, updatable=true)
+	@Fetch(FetchMode.JOIN)
+	@Cascade(CascadeType.SAVE_UPDATE)
 	private Loteca loteca;
+	
+	@OneToMany(mappedBy="clube", fetch=FetchType.LAZY)
+	@Cascade(CascadeType.ALL)
+	private List<Clubeusuario> clubeusuarios;
+	
+	//TODO: fazer mapeamento eltcclassifclube
 
 	public Clube() {
 		super();
-		setLoteca(new Loteca());
 	}
-
+	
 	public long getNuSeqclube() {
 		return nuSeqclube;
 	}
@@ -76,9 +93,14 @@ public class Clube extends Entity {
 			" cdClube=" + getCdClube() +
 			" nmClube=" + getNmClube();
 	}
-	
-	
-	
+
+	public List<Clubeusuario> getClubeusuarios() {
+		return clubeusuarios;
+	}
+
+	public void setClubeusuarios(List<Clubeusuario> clubeusuarios) {
+		this.clubeusuarios = clubeusuarios;
+	}
 	
 
 }

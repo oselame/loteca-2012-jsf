@@ -3,6 +3,7 @@ package br.com.softal.loteca.model.usuario;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,9 +12,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import br.com.softal.base.model.Entity;
 import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
 import br.com.softal.loteca.model.projeto.Projeto;
+import br.com.softal.loteca.model.usuariogrupo.Usuariogrupo;
 
 @SuppressWarnings("serial")
 @javax.persistence.Entity
@@ -59,14 +66,24 @@ public class Usuario extends Entity {
 	/*@Column(name = "cdProjeto")
 	private String cdProjeto;*/
 
-	@ManyToOne(optional = false, targetEntity = Projeto.class)
-	@JoinColumn(name = "cdProjeto", referencedColumnName = "cdProjeto")	
+/*	@ManyToOne(optional = false, targetEntity = Projeto.class)
+	@JoinColumn(name = "cdProjeto", referencedColumnName = "cdProjeto")	*/
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="cdprojeto", insertable=true, updatable=true)
+	@Fetch(FetchMode.JOIN)
+	@Cascade(CascadeType.SAVE_UPDATE)
 	private Projeto projeto;
 	
-	@OneToMany(targetEntity = Lotecausuario.class)
-	@JoinColumn(name = "cdUsuario", referencedColumnName = "cdUsuario")	
+/*	@OneToMany(targetEntity = Lotecausuario.class)
+	@JoinColumn(name = "cdUsuario", referencedColumnName = "cdUsuario")	*/
+	@OneToMany(mappedBy="usuario", fetch=FetchType.LAZY)
+	@Cascade(CascadeType.ALL)
 	private List<Lotecausuario> lotecasusuario;
 
+	@OneToMany(mappedBy="usuario", fetch=FetchType.LAZY)
+	@Cascade(CascadeType.ALL)
+	private List<Usuariogrupo> usuariogrupos;
+	
 	public Usuario() {
 		super();
 	}
@@ -181,6 +198,14 @@ public class Usuario extends Entity {
 
 	public void setLotecasusuario(List<Lotecausuario> lotecasusuario) {
 		this.lotecasusuario = lotecasusuario;
+	}
+
+	public List<Usuariogrupo> getUsuariogrupos() {
+		return usuariogrupos;
+	}
+
+	public void setUsuariogrupos(List<Usuariogrupo> usuariogrupos) {
+		this.usuariogrupos = usuariogrupos;
 	}
 	
 }

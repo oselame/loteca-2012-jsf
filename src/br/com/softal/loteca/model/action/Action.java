@@ -1,13 +1,20 @@
 package br.com.softal.loteca.model.action;
 
+import java.util.List;
+
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import br.com.softal.base.model.Entity;
+import br.com.softal.loteca.model.grupoaction.Grupoaction;
 
 @SuppressWarnings("serial")
 @javax.persistence.Entity
@@ -17,7 +24,7 @@ public class Action extends Entity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cdaction")
-	@OneToMany(mappedBy = "action")
+	//@OneToMany(mappedBy = "action")
 	private long cdAction;
 
 	@Column(name = "nmAction")
@@ -25,6 +32,10 @@ public class Action extends Entity {
 
 	@Column(name = "deAction")
 	private String deAction;
+	
+	@OneToMany(mappedBy="action", fetch=FetchType.LAZY)
+	@Cascade(CascadeType.ALL)
+	private List<Grupoaction> grupoactions;
 
 	public Action() {
 		super();
@@ -60,4 +71,12 @@ public class Action extends Entity {
 		this.deAction = deAction;
 	}
 
+	public List<Grupoaction> getGrupoactions() {
+		return grupoactions;
+	}
+
+	public void setGrupoactions(List<Grupoaction> grupoactions) {
+		this.grupoactions = grupoactions;
+	}
+	
 }
