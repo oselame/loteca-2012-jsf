@@ -1,6 +1,9 @@
 package br.com.softal.loteca.model.loteca;
 
+import java.util.List;
+
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -8,7 +11,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import br.com.softal.base.model.Entity;
+import br.com.softal.loteca.model.clube.Clube;
+import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
 
 @SuppressWarnings("serial")
 @javax.persistence.Entity
@@ -18,7 +26,6 @@ public class Loteca extends Entity {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "cdloteca")
-	@OneToMany(mappedBy = "loteca")
 	private long cdLoteca;
 
 	@Column(name = "nuano")
@@ -26,6 +33,14 @@ public class Loteca extends Entity {
 
 	@Column(name = "flativa")
 	private Long flAtiva;
+	
+	@OneToMany(mappedBy="loteca", fetch=FetchType.LAZY)
+	@Cascade(CascadeType.ALL)
+	private List<Clube> clubes;
+	
+	@OneToMany(mappedBy="loteca", fetch=FetchType.LAZY)
+	@Cascade(CascadeType.ALL)
+	private List<Lotecausuario> lotecasusuario;
 	
 	@Transient
 	private String deLoteca;
@@ -85,6 +100,22 @@ public class Loteca extends Entity {
 
 	public void setDeLoteca(String deLoteca) {
 		this.deLoteca = deLoteca;
+	}
+
+	public List<Clube> getClubes() {
+		return clubes;
+	}
+
+	public void setClubes(List<Clube> clubes) {
+		this.clubes = clubes;
+	}
+
+	public List<Lotecausuario> getLotecasusuario() {
+		return lotecasusuario;
+	}
+
+	public void setLotecasusuario(List<Lotecausuario> lotecasusuario) {
+		this.lotecasusuario = lotecasusuario;
 	}
 	
 }

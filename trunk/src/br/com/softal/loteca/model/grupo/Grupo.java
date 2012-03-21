@@ -1,13 +1,21 @@
 package br.com.softal.loteca.model.grupo;
 
+import java.util.List;
+
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import br.com.softal.base.model.Entity;
+import br.com.softal.loteca.model.clube.Clube;
+import br.com.softal.loteca.model.grupoaction.Grupoaction;
 
 @SuppressWarnings("serial")
 @javax.persistence.Entity
@@ -17,7 +25,7 @@ public class Grupo extends Entity {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "cdgrupo")
-	@OneToMany(mappedBy = "grupo")
+	//@OneToMany(mappedBy = "grupo")
 	private long cdGrupo;
 
 	@Column(name = "degrupo")
@@ -25,6 +33,10 @@ public class Grupo extends Entity {
 
 	@Column(name = "nmgrupo")
 	private String nmGrupo;
+	
+	@OneToMany(mappedBy="grupo", fetch=FetchType.LAZY)
+	@Cascade(CascadeType.ALL)
+	private List<Grupoaction> grupoactions;
 	
 	public Grupo() {
 		super();
@@ -61,4 +73,12 @@ public class Grupo extends Entity {
 		this.nmGrupo = nmGrupo;
 	}
 
+	public List<Grupoaction> getGrupoactions() {
+		return grupoactions;
+	}
+
+	public void setGrupoactions(List<Grupoaction> grupoactions) {
+		this.grupoactions = grupoactions;
+	}
+	
 }
