@@ -36,26 +36,20 @@ public class Lotecausuario extends Entity {
 	@Column(name = "flativo")
 	private Long flAtivo;
 	
-/*	@ManyToOne(optional = false, targetEntity = Usuario.class)
-	@JoinColumn(name = "cdusuario", referencedColumnName = "cdUsuario")*/
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="cdusuario", insertable=true, updatable=true)
 	@Fetch(FetchMode.JOIN)
-	@Cascade(CascadeType.SAVE_UPDATE)
+	//@Cascade(CascadeType.SAVE_UPDATE)
 	private Usuario usuario;
 	
-/*	@ManyToOne(optional = false, targetEntity = Loteca.class)
-	@JoinColumn(name = "cdloteca", referencedColumnName = "cdLoteca")*/
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="cdloteca", insertable=true, updatable=true)
 	@Fetch(FetchMode.JOIN)
-	@Cascade(CascadeType.SAVE_UPDATE)
+	//@Cascade(CascadeType.SAVE_UPDATE)
 	private Loteca loteca;
 	
-/*	@OneToMany( targetEntity = Clubeusuario.class, fetch=FetchType.LAZY)
-	@JoinColumn(name = "nuSeqclubeusuario", insertable=false, updatable=false)*/
 	@OneToMany(mappedBy="lotecausuario", fetch=FetchType.LAZY)
-	@Cascade(CascadeType.ALL)
+	//@Cascade(CascadeType.ALL)
 	private List<Clubeusuario> clubeusuarios;
 
 	public Lotecausuario() {

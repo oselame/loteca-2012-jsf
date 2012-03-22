@@ -134,20 +134,26 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 	}
 	
 	private void carregaClubesUsuario() {
-		Clubeusuario cu = new Clubeusuario();
-		cu.setLotecausuario(getEntity());
-		List<Clubeusuario> lista = (List<Clubeusuario>) LtcServiceLocator.getInstance().getLotecaService().findAll( cu );
-		if (lista == null || lista.size() == 0) {
-			this.insereClubesUsuario();
-			this.carregaClubesUsuario();
-		}
-		Collections.sort(lista, new Comparator<Clubeusuario>() {
-			@Override
-			public int compare(Clubeusuario o1, Clubeusuario o2) {
-				return o1.getNuPosicao().compareTo(o2.getNuPosicao());
+		try {
+			Clubeusuario cu = new Clubeusuario();
+			cu.setLotecausuario(getEntity());
+			List<Clubeusuario> lista = (List<Clubeusuario>) LtcServiceLocator.getInstance().getLotecaService().findAllClubeusuario( cu );
+			if (lista == null || lista.size() == 0) {
+				this.insereClubesUsuario();
+				this.carregaClubesUsuario();
+			} else {
+				getEntity().setClubeusuarios( lista );
 			}
-		});
-		getEntity().setClubeusuarios( lista );
+			Collections.sort(getEntity().getClubeusuarios(), new Comparator<Clubeusuario>() {
+				@Override
+				public int compare(Clubeusuario o1, Clubeusuario o2) {
+					return o1.getNuPosicao().compareTo(o2.getNuPosicao());
+				}
+			});
+			
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void atualizaClubesUsuario() {
@@ -220,7 +226,6 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 	
 	public void carregaUsuariosloteca(ValueChangeEvent event) {
 		try {
-			System.out.println( event.getNewValue() );
 			if ((Long)event.getNewValue() != null) {
 				long cdLoteca = (Long) event.getNewValue();
 				List<Lotecausuario> lista = LtcServiceLocator.getInstance().getLotecaService().findAllLotecausuarioByLoteca(cdLoteca);

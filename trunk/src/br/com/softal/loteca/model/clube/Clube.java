@@ -28,7 +28,6 @@ public class Clube extends Entity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	//@OneToMany(mappedBy = "clube")
 	@Column(name = "nuseqclube")
 	private long nuSeqclube;
 
@@ -38,14 +37,14 @@ public class Clube extends Entity {
 	@Column(name = "nmclube")
 	private String nmClube;
 
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="cdloteca", insertable=true, updatable=true)
 	@Fetch(FetchMode.JOIN)
-	@Cascade(CascadeType.SAVE_UPDATE)
+	//@Cascade(CascadeType.SAVE_UPDATE)
 	private Loteca loteca;
 	
 	@OneToMany(mappedBy="clube", fetch=FetchType.LAZY)
-	@Cascade(CascadeType.ALL)
+	//@Cascade(CascadeType.ALL)
 	private List<Clubeusuario> clubeusuarios;
 	
 	//TODO: fazer mapeamento eltcclassifclube

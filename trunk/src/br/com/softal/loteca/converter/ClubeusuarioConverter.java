@@ -13,6 +13,8 @@ import br.com.softal.loteca.model.clubeusuario.Clubeusuario;
 import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
 
 public class ClubeusuarioConverter implements Converter {
+	
+	private static final String SEPARADOR = "#";
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component,
@@ -26,7 +28,7 @@ public class ClubeusuarioConverter implements Converter {
 
 		int hyphenCount = 0;
 		boolean conversionError = false;
-		StringTokenizer hyphenTokenizer = new StringTokenizer(value, "#");
+		StringTokenizer hyphenTokenizer = new StringTokenizer(value, ClubeusuarioConverter.SEPARADOR);
 		while (hyphenTokenizer.hasMoreTokens()) {
 			String token = hyphenTokenizer.nextToken();
 			try {
@@ -34,10 +36,11 @@ public class ClubeusuarioConverter implements Converter {
 					case 0: cu.setNuSeqclubeusuario( Long.parseLong(token)); break;
 					case 1: cu.setNuPosicao( Long.parseLong(token)); break;
 					case 2: cu.setFlRebaixado( Long.parseLong(token)); break;
-					case 3: cu.getClube().setCdClube( Long.parseLong(token)); break;
-					case 4: cu.getClube().setNmClube( token ); break;
-					case 5: cu.getLotecausuario().setNuSeqlotecausuario( Long.parseLong(token)); break;
-					case 6: cu.setNuPontos( Long.parseLong(token) ); break;
+					case 3: cu.setNuPontos( Long.parseLong(token) ); break;
+					case 4: cu.getLotecausuario().setNuSeqlotecausuario( Long.parseLong(token)); break;
+					case 5: cu.getClube().setNuSeqclube( Long.parseLong(token)); break;
+					case 6: cu.getClube().setCdClube( Long.parseLong(token)); break;
+					case 7: cu.getClube().setNmClube( token ); break;
 					default:
 						break;
 				}
@@ -47,7 +50,7 @@ public class ClubeusuarioConverter implements Converter {
 			}
 		}
 
-		if (conversionError || (hyphenCount != 7)) {
+		if (conversionError || (hyphenCount != 8)) {
 			throw new ConverterException();
 		}
 		return cu;
@@ -60,13 +63,14 @@ public class ClubeusuarioConverter implements Converter {
 		if (value instanceof Clubeusuario) {
 			cu = (Clubeusuario) value;
 			StringBuilder sb = new StringBuilder();
-			sb.append( cu.getNuSeqclubeusuario() ).append("#");
-			sb.append( cu.getNuPosicao() ).append("#");
-			sb.append( BaseUtil.getFlag(cu.getFlRebaixado()) ).append("#");
-			sb.append( cu.getClube().getCdClube() ).append("#");
-			sb.append( cu.getClube().getNmClube() ).append("#");
-			sb.append( cu.getLotecausuario().getNuSeqlotecausuario() ).append("#");
-			sb.append( BaseUtil.getLongValue(cu.getNuPontos()) );
+			sb.append( cu.getNuSeqclubeusuario() 						).append(ClubeusuarioConverter.SEPARADOR);
+			sb.append( cu.getNuPosicao() 								).append(ClubeusuarioConverter.SEPARADOR);
+			sb.append( BaseUtil.getFlag(cu.getFlRebaixado()) 			).append(ClubeusuarioConverter.SEPARADOR);
+			sb.append( BaseUtil.getLongValue(cu.getNuPontos()) 			).append(ClubeusuarioConverter.SEPARADOR);
+			sb.append( cu.getLotecausuario().getNuSeqlotecausuario() 	).append(ClubeusuarioConverter.SEPARADOR);
+			sb.append( cu.getClube().getNuSeqclube() 					).append(ClubeusuarioConverter.SEPARADOR);
+			sb.append( cu.getClube().getCdClube() 						).append(ClubeusuarioConverter.SEPARADOR);
+			sb.append( cu.getClube().getNmClube() 						);
 			return sb.toString();
 		}
 		return "";

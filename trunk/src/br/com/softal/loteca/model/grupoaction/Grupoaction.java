@@ -29,20 +29,16 @@ public class Grupoaction extends Entity {
 	@Column(name = "nuseqgrupoaction")
 	private long nuSeqgrupoaction;
 	
-/*	@ManyToOne(optional = false, targetEntity = Grupo.class)
-	@JoinColumn(name = "cdGrupo", referencedColumnName = "cdGrupo")*/
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="cdgrupo", insertable=true, updatable=true)
 	@Fetch(FetchMode.JOIN)
-	@Cascade(CascadeType.SAVE_UPDATE)
+	//@Cascade(CascadeType.SAVE_UPDATE)
 	private Grupo grupo;
 	
-/*	@ManyToOne(optional = false, targetEntity = Action.class)
-	@JoinColumn(name = "cdAction", referencedColumnName = "cdAction")	*/
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="cdaction", insertable=true, updatable=true)
 	@Fetch(FetchMode.JOIN)
-	@Cascade(CascadeType.SAVE_UPDATE)	
+	//@Cascade(CascadeType.SAVE_UPDATE)	
 	private Action action;
 
 	public Grupoaction() {
