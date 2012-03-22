@@ -9,8 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -28,16 +26,16 @@ public class Usuariogrupo extends Entity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long nuSequsuariogrupo;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cdgrupo", insertable = true, updatable = true)
 	@Fetch(FetchMode.JOIN)
-	@Cascade(CascadeType.SAVE_UPDATE)
+	//@Cascade(CascadeType.SAVE_UPDATE)
 	private Grupo grupo;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cdusuario", insertable = true, updatable = true)
 	@Fetch(FetchMode.JOIN)
-	@Cascade(CascadeType.SAVE_UPDATE)
+	//@Cascade(CascadeType.SAVE_UPDATE)
 	private Usuario usuario;
 
 	public Usuariogrupo() {
