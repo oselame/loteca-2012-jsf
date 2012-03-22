@@ -36,11 +36,11 @@
 				<p:dataTable id="lotecausuarios" var="row" value="#{lotecausuarioBean.rows}"
 					rowKey="#{row.nuSeqlotecausuario}" selection="#{lotecausuarioBean.entity}"
 					selectionMode="single" emptyMessage="#{msg.warning_nenhum_registro_encontrado}">
-					<p:column headerText="#{msg.lotecausuario_cdloteca}">
-						<h:outputText value="#{row.loteca.deLoteca}" />
-					</p:column>
 					<p:column headerText="#{msg.lotecausuario_cdusuario}">
 						<h:outputText value="#{row.usuario.nmUsuario}" />
+					</p:column>
+					<p:column headerText="#{msg.lotecausuario_flativo}" style="width:80px;text-align:center;">
+						<p:selectBooleanCheckbox value="#{row.blAtivo}" disabled="true" />
 					</p:column>
 					<p:column style="width:15px">
 						<p:commandButton id="selectButton" icon="ui-icon-search" title="Editar" action="#{lotecausuarioBean.editar}" ajax="false">

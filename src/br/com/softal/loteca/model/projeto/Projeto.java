@@ -35,7 +35,7 @@ public class Projeto extends Entity {
 	private String sgProjeto;
 	
 	@OneToMany(mappedBy="projeto", fetch=FetchType.LAZY)
-	@Cascade(CascadeType.ALL)
+	//@Cascade(CascadeType.ALL)
 	private List<Usuario> usuarios;
 
 	public Projeto() {

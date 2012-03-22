@@ -35,7 +35,7 @@ public class Grupo extends Entity {
 	private String nmGrupo;
 	
 	@OneToMany(mappedBy="grupo", fetch=FetchType.LAZY)
-	@Cascade(CascadeType.ALL)
+	//@Cascade(CascadeType.ALL)
 	private List<Grupoaction> grupoactions;
 	
 	public Grupo() {

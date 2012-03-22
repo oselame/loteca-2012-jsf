@@ -39,22 +39,16 @@ public class Clubeusuario extends Entity {
 	@Column(name = "nupontos")
 	private Long nuPontos;
 
-/*	@ManyToOne(optional = false, targetEntity = Clube.class)
-	@JoinColumn(name = "nuSeqclube", referencedColumnName = "nuSeqclube") //--, insertable=false, updatable=false
-*/	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="nuseqclube", insertable=true, updatable=true)
 	@Fetch(FetchMode.JOIN)
-	@Cascade(CascadeType.SAVE_UPDATE)
+	//@Cascade(CascadeType.SAVE_UPDATE)
 	private Clube clube;
 
-/*	@ManyToOne(optional = false, targetEntity = Lotecausuario.class)
-	@JoinColumn(name = "nuSeqlotecausuario", referencedColumnName = "nuSeqlotecausuario") //--, insertable=false, updatable=false
-*/	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="nuseqlotecausuario", insertable=true, updatable=true)
 	@Fetch(FetchMode.JOIN)
-	@Cascade(CascadeType.SAVE_UPDATE)
+	//@Cascade(CascadeType.SAVE_UPDATE)
 	private Lotecausuario lotecausuario;
 
 	public Clubeusuario() {

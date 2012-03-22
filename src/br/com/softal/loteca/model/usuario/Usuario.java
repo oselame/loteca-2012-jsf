@@ -63,25 +63,18 @@ public class Usuario extends Entity {
 	@Column(name = "flEnviosenha")
 	private Long flEnviosenha;
 
-	/*@Column(name = "cdProjeto")
-	private String cdProjeto;*/
-
-/*	@ManyToOne(optional = false, targetEntity = Projeto.class)
-	@JoinColumn(name = "cdProjeto", referencedColumnName = "cdProjeto")	*/
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="cdprojeto", insertable=true, updatable=true)
 	@Fetch(FetchMode.JOIN)
-	@Cascade(CascadeType.SAVE_UPDATE)
+	//-- @Cascade(CascadeType.SAVE_UPDATE)
 	private Projeto projeto;
 	
-/*	@OneToMany(targetEntity = Lotecausuario.class)
-	@JoinColumn(name = "cdUsuario", referencedColumnName = "cdUsuario")	*/
 	@OneToMany(mappedBy="usuario", fetch=FetchType.LAZY)
-	@Cascade(CascadeType.ALL)
+	//-- @Cascade(CascadeType.ALL)
 	private List<Lotecausuario> lotecasusuario;
 
 	@OneToMany(mappedBy="usuario", fetch=FetchType.LAZY)
-	@Cascade(CascadeType.ALL)
+	//-- @Cascade(CascadeType.ALL)
 	private List<Usuariogrupo> usuariogrupos;
 	
 	public Usuario() {

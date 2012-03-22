@@ -34,7 +34,7 @@ public class Action extends Entity {
 	private String deAction;
 	
 	@OneToMany(mappedBy="action", fetch=FetchType.LAZY)
-	@Cascade(CascadeType.ALL)
+	//@Cascade(CascadeType.ALL)
 	private List<Grupoaction> grupoactions;
 
 	public Action() {
