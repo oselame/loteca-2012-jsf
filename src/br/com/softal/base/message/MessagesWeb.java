@@ -40,5 +40,13 @@ public class MessagesWeb extends Messages {
 	public void addWarningMessage(String message) {
 		this.addMessage(FacesMessage.SEVERITY_WARN, message );
 	}
+	
+	public void addInfoMessage(String message) {
+		this.addMessage(FacesMessage.SEVERITY_INFO, message );
+	}
+	
+	public void addFatalMessage(String message) {
+		this.addMessage(FacesMessage.SEVERITY_FATAL, message );
+	}
 
 }
