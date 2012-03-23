@@ -1,64 +1,88 @@
 package br.com.softal.loteca.model.jogo;
 
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import br.com.softal.base.model.Entity;
+import br.com.softal.loteca.model.data.Data;
 
 @SuppressWarnings("serial")
 @javax.persistence.Entity
-@Table(name = "eseggrupo")
+@Table(name = "eltcjogo")
 public class Jogo extends Entity {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "cdgrupo")
-	@OneToMany(mappedBy = "grupo")
-	private long cdGrupo;
+	private long nuSeqjogo;
 
-	@Column(name = "degrupo")
-	private String deGrupo;
-
-	@Column(name = "nmgrupo")
-	private String nmGrupo;
+	@Column(name = "dejogo")
+	private String deJogo;
+	
+	@Column(name = "tpResultadofinal")
+	private long tpResultadofinal;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="cddata", insertable=true, updatable=true)
+	@Fetch(FetchMode.JOIN)
+	private Data data;
 	
 	public Jogo() {
 		super();
 	}
-
-	public Jogo(long cdGrupo, String deGrupo, String nmGrupo) {
+	
+	public Jogo(long nuSeqjogo) {
 		this();
-		this.cdGrupo = cdGrupo;
-		this.deGrupo = deGrupo;
-		this.nmGrupo = nmGrupo;
 	}
 
-	public long getCdGrupo() {
-		return cdGrupo;
+	public Jogo(long nuSeqjogo, String deJogo, long tpResultadofinal, long cdData) {
+		super();
+		this.nuSeqjogo = nuSeqjogo;
+		this.deJogo = deJogo;
+		this.tpResultadofinal = tpResultadofinal;
+		this.setData(new Data());
+		this.getData().setCdData(cdData);
 	}
 
-	public void setCdGrupo(long cdGrupo) {
-		this.cdGrupo = cdGrupo;
+	public long getNuSeqjogo() {
+		return nuSeqjogo;
 	}
 
-	public String getDeGrupo() {
-		return deGrupo;
+	public void setNuSeqjogo(long nuSeqjogo) {
+		this.nuSeqjogo = nuSeqjogo;
 	}
 
-	public void setDeGrupo(String deGrupo) {
-		this.deGrupo = deGrupo;
+	public String getDeJogo() {
+		return deJogo;
 	}
 
-	public String getNmGrupo() {
-		return nmGrupo;
+	public void setDeJogo(String deJogo) {
+		this.deJogo = deJogo;
 	}
 
-	public void setNmGrupo(String nmGrupo) {
-		this.nmGrupo = nmGrupo;
+	public long getTpResultadofinal() {
+		return tpResultadofinal;
 	}
+
+	public void setTpResultadofinal(long tpResultadofinal) {
+		this.tpResultadofinal = tpResultadofinal;
+	}
+
+	public Data getData() {
+		return data;
+	}
+
+	public void setData(Data data) {
+		this.data = data;
+	}
+	
 
 }
