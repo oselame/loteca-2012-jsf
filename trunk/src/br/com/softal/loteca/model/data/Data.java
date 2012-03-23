@@ -1,6 +1,7 @@
 package br.com.softal.loteca.model.data;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import br.com.softal.base.model.Entity;
 import br.com.softal.loteca.model.jogo.Jogo;
@@ -25,7 +28,8 @@ public class Data extends Entity {
 	private long cdData;
 
 	@Column(name = "dtdata")
-	private String dtData;
+	@Temporal(TemporalType.DATE)
+	private Date dtData;
 
 	@Column(name = "deobservacao")
 	private String deObservacao;
@@ -46,7 +50,7 @@ public class Data extends Entity {
 		super();
 	}
 	
-	public Data(long cdData, String dtData, String deObservacao,
+	public Data(long cdData, Date dtData, String deObservacao,
 			Long flSituacao, Long flAtualizoutimes, String deClassificacao) {
 		this();
 		this.inicializaRelacionamentos();
@@ -66,11 +70,11 @@ public class Data extends Entity {
 		this.cdData = cdData;
 	}
 
-	public String getDtData() {
+	public Date getDtData() {
 		return dtData;
 	}
 
-	public void setDtData(String dtData) {
+	public void setDtData(Date dtData) {
 		this.dtData = dtData;
 	}
 

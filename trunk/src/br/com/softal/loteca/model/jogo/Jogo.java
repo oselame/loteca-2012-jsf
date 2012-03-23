@@ -29,11 +29,14 @@ public class Jogo extends Entity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long nuSeqjogo;
 
+	@Column(name = "cdjogo")
+	private Long cdJogo;
+	
 	@Column(name = "dejogo")
 	private String deJogo;
 
 	@Column(name = "tpResultadofinal")
-	private long tpResultadofinal;
+	private Long tpResultadofinal;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cddata", insertable = true, updatable = true)
@@ -51,14 +54,23 @@ public class Jogo extends Entity {
 		this();
 	}
 
-	public Jogo(long nuSeqjogo, String deJogo, long tpResultadofinal,
+	public Jogo(long nuSeqjogo, Long cdJogo, String deJogo, Long tpResultadofinal,
 			long cdData) {
 		super();
 		this.inicializaRelacionamentos();
 		this.nuSeqjogo = nuSeqjogo;
+		this.cdJogo = cdJogo;
 		this.deJogo = deJogo;
 		this.tpResultadofinal = tpResultadofinal;
 		this.getData().setCdData(cdData);
+	}
+	
+	public Long getCdJogo() {
+		return cdJogo;
+	}
+
+	public void setCdJogo(Long cdJogo) {
+		this.cdJogo = cdJogo;
 	}
 
 	public long getNuSeqjogo() {
@@ -77,11 +89,11 @@ public class Jogo extends Entity {
 		this.deJogo = deJogo;
 	}
 
-	public long getTpResultadofinal() {
+	public Long getTpResultadofinal() {
 		return tpResultadofinal;
 	}
 
-	public void setTpResultadofinal(long tpResultadofinal) {
+	public void setTpResultadofinal(Long tpResultadofinal) {
 		this.tpResultadofinal = tpResultadofinal;
 	}
 

@@ -11,6 +11,8 @@ import br.com.softal.loteca.sets.SpringFactory;
 @SuppressWarnings("serial")
 public abstract class AbstractManegedBean<E extends Entity> implements Serializable {
 	
+	//protected Logger logger = Logger.getLogger(getEntity().getClass().getName());  
+	
 	private MessagesWeb messages;
 	private DefaultServiceImpl defaultService;
 	private E entity;
