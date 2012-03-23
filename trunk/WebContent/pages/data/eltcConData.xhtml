@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition
+	template="#{pageContext.servletContext.contextPath}/templates/template.xhtml">
+	<ui:define name="title">
+		<h:outputText value="#{msg.data_titulo}" />
+	</ui:define>
+
+	<ui:define name="context">
+			<h:form>
+				<p:dataTable id="datas" var="row" value="#{dataBean.rows}"
+					rowKey="#{row.cdData}" selection="#{dataBean.entity}"
+					selectionMode="single" emptyMessage="#{msg.warning_nenhum_registro_encontrado}">
+					
+					<f:facet name="header">
+						#{msg.data_consultar}
+					</f:facet>
+					
+					<p:column headerText="#{msg.data_cddata}">
+						<h:outputText value="#{row.cdData}" />
+					</p:column>
+					<p:column headerText="#{msg.data_dtdata}">
+						<h:outputText value="#{row.dtData}" />
+					</p:column>
+					<p:column headerText="#{msg.data_deobservacao}">
+						<h:outputText value="#{row.deObservacao}" />
+					</p:column>
+					<p:column style="width:15px">
+						<p:commandButton id="selectButton" icon="ui-icon-search" title="${msg.title_edit}" 
+							action="#{dataBean.editar}" ajax="false">
+							<f:setPropertyActionListener value="#{row}" target="#{dataBean.entity}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+				<p:messages showDetail="true" showSummary="false" />
+			</h:form>
+
+			<h:form>
+				<h:panelGrid columns="2">
+					<p:commandButton value="#{msg.button_novo}"
+						action="#{dataBean.adicionar}" ajax="false" />
+				</h:panelGrid>
+			</h:form>
+	</ui:define>
+</ui:composition>
+</html>
