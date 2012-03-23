@@ -4,6 +4,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import org.springframework.dao.DataIntegrityViolationException;
+
 import br.com.softal.base.bean.AbstractManegedBean;
 
 @SuppressWarnings("serial")
@@ -56,8 +58,11 @@ public class GrupoBean extends AbstractManegedBean<Grupo> {
 			super.delete();
 			super.getMessages().addSucessMessage("mensagem_registro_excluido_com_sucesso");
 			return adicionar();
+		} catch (DataIntegrityViolationException e) {
+			this.getMessages().addWarningMessage("warning_constrait_violation");
 		} catch (Exception e) {
 			super.getMessages().addSucessMessage("mensagem_ocorreu_um_erro_ao_excluir_o_registro");
+			e.printStackTrace();
 		} finally {
 			init();
 		}
