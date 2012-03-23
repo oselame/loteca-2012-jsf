@@ -1,13 +1,21 @@
 package br.com.softal.loteca.model.classifclube;
 
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import br.com.softal.base.model.Entity;
+import br.com.softal.loteca.model.clube.Clube;
+import br.com.softal.loteca.model.data.Data;
 
 @SuppressWarnings("serial")
 @javax.persistence.Entity
@@ -16,16 +24,10 @@ public class Classifclube extends Entity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "nuseqcassifclube")
+	@Column(name = "nuSeqclassifclube")
 	@OneToMany(mappedBy = "classifclube")
-	private long nuSeqcassifclube;
+	private long nuSeqclassifclube;
 
-	@Column(name = "cdData")
-	private Long cdData;
-
-	@Column(name = "nuseqclube")
-	private Long nuSeqclube;
-	
 	@Column(name = "nuclassificacao")
 	private Long nuClassificacao;
 
@@ -56,25 +58,47 @@ public class Classifclube extends Entity {
 	@Column(name = "nupercaprov")
 	private Long nuPercaprov;
 
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="cddata", insertable=true, updatable=true)
+	@Fetch(FetchMode.JOIN)
+	private Data data;
+
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="nuseqclube", insertable=true, updatable=true)
+	@Fetch(FetchMode.JOIN)
+	private Clube clube;
 
 	public Classifclube() {
 		super();
 	}
-
-	public long getNuSeqcassifclube() {
-		return nuSeqcassifclube;
+	
+	public Classifclube(long nuSeqclassifclube, Long nuClassificacao,
+			Long nuPontos, Long nuJogos, Long nuVitorias, Long nuEmpates,
+			Long nuDerrotas, Long nuGolspro, Long nuGolscontra,
+			Long nuSaldogols, Long nuPercaprov, Long cdData, Long nuSeqclube) {
+		this();
+		this.inicializaRelacionamentos();
+		this.nuSeqclassifclube = nuSeqclassifclube;
+		this.nuClassificacao = nuClassificacao;
+		this.nuPontos = nuPontos;
+		this.nuJogos = nuJogos;
+		this.nuVitorias = nuVitorias;
+		this.nuEmpates = nuEmpates;
+		this.nuDerrotas = nuDerrotas;
+		this.nuGolspro = nuGolspro;
+		this.nuGolscontra = nuGolscontra;
+		this.nuSaldogols = nuSaldogols;
+		this.nuPercaprov = nuPercaprov;
+		getData().setCdData(cdData);
+		getClube().setNuSeqclube(nuSeqclube);
 	}
 
-	public void setNuSeqcassifclube(long nuSeqcassifclube) {
-		this.nuSeqcassifclube = nuSeqcassifclube;
+	public long getNuSeqclassifclube() {
+		return nuSeqclassifclube;
 	}
 
-	public Long getCdData() {
-		return cdData;
-	}
-
-	public void setCdData(Long cdData) {
-		this.cdData = cdData;
+	public void setNuSeqclassifclube(long nuSeqclassifclube) {
+		this.nuSeqclassifclube = nuSeqclassifclube;
 	}
 
 	public Long getNuClassificacao() {
@@ -157,18 +181,26 @@ public class Classifclube extends Entity {
 		this.nuPercaprov = nuPercaprov;
 	}
 
-	public Long getNuSeqclube() {
-		return nuSeqclube;
+	public Data getData() {
+		return data;
 	}
 
-	public void setNuSeqclube(Long nuSeqclube) {
-		this.nuSeqclube = nuSeqclube;
+	public void setData(Data data) {
+		this.data = data;
 	}
-	
+
+	public Clube getClube() {
+		return clube;
+	}
+
+	public void setClube(Clube clube) {
+		this.clube = clube;
+	}
+
 	@Override
 	public void inicializaRelacionamentos() {
-		// TODO Auto-generated method stub
-		
+		setData(new Data());
+		setClube(new Clube());
 	}
 
 }
