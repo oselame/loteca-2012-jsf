@@ -1,6 +1,9 @@
 package br.com.softal.loteca.model.data;
 
+import java.util.List;
+
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -8,6 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.com.softal.base.model.Entity;
+import br.com.softal.loteca.model.jogo.Jogo;
 
 @SuppressWarnings("serial")
 @javax.persistence.Entity
@@ -17,7 +21,6 @@ public class Data extends Entity {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "cddata")
-	@OneToMany(mappedBy = "data")
 	private long cdData;
 
 	@Column(name = "dtdata")
@@ -35,9 +38,25 @@ public class Data extends Entity {
 	@Column(name = "declassificacao")
 	private String deClassificacao;
 	
+	@OneToMany(mappedBy="data", fetch=FetchType.LAZY)
+	private List<Jogo> jogos;
+	
 	public Data() {
 		super();
 	}
+	
+	public Data(long cdData, String dtData, String deObservacao,
+			Long flSituacao, Long flAtualizoutimes, String deClassificacao) {
+		super();
+		this.cdData = cdData;
+		this.dtData = dtData;
+		this.deObservacao = deObservacao;
+		this.flSituacao = flSituacao;
+		this.flAtualizoutimes = flAtualizoutimes;
+		this.deClassificacao = deClassificacao;
+	}
+
+
 
 	public long getCdData() {
 		return cdData;
@@ -85,6 +104,14 @@ public class Data extends Entity {
 
 	public void setDeClassificacao(String deClassificacao) {
 		this.deClassificacao = deClassificacao;
+	}
+
+	public List<Jogo> getJogos() {
+		return jogos;
+	}
+
+	public void setJogos(List<Jogo> jogos) {
+		this.jogos = jogos;
 	}
 	
 }
