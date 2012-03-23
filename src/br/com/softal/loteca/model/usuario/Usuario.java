@@ -1,5 +1,6 @@
 package br.com.softal.loteca.model.usuario;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -81,6 +82,28 @@ public class Usuario extends Entity {
 		super();
 	}
 	
+	public Usuario(Long cdUsuario, String nmUsuario, String deLogin,
+			String deSenha, String deEmail, Long vlDeposito,
+			String deEmailpessoal, Long flAdm, Long flAtivo,
+			Long flForaempresa, Long flEnviosenha, Long cdProjeto) {
+		this();
+		this.inicializaRelacionamentos();
+		this.cdUsuario = cdUsuario;
+		this.nmUsuario = nmUsuario;
+		this.deLogin = deLogin;
+		this.deSenha = deSenha;
+		this.deEmail = deEmail;
+		this.vlDeposito = vlDeposito;
+		this.deEmailpessoal = deEmailpessoal;
+		this.flAdm = flAdm;
+		this.flAtivo = flAtivo;
+		this.flForaempresa = flForaempresa;
+		this.flEnviosenha = flEnviosenha;
+		getProjeto().setCdProjeto(cdProjeto);
+	}
+
+
+
 	public String getNmUsuario() {
 		return nmUsuario;
 	}
@@ -199,6 +222,13 @@ public class Usuario extends Entity {
 
 	public void setUsuariogrupos(List<Usuariogrupo> usuariogrupos) {
 		this.usuariogrupos = usuariogrupos;
+	}
+	
+	@Override
+	public void inicializaRelacionamentos() {
+		setProjeto(new Projeto());		
+		setLotecasusuario(new ArrayList<Lotecausuario>());
+		setUsuariogrupos(new ArrayList<Usuariogrupo>());
 	}
 	
 }

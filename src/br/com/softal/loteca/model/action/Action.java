@@ -10,9 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-
 import br.com.softal.base.model.Entity;
 import br.com.softal.loteca.model.grupoaction.Grupoaction;
 
@@ -77,6 +74,10 @@ public class Action extends Entity {
 
 	public void setGrupoactions(List<Grupoaction> grupoactions) {
 		this.grupoactions = grupoactions;
+	}
+	
+	@Override
+	public void inicializaRelacionamentos() {
 	}
 	
 }

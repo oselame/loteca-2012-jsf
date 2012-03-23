@@ -44,6 +44,14 @@ public class Grupoaction extends Entity {
 	public Grupoaction() {
 		super();
 	}
+	
+	public Grupoaction(long nuSeqgrupoaction, Long cdGrupo, Long cdAction) {
+		this();
+		this.nuSeqgrupoaction = nuSeqgrupoaction;
+		this.inicializaRelacionamentos();
+		getGrupo().setCdGrupo(cdGrupo);
+		getAction().setCdAction(cdAction);
+	}
 
 	public long getNuSeqgrupoaction() {
 		return nuSeqgrupoaction;
@@ -67,6 +75,12 @@ public class Grupoaction extends Entity {
 
 	public void setAction(Action action) {
 		this.action = action;
+	}
+	
+	@Override
+	public void inicializaRelacionamentos() {
+		setGrupo(new Grupo());
+		setAction(new Action());		
 	}
 
 

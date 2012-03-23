@@ -164,5 +164,11 @@ public class Classifclube extends Entity {
 	public void setNuSeqclube(Long nuSeqclube) {
 		this.nuSeqclube = nuSeqclube;
 	}
+	
+	@Override
+	public void inicializaRelacionamentos() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

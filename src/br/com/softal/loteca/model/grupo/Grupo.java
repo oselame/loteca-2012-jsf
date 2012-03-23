@@ -81,4 +81,8 @@ public class Grupo extends Entity {
 		this.grupoactions = grupoactions;
 	}
 	
+	@Override
+	public void inicializaRelacionamentos() {
+	}
+	
 }

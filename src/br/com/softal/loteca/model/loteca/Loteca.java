@@ -1,5 +1,6 @@
 package br.com.softal.loteca.model.loteca;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -53,7 +54,8 @@ public class Loteca extends Entity {
 	}
 	
 	public Loteca(long cdLoteca, Long nuAno, Long flAtiva) {
-		super();
+		this();
+		this.inicializaRelacionamentos();
 		this.cdLoteca = cdLoteca;
 		this.nuAno = nuAno;
 		this.flAtiva = flAtiva;
@@ -116,6 +118,12 @@ public class Loteca extends Entity {
 
 	public void setLotecasusuario(List<Lotecausuario> lotecasusuario) {
 		this.lotecasusuario = lotecasusuario;
+	}
+	
+	@Override
+	public void inicializaRelacionamentos() {
+		setClubes(new ArrayList<Clube>());
+		setLotecasusuario(new ArrayList<Lotecausuario>());
 	}
 	
 }

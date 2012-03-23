@@ -32,6 +32,10 @@
 				<value>br.com.softal.loteca.model.usuario.Usuario</value>
 				<value>br.com.softal.loteca.model.lotecausuario.Lotecausuario</value>
 				<value>br.com.softal.loteca.model.clubeusuario.Clubeusuario</value>
+				<value>br.com.softal.loteca.model.data.Data</value>
+				<value>br.com.softal.loteca.model.jogo.Jogo</value>
+				<value>br.com.softal.loteca.model.jogousuario.Jogousuario</value>
+				
 			</list>
 		</property>
 		

@@ -1,5 +1,6 @@
 package br.com.softal.loteca.model.lotecausuario;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -56,6 +57,17 @@ public class Lotecausuario extends Entity {
 		super();
 	}
 	
+	public Lotecausuario(long nuSeqlotecausuario, Long flAtivo,
+			Long  cdUsuario, Long cdLoteca) {
+		this();
+		this.inicializaRelacionamentos();
+		this.nuSeqlotecausuario = nuSeqlotecausuario;
+		this.flAtivo = flAtivo;
+		getUsuario().setCdUsuario(cdUsuario);
+		getLoteca().setCdLoteca(cdLoteca);
+	}
+
+
 	public long getNuSeqlotecausuario() {
 		return nuSeqlotecausuario;
 	}
@@ -102,6 +114,13 @@ public class Lotecausuario extends Entity {
 
 	public void setClubeusuarios(List<Clubeusuario> clubeusuarios) {
 		this.clubeusuarios = clubeusuarios;
+	}
+	
+	@Override
+	public void inicializaRelacionamentos() {
+		setUsuario(new Usuario());
+		setLoteca(new Loteca());
+		setClubeusuarios(new ArrayList<Clubeusuario>());
 	}
 	
 }

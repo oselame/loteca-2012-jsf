@@ -1,13 +1,21 @@
 package br.com.softal.loteca.model.usuariodata;
 
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import br.com.softal.base.model.Entity;
+import br.com.softal.loteca.model.data.Data;
+import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
 
 @SuppressWarnings("serial")
 @javax.persistence.Entity
@@ -16,45 +24,76 @@ public class Usuariodata extends Entity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "nuSequsuariodata")
+	@Column(name = "nusequsuariodata")
 	@OneToMany(mappedBy = "usuariodata")
 	private long nuSequsuariodata;
 
-	@Column(name = "nuSeqlotecausuario")
-	private Long nuSeqlotecausuario;
-
-	@Column(name = "cdData")
-	private Long cdData;
-
-	@Column(name = "flApostou")
+	@Column(name = "flapostou")
 	private Long flApostou;
 
-	@Column(name = "nuTotalpontos")
+	@Column(name = "nutotalpontos")
 	private Long nuTotalpontos;
 
-	@Column(name = "flCanhoto")
+	@Column(name = "flcanhoto")
 	private Long flCanhoto;
 
-	@Column(name = "flGeradoaleat")
+	@Column(name = "flgeradoaleat")
 	private Long flGeradoaleat;
 
-	@Column(name = "nuPosicao")
+	@Column(name = "nuposicao")
 	private Long nuPosicao;
 
-	@Column(name = "nuTotallistas")
+	@Column(name = "nutotallistas")
 	private Long nuTotallistas;
 
-	@Column(name = "deBytesjogo")
+	@Column(name = "debytesjogo")
 	private String deBytesjogo;
 
-	@Column(name = "flPagou")
+	@Column(name = "flpagou")
 	private Long flPagou;
 
-	@Column(name = "nuPosicaofinal")
+	@Column(name = "nuposicaofinal")
 	private Long nuPosicaofinal;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "nuseqlotecausuario", insertable = true, updatable = true)
+	@Fetch(FetchMode.JOIN)
+	private Lotecausuario lotecausuario;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "cddata", insertable = true, updatable = true)
+	@Fetch(FetchMode.JOIN)
+	private Data data;
 
 	public Usuariodata() {
 		super();
+	}
+	
+	public Usuariodata(long nuSequsuariodata, Long flApostou,
+			Long nuTotalpontos, Long flCanhoto, Long flGeradoaleat,
+			Long nuPosicao, Long nuTotallistas, String deBytesjogo,
+			Long flPagou, Long nuPosicaofinal, Long nuSeqlotecausuario,
+			Long cdData) {
+		super();
+		this.nuSequsuariodata = nuSequsuariodata;
+		this.flApostou = flApostou;
+		this.nuTotalpontos = nuTotalpontos;
+		this.flCanhoto = flCanhoto;
+		this.flGeradoaleat = flGeradoaleat;
+		this.nuPosicao = nuPosicao;
+		this.nuTotallistas = nuTotallistas;
+		this.deBytesjogo = deBytesjogo;
+		this.flPagou = flPagou;
+		this.nuPosicaofinal = nuPosicaofinal;
+		this.inicializaRelacionamentos();
+		getLotecausuario().setNuSeqlotecausuario(nuSeqlotecausuario);
+		getData().setCdData(cdData);
+	}
+
+	@Override
+	public void inicializaRelacionamentos() {
+		setData(new Data());
+		setLotecausuario(new Lotecausuario());
 	}
 
 	public long getNuSequsuariodata() {
@@ -63,22 +102,6 @@ public class Usuariodata extends Entity {
 
 	public void setNuSequsuariodata(long nuSequsuariodata) {
 		this.nuSequsuariodata = nuSequsuariodata;
-	}
-
-	public Long getNuSeqlotecausuario() {
-		return nuSeqlotecausuario;
-	}
-
-	public void setNuSeqlotecausuario(Long nuSeqlotecausuario) {
-		this.nuSeqlotecausuario = nuSeqlotecausuario;
-	}
-
-	public Long getCdData() {
-		return cdData;
-	}
-
-	public void setCdData(Long cdData) {
-		this.cdData = cdData;
 	}
 
 	public Long getFlApostou() {
@@ -151,6 +174,22 @@ public class Usuariodata extends Entity {
 
 	public void setNuPosicaofinal(Long nuPosicaofinal) {
 		this.nuPosicaofinal = nuPosicaofinal;
+	}
+
+	public Lotecausuario getLotecausuario() {
+		return lotecausuario;
+	}
+
+	public void setLotecausuario(Lotecausuario lotecausuario) {
+		this.lotecausuario = lotecausuario;
+	}
+
+	public Data getData() {
+		return data;
+	}
+
+	public void setData(Data data) {
+		this.data = data;
 	}
 
 }

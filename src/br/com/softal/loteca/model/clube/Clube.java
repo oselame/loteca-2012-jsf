@@ -1,5 +1,6 @@
 package br.com.softal.loteca.model.clube;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -12,8 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -53,6 +52,17 @@ public class Clube extends Entity {
 		super();
 	}
 	
+	public Clube(long nuSeqclube, Long cdClube, String nmClube, Long cdLoteca) {
+		this();
+		this.inicializaRelacionamentos();
+		this.nuSeqclube = nuSeqclube;
+		this.cdClube = cdClube;
+		this.nmClube = nmClube;
+		getLoteca().setCdLoteca(cdLoteca);
+	}
+
+
+
 	public long getNuSeqclube() {
 		return nuSeqclube;
 	}
@@ -98,6 +108,12 @@ public class Clube extends Entity {
 
 	public void setClubeusuarios(List<Clubeusuario> clubeusuarios) {
 		this.clubeusuarios = clubeusuarios;
+	}
+	
+	@Override
+	public void inicializaRelacionamentos() {
+		setLoteca(new Loteca());
+		setClubeusuarios(new ArrayList<Clubeusuario>());		
 	}
 	
 

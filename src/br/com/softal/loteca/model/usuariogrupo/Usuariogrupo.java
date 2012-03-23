@@ -41,6 +41,16 @@ public class Usuariogrupo extends Entity {
 	public Usuariogrupo() {
 		super();
 	}
+	
+	public Usuariogrupo(Long nuSequsuariogrupo, Long cdGrupo, Long cdUsuario) {
+		this();
+		this.inicializaRelacionamentos();
+		this.nuSequsuariogrupo = nuSequsuariogrupo;
+		getGrupo().setCdGrupo(cdGrupo);
+		getUsuario().setCdUsuario(cdUsuario);
+	}
+
+
 
 	public Long getNuSequsuariogrupo() {
 		return nuSequsuariogrupo;
@@ -66,5 +76,9 @@ public class Usuariogrupo extends Entity {
 		this.usuario = usuario;
 	}
 
-	
+	@Override
+	public void inicializaRelacionamentos() {
+		setGrupo(new Grupo());
+		setUsuario(new Usuario());	
+	}
 }

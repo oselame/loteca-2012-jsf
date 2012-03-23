@@ -7,11 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -54,6 +51,20 @@ public class Clubeusuario extends Entity {
 	public Clubeusuario() {
 		super();
 	}
+	
+	public Clubeusuario(long nuSeqclubeusuario, Long nuPosicao,
+			Long flRebaixado, Long nuPontos, Long nuSeqclube, Long nuSeqlotecausuario) {
+		super();
+		this.inicializaRelacionamentos();
+		this.nuSeqclubeusuario = nuSeqclubeusuario;
+		this.nuPosicao = nuPosicao;
+		this.flRebaixado = flRebaixado;
+		this.nuPontos = nuPontos;
+		this.getClube().setNuSeqclube(nuSeqclube);
+		this.getLotecausuario().setNuSeqlotecausuario(nuSeqlotecausuario);
+	}
+
+
 
 	public long getNuSeqclubeusuario() {
 		return nuSeqclubeusuario;
@@ -101,6 +112,12 @@ public class Clubeusuario extends Entity {
 
 	public void setNuPontos(Long nuPontos) {
 		this.nuPontos = nuPontos;
+	}
+	
+	@Override
+	public void inicializaRelacionamentos() {
+		setClube(new Clube());
+		setLotecausuario(new Lotecausuario());
 	}
 
 }

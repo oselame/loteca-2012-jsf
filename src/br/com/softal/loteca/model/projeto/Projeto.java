@@ -81,4 +81,8 @@ public class Projeto extends Entity {
 		this.usuarios = usuarios;
 	}
 	
+	@Override
+	public void inicializaRelacionamentos() {
+	}
+	
 }

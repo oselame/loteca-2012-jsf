@@ -62,6 +62,8 @@ public abstract class Entity implements Serializable {
 		return getStatus() != null && !"".equalsIgnoreCase(getStatus()) && getStatus().equalsIgnoreCase(Entity.STATUS_UNMODIFIED);
 	}
 	
+	public abstract void inicializaRelacionamentos() ;
+	
 
 	/*
 	public abstract long getId();
