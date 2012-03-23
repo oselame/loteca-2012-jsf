@@ -34,13 +34,6 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 	private List<SelectItem> lotecas;
 	private List<SelectItem> usuarios;
 	
-	@ManagedProperty(value = "#{lotecaBean}")
-	private LotecaBean lotecaBean;
-	
-	@ManagedProperty(value = "#{usuarioBean}")
-	private UsuarioBean usuarioBean;
-	
-	
 	public LotecausuarioBean() {
 	}
 	
@@ -68,34 +61,18 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 		this.usuarios = usuarios;
 	}
 	
-	public LotecaBean getLotecaBean() {
-		return lotecaBean;
-	}
-
-	public void setLotecaBean(LotecaBean lotecaBean) {
-		this.lotecaBean = lotecaBean;
-	}
-	
-	public UsuarioBean getUsuarioBean() {
-		return usuarioBean;
-	}
-
-	public void setUsuarioBean(UsuarioBean usuarioBean) {
-		this.usuarioBean = usuarioBean;
-	}
-	
+	@SuppressWarnings("unchecked")
 	private void carregaLotecas() {
-		getLotecaBean().init();
-		List<Loteca> listaLotecas = getLotecaBean().getRows();
+		List<Loteca> listaLotecas = (List<Loteca>) LtcServiceLocator.getInstance().getLotecaService().findAll(new Loteca());
 		setLotecas(new ArrayList<SelectItem>());
 		for (Loteca p : listaLotecas) {
 			getLotecas().add(new SelectItem(p.getCdLoteca(), p.getNuAno().toString()));
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void carregaUsuarios() {
-		getUsuarioBean().init();
-		List<Usuario> listaUsuarios = getUsuarioBean().getRows();
+		List<Usuario> listaUsuarios =  (List<Usuario>) LtcServiceLocator.getInstance().getLotecaService().findAll(new Usuario());
 		setUsuarios(new ArrayList<SelectItem>());
 		for (Usuario u : listaUsuarios) {
 			getUsuarios().add(new SelectItem(u.getCdUsuario(), u.getNmUsuario()));
@@ -118,6 +95,7 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 		this.carregaUsuarios();
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void insereClubesUsuario() {
 		Clube clube = new Clube();
 		clube.setLoteca( getEntity().getLoteca() );
@@ -184,6 +162,7 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 				super.getMessages().addSucessMessage("mensagem_registro_salvo_com_sucesso");
 			}
 			getEntity().setStatusUpdate();
+			this.carregaClubesUsuario();
 		} catch (DataIntegrityViolationException e) {
 			super.getMessages().addWarningMessage("warning_registro_duplicado");
 			e.printStackTrace();
@@ -192,7 +171,6 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 			e.printStackTrace();
 		} finally {
 			init();
-			this.carregaClubesUsuario();
 		}
 	}	
 	
