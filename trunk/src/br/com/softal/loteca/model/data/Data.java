@@ -1,5 +1,6 @@
 package br.com.softal.loteca.model.data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -47,7 +48,8 @@ public class Data extends Entity {
 	
 	public Data(long cdData, String dtData, String deObservacao,
 			Long flSituacao, Long flAtualizoutimes, String deClassificacao) {
-		super();
+		this();
+		this.inicializaRelacionamentos();
 		this.cdData = cdData;
 		this.dtData = dtData;
 		this.deObservacao = deObservacao;
@@ -55,8 +57,6 @@ public class Data extends Entity {
 		this.flAtualizoutimes = flAtualizoutimes;
 		this.deClassificacao = deClassificacao;
 	}
-
-
 
 	public long getCdData() {
 		return cdData;
@@ -112,6 +112,12 @@ public class Data extends Entity {
 
 	public void setJogos(List<Jogo> jogos) {
 		this.jogos = jogos;
+	}
+	
+	@Override
+	public void inicializaRelacionamentos() {
+		setJogos(new ArrayList<Jogo>());
+		
 	}
 	
 }
