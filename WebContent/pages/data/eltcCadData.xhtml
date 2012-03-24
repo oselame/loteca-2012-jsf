@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition
+	template="#{pageContext.servletContext.contextPath}/templates/template.xhtml">
+	<ui:define name="title">
+		<h:outputText value="#{msg.data_titulo}" />
+	</ui:define>
+
+	<ui:define name="context">
+		<h:form>
+			<p:messages showDetail="true" showSummary="false" />
+			
+			<p:panel header="#{msg.grupo_cadastrar}">
+				<p:tabView id="tabView">
+					<p:growl id="growl" sticky="true" showDetail="true"/> 
+					<p:tab id="tab1" title="Data">
+						<h:panelGrid columns="2" style="width:100%"
+							columnClasses="headerColumn alignRight bold">
+							<h:outputText value="Data*:" />
+							<h:outputText value="#{dataBean.entity.dtData}"
+								pattern="dd/MM/yyyy" converter="javax.faces.DateTime" />
+		
+							<h:outputText value="Observação*:" />
+							<h:outputText value="#{dataBean.entity.deObservacao}" />
+							<f:facet name="footer">
+								<p:commandButton value="#{msg.botao_gerar_jogos}" action="#{dataBean.gerarjogos}" ajax="false" immediate="true" update="growl"/>
+							</f:facet>
+						</h:panelGrid>
+					</p:tab>
+					<p:tab id="tab2" title="Jogos">  
+						<p:dataTable var="jj" value="#{dataBean.entity.jogos}">
+							<p:column headerText="#{msg.data_wizard_jogo}" style="width:50px;">
+								#{jj.cdJogo}
+							</p:column>
+							<p:column headerText="#{msg.data_wizard_partida}">
+								#{jj.deJogo}
+							</p:column>
+							<p:column headerText="#{msg.jogo_tpresultadofinal}">
+								<h:selectOneMenu value="#{jj.tpResultadofinal}" id="tpResultadofinal" style="width: 100%" 
+									required="true" requiredMessage="#{msg.jogo_tpresultadofinal_requirido}">
+									<f:selectItem itemLabel="#{msg.selectonemenu_selecione}" itemValue="" />
+									<f:selectItem itemLabel="#{msg.jogo_tpresultadofinal_coluna1}" itemValue="1" />
+									<f:selectItem itemLabel="#{msg.jogo_tpresultadofinal_empate}" itemValue="0" />
+									<f:selectItem itemLabel="#{msg.jogo_tpresultadofinal_coluna2}" itemValue="2" />
+								</h:selectOneMenu>
+							</p:column>
+						</p:dataTable>
+					</p:tab>
+				</p:tabView>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
