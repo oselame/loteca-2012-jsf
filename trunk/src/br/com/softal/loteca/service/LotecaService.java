@@ -12,7 +12,8 @@ import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
 public interface LotecaService extends DefaultService {
 	
 	Loteca findLotecaAtiva() throws ServiceException;
-	List<Lotecausuario> findAllLotecausuarioByLoteca(long cdLoteca) throws ServiceException;
+	List<Lotecausuario> findAllLotecausuarioByLoteca(Long cdLoteca) throws ServiceException;
+	List<Lotecausuario> findAllLotecausuarioByLoteca(Loteca loteca) throws ServiceException;
 	List<Clube> findAllClubeByLoteca(long cdLoteca) throws ServiceException;
 	List<Clubeusuario> findAllClubeusuario(Clubeusuario clubeusuario) throws ServiceException;
 	

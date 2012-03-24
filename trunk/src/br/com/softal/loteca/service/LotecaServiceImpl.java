@@ -58,8 +58,17 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 	}
 	
 	@Override
-	public List<Lotecausuario> findAllLotecausuarioByLoteca(long cdLoteca) {
+	public List<Lotecausuario> findAllLotecausuarioByLoteca(Long cdLoteca) {
 		return getLotecausuarioDAO().findAllLotecausuarioByLoteca(cdLoteca);
+	}
+	
+	@Override
+	public List<Lotecausuario> findAllLotecausuarioByLoteca(Loteca loteca)
+			throws ServiceException {
+		if (loteca.getCdLoteca() != 0) {
+			return getLotecausuarioDAO().findAllLotecausuarioByLoteca(loteca.getCdLoteca());
+		}
+		return null;
 	}
 	
 	@Override
