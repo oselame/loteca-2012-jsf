@@ -16,6 +16,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import br.com.softal.base.model.Entity;
+import br.com.softal.loteca.model.classifclube.Classifclube;
 import br.com.softal.loteca.model.jogo.Jogo;
 
 @SuppressWarnings("serial")
@@ -50,11 +51,23 @@ public class Data extends Entity {
 	@Column(name = "flatualizoutimes")
 	private Long flAtualizoutimes;
 	
+	@Column(name = "flatualizouresultados")
+	private Long flAtualizouresultados;
+	
+	@Column(name = "flenviouemailjogoliberado")
+	private Long flEnviouemailjogoliberado;
+	
+	@Column(name = "flenviouemailresultado")
+	private Long flEnviouemailresultado;
+	
 	@Column(name = "declassificacao")
 	private String deClassificacao;
 	
 	@OneToMany(mappedBy="data", fetch=FetchType.LAZY)
 	private List<Jogo> jogos;
+	
+	@OneToMany(mappedBy="data", fetch=FetchType.LAZY)
+	private List<Classifclube> classifclubes;
 	
 	public Data() {
 		super();
@@ -136,10 +149,68 @@ public class Data extends Entity {
 		this.jogos = jogos;
 	}
 	
+	public Long getFlAtualizouresultados() {
+		return flAtualizouresultados;
+	}
+
+	public void setFlAtualizouresultados(Long flAtualizouresultados) {
+		this.flAtualizouresultados = flAtualizouresultados;
+	}
+	
+	public Boolean getBlAtualizouresultados() {
+		return flAtualizouresultados != null && flAtualizouresultados == 1l;
+	}
+	
+	public void setBlAtualizouresultados(Boolean blAtualizouresultados) {
+		this.flAtualizouresultados = (blAtualizouresultados == null) ? 0l : (blAtualizouresultados ?  1l : 0l);
+	}
+	
+	public Long getFlEnviouemailjogoliberado() {
+		return flEnviouemailjogoliberado;
+	}
+
+	public void setFlEnviouemailjogoliberado(Long flEnviouemailjogoliberado) {
+		this.flEnviouemailjogoliberado = flEnviouemailjogoliberado;
+	}
+	
+	public Boolean getBlEnviouemailjogoliberado() {
+		return flEnviouemailjogoliberado != null && flEnviouemailjogoliberado == 1l;
+	}
+	
+	public void setBlEnviouemailjogoliberado(Boolean blEnviouemailjogoliberado) {
+		this.flEnviouemailjogoliberado = (blEnviouemailjogoliberado == null) ? 0l : (blEnviouemailjogoliberado ?  1l : 0l);
+	}
+
+	public Long getFlEnviouemailresultado() {
+		return flEnviouemailresultado;
+	}
+
+	public void setFlEnviouemailresultado(Long flEnviouemailresultado) {
+		this.flEnviouemailresultado = flEnviouemailresultado;
+	}
+	
+	public Boolean getBlEnviouemailresultado() {
+		return flEnviouemailresultado != null && flEnviouemailresultado == 1l;
+	}
+	
+	public void setBlEnviouemailresultado(Boolean blEnviouemailresultado) {
+		this.flEnviouemailresultado = (blEnviouemailresultado == null) ? 0l : (blEnviouemailresultado ?  1l : 0l);
+	}
+	
+	public List<Classifclube> getClassifclubes() {
+		return classifclubes;
+	}
+
+	public void setClassifclubes(List<Classifclube> classifclubes) {
+		this.classifclubes = classifclubes;
+	}
+
+	/****************************************************************************************************************/
+
 	@Override
 	public void inicializaRelacionamentos() {
 		setJogos(new ArrayList<Jogo>());
-		
+		setClassifclubes(new ArrayList<Classifclube>());
 	}
 	
 }

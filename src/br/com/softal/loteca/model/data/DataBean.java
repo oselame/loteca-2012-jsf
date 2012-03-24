@@ -13,11 +13,11 @@ import org.springframework.dao.DataIntegrityViolationException;
 import br.com.softal.base.bean.AbstractManegedBean;
 import br.com.softal.base.service.ServiceException;
 import br.com.softal.loteca.LtcServiceLocator;
+import br.com.softal.loteca.model.classifclube.Classifclube;
 import br.com.softal.loteca.model.jogo.Jogo;
 import br.com.softal.loteca.model.jogousuario.Jogousuario;
 import br.com.softal.loteca.model.loteca.Loteca;
 import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
-import br.com.softal.loteca.model.usuario.Usuario;
 
 @SuppressWarnings("serial")
 @ManagedBean(name="dataBean")
@@ -42,6 +42,8 @@ public class DataBean extends AbstractManegedBean<Data> {
 	public void setDeJogos(String deJogos) {
 		this.deJogos = deJogos;
 	}
+	
+	/******************************************************************************/
 
 	private void processaJogos() {
 		if (getDeJogos() != null && !getDeJogos().equalsIgnoreCase("")) {
@@ -71,10 +73,7 @@ public class DataBean extends AbstractManegedBean<Data> {
 	@Override
 	public void save() {
 		try {
-			/*if (getEntity().isStatusInsert()) {
-				super.save();
-				super.getMessages().addSucessMessage("mensagem_registro_salvo_com_sucesso");
-			} else */if (getEntity().isStatusUpdate()) {
+			if (getEntity().isStatusUpdate()) {
 				super.update();
 				super.getMessages().addSucessMessage("mensagem_registro_salvo_com_sucesso");
 			}
@@ -119,25 +118,67 @@ public class DataBean extends AbstractManegedBean<Data> {
 	}
 	
 	public void enviaremailjogoliberado() {
-		
+		try {
+			getEntity().setFlEnviouemailjogoliberado(1l);
+			this.save();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void processarResultados() {
-		
+		try {
+			getEntity().setFlAtualizouresultados(1l);
+			this.save();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public void atualizarJogos() {
-		
+	public String salvaClassificacaojogos() {
+		String deClassificacao = getEntity().getDeClassificacao();
+		if (deClassificacao != null) {
+			String[] clubes = deClassificacao.split("\n");
+			if (clubes.length != 20) {
+				getMessages().addWarningMessage("classifclube_msg_warning_classificacao_invalida");
+				return null;
+			}
+		}
+		//return editar();	
+		return null;
+	}
+	
+	public void atualizarResultadoJogos() {
+		try {
+			List<Jogo> jogos = getEntity().getJogos();
+			for (Jogo j : jogos) {
+				LtcServiceLocator.getInstance().getLotecaService().update(j);
+			}
+			getEntity().setFlAtualizoutimes(1l);
+			this.save();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void enviaremailresultado() {
-		
+		try {
+			getEntity().setFlEnviouemailresultado(1l);
+			this.save();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public String saveWizard() {
 		try {
 			//getEntity().setTpSituacao( Data.TP_SITUACAO_CADASTRAMENTO );
 			getEntity().setTpSituacao( 1L );
+			getEntity().setFlAtualizouresultados(0l);
+			getEntity().setFlAtualizoutimes(0l);
+			getEntity().setFlEnviouemailjogoliberado(0l);
+			getEntity().setFlEnviouemailresultado(0l);
+			
 			super.save();
 			this.inserirJogos();
 			this.init();
@@ -174,9 +215,14 @@ public class DataBean extends AbstractManegedBean<Data> {
 		getEntity().setJogos(jogos);
 	}
 	
+	private void carregaClassifclubes() {
+		getEntity().setClassifclubes(new ArrayList<Classifclube>());
+	}
+	
 	public String editar() {
 		getEntity().setStatusUpdate();
 		this.carregaJogosData();
+		this.carregaClassifclubes();
 		return "eltcCadData";
 	}
 	
