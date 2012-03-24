@@ -16,6 +16,10 @@ public class MessagesWeb extends Messages {
 		FacesMessage msg = new FacesMessage(titulo, getMessage(message));
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
+	
+	public String getMessage(String msg) {
+		return super.getMessage(msg);
+	}
 
 	@Override
 	public void addMessage(Severity severity, String message) {

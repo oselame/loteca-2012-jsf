@@ -12,27 +12,55 @@
 	</ui:define>
 
 	<ui:define name="context">
-		<h:form>
-			<p:messages showDetail="true" showSummary="false" />
-			
-			<p:panel header="#{msg.grupo_cadastrar}">
-				<p:tabView id="tabView">
-					<p:growl id="growl" sticky="true" showDetail="true"/> 
-					<p:tab id="tab1" title="Data">
+		<p:messages showDetail="true" showSummary="false"  />
+		<p:panel header="#{msg.grupo_cadastrar}">
+			<p:tabView id="tabView">
+				<p:tab id="tab1" title="Data">
+					<h:form>
 						<h:panelGrid columns="2" style="width:100%"
 							columnClasses="headerColumn alignRight bold">
-							<h:outputText value="Data*:" />
+							<h:outputText value="#{msg.data_dtdata}*:" />
 							<h:outputText value="#{dataBean.entity.dtData}"
 								pattern="dd/MM/yyyy" converter="javax.faces.DateTime" />
 		
-							<h:outputText value="Observação*:" />
+							<h:outputText value="${msg.data_deobservacao}*:" />
 							<h:outputText value="#{dataBean.entity.deObservacao}" />
+							
+							<h:outputText value="" />
+							<p:selectBooleanCheckbox value="${dataBean.entity.blAtualizoutimes}" itemLabel="${msg.data_flatualizoutimes}" disabled="true"></p:selectBooleanCheckbox>
+							
+							<h:outputText value="${msg.data_tpsituacao}*:" />
+							<h:selectOneMenu value="#{dataBean.entity.tpSituacao}" id="tpSituacao" style="width: 100%" 
+									required="true" requiredMessage="#{msg.data_tpsituacao_requirido}">
+									<f:selectItem itemLabel="#{msg.selectonemenu_selecione}" itemValue="" />
+									<f:selectItem itemLabel="#{msg.data_tpsituacao_cadastramento}" 		itemValue="1" />
+									<f:selectItem itemLabel="#{msg.data_tpsituacao_em_andamento}" 		itemValue="2" />
+									<f:selectItem itemLabel="#{msg.data_tpsituacao_em_processamento}" 	itemValue="3" />
+									<f:selectItem itemLabel="#{msg.data_tpsituacao_concluida}" 			itemValue="4" />
+							</h:selectOneMenu>
+							
 							<f:facet name="footer">
-								<p:commandButton value="#{msg.botao_gerar_jogos}" action="#{dataBean.gerarjogos}" ajax="false" immediate="true" update="growl"/>
+								<p:commandButton value="#{msg.button_save}" action="#{dataBean.save}" ajax="false" update="growl"/>
+								<p:commandButton value="#{msg.botao_gerar_jogos}"  action="#{dataBean.gerarjogos}" ajax="false" 
+									immediate="true" update="growl"
+									rendered="#{dataBean.entity.tpSituacao eq 1}" />
+								<p:commandButton value="#{msg.botao_enviar_email_jogo_liberado}"  action="#{dataBean.enviaremailjogoliberado}" ajax="false" 
+									immediate="true" update="growl"
+									rendered="#{dataBean.entity.tpSituacao eq 2}" />
+									
+								<p:commandButton value="#{msg.botao_processar_resultados}"  action="#{dataBean.processarResultados}" ajax="false" 
+									immediate="true" update="growl"
+									rendered="#{dataBean.entity.tpSituacao eq 3}" />
+									
+								<p:commandButton value="#{msg.botao_enviar_email_resultado_jogo}"  action="#{dataBean.enviaremailresultado}" ajax="false" 
+									immediate="true" update="growl"
+									rendered="#{dataBean.entity.tpSituacao eq 4}" />
 							</f:facet>
 						</h:panelGrid>
-					</p:tab>
-					<p:tab id="tab2" title="Jogos">  
+					</h:form>
+				</p:tab>
+				<p:tab id="tab2" title="Jogos" rendered="#{dataBean.entity.tpSituacao eq 3}" > 
+					<h:form>
 						<p:dataTable var="jj" value="#{dataBean.entity.jogos}">
 							<p:column headerText="#{msg.data_wizard_jogo}" style="width:50px;">
 								#{jj.cdJogo}
@@ -50,10 +78,10 @@
 								</h:selectOneMenu>
 							</p:column>
 						</p:dataTable>
-					</p:tab>
-				</p:tabView>
-			</p:panel>
-		</h:form>
+					</h:form>
+				</p:tab>
+			</p:tabView>
+		</p:panel>
 	</ui:define>
 </ui:composition>
 </html>

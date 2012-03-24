@@ -68,13 +68,13 @@ public class DataBean extends AbstractManegedBean<Data> {
 		super.findAll();
 	}
 	
-	/*@Override
+	@Override
 	public void save() {
 		try {
-			if (getEntity().isStatusInsert()) {
+			/*if (getEntity().isStatusInsert()) {
 				super.save();
 				super.getMessages().addSucessMessage("mensagem_registro_salvo_com_sucesso");
-			} else if (getEntity().isStatusUpdate()) {
+			} else */if (getEntity().isStatusUpdate()) {
 				super.update();
 				super.getMessages().addSucessMessage("mensagem_registro_salvo_com_sucesso");
 			}
@@ -83,7 +83,7 @@ public class DataBean extends AbstractManegedBean<Data> {
 			e.printStackTrace();
 		}
 		init();
-	}*/
+	}
 	
 	public void gerarjogos() {
 		try {
@@ -122,7 +122,7 @@ public class DataBean extends AbstractManegedBean<Data> {
 		
 	}
 	
-	public void calcularresultados() {
+	public void processarResultados() {
 		
 	}
 	
@@ -134,14 +134,19 @@ public class DataBean extends AbstractManegedBean<Data> {
 		
 	}
 	
-	public void saveWizard() {
+	public String saveWizard() {
 		try {
+			//getEntity().setTpSituacao( Data.TP_SITUACAO_CADASTRAMENTO );
+			getEntity().setTpSituacao( 1L );
 			super.save();
 			this.inserirJogos();
 			this.init();
 			super.getMessages().addSucessMessage("mensagem_registro_salvo_com_sucesso");
+			return editar();
 		} catch (Exception e) {
 			e.printStackTrace();
+			super.getMessages().addFatalMessage(e.getMessage());
+			return null;
 		}
 		
 	}

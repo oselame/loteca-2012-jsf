@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import br.com.softal.base.model.Entity;
 import br.com.softal.loteca.model.jogo.Jogo;
@@ -21,6 +22,15 @@ import br.com.softal.loteca.model.jogo.Jogo;
 @javax.persistence.Entity
 @Table(name = "eltcdata")
 public class Data extends Entity {
+	
+	/*@Transient
+	public static final long TP_SITUACAO_CADASTRAMENTO = 1L;
+	
+	@Transient
+	public static final long TP_SITUACAO_EM_ANDAMENTO = 2L;
+	
+	@Transient
+	public static final long TP_SITUACAO_CONCLUIDO = 3L;*/
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -34,8 +44,8 @@ public class Data extends Entity {
 	@Column(name = "deobservacao")
 	private String deObservacao;
 	
-	@Column(name = "flsituacao")
-	private Long flSituacao;
+	@Column(name = "tpsituacao")
+	private Long tpSituacao;
 	
 	@Column(name = "flatualizoutimes")
 	private Long flAtualizoutimes;
@@ -51,13 +61,13 @@ public class Data extends Entity {
 	}
 	
 	public Data(long cdData, Date dtData, String deObservacao,
-			Long flSituacao, Long flAtualizoutimes, String deClassificacao) {
+			Long tpSituacao, Long flAtualizoutimes, String deClassificacao) {
 		this();
 		this.inicializaRelacionamentos();
 		this.cdData = cdData;
 		this.dtData = dtData;
 		this.deObservacao = deObservacao;
-		this.flSituacao = flSituacao;
+		this.tpSituacao = tpSituacao;
 		this.flAtualizoutimes = flAtualizoutimes;
 		this.deClassificacao = deClassificacao;
 	}
@@ -86,12 +96,12 @@ public class Data extends Entity {
 		this.deObservacao = deObservacao;
 	}
 
-	public Long getFlSituacao() {
-		return flSituacao;
+	public Long getTpSituacao() {
+		return tpSituacao;
 	}
 
-	public void setFlSituacao(Long flSituacao) {
-		this.flSituacao = flSituacao;
+	public void setTpSituacao(Long tpSituacao) {
+		this.tpSituacao = tpSituacao;
 	}
 
 	public Long getFlAtualizoutimes() {
@@ -101,7 +111,15 @@ public class Data extends Entity {
 	public void setFlAtualizoutimes(Long flAtualizoutimes) {
 		this.flAtualizoutimes = flAtualizoutimes;
 	}
-
+	
+	public Boolean getBlAtualizoutimes() {
+		return flAtualizoutimes != null && flAtualizoutimes == 1l;
+	}
+	
+	public void setBlAtualizoutimes(Boolean blAtualizoutimes) {
+		this.flAtualizoutimes = (blAtualizoutimes == null) ? 0l : (blAtualizoutimes ?  1l : 0l);
+	}
+	
 	public String getDeClassificacao() {
 		return deClassificacao;
 	}
