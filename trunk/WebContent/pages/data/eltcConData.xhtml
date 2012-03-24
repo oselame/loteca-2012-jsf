@@ -31,7 +31,7 @@
 						<h:outputText value="#{row.deObservacao}" />
 					</p:column>
 					<p:column style="width:15px">
-						<p:commandButton id="selectButton" icon="ui-icon-search" title="${msg.title_edit}" 
+						<p:commandButton id="selectButton" icon="ui-icon-search" title="#{msg.title_edit}" 
 							action="#{dataBean.editar}" ajax="false">
 							<f:setPropertyActionListener value="#{row}" target="#{dataBean.entity}" />
 						</p:commandButton>
