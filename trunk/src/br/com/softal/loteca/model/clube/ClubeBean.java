@@ -78,7 +78,6 @@ public class ClubeBean extends AbstractManegedBean<Clube> implements Serializabl
 	
 	public void carregaClubesloteca(ValueChangeEvent event) {
 		try {
-			System.out.println( event.getNewValue() );
 			if ((Long)event.getNewValue() != null) {
 				long cdLoteca = (Long) event.getNewValue();
 				List<Clube> lista = LtcServiceLocator.getInstance().getLotecaService().findAllClubeByLoteca(cdLoteca);

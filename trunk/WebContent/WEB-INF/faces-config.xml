@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee"
- xmlns:xi="http://www.w3.org/2001/XInclude"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
- <converter>
-  <description>Converte um Clubeusuario</description>
-  <converter-id>clubeusuarioConverter</converter-id>
-  <converter-class>br.com.softal.loteca.converter.ClubeusuarioConverter</converter-class>
- </converter>
- <application>
-  <resource-bundle>
-   <base-name>br.com.softal.loteca.bundle.messages</base-name>
-   <var>msg</var>
-  </resource-bundle>
-  <locale-config>
-   <default-locale>pt_BR</default-locale>
-   <supported-locale>pt_BR</supported-locale>
-   <supported-locale>en_US</supported-locale>
-  </locale-config>
- </application>
+	xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+	<converter>
+		<description>Converte um Clubeusuario</description>
+		<converter-id>clubeusuarioConverter</converter-id>
+		<converter-class>br.com.softal.loteca.converter.ClubeusuarioConverter</converter-class>
+	</converter>
+	<application>
+		<resource-bundle>
+			<base-name>br.com.softal.loteca.bundle.messages</base-name>
+			<var>msg</var>
+		</resource-bundle>
+		<locale-config>
+			<default-locale>pt_BR</default-locale>
+			<supported-locale>pt_BR</supported-locale>
+			<supported-locale>en_US</supported-locale>
+		</locale-config>
+	</application>
+	<validator>
+		<validator-id>emailValidator</validator-id>
+		<validator-class>br.com.softal.base.validator.EmailValidator</validator-class>
+	</validator>
 </faces-config>

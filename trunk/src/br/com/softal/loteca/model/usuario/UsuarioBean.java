@@ -104,14 +104,22 @@ public class UsuarioBean extends AbstractManegedBean<Usuario> {
 		super.findAll();
 		this.carregaProjetos();
 	}
+	
+	public void geraDeLoginDoEmail() {
+		int pos = getEntity().getDeEmail().indexOf("@");
+		String deLogin = getEntity().getDeEmail().substring(0, pos);
+		getEntity().setDeLogin(deLogin);
+	}
 
 	@Override
 	public void save() {
 		try {
 			if (getEntity().isStatusInsert()) {
+				this.geraDeLoginDoEmail();
 				super.save();
 				super.getMessages().addSucessMessage("mensagem_registro_salvo_com_sucesso");
 			} else if (getEntity().isStatusUpdate()) {
+				this.geraDeLoginDoEmail();
 				super.update();
 				super.getMessages().addSucessMessage("mensagem_registro_salvo_com_sucesso");
 			}

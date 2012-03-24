@@ -9,14 +9,18 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
+import br.com.softal.base.message.MessagesWeb;
+
 public class EmailValidator implements Validator {
+	
 
 	@Override
 	public void validate(FacesContext facesContext, UIComponent uIComponent,
 			Object object) throws ValidatorException {
+		MessagesWeb messages = new MessagesWeb();
 		String enteredEmail = (String) object;
-		// Set the email pattern string
-		Pattern p = Pattern.compile(".+@.+\\\\.[a-z]+");
+		String EMAIL_PATTERN =  "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+		Pattern p = Pattern.compile(EMAIL_PATTERN);
 
 		// Match the given string with the pattern
 		Matcher m = p.matcher(enteredEmail);
@@ -26,8 +30,8 @@ public class EmailValidator implements Validator {
 
 		if (!matchFound) {
 			FacesMessage message = new FacesMessage();
-			message.setDetail("msg_warnig_email_invalido");
-			message.setSummary("msg_warnig_email_invalido valid");
+			message.setDetail(messages.getMessage("msg_warnig_email_invalido"));
+			message.setSummary(messages.getMessage("msg_warnig_email_invalido"));
 			message.setSeverity(FacesMessage.SEVERITY_WARN);
 			throw new ValidatorException(message);
 		}
