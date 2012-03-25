@@ -1,6 +1,7 @@
 package br.com.softal.base.mail.multipart;
 
 import org.apache.commons.mail.Email;
+import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.MultiPartEmail;
 
@@ -48,6 +49,11 @@ public abstract class LtcMultiPartEmailImpl implements LtcMultiPartEmail {
 	@Override
 	public void setMsg(String msg) throws EmailException {
 		email.setMsg(msg);
+	}
+	
+	@Override
+	public void addAttach(EmailAttachment attachment) throws EmailException {
+		email.attach(attachment);		
 	}
 	
 }

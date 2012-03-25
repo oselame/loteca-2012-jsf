@@ -1,5 +1,6 @@
 package br.com.softal.base.mail.multipart;
 
+import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
 
 public interface LtcMultiPartEmail {
@@ -8,5 +9,6 @@ public interface LtcMultiPartEmail {
 	void addTo(String to) throws EmailException;
 	void setSubject(String subject) throws EmailException;
 	void setMsg(String msg) throws EmailException;
+	void addAttach(EmailAttachment attachment) throws EmailException;
 	
 }
