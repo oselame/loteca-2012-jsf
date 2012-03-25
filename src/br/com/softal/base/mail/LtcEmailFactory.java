@@ -1,5 +1,7 @@
 package br.com.softal.base.mail;
 
+import br.com.softal.base.mail.simplemail.LtcEmail;
+
 
 public class LtcEmailFactory {
 	
