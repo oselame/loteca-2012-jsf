@@ -2,7 +2,9 @@ package br.com.softal.base.mail.simplemail;
 
 import org.apache.commons.mail.EmailException;
 
-public interface LtcSimpleEmail {
+import br.com.softal.base.mail.interfaces.LtcEmail;
+
+public interface LtcSimpleEmail extends LtcEmail {
 	
 	void send() throws EmailException;
 	void addTo(String to) throws EmailException;

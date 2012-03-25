@@ -1,15 +1,12 @@
 package br.com.softal.base.mail;
 
-import br.com.softal.base.mail.simplemail.LtcEmail;
 
 
 public class LtcEmailFactory {
 	
 	private static LtcEmailFactory emailFactory;
-	private LtcEmail email;
 	
-	private LtcEmailFactory() {
-	}
+	private LtcEmailFactory() {}
 	
 	public static LtcEmailFactory getInstance() {
 		if (emailFactory == null) {
@@ -18,19 +15,16 @@ public class LtcEmailFactory {
 		return emailFactory;
 	}
 	
-	public LtcEmail createSimpleMail() {
-		email = new LtcSimpleMail();
-		return email;
+	public LtcSimpleMail createSimpleMail() {
+		return new LtcSimpleMail();
 	}
 	
-	public LtcEmail createMultiPartEmail() {
-		email = new LtcMultiPartEmail();
-		return email;
+	public LtcMultiPartEmail createMultiPartEmail() {
+		return new LtcMultiPartEmail();
 	}
-	/*
-	public LtcEmail createHtmlEmail() {
-		email = new LtcHtmlEmail();
-		return email;
-	}*/
+	
+	public LtcHtmlEmail createHtmlEmail() {
+		return new LtcHtmlEmail();
+	}
 
 }
