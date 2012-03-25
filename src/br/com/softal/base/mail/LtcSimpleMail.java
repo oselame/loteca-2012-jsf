@@ -3,10 +3,9 @@ package br.com.softal.base.mail;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 
-import br.com.softal.base.mail.simplemail.LtcEmail;
-import br.com.softal.base.mail.simplemail.LtcEmailImpl;
+import br.com.softal.base.mail.simplemail.LtcSimpleEmailImpl;
 
-public class LtcSimpleMail extends LtcEmailImpl implements LtcEmail {
+public class LtcSimpleMail extends LtcSimpleEmailImpl {
 	
 	public LtcSimpleMail() {
 		super(new SimpleEmail());

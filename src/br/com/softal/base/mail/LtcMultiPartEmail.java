@@ -13,8 +13,13 @@ public class LtcMultiPartEmail extends LtcMultiPartEmailImpl  {
 
 	@Override
 	public void send() throws EmailException {
-		// TODO Auto-generated method stub
-		
+		if (email.getToAddresses() == null || email.getToAddresses().isEmpty()) {
+			throw new EmailException("Destinatario(s) nao informado");
+		}
+		if (email.getSubject() == null || email.getSubject().equalsIgnoreCase("")) {
+			throw new EmailException("Assunto nao informado");
+		}
+		email.send();
 	}
 
 }

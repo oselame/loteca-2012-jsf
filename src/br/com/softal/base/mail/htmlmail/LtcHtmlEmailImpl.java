@@ -1,5 +1,6 @@
 package br.com.softal.base.mail.htmlmail;
 
+import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 
@@ -52,6 +53,11 @@ public abstract class LtcHtmlEmailImpl implements LtcHtmlEmail {
 	@Override
 	public void setTextMsg(String msg) throws EmailException {
 		email.setTextMsg(msg);
+	}
+	
+	@Override
+	public void addAttach(EmailAttachment attachment) throws EmailException {
+		email.attach(attachment);		
 	}
 	
 }
