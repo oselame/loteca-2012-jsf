@@ -1,39 +1,15 @@
 package br.com.softal.base.mail;
 
-import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 
+import br.com.softal.base.mail.simplemail.LtcEmail;
+import br.com.softal.base.mail.simplemail.LtcEmailImpl;
+
 public class LtcSimpleMail extends LtcEmailImpl implements LtcEmail {
 	
-	private Email email;
-	
 	public LtcSimpleMail() {
-		this(new SimpleEmail());
-	}
-	
-	private LtcSimpleMail(Email email) {
-		try {
-			this.email = email;
-			this.configuraEmail( this.email );
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@Override
-	public void addTo(String to) throws EmailException {
-		email.addTo(to);
-	}
-
-	@Override
-	public void setSubject(String subject) throws EmailException {
-		email.setSubject(subject);
-	}
-
-	@Override
-	public void setMsg(String msg) throws EmailException {
-		email.setMsg(msg);
+		super(new SimpleEmail());
 	}
 
 	@Override
@@ -47,13 +23,4 @@ public class LtcSimpleMail extends LtcEmailImpl implements LtcEmail {
 		email.send();
 	}
 	
-	public static void main(String[] args) {
-		LtcSimpleMail x = new LtcSimpleMail();
-		try {
-			x.send();
-		} catch (EmailException e) {
-			e.printStackTrace();
-		}
-	}
-
 }
