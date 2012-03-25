@@ -3,9 +3,6 @@ package br.com.softal.base.mail;
 import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
 
-import br.com.softal.base.mail.interfaces.LtcEmail;
-import br.com.softal.base.mail.simplemail.LtcSimpleEmail;
-
 public class TesteEmail {
 	
 	public void enviaSimpleMail() {
