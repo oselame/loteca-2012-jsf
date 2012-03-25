@@ -5,8 +5,6 @@ import org.apache.commons.mail.EmailException;
 
 import br.com.softal.base.mail.LtcEmailProperties;
 
-
-
 public abstract class LtcEmailImpl implements LtcEmail {
 	
 	protected Email email;
