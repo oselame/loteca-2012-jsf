@@ -1,16 +1,13 @@
 package br.com.softal.base.mail.simplemail;
 
 import org.apache.commons.mail.Email;
-import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
-import org.apache.commons.mail.MultiPartEmail;
 
 import br.com.softal.base.mail.LtcEmailProperties;
-import br.com.softal.base.mail.simplemail.LtcEmailAttachment;
 
 
 
-public abstract class LtcEmailImpl implements LtcEmailAttachment {
+public abstract class LtcEmailImpl implements LtcEmail {
 	
 	protected Email email;
 	
@@ -39,11 +36,6 @@ public abstract class LtcEmailImpl implements LtcEmailAttachment {
 		email.setTLS(LtcEmailProperties.getInstance().isTsl());
 	}
 	
-	@Override
-	public void addAttach(EmailAttachment attachment) throws EmailException {
-		((MultiPartEmail) email).attach(attachment);
-	}
-
 	@Override
 	public void addTo(String to) throws EmailException {
 		email.addTo(to);
