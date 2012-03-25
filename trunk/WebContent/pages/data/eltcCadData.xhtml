@@ -31,6 +31,7 @@
 								<h:panelGrid columns="1" style="width:100%" >
 									<p:selectBooleanCheckbox value="#{dataBean.entity.blEnviouemailjogoliberado}" itemLabel="#{msg.data_flenviouemailjogoliberado}" disabled="true"></p:selectBooleanCheckbox>
 									<p:selectBooleanCheckbox value="#{dataBean.entity.blAtualizoutimes}" itemLabel="#{msg.data_flatualizoutimes}" disabled="true"></p:selectBooleanCheckbox>
+									<p:selectBooleanCheckbox value="#{dataBean.entity.blAtualizouclassificacao}" itemLabel="#{msg.data_flAtualizouclassificacao}" disabled="true"></p:selectBooleanCheckbox>
 									<p:selectBooleanCheckbox value="#{dataBean.entity.blAtualizouresultados}" itemLabel="#{msg.data_flatualizouresultados}" disabled="true"></p:selectBooleanCheckbox>
 									<p:selectBooleanCheckbox value="#{dataBean.entity.blEnviouemailresultado}" itemLabel="#{msg.data_flenviouemailresultado}" disabled="true"></p:selectBooleanCheckbox>
 								</h:panelGrid>
@@ -52,19 +53,20 @@
 								<p:commandButton value="#{msg.botao_gerar_jogos}"  action="#{dataBean.gerarjogos}" ajax="false" 
 									immediate="true" update="growl"
 									rendered="#{dataBean.entity.tpSituacao eq 1}" />
-									
+								
+								<!-- EMAIL JOGO LIBERADO -->
 								<p:commandButton value="#{msg.botao_enviar_email_jogo_liberado}"  action="#{dataBean.enviaremailjogoliberado}" ajax="false" 
 									immediate="true" update="growl"
-									rendered="#{dataBean.entity.tpSituacao eq 2 and dataBean.entity.flEnviouemailjogoliberado eq 0}" />
+									rendered="#{dataBean.entity.tpSituacao eq 2 and !dataBean.entity.blEnviouemailjogoliberado}" />
 								<p:commandButton value="#{msg.botao_enviar_email_jogo_liberado}"   
 									onclick="confirmEmailJogoLiberadoDialog.show()"
 									id="showConfirmEmailJogoLiberadoDialog"
-									rendered="#{dataBean.entity.tpSituacao eq 2 and dataBean.entity.flEnviouemailjogoliberado eq 1}" />
+									rendered="#{dataBean.entity.tpSituacao eq 2 and dataBean.entity.blEnviouemailjogoliberado}" />
 									
-									
+								<!-- PROCESSANDO RESULTADOS -->
 								<p:commandButton value="#{msg.botao_processar_resultados}"  action="#{dataBean.processarResultados}" ajax="false" 
 									immediate="true" update="growl"
-									rendered="#{dataBean.entity.tpSituacao eq 3}" />
+									rendered="#{dataBean.entity.tpSituacao eq 3 and dataBean.entity.blAtualizoutimes and dataBean.entity.blAtualizouclassificacao}" />
 									
 								<p:commandButton value="#{msg.botao_enviar_email_resultado_jogo}"  action="#{dataBean.enviaremailresultado}" ajax="false" 
 									immediate="true" update="growl"
@@ -121,7 +123,7 @@
 								<p:commandButton value="#{msg.classifclube_salvar_classificacao}" action="#{dataBean.salvaClassificacaojogos}" ajax="false" update="growl"/>
 							</f:facet>
 						</h:panelGrid>
-						<p:dataTable id="row" value="#{dataBean.entity.classifclubes}">
+						<p:dataTable value="#{dataBean.entity.classifclubes}" var="row">
 							<p:column headerText="#{msg.classifclube_nmclube}">
 								#{row.nuClassificacao}  #{row.clube.nmClube}
 							</p:column>

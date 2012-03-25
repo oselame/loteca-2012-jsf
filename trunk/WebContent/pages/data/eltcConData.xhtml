@@ -22,10 +22,10 @@
 					</f:facet>
 					
 					<p:column headerText="#{msg.data_cddata}">
-						<h:outputText value="#{row.cdData}" />
+						<h:outputText value="#{row.cdData}"  />
 					</p:column>
 					<p:column headerText="#{msg.data_dtdata}">
-						<h:outputText value="#{row.dtData}" />
+						<h:outputText value="#{row.dtData}" pattern="dd/MM/yyyy" converter="javax.faces.DateTime" />
 					</p:column>
 					<p:column headerText="#{msg.data_deobservacao}">
 						<h:outputText value="#{row.deObservacao}" />

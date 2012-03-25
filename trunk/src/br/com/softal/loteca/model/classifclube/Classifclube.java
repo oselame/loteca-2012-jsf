@@ -19,7 +19,7 @@ import br.com.softal.loteca.model.data.Data;
 
 @SuppressWarnings("serial")
 @javax.persistence.Entity
-@Table(name = "eltcclassiftime")
+@Table(name = "eltcclassifclube")
 public class Classifclube extends Entity {
 
 	@Id
@@ -202,5 +202,5 @@ public class Classifclube extends Entity {
 		setData(new Data());
 		setClube(new Clube());
 	}
-
+	
 }

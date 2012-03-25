@@ -1,6 +1,8 @@
 package br.com.softal.loteca.model.data;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -136,15 +138,14 @@ public class DataBean extends AbstractManegedBean<Data> {
 	}
 	
 	public String salvaClassificacaojogos() {
-		String deClassificacao = getEntity().getDeClassificacao();
-		if (deClassificacao != null) {
-			String[] clubes = deClassificacao.split("\n");
-			if (clubes.length != 20) {
-				getMessages().addWarningMessage("classifclube_msg_warning_classificacao_invalida");
-				return null;
-			}
+		try {
+			Loteca lotecaativa = LtcServiceLocator.getInstance().getLotecaService().findLotecaAtiva();
+			LtcServiceLocator.getInstance().getLotecaService().geraClassificacao(lotecaativa, getEntity());
+			getEntity().setFlAtualizouclassificacao(1l);
+			this.save();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		//return editar();	
 		return null;
 	}
 	
@@ -176,6 +177,7 @@ public class DataBean extends AbstractManegedBean<Data> {
 			getEntity().setTpSituacao( 1L );
 			getEntity().setFlAtualizouresultados(0l);
 			getEntity().setFlAtualizoutimes(0l);
+			getEntity().setFlAtualizouclassificacao(0l);
 			getEntity().setFlEnviouemailjogoliberado(0l);
 			getEntity().setFlEnviouemailresultado(0l);
 			
@@ -216,7 +218,16 @@ public class DataBean extends AbstractManegedBean<Data> {
 	}
 	
 	private void carregaClassifclubes() {
-		getEntity().setClassifclubes(new ArrayList<Classifclube>());
+		Classifclube cc = new Classifclube();
+		cc.setData(getEntity());
+		List<Classifclube> classificacoes = (List<Classifclube>) LtcServiceLocator.getInstance().getLotecaService().findAll( cc );
+		Collections.sort(classificacoes, new Comparator<Classifclube>() {
+			@Override
+			public int compare(Classifclube o1, Classifclube o2) {
+				return o1.getNuClassificacao().compareTo(o2.getNuClassificacao());
+			}
+		});
+		getEntity().setClassifclubes( classificacoes );
 	}
 	
 	public String editar() {

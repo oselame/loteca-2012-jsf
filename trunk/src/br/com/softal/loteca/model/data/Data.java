@@ -51,6 +51,9 @@ public class Data extends Entity {
 	@Column(name = "flatualizoutimes")
 	private Long flAtualizoutimes;
 	
+	@Column(name = "flatualizouclassificacao")
+	private Long flAtualizouclassificacao;
+	
 	@Column(name = "flatualizouresultados")
 	private Long flAtualizouresultados;
 	
@@ -204,6 +207,23 @@ public class Data extends Entity {
 	public void setClassifclubes(List<Classifclube> classifclubes) {
 		this.classifclubes = classifclubes;
 	}
+	
+	public Long getFlAtualizouclassificacao() {
+		return flAtualizouclassificacao;
+	}
+
+	public void setFlAtualizouclassificacao(Long flAtualizouclassificacao) {
+		this.flAtualizouclassificacao = flAtualizouclassificacao;
+	}
+	
+	public Boolean getBlAtualizouclassificacao() {
+		return flAtualizouclassificacao != null && flAtualizouclassificacao == 1l;
+	}
+	
+	public void setBlAtualizouclassificacao(Boolean blAtualizouclassificacao) {
+		this.flAtualizouclassificacao = (blAtualizouclassificacao == null) ? 0l : (blAtualizouclassificacao ?  1l : 0l);
+	}
+	
 
 	/****************************************************************************************************************/
 
