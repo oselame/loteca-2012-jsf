@@ -1,16 +1,15 @@
-package br.com.softal.base.mail.multipart;
+package br.com.softal.base.mail.htmlmail;
 
-import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
-import org.apache.commons.mail.MultiPartEmail;
+import org.apache.commons.mail.HtmlEmail;
 
 import br.com.softal.base.mail.LtcEmailProperties;
 
-public abstract class LtcMultiPartEmailImpl implements LtcMultiPartEmail {
+public abstract class LtcHtmlEmailImpl implements LtcHtmlEmail {
 	
-	protected MultiPartEmail email;
+	protected HtmlEmail email;
 	
-	public LtcMultiPartEmailImpl(MultiPartEmail email) {
+	public LtcHtmlEmailImpl(HtmlEmail email) {
 		try {
 			this.email = email;
 			this.configuraEmail( this.email );
@@ -22,7 +21,7 @@ public abstract class LtcMultiPartEmailImpl implements LtcMultiPartEmail {
 	@Override
 	public abstract void send() throws EmailException;
 	
-	public void configuraEmail(MultiPartEmail email) throws EmailException {
+	public void configuraEmail(HtmlEmail email) throws EmailException {
 		email.setDebug( LtcEmailProperties.getInstance().isDebug() );
 		email.setFrom( LtcEmailProperties.getInstance().getFrom() );
 		email.setHostName(LtcEmailProperties.getInstance().getHostName() );
@@ -46,13 +45,13 @@ public abstract class LtcMultiPartEmailImpl implements LtcMultiPartEmail {
 	}
 
 	@Override
-	public void setMsg(String msg) throws EmailException {
-		email.setMsg(msg);
+	public void setHtmlMsg(String msg) throws EmailException {
+		email.setHtmlMsg(msg);
 	}
 	
 	@Override
-	public void addAttach(EmailAttachment attachment) throws EmailException {
-		email.attach(attachment);		
+	public void setTextMsg(String msg) throws EmailException {
+		email.setTextMsg(msg);
 	}
 	
 }

@@ -23,11 +23,11 @@ public class LtcEmailFactory {
 		return email;
 	}
 	
-	/*public LtcEmail createMultiPartEmail() {
+	public LtcEmail createMultiPartEmail() {
 		email = new LtcMultiPartEmail();
 		return email;
 	}
-	
+	/*
 	public LtcEmail createHtmlEmail() {
 		email = new LtcHtmlEmail();
 		return email;
