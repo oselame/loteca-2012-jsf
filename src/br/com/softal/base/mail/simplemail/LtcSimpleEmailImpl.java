@@ -5,11 +5,11 @@ import org.apache.commons.mail.EmailException;
 
 import br.com.softal.base.mail.LtcEmailProperties;
 
-public abstract class LtcEmailImpl implements LtcEmail {
+public abstract class LtcSimpleEmailImpl implements LtcSimpleEmail {
 	
 	protected Email email;
 	
-	public LtcEmailImpl(Email email) {
+	public LtcSimpleEmailImpl(Email email) {
 		try {
 			this.email = email;
 			this.configuraEmail( this.email );
