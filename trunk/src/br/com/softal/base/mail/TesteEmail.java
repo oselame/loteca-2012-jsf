@@ -78,8 +78,8 @@ public class TesteEmail {
 	
 	public static void main(String[] args) {
 		TesteEmail t = new TesteEmail();
-		//-- t.enviaSimpleMail();
-		//-- t.enviaAttachMail();
+		t.enviaSimpleMail();
+		t.enviaAttachMail();
 		t.enviaHtmlMail();
 	}
 }
