@@ -31,29 +31,26 @@ public class Usuariodata extends Entity {
 	@Column(name = "flapostou")
 	private Long flApostou;
 
-	@Column(name = "nutotalpontos")
-	private Long nuTotalpontos;
-
 	@Column(name = "flcanhoto")
 	private Long flCanhoto;
 
 	@Column(name = "flgeradoaleat")
 	private Long flGeradoaleat;
 
-	@Column(name = "nuposicao")
-	private Long nuPosicao;
-
-	@Column(name = "nutotallistas")
-	private Long nuTotallistas;
-
 	@Column(name = "debytesjogo")
 	private String deBytesjogo;
 
 	@Column(name = "flpagou")
 	private Long flPagou;
-
-	@Column(name = "nuposicaofinal")
-	private Long nuPosicaofinal;
+	
+	@Column(name = "nuposicao")
+	private Long nuPosicao;
+	
+	@Column(name = "nupontoscartao")
+	private Long nuPontoscartao;
+	
+	@Column(name = "nupontoslista")
+	private Long nuPontoslista;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "nuseqlotecausuario", insertable = true, updatable = true)
@@ -70,21 +67,19 @@ public class Usuariodata extends Entity {
 	}
 	
 	public Usuariodata(long nuSequsuariodata, Long flApostou,
-			Long nuTotalpontos, Long flCanhoto, Long flGeradoaleat,
-			Long nuPosicao, Long nuTotallistas, String deBytesjogo,
-			Long flPagou, Long nuPosicaofinal, Long nuSeqlotecausuario,
-			Long cdData) {
+			Long flCanhoto, Long flGeradoaleat, String deBytesjogo, 
+			Long flPagou,  Long nuPosicao, Long nuPontoscartao, 
+			Long nuPontoslista, Long nuSeqlotecausuario, Long cdData) {
 		super();
 		this.nuSequsuariodata = nuSequsuariodata;
 		this.flApostou = flApostou;
-		this.nuTotalpontos = nuTotalpontos;
 		this.flCanhoto = flCanhoto;
 		this.flGeradoaleat = flGeradoaleat;
-		this.nuPosicao = nuPosicao;
-		this.nuTotallistas = nuTotallistas;
 		this.deBytesjogo = deBytesjogo;
 		this.flPagou = flPagou;
-		this.nuPosicaofinal = nuPosicaofinal;
+		this.nuPosicao = nuPosicao;
+		this.nuPontoscartao = nuPontoscartao;
+		this.nuPontoslista = nuPontoslista;
 		this.inicializaRelacionamentos();
 		getLotecausuario().setNuSeqlotecausuario(nuSeqlotecausuario);
 		getData().setCdData(cdData);
@@ -112,14 +107,6 @@ public class Usuariodata extends Entity {
 		this.flApostou = flApostou;
 	}
 
-	public Long getNuTotalpontos() {
-		return nuTotalpontos;
-	}
-
-	public void setNuTotalpontos(Long nuTotalpontos) {
-		this.nuTotalpontos = nuTotalpontos;
-	}
-
 	public Long getFlCanhoto() {
 		return flCanhoto;
 	}
@@ -144,14 +131,6 @@ public class Usuariodata extends Entity {
 		this.nuPosicao = nuPosicao;
 	}
 
-	public Long getNuTotallistas() {
-		return nuTotallistas;
-	}
-
-	public void setNuTotallistas(Long nuTotallistas) {
-		this.nuTotallistas = nuTotallistas;
-	}
-
 	public String getDeBytesjogo() {
 		return deBytesjogo;
 	}
@@ -166,14 +145,6 @@ public class Usuariodata extends Entity {
 
 	public void setFlPagou(Long flPagou) {
 		this.flPagou = flPagou;
-	}
-
-	public Long getNuPosicaofinal() {
-		return nuPosicaofinal;
-	}
-
-	public void setNuPosicaofinal(Long nuPosicaofinal) {
-		this.nuPosicaofinal = nuPosicaofinal;
 	}
 
 	public Lotecausuario getLotecausuario() {
@@ -192,4 +163,20 @@ public class Usuariodata extends Entity {
 		this.data = data;
 	}
 
+	private Long getNuPontoscartao() {
+		return nuPontoscartao;
+	}
+
+	private void setNuPontoscartao(Long nuPontoscartao) {
+		this.nuPontoscartao = nuPontoscartao;
+	}
+
+	private Long getNuPontoslista() {
+		return nuPontoslista;
+	}
+
+	private void setNuPontoslista(Long nuPontoslista) {
+		this.nuPontoslista = nuPontoslista;
+	}
+	
 }
