@@ -9,6 +9,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import org.apache.commons.mail.Email;
 import org.primefaces.event.FlowEvent;
 import org.springframework.dao.DataIntegrityViolationException;
 
@@ -121,6 +122,10 @@ public class DataBean extends AbstractManegedBean<Data> {
 	
 	public void enviaremailjogoliberado() {
 		try {
+			Loteca lotecaativa = LtcServiceLocator.getInstance().getLotecaService().findLotecaAtiva();
+			List<Lotecausuario> usuarios = LtcServiceLocator.getInstance().getLotecaService().findAllLotecausuarioByLoteca(lotecaativa);
+			EmailData.enviaEmailJogoLiberado(getEntity(), usuarios);
+			
 			getEntity().setFlEnviouemailjogoliberado(1l);
 			this.save();
 		} catch (Exception e) {
@@ -130,6 +135,7 @@ public class DataBean extends AbstractManegedBean<Data> {
 	
 	public void processarResultados() {
 		try {
+			LtcServiceLocator.getInstance().getLotecaService().processaResultado(getEntity());
 			getEntity().setFlAtualizouresultados(1l);
 			this.save();
 		} catch (Exception e) {
@@ -164,6 +170,9 @@ public class DataBean extends AbstractManegedBean<Data> {
 	
 	public void enviaremailresultado() {
 		try {
+			Loteca lotecaativa = LtcServiceLocator.getInstance().getLotecaService().findLotecaAtiva();
+			List<Lotecausuario> usuarios = LtcServiceLocator.getInstance().getLotecaService().findAllLotecausuarioByLoteca(lotecaativa);
+			EmailData.enviaEmailResultado(getEntity(), usuarios);
 			getEntity().setFlEnviouemailresultado(1l);
 			this.save();
 		} catch (Exception e) {

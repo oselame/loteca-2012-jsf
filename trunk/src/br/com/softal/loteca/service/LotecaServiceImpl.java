@@ -147,5 +147,10 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 			e.printStackTrace();
 		}
 	}
+	
+	@Override
+	public void processaResultado(Data data) throws ServiceException {
+		
+	}
 
 }
