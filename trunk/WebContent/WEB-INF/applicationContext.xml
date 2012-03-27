@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:sec="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                    http://www.springframework.org/schema/security 
+                    http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+	<!-- Conexão com banco de dados -->
+	<bean id="dataSource" class="br.com.softal.loteca.sets.Connect" />
+	
+	<!-- configuracao das paginas  -->
+	<sec:http auto-config="true" access-denied-page="/negado.xhtml">
+		<sec:form-login login-page="/eltcLogin.xhtml" authentication-failure-url="/eltcLogin.xhtml?erro=invalido" />		
+		<sec:intercept-url pattern="/pages/**" access="ROLE_ADMINISTRADOR,ROLE_PARTICIPANTE" />
+		<!-- <sec:intercept-url pattern="/pages/**" access="ROLE_ADMINISTRADOR" /> -->
+		<sec:intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />	
+	</sec:http>
+
+	<!-- como vai ser a autenticacao -->
+	<sec:authentication-manager>
+		<sec:authentication-provider>
+			<sec:jdbc-user-service data-source-ref="dataSource"
+				users-by-username-query="select delogin, desenha, case when flativo = 1 then 'true' else 'false' end as enable from eltcusuario where delogin=?"
+				authorities-by-username-query="SELECT U.delogin, G.deGrupo FROM esegusuariogrupo UG join eseggrupo G on G.cdGrupo = UG.cdGrupo join eltcusuario U on U.cdUsuario = UG.cdUsuario WHERE U.deLogin=?" />
+		</sec:authentication-provider>
+	</sec:authentication-manager>
+
+</beans>
