@@ -14,7 +14,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import br.com.softal.base.model.Entity;
-import br.com.softal.base.model.grupo.Jogo;
+import br.com.softal.loteca.model.jogo.Jogo;
 import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
 
 @SuppressWarnings("serial")
