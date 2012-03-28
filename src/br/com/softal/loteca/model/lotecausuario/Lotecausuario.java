@@ -19,9 +19,9 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import br.com.softal.base.model.Entity;
+import br.com.softal.base.model.usuario.Usuario;
 import br.com.softal.loteca.model.clubeusuario.Clubeusuario;
 import br.com.softal.loteca.model.loteca.Loteca;
-import br.com.softal.loteca.model.usuario.Usuario;
 
 @SuppressWarnings("serial")
 @javax.persistence.Entity

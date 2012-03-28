@@ -6,9 +6,9 @@ import org.apache.commons.mail.EmailException;
 
 import br.com.softal.base.mail.LtcEmailFactory;
 import br.com.softal.base.mail.LtcHtmlEmail;
-import br.com.softal.loteca.model.jogo.Jogo;
+import br.com.softal.base.model.grupo.Jogo;
+import br.com.softal.base.model.usuario.Usuario;
 import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
-import br.com.softal.loteca.model.usuario.Usuario;
 
 public class EmailData {
 	
