@@ -14,10 +14,10 @@ import org.primefaces.event.FlowEvent;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import br.com.softal.base.bean.AbstractManegedBean;
+import br.com.softal.base.model.grupo.Jogo;
 import br.com.softal.base.service.ServiceException;
 import br.com.softal.loteca.LtcServiceLocator;
 import br.com.softal.loteca.model.classifclube.Classifclube;
-import br.com.softal.loteca.model.jogo.Jogo;
 import br.com.softal.loteca.model.jogousuario.Jogousuario;
 import br.com.softal.loteca.model.loteca.Loteca;
 import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
