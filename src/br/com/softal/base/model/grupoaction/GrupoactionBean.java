@@ -13,8 +13,8 @@ import javax.faces.model.SelectItem;
 import br.com.softal.base.bean.AbstractManegedBean;
 import br.com.softal.base.model.action.Action;
 import br.com.softal.base.model.action.ActionBean;
-import br.com.softal.loteca.model.grupo.Grupo;
-import br.com.softal.loteca.model.grupo.GrupoBean;
+import br.com.softal.base.model.grupo.Grupo;
+import br.com.softal.base.model.grupo.GrupoBean;
 
 @SuppressWarnings("serial")
 @ManagedBean(name = "grupoactionBean")

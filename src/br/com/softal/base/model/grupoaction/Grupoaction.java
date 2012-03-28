@@ -16,7 +16,7 @@ import org.hibernate.annotations.FetchMode;
 
 import br.com.softal.base.model.Entity;
 import br.com.softal.base.model.action.Action;
-import br.com.softal.loteca.model.grupo.Grupo;
+import br.com.softal.base.model.grupo.Grupo;
 import br.com.softal.loteca.model.loteca.Loteca;
 
 @SuppressWarnings("serial")
