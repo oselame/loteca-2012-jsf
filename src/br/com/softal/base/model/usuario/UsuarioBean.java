@@ -11,9 +11,9 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.model.SelectItem;
 
 import br.com.softal.base.bean.AbstractManegedBean;
+import br.com.softal.base.model.projeto.Projeto;
+import br.com.softal.base.model.projeto.ProjetoBean;
 import br.com.softal.loteca.model.loteca.LotecaDataModel;
-import br.com.softal.loteca.model.projeto.Projeto;
-import br.com.softal.loteca.model.projeto.ProjetoBean;
 
 @SuppressWarnings("serial")
 @ManagedBean(name = "usuarioBean")
