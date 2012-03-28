@@ -25,7 +25,7 @@ import br.com.softal.loteca.model.usuariogrupo.Usuariogrupo;
 
 @SuppressWarnings("serial")
 @javax.persistence.Entity
-@Table(name = "eltcusuario")
+@Table(name = "esegusuario")
 public class Usuario extends Entity {
 
 	@Id
