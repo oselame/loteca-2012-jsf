@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.com.softal.base.model.Entity;
-import br.com.softal.loteca.model.grupoaction.Grupoaction;
+import br.com.softal.base.model.grupoaction.Grupoaction;
 
 @SuppressWarnings("serial")
 @javax.persistence.Entity
