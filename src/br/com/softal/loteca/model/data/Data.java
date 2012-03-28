@@ -16,8 +16,8 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import br.com.softal.base.model.Entity;
-import br.com.softal.base.model.grupo.Jogo;
 import br.com.softal.loteca.model.classifclube.Classifclube;
+import br.com.softal.loteca.model.jogo.Jogo;
 
 @SuppressWarnings("serial")
 @javax.persistence.Entity
