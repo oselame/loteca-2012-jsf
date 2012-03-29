@@ -14,10 +14,11 @@
 	<bean id="dataSource" class="br.com.softal.loteca.sets.Connect" />
 	
 	<!-- configuracao das paginas  -->
-	<sec:http auto-config="true" access-denied-page="/negado.xhtml">
+	<sec:http auto-config="true" access-denied-page="/negado.xhtml" >
 		<sec:form-login login-page="/eltcLogin.xhtml" authentication-failure-url="/eltcLogin.xhtml?erro=invalido" />		
 		<sec:intercept-url pattern="/pages/adm/**" access="ROLE_ADMINISTRADOR" />
 		<sec:intercept-url pattern="/pages/comum/**" access="ROLE_ADMINISTRADOR, ROLE_PARTICIPANTE" />
+		<sec:intercept-url pattern="/templates/**" access="ROLE_ADMINISTRADOR, ROLE_PARTICIPANTE" />
 		<sec:intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />	
 	</sec:http>
 
@@ -25,8 +26,8 @@
 	<sec:authentication-manager>
 		<sec:authentication-provider>
 			<sec:jdbc-user-service data-source-ref="dataSource"
-				users-by-username-query="select delogin, desenha, case when flativo = 1 then 'true' else 'false' end as enable from eltcusuario where delogin=?"
-				authorities-by-username-query="SELECT U.delogin, G.deGrupo FROM esegusuariogrupo UG join eseggrupo G on G.cdGrupo = UG.cdGrupo join eltcusuario U on U.cdUsuario = UG.cdUsuario WHERE U.deLogin=?" />
+				users-by-username-query="select delogin, desenha, case when flativo = 1 then 'true' else 'false' end as enable from esegusuario where delogin=?"
+				authorities-by-username-query="select u.delogin, g.degrupo from esegusuariogrupo ug join eseggrupo g on g.cdgrupo = ug.cdgrupo join esegusuario u on u.cdusuario = ug.cdusuario where u.delogin=?" />
 		</sec:authentication-provider>
 	</sec:authentication-manager>
 
