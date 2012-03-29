@@ -20,21 +20,22 @@
 
 		<property name="annotatedClasses">
 			<list>
-				<value>br.com.softal.loteca.model.action.Action</value>
+				<value>br.com.softal.base.model.grupo.Grupo</value>
+				<value>br.com.softal.base.model.action.Action</value>
+				<value>br.com.softal.base.model.grupoaction.Grupoaction</value>
+				<value>br.com.softal.base.model.usuario.Usuario</value>
+				<value>br.com.softal.base.model.usuariogrupo.Usuariogrupo</value>
+				<value>br.com.softal.base.model.projeto.Projeto</value>
+				
 				<value>br.com.softal.loteca.model.classifclube.Classifclube</value>
 				<value>br.com.softal.loteca.model.clubeusuario.Clubeusuario</value>
 				<value>br.com.softal.loteca.model.clube.Clube</value>
 				<value>br.com.softal.loteca.model.data.Data</value>
-				<value>br.com.softal.loteca.model.grupo.Grupo</value>
-				<value>br.com.softal.loteca.model.grupoaction.Grupoaction</value>
 				<value>br.com.softal.loteca.model.jogo.Jogo</value>
 				<value>br.com.softal.loteca.model.jogousuario.Jogousuario</value>
 				<value>br.com.softal.loteca.model.loteca.Loteca</value>
 				<value>br.com.softal.loteca.model.lotecausuario.Lotecausuario</value>
-				<value>br.com.softal.loteca.model.projeto.Projeto</value>
-				<value>br.com.softal.loteca.model.usuario.Usuario</value>
 				<value>br.com.softal.loteca.model.usuariodata.Usuariodata</value>
-				<value>br.com.softal.loteca.model.usuariogrupo.Usuariogrupo</value>
 			</list>
 		</property>
 		
