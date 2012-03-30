@@ -3,6 +3,8 @@ package br.com.softal.loteca.service;
 import java.util.List;
 
 import br.com.softal.base.dao.DaoException;
+import br.com.softal.base.model.usuario.HbnUsuarioDAO;
+import br.com.softal.base.model.usuario.Usuario;
 import br.com.softal.base.service.DefaultServiceImpl;
 import br.com.softal.base.service.ServiceException;
 import br.com.softal.loteca.model.classifclube.Classifclube;
@@ -24,7 +26,8 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 	private HbnClubeDAO clubeDAO;
 	private HbnClubeusuarioDAO clubeusuarioDAO;
 	private HbnClassifclubeDAO classifclubeDAO;
-
+	private HbnUsuarioDAO usuarioDAO;
+	
 	private HbnLotecaDAO getLotecaDAO() {
 		return lotecaDAO;
 	}
@@ -64,10 +67,27 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 	public void setClassifclubeDAO(HbnClassifclubeDAO classifclubeDAO) {
 		this.classifclubeDAO = classifclubeDAO;
 	}
+	
+	private HbnUsuarioDAO getUsuarioDAO() {
+		return usuarioDAO;
+	}
+
+	public void setUsuarioDAO(HbnUsuarioDAO usuarioDAO) {
+		this.usuarioDAO = usuarioDAO;
+	}
 
 	@Override
 	public Loteca findLotecaAtiva() {
 		return getLotecaDAO().findLotecaAtiva();
+	}
+	
+	@Override
+	public Usuario findUsuarioByLogin(String deLogin) throws ServiceException {
+		try {
+			return getUsuarioDAO().findUsuarioByLogin(deLogin);
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
 	}
 	
 	@Override

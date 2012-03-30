@@ -8,9 +8,13 @@ import javax.faces.bean.SessionScoped;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+
+import br.com.softal.base.service.ServiceException;
+import br.com.softal.loteca.LtcServiceLocator;
 
 
-@ManagedBean
+@ManagedBean(name = "usuarioController")
 @SessionScoped
 public class UsuarioController implements Serializable {
  
@@ -23,7 +27,16 @@ public class UsuarioController implements Serializable {
             Authentication authentication = context.getAuthentication();
             if (authentication instanceof Authentication){
                 //usuario.setDeLogin(((Usuario)authentication.getPrincipal()).getDeLogin());
-                usuario.setCdUsuario(((Usuario)authentication.getPrincipal()).getCdUsuario());
+            	try {
+            		if (authentication.getPrincipal().toString().equals("anonymousUser")) {
+            			usuario.setDeLogin("");
+            		} else {
+            			String deLogin = ((User) authentication.getPrincipal()).getUsername();
+            			usuario = LtcServiceLocator.getInstance().getLotecaService().findUsuarioByLogin(deLogin);
+            		}
+				} catch (ServiceException e) {
+					e.printStackTrace();
+				}
             }
         }
     }
@@ -34,6 +47,10 @@ public class UsuarioController implements Serializable {
  
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+    
+    public String login() {
+    	return "/templates/template.xhtml";
     }
  
 }

@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title><ui:insert name="title">Loteca 2012</ui:insert></title>
+	<link rel="stylesheet" type="text/css"
+		href="#{facesContext.externalContext.requestContextPath}/css/template.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{facesContext.externalContext.requestContextPath}/css/grid.css" />
+	<style type="text/css">
+		.ui-panel,div.ui-state-hover {
+			margin: 10px;
+			width: 300px;
+		}
+		
+		.ui-dashboard-column {
+			width: 320px;
+		}
+	</style>
+</h:head>
+<h:body>
+	<h:form id="form">
+
+		<p:growl id="growl" showDetail="true" />
+
+		<p:dashboard id="board" model="#{dashboardBean.model}"
+			style="width:100%">
+			<p:ajax event="reorder" listener="#{dashboardBean.handleReorder}"
+				update="growl" />
+
+			<p:panel id="login" header="Acesso">
+					<center>
+						<h:commandButton value="acesso" action="/inicio.xhtml"  />
+					</center>
+			</p:panel>
+
+			<p:panel id="finance" header="Finance">
+				<h:outputText value="Finance Content" />
+			</p:panel>
+
+			<p:panel id="lifestyle" header="Lifestyle">
+				<h:outputText value="Lifestyle Content" />
+			</p:panel>
+
+			<p:panel id="weather" header="Weather">
+				<h:outputText value="Weather Content" />
+			</p:panel>
+
+			<p:panel id="politics" header="Politics">
+				<h:outputText value="Politics Content" />
+			</p:panel>
+		</p:dashboard>
+
+	</h:form>
+</h:body>
+
+</html>
