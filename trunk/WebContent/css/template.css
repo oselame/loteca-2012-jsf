@@ -20,7 +20,7 @@ em {
 
 #topsection {
 	/* background: #EAEAEA; */
-	height: 120px; /*Height of top section*/
+	height: 100px; /*Height of top section*/
 }
 
 #topsection h1 {
@@ -69,15 +69,20 @@ em {
 }
 
 #logo{
-	height: 120px;
+	height: 100px;
 	width: 100px;
 	float: left;
 }
 
 #nomesistema{
 	width: 400px;
-	height: 120px;
-	padding-top: 30px;
+	height: 100px;
+	/*padding-top: 30px;*/
 	font-size: 40px;
 	float: left;
+}
+#login{
+	text-align: right;
+	width: 300px;
+	float: right;
 }

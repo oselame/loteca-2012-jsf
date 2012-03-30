@@ -5,32 +5,16 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-<ui:composition
-	template="#{pageContext.servletContext.contextPath}/templates/iniciotemplate.xhtml">
+	
+<ui:composition template="#{pageContext.servletContext.contextPath}/templates/iniciotemplate.xhtml">
 	<ui:define name="context">
-		<style type="text/css">
-			.ui-panel,div.ui-state-hover {
-				margin: 10px;
-				width: 300px;
-			}
-			
-			.ui-dashboard-column {
-				width: 320px;
-			}
-		</style>
-
 			<p:growl id="growl" showDetail="true" />
 
-			<p:dashboard id="board" model="#{dashboardBean.model}"
-				style="width:100%">
+			<p:dashboard id="board" model="#{dashboardBean.model}" style="width:100%">
 				<p:ajax event="reorder" listener="#{dashboardBean.handleReorder}" update="growl" />
 
 				<p:panel id="login" header="Acesso">
-					<center>
-						<h:form>
-							<a href="pages/inicio/index.xhtml">Acesso</a>
-						</h:form>
-					</center>
+					sdaf asd fsa fs sdaf asd fsa fs sdaf asd fsa fs sdaf asd fsa fs 
 				</p:panel>
 
 				<p:panel id="finance" header="Finance">
