@@ -2,6 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html" >
 <h:body>
+	<style>
+	</style>
 	<div id="cabecalho">
 		<div id="logo">
 			<h:graphicImage value="#{pageContext.servletContext.contextPath}/images/bola1.jpg" width="100" />
@@ -10,9 +12,8 @@
 			#{sistemaBean.nomesistema}s
 			
 		</div>
-		<div>
-			#{usuarioController.usuario.cdUsuario}
-			#{usuarioController.usuario.nmUsuario}
+		<div id="login">
+			<a href="pages/inicio/index.xhtml">Acesso</a>	
 		</div>
 	</div>
 </h:body>
