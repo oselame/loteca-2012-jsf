@@ -7,7 +7,12 @@
 			<h:graphicImage value="#{pageContext.servletContext.contextPath}/images/bola1.jpg" width="100" />
 		</div>
 		<div id="nomesistema">
-			#{sistemaBean.nomesistema}
+			#{sistemaBean.nomesistema}s
+			
+		</div>
+		<div>
+			#{usuarioController.usuario.cdUsuario}
+			#{usuarioController.usuario.nmUsuario}
 		</div>
 	</div>
 </h:body>

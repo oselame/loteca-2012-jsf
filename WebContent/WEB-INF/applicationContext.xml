@@ -15,11 +15,12 @@
 	
 	<!-- configuracao das paginas  -->
 	<sec:http auto-config="true" access-denied-page="/negado.xhtml" >
-		<sec:form-login login-page="/eltcLogin.xhtml" authentication-failure-url="/eltcLogin.xhtml?erro=invalido" />		
+		<sec:form-login login-page="/login.xhtml" authentication-failure-url="/login.xhtml?erro=invalido" />	
+		
+         
+        <sec:intercept-url pattern="/pages/inicio/**" access="ROLE_ADMINISTRADOR, ROLE_PARTICIPANTE" />
 		<sec:intercept-url pattern="/pages/adm/**" access="ROLE_ADMINISTRADOR" />
 		<sec:intercept-url pattern="/pages/comum/**" access="ROLE_ADMINISTRADOR, ROLE_PARTICIPANTE" />
-		<sec:intercept-url pattern="/templates/**" access="ROLE_ADMINISTRADOR, ROLE_PARTICIPANTE" />
-		<sec:intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />	
 	</sec:http>
 
 	<!-- como vai ser a autenticacao -->

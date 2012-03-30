@@ -66,6 +66,9 @@
 		<!-- Injeta esse objeto hibernateTemplate dentro do DAO -->
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
+	<bean id="usuarioDAO" class="br.com.softal.base.model.usuario.HbnUsuarioDAO"> 
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
 	<bean id="lotecaDAO" class="br.com.softal.loteca.model.loteca.HbnLotecaDAO"> 
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
@@ -88,6 +91,7 @@
 	</bean>
 	<bean id="lotecaService" class="br.com.softal.loteca.service.LotecaServiceImpl"> 
 		<property name="genericDAO" ref="genericDAO" />
+		<property name="usuarioDAO" ref="usuarioDAO" />
 		<property name="lotecaDAO" ref="lotecaDAO" />
 		<property name="lotecausuarioDAO" ref="lotecausuarioDAO" />
 		<property name="clubeDAO" ref="clubeDAO" />
