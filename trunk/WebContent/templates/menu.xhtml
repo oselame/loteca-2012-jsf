@@ -3,7 +3,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 <h:body>
-	<p:menu style="width: 100%"> 
+	<p:menu style="width: 100%" > 
 		<p:submenu label="#{msg.menu_seguranca}">
 			<p:menuitem url="/pages/adm/grupo/eltcConGrupo.xhtml" value="#{msg.menu_grupos}" />
 			<p:menuitem url="/pages/adm/action/eltcConAction.xhtml" value="#{msg.menu_actions}" />
@@ -18,6 +18,7 @@
 			<p:menuitem url="/pages/adm/data/eltcConData.xhtml" value="#{msg.menu_data}" />
 		</p:submenu>
 		<p:submenu label="#{msg.menu_loteca}">
+			<p:menuitem url="/pages/adm/clube/eltcConClube.xhtml" value="#{msg.menu_times}" />
 		</p:submenu>
 	</p:menu>
 </h:body>
