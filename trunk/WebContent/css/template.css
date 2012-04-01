@@ -2,7 +2,7 @@
 body {
 	margin: 0;
 	padding: 0;
-	/*line-height: 1.5em;*/
+	line-height: 1.5em;
 }
 
 b {
@@ -21,7 +21,6 @@ em {
 #topsection {
 	/* background: #EAEAEA; */
 	height: 100px; /*Height of top section*/
-	background-color: #BED6F8;
 }
 
 #topsection h1 {
@@ -48,7 +47,7 @@ em {
 #footer {
 	clear: left;
 	width: 100%;
-	background-color: #BED6F8;
+	/* background: black; */
 	/* color: #FFF; */
 	text-align: center;
 	padding: 4px 0;
@@ -59,9 +58,9 @@ em {
 }
 
 .innertube {
-	/*margin: 10px;*/
+	margin: 10px;
+	/*Margins for inner DIV inside each column (to provide padding)*/
 	margin-top: 0;
-	background-color: #BED6F8;
 }
 
 #cabecalho {
@@ -82,10 +81,8 @@ em {
 	font-size: 40px;
 	float: left;
 }
-
-div#divlogin {
-	padding-top: 25px;
+#divlogin{
+	text-align: right;
 	width: 300px;
-	float: left;
-	
+	float: right;
 }
