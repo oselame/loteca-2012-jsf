@@ -8,10 +8,10 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title><ui:insert name="title">Loteca 2012</ui:insert></title>
-	<link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}/css/template.css" />
+	<link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}/css/layout.css" />
 	<link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}/css/grid.css" />
 	<style type="text/css">
-		.ui-panel, div.ui-state-hover {
+		.ui-panel,div.ui-state-hover {
 			margin: 10px;
 			width: 300px;
 		}
@@ -19,39 +19,25 @@
 		.ui-dashboard-column {
 			width: 320px;
 		}
-	</style>	
+	</style>
 </h:head>
 <h:body>
-	<div id="maincontainer" class="ui-widget ui-widget-content ui-corner-all ui-helper-clearfix">
-		<div id="topsection">
-			<div class="innertube">
-				<ui:insert name="top">
-					<ui:include src="cabecalho.xhtml" />
-				</ui:insert>
-			</div>
+	<div id="outerWrapper">
+		<div id="header">
+			<ui:include src="cabecalho.xhtml" />
 		</div>
-
-		<div id="contentwrapper">
-			<div id="contentcolumn">
-				<div class="innertube">
-					<ui:insert name="context">&nbsp;</ui:insert>
-				</div>
+		<div id="contentWrapper">
+			<div id="leftColumn1">
+				<ui:include src="menu.xhtml" />
 			</div>
+			<div id="content">
+				<ui:insert name="context">&nbsp;</ui:insert>
+			</div>
+			<br class="clearFloat" />
 		</div>
-
-		<div id="leftcolumn">
-			<div class="innertube">
-				<ui:insert name="menuBar">
-					<ui:include src="menu.xhtml" />
-				</ui:insert>
-			</div>
-		</div>		
-
-
 		<div id="footer">
 			<ui:include src="rodape.xhtml" />
 		</div>
-
 	</div>
 	<ui:debug hotkey="K" />
 </h:body>
