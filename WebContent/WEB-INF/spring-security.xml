@@ -8,10 +8,11 @@
 	http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
     <http auto-config="true">
-		<form-login login-page="/login.xhtml" 
-			authentication-failure-url="/login.xhtml?erro=invalido" 
+		<form-login login-page="/eltcDashboard.xhtml" 
+			authentication-failure-url="/eltcDashboard.xhtml?erro=invalido" 
 			default-target-url="/templates/template.xhtml"/>	
-		<intercept-url pattern="/pages/user/**" access="ROLE_USER,ROLE_ADMIN" />
+		<intercept-url pattern="/templates/template.xhtml" access="ROLE_USER, ROLE_ADMIN" />
+		<intercept-url pattern="/pages/user/**" access="ROLE_USER, ROLE_ADMIN" />
 		<intercept-url pattern="/pages/adm/**" access="ROLE_ADMIN" />
 		<intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />            
     </http>

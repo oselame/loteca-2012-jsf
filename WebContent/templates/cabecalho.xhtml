@@ -11,11 +11,11 @@
 				value="#{pageContext.servletContext.contextPath}/images/zebra.jpg"
 				width="70"  />
 		</div>
-		<div id="nomesistema">#{sistemaBean.nomesistema}s</div>
+		<div id="nomesistema">#{sistemaBean.nomesistema}</div>
 		
 		<div id="divlogin">
 			<h:form id="loginForm" prependId="false" >
-				<h:panelGrid rendered="#{!authenticationBean.logado}" columns="3" border="0" width="100%">
+				<h:panelGrid rendered="#{!authenticationBean.logado}" columns="3" border="0" width="100%" style="text-align: left;">
 					<h:panelGroup>
 	               	 	Login: <br/>
 	               	 	 <h:inputText id="j_username" required="true" style="width:100px" requiredMessage="Campo 'Login' não informado."/>
@@ -30,12 +30,12 @@
 							action="#{authenticationBean.doLogin()}" value="Entrar" />
 					</h:panelGroup>
 				</h:panelGrid>
-				<h:panelGrid rendered="#{authenticationBean.logado}" styleClass="text-align: right;">
-					Bem vindo #{authenticationBean.usuario.nmUsuario}
-					<br/>
-					<h:outputLink value="#{request.contextPath}/j_spring_security_logout">Sair</h:outputLink>
-				</h:panelGrid>
 			</h:form>
+			<h:panelGrid rendered="#{authenticationBean.logado}" style="text-align: right;">
+				Bem vindo #{authenticationBean.usuario.nmUsuario}
+				<br/>
+				<h:outputLink value="#{request.contextPath}/j_spring_security_logout">Sair</h:outputLink>
+			</h:panelGrid>
 		</div>
 	</div>
 </h:body>
