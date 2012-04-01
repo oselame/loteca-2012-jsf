@@ -1,0 +1,37 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:sec="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+    <http auto-config="true">
+		<form-login login-page="/login.xhtml" 
+			authentication-failure-url="/login.xhtml?erro=invalido" 
+			default-target-url="/templates/template.xhtml"/>	
+		<intercept-url pattern="/pages/user/**" access="ROLE_USER,ROLE_ADMIN" />
+		<intercept-url pattern="/pages/adm/**" access="ROLE_ADMIN" />
+		<intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />            
+    </http>
+    
+	<authentication-manager>
+		<sec:authentication-provider>
+			<sec:jdbc-user-service data-source-ref="dataSource"
+				users-by-username-query="select delogin, desenha, case when flativo = 1 then 'true' else 'false' end as enable from esegusuario where delogin=?"
+				authorities-by-username-query="select u.delogin, g.degrupo from esegusuariogrupo ug join eseggrupo g on g.cdgrupo = ug.cdgrupo join esegusuario u on u.cdusuario = ug.cdusuario where u.delogin=?" />
+		</sec:authentication-provider>
+	</authentication-manager>    
+    
+<!-- ================ OLD WAY ================================================== 
+    <authentication-manager>
+            <authentication-provider>
+                    <user-service>
+                            <user name="rexryan" password="jets" authorities="ROLE_ADMIN" />
+                            <user name="djeter" password="17684514" authorities="ROLE_ADMIN" />
+                    </user-service>
+            </authentication-provider>
+    </authentication-manager>
+-->
+</beans:beans>
