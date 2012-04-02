@@ -13,22 +13,4 @@
 	<!-- Conexão com banco de dados -->
 	<bean id="dataSource" class="br.com.softal.loteca.sets.Connect" />
 	
-	<!-- configuracao das paginas  
-	<sec:http auto-config="true" access-denied-page="/negado.xhtml" >
-		<sec:form-login login-page="/login.xhtml" authentication-failure-url="/login.xhtml?erro=invalido" />	
-		<sec:intercept-url pattern="/pages/user/**" access="ROLE_USER,ROLE_ADMIN" />
-		<sec:intercept-url pattern="/pages/adm/**" access="ROLE_ADMIN" />
-		<sec:intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />	
-	</sec:http>
--->
-	<!-- como vai ser a autenticacao
-	<sec:authentication-manager>
-		<sec:authentication-provider>
-			<sec:jdbc-user-service data-source-ref="dataSource"
-				users-by-username-query="select delogin, desenha, case when flativo = 1 then 'true' else 'false' end as enable from esegusuario where delogin=?"
-				authorities-by-username-query="select u.delogin, g.degrupo from esegusuariogrupo ug join eseggrupo g on g.cdgrupo = ug.cdgrupo join esegusuario u on u.cdusuario = ug.cdusuario where u.delogin=?" />
-		</sec:authentication-provider>
-	</sec:authentication-manager>
-	 -->
-
 </beans>
