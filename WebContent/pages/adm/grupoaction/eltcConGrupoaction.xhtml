@@ -9,45 +9,45 @@
 	template="#{pageContext.servletContext.contextPath}/templates/template.xhtml">
 
 	<ui:define name="context">
-			<h:form>
-				<p:dataTable id="grupoactions" var="row" value="#{grupoactionBean.rows}"
-					rowKey="#{row.nuSeqgrupoaction}" selection="#{grupoactionBean.entity}"
-					selectionMode="single" emptyMessage="#{msg.warning_nenhum_registro_encontrado}">	
-					<f:facet name="header">
-						#{msg.grupoaction_consultar}
-					</f:facet>			
+		<h:form>
+			<p:dataTable id="grupoactions" var="row" value="#{grupoactionBean.rows}"
+				rowKey="#{row.nuSeqgrupoaction}" selection="#{grupoactionBean.entity}"
+				selectionMode="single" emptyMessage="#{msg.warning_nenhum_registro_encontrado}" style="width:100%">	
+				<f:facet name="header">
+					#{msg.grupoaction_consultar}
+				</f:facet>			
 
-					<p:column headerText="#{msg.grupoaction_grupo}">
-						#{row.grupo.deGrupo}
-					</p:column>
-					<p:column headerText="#{msg.grupoaction_action}">
-						#{row.action.deAction}
-					</p:column>
-					<p:column style="width:15px">
-						<p:commandButton id="selectButton" icon="ui-icon-trash" title="Excluir" action="#{grupoactionBean.excluir}" ajax="false" onclick="return confirm('#{msg.confirma_exclusao_registro}')">
-							<f:setPropertyActionListener value="#{row}" target="#{grupoactionBean.entity}" />
-						</p:commandButton>
-					</p:column>
-				</p:dataTable>
-				
-			</h:form>
-
+				<p:column headerText="#{msg.grupoaction_grupo}">
+					#{row.grupo.deGrupo}
+				</p:column>
+				<p:column headerText="#{msg.grupoaction_action}">
+					#{row.action.deAction}
+				</p:column>
+				<p:column style="width:15px">
+					<p:commandButton id="selectButton" icon="ui-icon-trash" title="Excluir" action="#{grupoactionBean.excluir}" ajax="false" onclick="return confirm('#{msg.confirma_exclusao_registro}')">
+						<f:setPropertyActionListener value="#{row}" target="#{grupoactionBean.entity}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</h:form>
 		<br />
 		<h:form>
-			<p:panel header="#{msg.grupoaction_cadastrar}">
+			<h:panelGrid header="#{msg.grupoaction_cadastrar}" style="width:100%" >	
 				<p:messages showDetail="true" showSummary="false" />
 				<h:inputHidden value="#{grupoactionBean.entity.nuSeqgrupoaction}" />
 				<h:inputHidden value="#{grupoactionBean.entity.status}" />
-				<h:panelGrid columns="4" columnClasses="headerColumn alignRight bold, emptyClass, headerColumn alignRight bold, emptyClass">
+				<h:panelGrid columns="2" border="0" 
+					columnClasses="headerColumn alignRight bold, emptyClass, headerColumn alignRight bold, emptyClass" 
+					style="width:100%" >
 					<h:outputLabel value="#{msg.grupoaction_grupo}*:" for="selectGrupo" />
 
-					<p:selectOneMenu value="#{grupoactionBean.cdGrupo}" id="selectGrupo" >
+					<p:selectOneMenu value="#{grupoactionBean.cdGrupo}" id="selectGrupo"  >
 						<f:selectItem itemLabel="#{msg.selectonemenu_selecione}" itemValue="" />
 						<f:selectItems value="#{grupoactionBean.grupos}" var="gru" itemLabel="#{gru.deGrupo}" itemValue="#{gru.cdGrupo}" />
 					</p:selectOneMenu>
 
 					<h:outputLabel value="#{msg.grupoaction_action}*:" for="selectAction" />
-					<p:selectOneMenu value="#{grupoactionBean.cdAction}" id="selectAction" >
+					<p:selectOneMenu value="#{grupoactionBean.cdAction}" id="selectAction" >	
 						<f:selectItem itemLabel="#{msg.selectonemenu_selecione}" itemValue="" />
 						<f:selectItems value="#{grupoactionBean.actions}" var="action"  itemLabel="#{action.deAction}" itemValue="#{action.cdAction}" />
 					</p:selectOneMenu>
@@ -56,7 +56,7 @@
 					<p:commandButton value="#{msg.button_save}"
 						action="#{grupoactionBean.save}" ajax="false" />
 				</f:facet>
-			</p:panel>
+			</h:panelGrid>
 		</h:form>
 	</ui:define>
 </ui:composition>
