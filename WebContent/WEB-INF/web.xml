@@ -55,13 +55,7 @@
     </filter-mapping> 
 <!-- ////////////////////////// END: SPRING RELATED //////////////////////// -->	
 	
-	
-	
-	
-	
-	
-  	
-  	<!-- Primefaces -->
+  <!-- Primefaces -->
   <context-param>
     <param-name>primefaces.THEME</param-name>
     <param-value>bluesky</param-value>
@@ -83,6 +77,12 @@
     <servlet-name>Resource Servlet</servlet-name>
     <url-pattern>/primefaces_resource/*</url-pattern>
   </servlet-mapping>
+  
+	<error-page>
+	   	<error-code>403</error-code>
+	   	<location>/403.xhtml</location>
+	</error-page>
+
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
