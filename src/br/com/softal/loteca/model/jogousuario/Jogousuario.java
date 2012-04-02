@@ -97,6 +97,14 @@ public class Jogousuario extends Entity {
 	public void setFlColuna1(Long flColuna1) {
 		this.flColuna1 = flColuna1;
 	}
+	
+	public Boolean getBlColuna1() {
+		return flColuna1 != null && flColuna1 == 1l;
+	}
+	
+	public void setBlColuna1(Boolean blColuna1) {
+		this.flColuna1 = (blColuna1 == null) ? 0l : (blColuna1 ?  1l : 0l);
+	}
 
 	public Long getFlEmpate() {
 		return flEmpate;
@@ -105,6 +113,14 @@ public class Jogousuario extends Entity {
 	public void setFlEmpate(Long flEmpate) {
 		this.flEmpate = flEmpate;
 	}
+	
+	public Boolean getBlEmpate() {
+		return flEmpate != null && flEmpate == 1l;
+	}
+	
+	public void setBlEmpate(Boolean blEmpate) {
+		this.flEmpate = (blEmpate == null) ? 0l : (blEmpate ?  1l : 0l);
+	}	
 
 	public Long getFlColuna2() {
 		return flColuna2;
@@ -112,6 +128,14 @@ public class Jogousuario extends Entity {
 
 	public void setFlColuna2(Long flColuna2) {
 		this.flColuna2 = flColuna2;
+	}
+	
+	public Boolean getBlColuna2() {
+		return flColuna2 != null && flColuna2 == 1l;
+	}
+	
+	public void setBlColuna2(Boolean blColuna2) {
+		this.flColuna2 = (blColuna2 == null) ? 0l : (blColuna2 ?  1l : 0l);
 	}
 
 	public Lotecausuario getLotecausuario() {

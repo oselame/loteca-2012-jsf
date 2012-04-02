@@ -10,35 +10,30 @@
 	<ui:define name="context">
 		<h:form>
 			<p:messages showDetail="true" showSummary="false" />
-			<p:panel header="#{msg.grupo_cadastrar}">
-				<h:inputHidden value="#{grupoBean.entity.status}"  />
-				<h:panelGrid columns="2" style="width:100%" columnClasses="headerColumn alignRight bold" >
-					<h:outputLabel  value="#{msg.grupo_cdgrupo}*:" for="cdGrupo" rendered="#{grupoBean.entity.status ne 'I'}" /> 
-					<p:inputText value="#{grupoBean.entity.cdGrupo}" id="cdGrupo" style="width:50px;" 
-						rendered="#{grupoBean.entity.status ne 'I'}" readonly="true" /> 
-					
-					<h:outputLabel value="#{msg.grupo_degrupo}*:" for="deGrupo" />
-					<p:inputText value="#{grupoBean.entity.deGrupo}" required="true" id="deGrupo"
-						requiredMessage="#{msg.grupo_degrupo_requirido}" 
-						maxlength="45" style="width: 100%" />
-					
-					<h:outputLabel value="#{msg.grupo_nmgrupo}*:" for="nmGrupo" />
-					<p:inputText value="#{grupoBean.entity.nmGrupo}" required="true" id="nmGrupo"
-						requiredMessage="#{msg.grupo_nmgrupo_requirido}" 
-						maxlength="45" style="width: 100%"/>
-				</h:panelGrid>
-				<f:facet name="footer">
-					<p:commandButton value="#{msg.button_save}" action="#{grupoBean.save}" ajax="false" />
-					<p:commandButton value="#{msg.button_novo}" action="#{grupoBean.adicionar}" ajax="false" immediate="true"/>
-					<p:commandButton value="#{msg.button_excluir}" action="#{grupoBean.excluir}" ajax="false" 
-						rendered="#{grupoBean.entity.status ne 'I'}" 
-						onclick="return confirm('#{msg.confirma_exclusao_registro}')" />
-					<p:commandButton value="#{msg.button_voltar}" action="eltcConGrupo" ajax="false" immediate="true"/>
+			<p:dataTable id="jogousuarios" var="row" value="#{jogousuarioBean.jogousuarios}"
+				rowKey="#{row.nuSeqjogousuario}" emptyMessage="#{msg.warning_nenhum_registro_encontrado}">
+				
+				<f:facet name="header">
+					#{msg.jogo_usuario_cadastrar}
 				</f:facet>
-			</p:panel>
+									
+				<p:column headerText="#{msg.jogo_usuario_jogo_cdjogo}"  style="width:40px;">
+					<h:outputText value="#{row.jogo.cdJogo}" />
+				</p:column>				
+				<p:column headerText="#{msg.jogo_usuario_jogo_dejogo}">
+					<h:outputText value="#{row.jogo.deJogo}" />
+				</p:column>				
+				<p:column headerText="#{msg.jogo_usuario_coluna1}" style="width:80px;" styleClass="alignCenter">
+					<p:selectBooleanCheckbox value="#{row.blColuna1}"/>
+				</p:column>				
+				<p:column headerText="#{msg.jogo_usuario_empate}" style="width:80px;" styleClass="alignCenter">
+					<p:selectBooleanCheckbox value="#{row.blEmpate}"/>
+				</p:column>				
+				<p:column headerText="#{msg.jogo_usuario_coluna2}" style="width:80px;" styleClass="alignCenter">
+					<p:selectBooleanCheckbox value="#{row.blColuna2}"/>
+				</p:column>				
+			</p:dataTable>
 		</h:form>
-		
-		
 	</ui:define>
 </ui:composition>
 </html>
