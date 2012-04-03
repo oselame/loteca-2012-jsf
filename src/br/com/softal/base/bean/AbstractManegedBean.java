@@ -5,6 +5,7 @@ import java.util.List;
 
 import br.com.softal.base.message.MessagesWeb;
 import br.com.softal.base.model.Entity;
+import br.com.softal.base.model.usuario.Usuario;
 import br.com.softal.base.service.DefaultServiceImpl;
 import br.com.softal.loteca.sets.SpringFactory;
 
@@ -17,13 +18,23 @@ public abstract class AbstractManegedBean<E extends Entity> implements Serializa
 	private DefaultServiceImpl defaultService;
 	private E entity;
 	private List<E> rows;
+	private Usuario usuariologado;
 
 	public AbstractManegedBean() {
 		initializeEntity();
+		setUsuariologado(null);
 		messages = new MessagesWeb();
 		defaultService = (DefaultServiceImpl) SpringFactory.getInstance().getBean("defaultService"); 
 	}
 	
+	public Usuario getUsuariologado() {
+		return usuariologado;
+	}
+
+	public void setUsuariologado(Usuario usuariologado) {
+		this.usuariologado = usuariologado;
+	}
+
 	public DefaultServiceImpl getDefaultService() {
 		return defaultService;
 	}

@@ -14,10 +14,12 @@ import br.com.softal.loteca.model.clube.HbnClubeDAO;
 import br.com.softal.loteca.model.clubeusuario.Clubeusuario;
 import br.com.softal.loteca.model.clubeusuario.HbnClubeusuarioDAO;
 import br.com.softal.loteca.model.data.Data;
+import br.com.softal.loteca.model.jogousuario.Jogousuario;
 import br.com.softal.loteca.model.loteca.HbnLotecaDAO;
 import br.com.softal.loteca.model.loteca.Loteca;
 import br.com.softal.loteca.model.lotecausuario.HbnLotecausuarioDAO;
 import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
+import br.com.softal.loteca.util.Constantes;
 
 public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaService {
 	
@@ -171,6 +173,24 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 	@Override
 	public void processaResultado(Data data) throws ServiceException {
 		
+	}
+	
+	@Override
+	public List<Jogousuario> findAllJogoUsuarioDataEmAndamento(Jogousuario jogousuario) throws ServiceException {
+		/*Data data = this.findDataEmAndamentoLotecaAtiva();
+		Lotecausuario lotecausuario = new Lotecausuario();
+		lotecausuario.get
+		jogousuario.setLotecausuario(lotecausuario);*/
+		List<Jogousuario> lista = (List<Jogousuario>) this.findAll(jogousuario);
+		return null;
+	}
+
+	@Override
+	public Data findDataEmAndamentoLotecaAtiva() {
+		Data data = new Data();
+		data.setTpSituacao( Constantes.DATA_SITUACAO_EM_ANDAMENTO );
+		List<Data> lista = (List<Data>) super.findAll(data);
+		return lista.size() > 0 ? lista.get(0) : null;
 	}
 
 }

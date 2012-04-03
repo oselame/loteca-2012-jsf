@@ -46,9 +46,6 @@ public class Usuario extends Entity {
 	@Column(name = "deEmail")
 	private String deEmail;
 
-	@Column(name = "vlDeposito")
-	private Long vlDeposito;
-
 	@Column(name = "deEmailpessoal")
 	private String deEmailpessoal;
 
@@ -83,8 +80,7 @@ public class Usuario extends Entity {
 	}
 	
 	public Usuario(Long cdUsuario, String nmUsuario, String deLogin,
-			String deSenha, String deEmail, Long vlDeposito,
-			String deEmailpessoal, Long flAdm, Long flAtivo,
+			String deSenha, String deEmail, String deEmailpessoal, Long flAdm, Long flAtivo,
 			Long flForaempresa, Long flEnviosenha, Long cdProjeto) {
 		this();
 		this.inicializaRelacionamentos();
@@ -93,7 +89,6 @@ public class Usuario extends Entity {
 		this.deLogin = deLogin;
 		this.deSenha = deSenha;
 		this.deEmail = deEmail;
-		this.vlDeposito = vlDeposito;
 		this.deEmailpessoal = deEmailpessoal;
 		this.flAdm = flAdm;
 		this.flAtivo = flAtivo;
@@ -127,15 +122,6 @@ public class Usuario extends Entity {
 	public void setDeEmail(String deEmail) {
 		this.deEmail = deEmail;
 	}
-
-	public Long getVlDeposito() {
-		return vlDeposito;
-	}
-
-	public void setVlDeposito(Long vlDeposito) {
-		this.vlDeposito = vlDeposito;
-	}
-
 
 	public String getDeEmailpessoal() {
 		return deEmailpessoal;

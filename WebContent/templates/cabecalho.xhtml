@@ -32,7 +32,7 @@
 				</h:panelGrid>
 			</h:form>
 			<h:panelGrid rendered="#{authenticationBean.logado}" style="text-align: right;">
-				Bem vindo #{authenticationBean.usuario.nmUsuario}
+				Bem vindo #{authenticationBean.usuariologado.nmUsuario}
 				<br/>
 				<h:outputLink value="#{request.contextPath}/j_spring_security_logout">Sair</h:outputLink>
 			</h:panelGrid>
