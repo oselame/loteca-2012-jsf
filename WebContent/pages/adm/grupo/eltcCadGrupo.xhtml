@@ -10,7 +10,7 @@
 	<ui:define name="context">
 		<h:form>
 			<p:messages showDetail="true" showSummary="false" />
-			<p:panel header="#{msg.grupo_cadastrar}">
+			<p:panel header="#{msg.grupo_cadastrar}" style="width:100%">
 				<h:inputHidden value="#{grupoBean.entity.status}"  />
 				<h:panelGrid columns="2" style="width:100%" columnClasses="headerColumn alignRight bold" >
 					<h:outputLabel  value="#{msg.grupo_cdgrupo}*:" for="cdGrupo" rendered="#{grupoBean.entity.status ne 'I'}" /> 
