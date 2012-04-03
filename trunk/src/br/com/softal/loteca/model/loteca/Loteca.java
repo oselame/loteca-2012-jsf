@@ -23,7 +23,7 @@ import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
 @javax.persistence.Entity
 @Table(name = "eltcloteca")
 public class Loteca extends Entity {
-
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "cdloteca")
@@ -32,8 +32,8 @@ public class Loteca extends Entity {
 	@Column(name = "nuano")
 	private Long nuAno;
 
-	@Column(name = "flativa")
-	private Long flAtiva;
+	@Column(name = "tpsituacao")
+	private Long tpSituacao;
 	
 	@OneToMany(mappedBy="loteca", fetch=FetchType.LAZY)
 	@Cascade(CascadeType.ALL)
@@ -53,12 +53,12 @@ public class Loteca extends Entity {
 		super();
 	}
 	
-	public Loteca(long cdLoteca, Long nuAno, Long flAtiva) {
+	public Loteca(long cdLoteca, Long nuAno, Long tpSituacao) {
 		this();
 		this.inicializaRelacionamentos();
 		this.cdLoteca = cdLoteca;
 		this.nuAno = nuAno;
-		this.flAtiva = flAtiva;
+		this.tpSituacao = tpSituacao;
 	}
 
 	public long getCdLoteca() {
@@ -77,12 +77,12 @@ public class Loteca extends Entity {
 		this.nuAno = nuAno;
 	}
 
-	public Long getFlAtiva() {
-		return flAtiva;
+	public Long getTpSituacao() {
+		return tpSituacao;
 	}
 
-	public void setFlAtiva(Long flAtiva) {
-		this.flAtiva = flAtiva;
+	public void setTpSituacao(Long tpSituacao) {
+		this.tpSituacao = tpSituacao;
 	}
 
 	public Boolean getSelecionada() {

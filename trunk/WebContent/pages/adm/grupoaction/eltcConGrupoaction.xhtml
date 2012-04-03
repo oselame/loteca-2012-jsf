@@ -32,7 +32,7 @@
 		</h:form>
 		<br />
 		<h:form>
-			<h:panelGrid header="#{msg.grupoaction_cadastrar}" style="width:100%" >	
+			<p:panel header="#{msg.grupoaction_cadastrar}" style="width:100%" >	
 				<p:messages showDetail="true" showSummary="false" />
 				<h:inputHidden value="#{grupoactionBean.entity.nuSeqgrupoaction}" />
 				<h:inputHidden value="#{grupoactionBean.entity.status}" />
@@ -56,7 +56,7 @@
 					<p:commandButton value="#{msg.button_save}"
 						action="#{grupoactionBean.save}" ajax="false" />
 				</f:facet>
-			</h:panelGrid>
+			</p:panel>
 		</h:form>
 	</ui:define>
 </ui:composition>
