@@ -78,12 +78,6 @@
 						<p:selectBooleanCheckbox value="#{usuarioBean.blEnviosenha}" itemLabel="#{msg.usuario_flenviosenha}" styleClass="bold" />
 					</h:panelGrid>
 					
-					<h:outputLabel value="#{msg.usuario_vldeposito} *:" for="vlDeposito"/>
-					<p:inputText value="#{usuarioBean.entity.vlDeposito}" id="vlDeposito"
-						required="true" requiredMessage="#{msg.usuario_vldeposito_requirido}" 
-						maxlength="3" size="5"
-						converter="javax.faces.Integer"
-						converterMessage="#{msg.usuario_vldeposito_valor_invalido}"/>	
 				</h:panelGrid>
 				
 				<f:facet name="footer">

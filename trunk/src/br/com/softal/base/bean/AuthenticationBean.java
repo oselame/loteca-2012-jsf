@@ -1,6 +1,7 @@
 package br.com.softal.base.bean;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -20,34 +21,32 @@ import br.com.softal.base.model.usuario.Usuario;
 import br.com.softal.base.service.ServiceException;
 import br.com.softal.loteca.LtcServiceLocator;
 
+@SuppressWarnings("serial")
 @ManagedBean(name="authenticationBean")
 @SessionScoped
-public class AuthenticationBean {
-	
-	private Usuario usuario; 
+public class AuthenticationBean extends AbstractManegedBean<Usuario> implements Serializable {
 	
 	public String doLogin() throws IOException, ServletException {
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
         RequestDispatcher dispatcher = ((ServletRequest) context.getRequest()).getRequestDispatcher("/j_spring_security_check");
         dispatcher.forward((ServletRequest) context.getRequest(), (ServletResponse) context.getResponse());
-        x();
+        carregaUsuarioLogado();
         FacesContext.getCurrentInstance().responseComplete();
         return null;
     }
 	
-	public void x() {
-		usuario = new Usuario();
+	public void carregaUsuarioLogado() {
+		
         SecurityContext context = SecurityContextHolder.getContext();
         if (context instanceof SecurityContext){
             Authentication authentication = context.getAuthentication();
             if (authentication instanceof Authentication){
-                //usuario.setDeLogin(((Usuario)authentication.getPrincipal()).getDeLogin());
             	try {
             		if (authentication.getPrincipal().toString().equals("anonymousUser")) {
-            			usuario.setDeLogin("");
+            			super.getUsuariologado().setDeLogin("");
             		} else {
             			String deLogin = ((User) authentication.getPrincipal()).getUsername();
-            			usuario = LtcServiceLocator.getInstance().getLotecaService().findUsuarioByLogin(deLogin);
+            			super.setUsuariologado(LtcServiceLocator.getInstance().getLotecaService().findUsuarioByLogin(deLogin));
             		}
 				} catch (ServiceException e) {
 					e.printStackTrace();
@@ -62,15 +61,13 @@ public class AuthenticationBean {
 	}
 
     public String doLogout() {
+    	super.setUsuariologado(null);
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "/logout.xhtml";
     }
     
-    public Usuario getUsuario() {
-        return usuario;
-    }
- 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
+	@Override
+	protected void initializeEntity() {
+		setEntity(new Usuario());
+	}
 }

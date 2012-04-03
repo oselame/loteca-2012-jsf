@@ -31,6 +31,7 @@ h2 {
 	font-weight: bold;
 	line-height: 14px;
 }
+
 /* Sets the style for unvisited links. */
 a, a:link {
 	color: #3c982d;
@@ -56,6 +57,7 @@ a:focus {
 a:active {
 	color: #164619;
 }
+
 /* This is a container for the page content. It is common to use the container to constrain the width of the page content and allow for browser chrome to avoid the need for horizontal scrolling. For fixed layouts you may specify a container width and use auto for the left and right margin to center the container on the page. IE 5 browser require the use of text-align: center defined by the body element to center the container. For liquid layouts you may simply set the left and right margins to center the container on the page. */
 #outerWrapper {
 	background-color: #fff;

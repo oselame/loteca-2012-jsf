@@ -24,15 +24,6 @@ import br.com.softal.loteca.model.jogo.Jogo;
 @Table(name = "eltcdata")
 public class Data extends Entity {
 	
-	/*@Transient
-	public static final long TP_SITUACAO_CADASTRAMENTO = 1L;
-	
-	@Transient
-	public static final long TP_SITUACAO_EM_ANDAMENTO = 2L;
-	
-	@Transient
-	public static final long TP_SITUACAO_CONCLUIDO = 3L;*/
-
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "cddata")
