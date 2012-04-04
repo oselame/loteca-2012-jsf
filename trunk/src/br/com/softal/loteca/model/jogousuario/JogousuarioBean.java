@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import br.com.softal.base.bean.AbstractManegedBean;
 import br.com.softal.loteca.LtcServiceLocator;
@@ -44,14 +45,18 @@ public class JogousuarioBean extends AbstractManegedBean<Jogousuario> implements
 	protected void initializeEntity() {
 		setEntity(new Jogousuario());
 		setJogousuarios(new ArrayList<Jogousuario>());
-		getJogousuarios().add(new Jogousuario());
-		this.carregaJogoUsuario();
 	}
 	
-	public void carregaJogoUsuario() {
+	public String abrirCadJogousuario() {
+		getJogousuarios().add(new Jogousuario());
+		this.carregaJogoUsuario();
+		return FacesContext.getCurrentInstance().getExternalContext() + "/pages/user/jogousuario/eltcCadJogousuario.xhtml";
+	}
+	
+	private void carregaJogoUsuario() {
 		try {
 			List<Jogousuario> jogousuarios = LtcServiceLocator.getInstance().getLotecaService().findAllJogoUsuarioDataEmAndamento(getEntity());
-			setRows(jogousuarios);
+			setJogousuarios(jogousuarios);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
