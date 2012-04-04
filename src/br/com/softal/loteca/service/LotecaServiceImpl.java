@@ -182,7 +182,7 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 		lotecausuario.get
 		jogousuario.setLotecausuario(lotecausuario);*/
 		List<Jogousuario> lista = (List<Jogousuario>) this.findAll(jogousuario);
-		return null;
+		return lista;
 	}
 
 	@Override
