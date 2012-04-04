@@ -9,39 +9,27 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title><ui:insert name="title">#{sistemaBean.nomesistema}</ui:insert></title>
 	<link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}/css/layout.css" />
-	<link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}/css/loteca.css" />
 	<link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}/css/grid.css" />
-	<style type="text/css">
-		.ui-panel,div.ui-state-hover {
-			margin: 10px;
-			width: 300px;
-		}
-		
-		.ui-dashboard-column {
-			width: 320px;
-		}
-	</style>
 </h:head>
 <h:body>
-		<div id="mainContainer">
+	<div id="outerWrapper">
 		<div id="header">
 			<ui:include src="cabecalho.xhtml" />
 		</div>
-		<!-- header, END -->
-		<div id="sideBarContentContainer">
-			<!-- sideBar, END -->
-			<div id="contentX">
+		<div id="contentWrapper">
+			<div id="leftColumn1">
+				<ui:include src="menu.xhtml" />
+			</div>
+			<div id="content">
 				<ui:insert name="context">&nbsp;</ui:insert>
 			</div>
-			<!-- content, END -->
-			<div style="clear: both"></div>
+			<br class="clearFloat" />
 		</div>
-		<!-- sideBarContentContainer -->
 		<div id="footer">
 			<ui:include src="rodape.xhtml" />
 		</div>
 	</div>
-	<!-- mainContainer -->
+	<ui:debug hotkey="K" />
 </h:body>
 
 </html>

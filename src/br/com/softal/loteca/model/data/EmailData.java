@@ -17,9 +17,9 @@ public class EmailData {
 		html.append("<html>");
 		html.append("\t<body>");
 		html.append("\t\t<h3>" + data.getDeObservacao() + "</h3><br>");
-		
-		html.append("\t\t<table border=\"1\" >");
-		html.append("\t\t\t<tr>");
+	
+		html.append("\t\t<table border=\"0\" style=\"border-style: solid; border-width: 1px;\">");
+		html.append("\t\t\t<tr style=\"background-color: #2b3a3c; color: white;\">");
 		html.append("\t\t\t\t<td colspan=\"2\">Jogo</td>");
 		html.append("\t\t\t\t<td align=\"center\">Coluna 1</td>");
 		html.append("\t\t\t\t<td align=\"center\">Empate</td>");
@@ -46,7 +46,7 @@ public class EmailData {
 		html.append(data.getDeObservacao() + "\n");
 		
 		for (Jogo j : data.getJogos()) {
-			html.append(j.getCdJogo() + ") [  ] [  ] [  ] " + j.getDeJogo() + "\n");
+			html.append(j.getCdJogo() + ") [   ] [   ] [   ] " + j.getDeJogo() + "\n");
 		}
 		return html.toString();
 	}
