@@ -9,26 +9,32 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title><ui:insert name="title">#{sistemaBean.nomesistema}</ui:insert></title>
 	<link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}/css/layout.css" />
+	<link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}/css/loteca.css" />
 	<link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}/css/grid.css" />
 </h:head>
 <h:body>
-	<div id="outerWrapper">
+	<div id="mainContainer">
 		<div id="header">
 			<ui:include src="cabecalho.xhtml" />
 		</div>
-		<div id="contentWrapper">
-			<div id="leftColumn1">
+		<!-- header, END -->
+		<div id="sideBarContentContainer">
+			<div id="sideBar">
 				<ui:include src="menu.xhtml" />
 			</div>
+			<!-- sideBar, END -->
 			<div id="content">
 				<ui:insert name="context">&nbsp;</ui:insert>
 			</div>
-			<br class="clearFloat" />
+			<!-- content, END -->
+			<div style="clear: both"></div>
 		</div>
+		<!-- sideBarContentContainer -->
 		<div id="footer">
 			<ui:include src="rodape.xhtml" />
 		</div>
 	</div>
+	<!-- mainContainer -->
 	<ui:debug hotkey="K" />
 </h:body>
 

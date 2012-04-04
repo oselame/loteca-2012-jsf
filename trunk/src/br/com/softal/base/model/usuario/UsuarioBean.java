@@ -119,7 +119,7 @@ public class UsuarioBean extends AbstractManegedBean<Usuario> {
 				super.save();
 				super.getMessages().addSucessMessage("mensagem_registro_salvo_com_sucesso");
 			} else if (getEntity().isStatusUpdate()) {
-				this.geraDeLoginDoEmail();
+				//--this.geraDeLoginDoEmail();
 				super.update();
 				super.getMessages().addSucessMessage("mensagem_registro_salvo_com_sucesso");
 			}
