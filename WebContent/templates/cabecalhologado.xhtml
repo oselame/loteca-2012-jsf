@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:body>
+	<style>
+</style>
+	<div id="cabecalho">
+		<div id="logo">
+			<h:graphicImage
+				value="#{pageContext.servletContext.contextPath}/images/zebra.jpg"
+				width="70"  />
+		</div>
+		<div id="nomesistema">#{sistemaBean.nomesistema}</div>
+		
+		<div id="divlogin">
+			<h:form id="loginForm" prependId="false" >
+				<h:panelGrid rendered="#{!authenticationBean.logado}" columns="3" border="0" width="100%" style="text-align: left;">
+					<h:panelGroup>
+	               	 	Login: <br/>
+	               	 	 <h:inputText id="j_username" required="true" style="width:100px" requiredMessage="Campo 'Login' não informado."/>
+					</h:panelGroup>
+					<h:panelGroup>
+	               	 	Senha: <br/>
+	                	 <h:inputSecret id="j_password" required="true" style="width:100px" requiredMessage="Campo 'Senha' não informado."/>
+					</h:panelGroup>
+					<h:panelGroup>
+						<br/>
+						<h:commandButton type="submit" id="login"
+							action="#{authenticationBean.doLogin()}" value="Entrar" />
+					</h:panelGroup>
+				</h:panelGrid>
+			</h:form>
+			<h:panelGrid rendered="#{authenticationBean.logado}" style="text-align: right;">
+				Bem vindo <s>pé frio</s> #{authenticationBean.usuariologado.nmUsuario}
+				<br/>
+				<h:outputLink value="#{request.contextPath}/j_spring_security_logout">Sair</h:outputLink>
+			</h:panelGrid>
+		</div>
+	</div>
+</h:body>
+
+</html>
