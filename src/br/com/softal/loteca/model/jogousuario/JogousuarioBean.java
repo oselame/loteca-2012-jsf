@@ -10,6 +10,7 @@ import javax.faces.context.FacesContext;
 
 import br.com.softal.base.bean.AbstractManegedBean;
 import br.com.softal.loteca.LtcServiceLocator;
+import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
 
 @SuppressWarnings("serial")
 @ManagedBean(name="jogousuarioBean")
@@ -55,8 +56,14 @@ public class JogousuarioBean extends AbstractManegedBean<Jogousuario> implements
 	
 	private void carregaJogoUsuario() {
 		try {
-			List<Jogousuario> jogousuarios = LtcServiceLocator.getInstance().getLotecaService().findAllJogoUsuarioDataEmAndamento(getEntity());
-			setJogousuarios(jogousuarios);
+			Lotecausuario lotecausuario = LtcServiceLocator.getInstance().getLotecaService().findLotecausuarioAtivo(super.getUsuariologado()); 
+			if (lotecausuario != null) {
+				getEntity().setLotecausuario(lotecausuario);
+				List<Jogousuario> jogousuarios = LtcServiceLocator.getInstance().getLotecaService().findAllJogoUsuarioDataAtiva( lotecausuario );
+				setJogousuarios(jogousuarios);
+			} else {
+				setJogousuarios(new ArrayList<Jogousuario>());
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

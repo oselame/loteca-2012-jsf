@@ -20,6 +20,7 @@ import org.springframework.security.core.userdetails.User;
 import br.com.softal.base.model.usuario.Usuario;
 import br.com.softal.base.service.ServiceException;
 import br.com.softal.loteca.LtcServiceLocator;
+import br.com.softal.loteca.util.Constantes;
 
 @SuppressWarnings("serial")
 @ManagedBean(name="authenticationBean")
@@ -46,7 +47,8 @@ public class AuthenticationBean extends AbstractManegedBean<Usuario> implements 
             			super.getUsuariologado().setDeLogin("");
             		} else {
             			String deLogin = ((User) authentication.getPrincipal()).getUsername();
-            			super.setUsuariologado(LtcServiceLocator.getInstance().getLotecaService().findUsuarioByLogin(deLogin));
+            			Usuario usuario = LtcServiceLocator.getInstance().getLotecaService().findUsuarioByLogin(deLogin);
+            			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(Constantes.USUARIO_LOGADO, usuario);
             		}
 				} catch (ServiceException e) {
 					e.printStackTrace();
@@ -64,7 +66,6 @@ public class AuthenticationBean extends AbstractManegedBean<Usuario> implements 
 	}
 
     public String doLogout() {
-    	super.setUsuariologado(null);
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "/logout.xhtml";
     }

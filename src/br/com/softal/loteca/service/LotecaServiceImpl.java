@@ -14,6 +14,7 @@ import br.com.softal.loteca.model.clube.HbnClubeDAO;
 import br.com.softal.loteca.model.clubeusuario.Clubeusuario;
 import br.com.softal.loteca.model.clubeusuario.HbnClubeusuarioDAO;
 import br.com.softal.loteca.model.data.Data;
+import br.com.softal.loteca.model.jogousuario.HbnJogousuarioDAO;
 import br.com.softal.loteca.model.jogousuario.Jogousuario;
 import br.com.softal.loteca.model.loteca.HbnLotecaDAO;
 import br.com.softal.loteca.model.loteca.Loteca;
@@ -29,9 +30,18 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 	private HbnClubeusuarioDAO clubeusuarioDAO;
 	private HbnClassifclubeDAO classifclubeDAO;
 	private HbnUsuarioDAO usuarioDAO;
+	private HbnJogousuarioDAO jogousuarioDAO;
 	
 	private HbnLotecaDAO getLotecaDAO() {
 		return lotecaDAO;
+	}
+	
+	public HbnJogousuarioDAO getJogousuarioDAO() {
+		return jogousuarioDAO;
+	}
+
+	public void setJogousuarioDAO(HbnJogousuarioDAO jogousuarioDAO) {
+		this.jogousuarioDAO = jogousuarioDAO;
 	}
 
 	public void setLotecaDAO(HbnLotecaDAO lotecaDAO) {
@@ -175,15 +185,15 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 		
 	}
 	
+	/*
 	@Override
 	public List<Jogousuario> findAllJogoUsuarioDataEmAndamento(Jogousuario jogousuario) throws ServiceException {
-		/*Data data = this.findDataEmAndamentoLotecaAtiva();
-		Lotecausuario lotecausuario = new Lotecausuario();
-		lotecausuario.get
-		jogousuario.setLotecausuario(lotecausuario);*/
+		Data data = this.findDataEmAndamentoLotecaAtiva();
+		jogousuario.setJogo(new Jogo());
+		jogousuario.getJogo().setData(data);
 		List<Jogousuario> lista = (List<Jogousuario>) this.findAll(jogousuario);
 		return lista;
-	}
+	}*/
 
 	@Override
 	public Data findDataEmAndamentoLotecaAtiva() {
@@ -192,5 +202,16 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 		List<Data> lista = (List<Data>) super.findAll(data);
 		return lista.size() > 0 ? lista.get(0) : null;
 	}
+	
+	@Override
+	public Lotecausuario findLotecausuarioAtivo(Usuario usuario) {
+		return getLotecausuarioDAO().findLotecausuarioAtivo(usuario);
+	}
+	
+	@Override
+	public List<Jogousuario> findAllJogoUsuarioDataAtiva(Lotecausuario lotecausuario) {
+		return getJogousuarioDAO().findAllJogoUsuarioDataAtiva(lotecausuario);
+	}
+	
 
 }
