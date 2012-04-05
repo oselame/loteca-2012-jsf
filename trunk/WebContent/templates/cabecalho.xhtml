@@ -8,14 +8,14 @@
 	<div id="cabecalho">
 		<div id="logo">
 			<h:graphicImage
-				value="#{pageContext.servletContext.contextPath}/images/zebra.jpg"
+				value="/images/zebra.jpg"
 				width="70"  />
 		</div>
 		<div id="nomesistema">#{sistemaBean.nomesistema}</div>
 		
 		<div id="divlogin">
 			<h:form id="loginForm" prependId="false" >
-				<h:panelGrid rendered="#{!authenticationBean.logado}" columns="3" border="0" width="100%" style="text-align: left;">
+				<h:panelGrid columns="3" border="0" width="100%" style="text-align: left;">
 					<h:panelGroup>
 	               	 	Login: <br/>
 	               	 	 <h:inputText id="j_username" required="true" style="width:100px" requiredMessage="Campo 'Login' não informado."/>
@@ -31,11 +31,6 @@
 					</h:panelGroup>
 				</h:panelGrid>
 			</h:form>
-			<h:panelGrid rendered="#{authenticationBean.logado}" style="text-align: right;">
-				Bem vindo <s>pé frio</s> #{authenticationBean.usuariologado.nmUsuario}
-				<br/>
-				<h:outputLink value="#{request.contextPath}/j_spring_security_logout">Sair</h:outputLink>
-			</h:panelGrid>
 		</div>
 	</div>
 </h:body>

@@ -56,8 +56,11 @@ public class AuthenticationBean extends AbstractManegedBean<Usuario> implements 
 	}
 	
 	public boolean isLogado() {
-		// System.out.println( SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString() );
-		return !SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString().equals("anonymousUser");
+		try {
+			return !SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString().equals("anonymousUser");
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
     public String doLogout() {
