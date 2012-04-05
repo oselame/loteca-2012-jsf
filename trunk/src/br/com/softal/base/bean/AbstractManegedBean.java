@@ -3,6 +3,8 @@ package br.com.softal.base.bean;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.context.FacesContext;
+
 import br.com.softal.base.message.MessagesWeb;
 import br.com.softal.base.model.Entity;
 import br.com.softal.base.model.usuario.Usuario;
@@ -19,6 +21,10 @@ public abstract class AbstractManegedBean<E extends Entity> implements Serializa
 	private E entity;
 	private List<E> rows;
 	private Usuario usuariologado;
+	
+	protected String getContext() {
+		return FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
+	}
 
 	public AbstractManegedBean() {
 		initializeEntity();
