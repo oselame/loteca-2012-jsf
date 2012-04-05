@@ -84,6 +84,9 @@
 	<bean id="classifclubeDAO" class="br.com.softal.loteca.model.classifclube.HbnClassifclubeDAO"> 
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
+	<bean id="jogousuarioDAO" class="br.com.softal.loteca.model.jogousuario.HbnJogousuarioDAO"> 
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
 	
 	<!-- Services -->
 	<bean id="defaultService" class="br.com.softal.base.service.DefaultServiceImpl"> 
@@ -97,5 +100,6 @@
 		<property name="clubeDAO" ref="clubeDAO" />
 		<property name="clubeusuarioDAO" ref="clubeusuarioDAO" />
 		<property name="classifclubeDAO" ref="classifclubeDAO" />
+		<property name="jogousuarioDAO" ref="jogousuarioDAO" />
 	</bean>
 </beans>

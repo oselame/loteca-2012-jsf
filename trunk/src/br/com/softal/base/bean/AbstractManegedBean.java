@@ -10,6 +10,7 @@ import br.com.softal.base.model.Entity;
 import br.com.softal.base.model.usuario.Usuario;
 import br.com.softal.base.service.DefaultServiceImpl;
 import br.com.softal.loteca.sets.SpringFactory;
+import br.com.softal.loteca.util.Constantes;
 
 @SuppressWarnings("serial")
 public abstract class AbstractManegedBean<E extends Entity> implements Serializable {
@@ -20,7 +21,6 @@ public abstract class AbstractManegedBean<E extends Entity> implements Serializa
 	private DefaultServiceImpl defaultService;
 	private E entity;
 	private List<E> rows;
-	private Usuario usuariologado;
 	
 	protected String getContext() {
 		return FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
@@ -28,17 +28,12 @@ public abstract class AbstractManegedBean<E extends Entity> implements Serializa
 
 	public AbstractManegedBean() {
 		initializeEntity();
-		setUsuariologado(null);
 		messages = new MessagesWeb();
 		defaultService = (DefaultServiceImpl) SpringFactory.getInstance().getBean("defaultService"); 
 	}
 	
 	public Usuario getUsuariologado() {
-		return usuariologado;
-	}
-
-	public void setUsuariologado(Usuario usuariologado) {
-		this.usuariologado = usuariologado;
+		return (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get(Constantes.USUARIO_LOGADO);
 	}
 
 	public DefaultServiceImpl getDefaultService() {
