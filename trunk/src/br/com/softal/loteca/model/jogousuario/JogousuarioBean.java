@@ -50,9 +50,7 @@ public class JogousuarioBean extends AbstractManegedBean<Jogousuario> implements
 	public String abrirCadJogousuario() {
 		getJogousuarios().add(new Jogousuario());
 		this.carregaJogoUsuario();
-		String retorno = "eltcCadJogousuario";
-		System.out.println(retorno);
-		return retorno;
+		return "/pages/user/jogousuario/eltcCadJogousuario.xhtml";
 	}
 	
 	private void carregaJogoUsuario() {
