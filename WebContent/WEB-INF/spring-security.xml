@@ -13,6 +13,7 @@
 			default-target-url="/templates/template.xhtml" />	
 		<intercept-url pattern="/templates/template.xhtml" access="ROLE_USER, ROLE_ADMIN" />
 		<intercept-url pattern="/pages/user/**" access="ROLE_USER, ROLE_ADMIN" />
+		<intercept-url pattern="/pages/user/jogousuario/**" access="ROLE_USER, ROLE_ADMIN" />
 		<intercept-url pattern="/pages/adm/**" access="ROLE_ADMIN" />
 		<intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />            
     </http>
