@@ -8,31 +8,44 @@
 <ui:composition template="/templates/template.xhtml">
 	
 	<ui:define name="context">
+		<style>
+			.linhaDuplo {
+				background-color: #8AB573;
+			}
+		</style>
 		<h:form>
 			<p:messages showDetail="true" showSummary="false" />
-			<p:dataTable id="jogousuarios" var="row" value="#{jogousuarioBean.jogousuarios}"
-				rowKey="#{row.nuSeqjogousuario}" emptyMessage="#{msg.warning_nenhum_registro_encontrado}">
-				
-				<f:facet name="header">
-					#{msg.jogo_usuario_cadastrar}
+			<p:panel>
+				<p:dataTable id="jogousuarios" var="row" value="#{jogousuarioBean.jogousuarios}"
+					rowKey="#{row.nuSeqjogousuario}" emptyMessage="#{msg.warning_nenhum_registro_encontrado}">
+					
+					<f:facet name="header">
+						#{msg.jogo_usuario_cadastrar}
+					</f:facet>
+										
+					<p:column headerText="#{msg.jogo_usuario_jogo_cdjogo}"  style="width:40px;" styleClass="#{row.tpJogo eq 1 ? 'linhaDuplo' : ''}">
+						<h:outputText value="#{row.jogo.cdJogo}" />
+					</p:column>				
+					<p:column headerText="#{msg.jogo_usuario_jogo_dejogo}" styleClass="#{row.tpJogo eq 1 ? 'linhaDuplo' : ''}">
+						<h:outputText value="#{row.jogo.deJogo}" />
+					</p:column>				
+					<p:column headerText="#{msg.jogo_usuario_coluna1}" style="width:80px;" styleClass="alignCenter #{row.tpJogo eq 1 ? 'linhaDuplo' : ''}">
+						<p:selectBooleanCheckbox value="#{row.blColuna1}"/>
+					</p:column>				
+					<p:column headerText="#{msg.jogo_usuario_empate}" style="width:80px;" styleClass="alignCenter #{row.tpJogo eq 1 ? 'linhaDuplo' : ''}">
+						<p:selectBooleanCheckbox value="#{row.blEmpate}"/>
+					</p:column>				
+					<p:column headerText="#{msg.jogo_usuario_coluna2}" style="width:80px;" styleClass="alignCenter #{row.tpJogo eq 1 ? 'linhaDuplo' : ''}">
+						<p:selectBooleanCheckbox value="#{row.blColuna2}"/>
+					</p:column>				
+				</p:dataTable>
+				<f:facet name="footer">
+					<p:commandButton value="Salvar" action="#{jogousuarioBean.salvarCadJogousuario}" ajax="false" disabled="#{not jogousuarioBean.jogohabilitado}"/>
+					<p:commandButton value="Gerar Jogo Aleatório" action="#{jogousuarioBean.gerarCadJogousuarioAleatorio}" ajax="false" disabled="#{not jogousuarioBean.jogohabilitado}"/>
+					<p:commandButton value="Enviar por E-mail" action="#{jogousuarioBean.enviarJogoEmailPessoal}" ajax="false" disabled="#{not jogousuarioBean.jogohabilitado}"/>
 				</f:facet>
-									
-				<p:column headerText="#{msg.jogo_usuario_jogo_cdjogo}"  style="width:40px;">
-					<h:outputText value="#{row.jogo.cdJogo}" />
-				</p:column>				
-				<p:column headerText="#{msg.jogo_usuario_jogo_dejogo}">
-					<h:outputText value="#{row.jogo.deJogo}" />
-				</p:column>				
-				<p:column headerText="#{msg.jogo_usuario_coluna1}" style="width:80px;" styleClass="alignCenter">
-					<p:selectBooleanCheckbox value="#{row.blColuna1}"/>
-				</p:column>				
-				<p:column headerText="#{msg.jogo_usuario_empate}" style="width:80px;" styleClass="alignCenter">
-					<p:selectBooleanCheckbox value="#{row.blEmpate}"/>
-				</p:column>				
-				<p:column headerText="#{msg.jogo_usuario_coluna2}" style="width:80px;" styleClass="alignCenter">
-					<p:selectBooleanCheckbox value="#{row.blColuna2}"/>
-				</p:column>				
-			</p:dataTable>
+			</p:panel>
+			
 		</h:form>
 	</ui:define>
 </ui:composition>

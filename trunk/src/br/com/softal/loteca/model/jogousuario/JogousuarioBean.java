@@ -9,6 +9,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import br.com.softal.base.bean.AbstractManegedBean;
+import br.com.softal.base.service.ServiceException;
 import br.com.softal.loteca.LtcServiceLocator;
 import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
 
@@ -19,6 +20,7 @@ public class JogousuarioBean extends AbstractManegedBean<Jogousuario> implements
 	
 	private Long cdLoteca;
 	private List<Jogousuario> jogousuarios; 
+	private Boolean jogohabilitado;
 	
 	public Long getCdLoteca() {
 		return cdLoteca;
@@ -34,6 +36,14 @@ public class JogousuarioBean extends AbstractManegedBean<Jogousuario> implements
 
 	public void setJogousuarios(List<Jogousuario> jogousuarios) {
 		this.jogousuarios = jogousuarios;
+	}
+	
+	public Boolean getJogohabilitado() {
+		return jogohabilitado == null ? false : jogohabilitado;
+	}
+
+	public void setJogohabilitado(Boolean jogohabilitado) {
+		this.jogohabilitado = jogohabilitado;
 	}
 
 	public JogousuarioBean() {
@@ -61,9 +71,40 @@ public class JogousuarioBean extends AbstractManegedBean<Jogousuario> implements
 				getEntity().setLotecausuario(lotecausuario);
 				List<Jogousuario> jogousuarios = LtcServiceLocator.getInstance().getLotecaService().findAllJogoUsuarioDataAtiva( lotecausuario );
 				setJogousuarios(jogousuarios);
+				this.setJogohabilitado(getJogousuarios().size() > 0);
 			} else {
 				setJogousuarios(new ArrayList<Jogousuario>());
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public String salvarCadJogousuario() {
+		try {
+			LtcServiceLocator.getInstance().getLotecaService().saveAllJogousuario( getJogousuarios() );
+			super.getMessages().addSucessMessage("mensagem_registro_salvo_com_sucesso");
+		} catch (ServiceException e) {
+			super.getMessages().addWarningMessage(e.getMessage());
+			return null;
+		}
+		return abrirCadJogousuario();		
+	}
+	
+	public String gerarCadJogousuarioAleatorio() {
+		try {
+			LtcServiceLocator.getInstance().getLotecaService().saveAllJogousuario( getJogousuarios(), true);
+			super.getMessages().addSucessMessage("mensagem_registro_salvo_com_sucesso");
+		} catch (ServiceException e) {
+			super.getMessages().addWarningMessage(e.getMessage());
+			return null;
+		}
+		return abrirCadJogousuario();		
+	}
+	
+	public void enviarJogoEmailPessoal() {
+		try {
+			EmailJogousuario.enviaEmailJogousuarioParaEmailPessoal(getJogousuarios(), getUsuariologado());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

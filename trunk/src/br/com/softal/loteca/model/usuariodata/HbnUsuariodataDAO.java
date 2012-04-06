@@ -15,7 +15,7 @@ public class HbnUsuariodataDAO extends GenericDAOImpl<Usuariodata> implements Us
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Usuariodata findUsuariodata(Jogousuario jogousuario) throws DaoException {
+	public Usuariodata findUsuariodata(Jogousuario jogousuario) {
 		List<Usuariodata> lista = new ArrayList<Usuariodata>();
 		StringBuilder hql = new StringBuilder();
 		hql.append("FROM Usuariodata ud ");
