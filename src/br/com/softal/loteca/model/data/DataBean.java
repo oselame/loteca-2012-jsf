@@ -89,6 +89,13 @@ public class DataBean extends AbstractManegedBean<Data> {
 	
 	public void gerarjogos() {
 		try {
+			LtcServiceLocator.getInstance().getLotecaService().gerarJogosusuarios(getEntity());
+			getMessages().addSucessMessage("jogo_msg_sucesso_geracao_jogos");
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		
+		/*try {
 			List<Jogousuario> jogousuarios = new ArrayList<Jogousuario>();
 			List<Jogo> jogos = getEntity().getJogos();
 			Loteca lotecaativa = LtcServiceLocator.getInstance().getLotecaService().findLotecaAtiva();
@@ -117,7 +124,7 @@ public class DataBean extends AbstractManegedBean<Data> {
 			getMessages().addSucessMessage("jogo_msg_sucesso_geracao_jogos");
 		} catch (ServiceException e) {
 			e.printStackTrace();
-		}
+		}*/
 	}
 	
 	public void enviaremailjogoliberado() {

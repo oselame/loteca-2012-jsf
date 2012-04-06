@@ -86,20 +86,24 @@
 	</bean>
 	<bean id="jogousuarioDAO" class="br.com.softal.loteca.model.jogousuario.HbnJogousuarioDAO"> 
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
-	</bean>
+	</bean> 
+	<bean id="usuariodataDAO" class="br.com.softal.loteca.model.usuariodata.HbnUsuariodataDAO"> 
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean> 
 	
 	<!-- Services -->
 	<bean id="defaultService" class="br.com.softal.base.service.DefaultServiceImpl"> 
 		<property name="genericDAO" ref="genericDAO" />
 	</bean>
 	<bean id="lotecaService" class="br.com.softal.loteca.service.LotecaServiceImpl"> 
-		<property name="genericDAO" ref="genericDAO" />
-		<property name="usuarioDAO" ref="usuarioDAO" />
-		<property name="lotecaDAO" ref="lotecaDAO" />
-		<property name="lotecausuarioDAO" ref="lotecausuarioDAO" />
-		<property name="clubeDAO" ref="clubeDAO" />
-		<property name="clubeusuarioDAO" ref="clubeusuarioDAO" />
-		<property name="classifclubeDAO" ref="classifclubeDAO" />
-		<property name="jogousuarioDAO" ref="jogousuarioDAO" />
+		<property name="genericDAO" 		ref="genericDAO" />
+		<property name="usuarioDAO" 		ref="usuarioDAO" />
+		<property name="lotecaDAO" 			ref="lotecaDAO" />
+		<property name="lotecausuarioDAO"	ref="lotecausuarioDAO" />
+		<property name="clubeDAO" 			ref="clubeDAO" />
+		<property name="clubeusuarioDAO" 	ref="clubeusuarioDAO" />
+		<property name="classifclubeDAO" 	ref="classifclubeDAO" />
+		<property name="jogousuarioDAO" 	ref="jogousuarioDAO" />
+		<property name="usuariodataDAO" 	ref="usuariodataDAO" />
 	</bean>
 </beans>
