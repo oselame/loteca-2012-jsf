@@ -94,7 +94,7 @@ public class JogousuarioBean extends AbstractManegedBean<Jogousuario> implements
 	public String gerarCadJogousuarioAleatorio() {
 		try {
 			LtcServiceLocator.getInstance().getLotecaService().saveAllJogousuario( getJogousuarios(), true);
-			super.getMessages().addSucessMessage("mensagem_registro_salvo_com_sucesso");
+			super.getMessages().addSucessMessage("msg_sucess_jogo_aleatorio_gerado_com_sucesso");
 		} catch (ServiceException e) {
 			super.getMessages().addWarningMessage(e.getMessage());
 			return null;
@@ -105,6 +105,7 @@ public class JogousuarioBean extends AbstractManegedBean<Jogousuario> implements
 	public void enviarJogoEmailPessoal() {
 		try {
 			EmailJogousuario.enviaEmailJogousuarioParaEmailPessoal(getJogousuarios(), getUsuariologado());
+			super.getMessages().addSucessMessage("msg_sucess_email_enviado_com_sucesso");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

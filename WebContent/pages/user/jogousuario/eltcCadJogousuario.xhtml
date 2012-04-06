@@ -14,7 +14,8 @@
 			}
 		</style>
 		<h:form>
-			<p:messages showDetail="true" showSummary="false" />
+			<p:growl id="growl" showDetail="true" sticky="true" />  
+			<p:messages showDetail="true" showSummary="false"/>
 			<p:panel>
 				<p:dataTable id="jogousuarios" var="row" value="#{jogousuarioBean.jogousuarios}"
 					rowKey="#{row.nuSeqjogousuario}" emptyMessage="#{msg.warning_nenhum_registro_encontrado}">
@@ -40,9 +41,15 @@
 					</p:column>				
 				</p:dataTable>
 				<f:facet name="footer">
-					<p:commandButton value="Salvar" action="#{jogousuarioBean.salvarCadJogousuario}" ajax="false" disabled="#{not jogousuarioBean.jogohabilitado}"/>
-					<p:commandButton value="Gerar Jogo Aleatório" action="#{jogousuarioBean.gerarCadJogousuarioAleatorio}" ajax="false" disabled="#{not jogousuarioBean.jogohabilitado}"/>
-					<p:commandButton value="Enviar por E-mail" action="#{jogousuarioBean.enviarJogoEmailPessoal}" ajax="false" disabled="#{not jogousuarioBean.jogohabilitado}"/>
+					<p:commandButton value="#{msg.button_save}" 
+						action="#{jogousuarioBean.salvarCadJogousuario}" update="growl, jogousuarios"  ajax="true" 
+						disabled="#{not jogousuarioBean.jogohabilitado}"/>
+					<p:commandButton value="#{msg.botao_gerar_jogo_aleatorio}" 
+						action="#{jogousuarioBean.gerarCadJogousuarioAleatorio}" update="growl, jogousuarios" ajax="true" 
+						disabled="#{not jogousuarioBean.jogohabilitado}"/>
+					<p:commandButton value="${msg.botao_enviar_por_email}" update="growl"
+						action="#{jogousuarioBean.enviarJogoEmailPessoal}"
+						disabled="#{not jogousuarioBean.jogohabilitado}"/>
 				</f:facet>
 			</p:panel>
 			

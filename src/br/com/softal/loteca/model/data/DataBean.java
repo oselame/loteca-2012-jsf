@@ -142,7 +142,7 @@ public class DataBean extends AbstractManegedBean<Data> {
 	
 	public void processarResultados() {
 		try {
-			LtcServiceLocator.getInstance().getLotecaService().processaResultado(getEntity());
+			LtcServiceLocator.getInstance().getLotecaService().processaResultadosData(getEntity());
 			getEntity().setFlAtualizouresultados(1l);
 			this.save();
 		} catch (Exception e) {
