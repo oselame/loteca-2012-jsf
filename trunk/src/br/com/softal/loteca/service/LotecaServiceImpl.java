@@ -197,11 +197,6 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 		}
 	}
 	
-	@Override
-	public void processaResultado(Data data) throws ServiceException {
-		
-	}
-	
 	/*
 	@Override
 	public List<Jogousuario> findAllJogoUsuarioDataEmAndamento(Jogousuario jogousuario) throws ServiceException {
@@ -303,6 +298,11 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
+		
+	}
+	
+	@Override
+	public void processaResultadosData(Data data) throws ServiceException {
 		
 	}
 	
