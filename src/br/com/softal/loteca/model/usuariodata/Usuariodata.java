@@ -52,8 +52,14 @@ public class Usuariodata extends Entity {
 	@Column(name = "nupontoslista")
 	private Long nuPontoslista;
 	
-	@Column(name = "nutotalpontos")
-	private Long nuTotalpontos;
+	@Column(name = "nupontosrodada")
+	private Long nuPontosrodada;
+	
+	@Column(name = "nuposicaofinal")
+	private Long nuPosicaofinal;
+	
+	@Column(name = "nupontosfinal")
+	private Long nuPontosfinal;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "nuseqlotecausuario", insertable = true, updatable = true)
@@ -72,7 +78,9 @@ public class Usuariodata extends Entity {
 	public Usuariodata(long nuSequsuariodata, Long flApostou,
 			Long flCanhoto, Long flGeradoaleat, String deBytesjogo, 
 			Long flPagou,  Long nuPosicao, Long nuPontoscartao, 
-			Long nuPontoslista, Long nuSeqlotecausuario, Long cdData) {
+			Long nuPontoslista, 
+			Long nuPontosrodada, Long nuPosicaofinal, Long nuPontosfinal,		
+			Long nuSeqlotecausuario, Long cdData) {
 		super();
 		this.nuSequsuariodata = nuSequsuariodata;
 		this.flApostou = flApostou;
@@ -83,6 +91,9 @@ public class Usuariodata extends Entity {
 		this.nuPosicao = nuPosicao;
 		this.nuPontoscartao = nuPontoscartao;
 		this.nuPontoslista = nuPontoslista;
+		this.nuPontosrodada = nuPontosrodada;
+		this.nuPosicaofinal = nuPosicaofinal;
+		this.nuPontosfinal = nuPontosfinal;
 		this.inicializaRelacionamentos();
 		getLotecausuario().setNuSeqlotecausuario(nuSeqlotecausuario);
 		getData().setCdData(cdData);
@@ -182,12 +193,28 @@ public class Usuariodata extends Entity {
 		this.nuPontoslista = nuPontoslista;
 	}
 
-	public Long getNuTotalpontos() {
-		return nuTotalpontos;
+	public Long getNuPontosrodada() {
+		return nuPontosrodada;
 	}
 
-	public void setNuTotalpontos(Long nuTotalpontos) {
-		this.nuTotalpontos = nuTotalpontos;
+	public void setNuPontosrodada(Long nuPontosrodada) {
+		this.nuPontosrodada = nuPontosrodada;
 	}
-	
+
+	public Long getNuPosicaofinal() {
+		return nuPosicaofinal;
+	}
+
+	public void setNuPosicaofinal(Long nuPosicaofinal) {
+		this.nuPosicaofinal = nuPosicaofinal;
+	}
+
+	public Long getNuPontosfinal() {
+		return nuPontosfinal;
+	}
+
+	public void setNuPontosfinal(Long nuPontosfinal) {
+		this.nuPontosfinal = nuPontosfinal;
+	}
+
 }
