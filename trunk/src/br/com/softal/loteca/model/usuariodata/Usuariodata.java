@@ -51,6 +51,9 @@ public class Usuariodata extends Entity {
 	
 	@Column(name = "nupontoslista")
 	private Long nuPontoslista;
+	
+	@Column(name = "nutotalpontos")
+	private Long nuTotalpontos;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "nuseqlotecausuario", insertable = true, updatable = true)
@@ -163,20 +166,28 @@ public class Usuariodata extends Entity {
 		this.data = data;
 	}
 
-	private Long getNuPontoscartao() {
+	public Long getNuPontoscartao() {
 		return nuPontoscartao;
 	}
 
-	private void setNuPontoscartao(Long nuPontoscartao) {
+	public void setNuPontoscartao(Long nuPontoscartao) {
 		this.nuPontoscartao = nuPontoscartao;
 	}
 
-	private Long getNuPontoslista() {
+	public Long getNuPontoslista() {
 		return nuPontoslista;
 	}
 
-	private void setNuPontoslista(Long nuPontoslista) {
+	public void setNuPontoslista(Long nuPontoslista) {
 		this.nuPontoslista = nuPontoslista;
+	}
+
+	public Long getNuTotalpontos() {
+		return nuTotalpontos;
+	}
+
+	public void setNuTotalpontos(Long nuTotalpontos) {
+		this.nuTotalpontos = nuTotalpontos;
 	}
 	
 }
