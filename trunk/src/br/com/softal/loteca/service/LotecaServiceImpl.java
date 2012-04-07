@@ -33,6 +33,7 @@ import br.com.softal.loteca.model.lotecausuario.HbnLotecausuarioDAO;
 import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
 import br.com.softal.loteca.model.usuariodata.HbnUsuariodataDAO;
 import br.com.softal.loteca.model.usuariodata.Usuariodata;
+import br.com.softal.loteca.model.usuariodata.UsuariodataDTO;
 import br.com.softal.loteca.util.Constantes;
 
 public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaService {
@@ -408,7 +409,7 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 				//-- Atualiza Pontos Listas
 				Usuariodata usuariodata = getUsuariodataDAO().findUsuariodata(lotecausuario, data);
 				usuariodata.setNuPontoslista(nuPontosLista);
-				usuariodata.setNuTotalpontos( usuariodata.getNuPontoscartao() +  nuPontosLista );
+				usuariodata.setNuPontosrodada( usuariodata.getNuPontoscartao() +  nuPontosLista );
 				this.update(usuariodata);
 			}
 			
@@ -417,14 +418,13 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 		}
 	}
 	
-	private void atualizaPosicaoJogador(Loteca lotecaativa, Data data) {
+	private void atualizaPosicaoJogadorRodada(List<Usuariodata> usuariodatas) {
 		try {
-			List<Usuariodata> usuariodatas = getUsuariodataDAO().findAllUsuariodata(lotecaativa, data);
 			Collections.sort(usuariodatas, new Comparator<Usuariodata>() {
 				@Override
 				public int compare(Usuariodata o1, Usuariodata o2) {
 					// compara primeiro os pontos totais
-					int ok =  o2.getNuTotalpontos().compareTo(o1.getNuTotalpontos());
+					int ok =  o2.getNuPontosrodada().compareTo(o1.getNuPontosrodada());
 					// se der empate busca a posicao anterior
 					if (ok == 0) {
 						ok =  o1.getNuPosicao().compareTo(o2.getNuPosicao());
@@ -442,13 +442,54 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 		}
 	}
 	
+	private void atualizaPosicaoJogadorLoteca(Loteca lotecaativa, Data data, List<Usuariodata> usuariodatas) {
+		try {
+			List<UsuariodataDTO> posicoes = getUsuariodataDAO().findAllUsuariodataFinal(lotecaativa, data);
+			Map<Long, Long> resultado = new HashMap<Long, Long>();
+			for (UsuariodataDTO dto : posicoes) {
+				resultado.put(dto.getNuSeqlotecausuario(), dto.getNuPontosfinal());
+			}
+			for (Usuariodata ud : usuariodatas) {
+				ud.setNuPontosfinal( resultado.get(ud.getLotecausuario().getNuSeqlotecausuario()) );
+			}
+			
+			Collections.sort(usuariodatas, new Comparator<Usuariodata>() {
+				@Override
+				public int compare(Usuariodata o1, Usuariodata o2) {
+					// compara primeiro os pontos totais
+					int ok =  o2.getNuPontosfinal().compareTo(o1.getNuPontosfinal());
+					// se der empate busca a posicao anterior
+					if (ok == 0) {
+						ok =  o1.getNuPosicaofinal().compareTo(o2.getNuPosicaofinal());
+					}
+					return ok;
+				}
+			});
+			long nuPosicaofinal = 0;
+			for (Usuariodata ud : usuariodatas) {
+				ud.setNuPosicaofinal(++nuPosicaofinal);
+				super.update(ud);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	public void processaResultadosData(Data data) throws ServiceException {
-		Loteca lotecaativa = LtcServiceLocator.getInstance().getLotecaService().findLotecaAtiva();
-		List<Lotecausuario> usuarios = LtcServiceLocator.getInstance().getLotecaService().findAllLotecausuarioByLoteca(lotecaativa);
-		this.processaResultadoCanhotos(lotecaativa, data, usuarios);
-		this.processaResultadoListas(lotecaativa, data, usuarios);
-		this.atualizaPosicaoJogador(lotecaativa, data);
+		try {
+			Loteca lotecaativa = LtcServiceLocator.getInstance().getLotecaService().findLotecaAtiva();
+			
+			List<Lotecausuario> usuarios = LtcServiceLocator.getInstance().getLotecaService().findAllLotecausuarioByLoteca(lotecaativa);
+			this.processaResultadoCanhotos(lotecaativa, data, usuarios);
+			this.processaResultadoListas(lotecaativa, data, usuarios);
+			
+			List<Usuariodata> usuariodatas = getUsuariodataDAO().findAllUsuariodata(lotecaativa, data);
+			this.atualizaPosicaoJogadorRodada(usuariodatas);
+			this.atualizaPosicaoJogadorLoteca(lotecaativa, data, usuariodatas);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@SuppressWarnings("unchecked")
