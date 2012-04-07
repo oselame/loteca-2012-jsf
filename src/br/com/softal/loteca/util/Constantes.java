@@ -12,5 +12,14 @@ public class Constantes {
 	public static final long DATA_SITUACAO_EM_ANDAMENTO 		= 2L;
 	public static final long DATA_SITUACAO_EM_PROCESSAMENTO 	= 3L;
 	public static final long DATA_SITUACAO_CONCLUIDO 			= 4L;
+	
+	public static final long JOGO_TIPO_RESULTADO_EMPATE			= 0L;
+	public static final long JOGO_TIPO_RESULTADO_COLUNA1		= 1L;
+	public static final long JOGO_TIPO_RESULTADO_COLUNA2		= 2L;
+	
+	public static final long JOGO_TPJOGO_SIMPLES				= 0L;
+	public static final long JOGO_TPJOGO_DUPLO					= 1L;
+	public static final long JOGO_TPJOGO_TRIPLO					= 2L;
+	
 
 }

@@ -1,8 +1,13 @@
 package br.com.softal.loteca.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.catalina.ha.backend.CollectedInfo;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import br.com.softal.base.dao.DaoException;
@@ -144,6 +149,13 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 	}
 	
 	@Override
+	public List<Clubeusuario> findAllClubeusuario(Lotecausuario lotecausuario) throws ServiceException {
+		Clubeusuario clubeusuario = new Clubeusuario();
+		clubeusuario.setLotecausuario(lotecausuario);
+		return getClubeusuarioDAO().findAllClubeusuario(clubeusuario);
+	}
+	
+	@Override
 	public void deleteClassifclube(Data data) throws ServiceException {
 		try {
 			getClassifclubeDAO().deleteClassifclube(data);
@@ -154,6 +166,7 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 	
 	public void geraClassificacao(Loteca loteca, Data data) throws ServiceException {
 		try {
+			data.getClassifclubes().clear();
 			this.deleteClassifclube(data);
 			String deClassificacao = data.getDeClassificacao();
 			if (deClassificacao != null) {
@@ -190,6 +203,7 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 					cc.setNuSaldogols( 		Long.valueOf(vclassif[9].trim()) ); //nuSaldogols
 					cc.setNuPercaprov( 		Long.valueOf(vclassif[10].trim()) ); //nuPercaprov
 					save(cc);
+					data.getClassifclubes().add(cc);
 				}
 			}
 		} catch (Exception e) {
@@ -301,9 +315,153 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 		
 	}
 	
+	private void processaResultadoCanhotos(Loteca lotecaativa, Data data, List<Lotecausuario> usuarios) {
+		//-- Calculando o resultado dos canhotos
+		for (Lotecausuario lu : usuarios) {
+			List<Jogousuario> jogosusuario = getJogousuarioDAO().findAllJogoUsuario(data, lu);
+			long nuPontoscartao = 0;
+			for (Jogousuario jogousuario : jogosusuario) {
+				/**************************** JOGO SIMPLES ****************************/
+				if (jogousuario.getTpJogo().longValue() == Constantes.JOGO_TPJOGO_SIMPLES) {
+					//-- Coluna 1
+					if (jogousuario.getJogo().getTpResultadofinal().longValue() == Constantes.JOGO_TIPO_RESULTADO_COLUNA1 &&  jogousuario.getFlColuna1().longValue() == 1) {
+						nuPontoscartao++;
+					} else
+					//-- Empate
+					if (jogousuario.getJogo().getTpResultadofinal().longValue() == Constantes.JOGO_TIPO_RESULTADO_EMPATE &&  jogousuario.getFlEmpate().longValue() == 1) {
+						nuPontoscartao++;
+					} else
+					//-- Coluna 2
+					if (jogousuario.getJogo().getTpResultadofinal().longValue() == Constantes.JOGO_TIPO_RESULTADO_COLUNA2 &&  jogousuario.getFlColuna2().longValue() == 1) {
+						nuPontoscartao++;
+					}
+				}
+				
+				/**************************** JOGO DUPLO ****************************/
+				if (jogousuario.getTpJogo().longValue() == Constantes.JOGO_TPJOGO_DUPLO) {
+					//-- Coluna 1
+					if (jogousuario.getJogo().getTpResultadofinal().longValue() == Constantes.JOGO_TIPO_RESULTADO_COLUNA1 &&  jogousuario.getFlColuna1().longValue() == 1) {
+						nuPontoscartao++;
+					} else
+					//-- Empate
+					if (jogousuario.getJogo().getTpResultadofinal().longValue() == Constantes.JOGO_TIPO_RESULTADO_EMPATE &&  jogousuario.getFlEmpate().longValue() == 1) {
+						nuPontoscartao++;
+					} else
+					//-- Coluna 2
+					if (jogousuario.getJogo().getTpResultadofinal().longValue() == Constantes.JOGO_TIPO_RESULTADO_COLUNA2 &&  jogousuario.getFlColuna2().longValue() == 1) {
+						nuPontoscartao++;
+					}
+				}
+				
+				/**************************** JOGO TRIPLO ****************************/
+				if (jogousuario.getTpJogo().longValue() == Constantes.JOGO_TPJOGO_TRIPLO) {
+					//-- Coluna 1
+					if (jogousuario.getFlColuna1().longValue() == 1) {
+						nuPontoscartao++;
+					} else
+					//-- Empate
+					if (jogousuario.getFlEmpate().longValue() == 1) {
+						nuPontoscartao++;
+					} else
+					//-- Coluna 2
+					if (jogousuario.getFlColuna2().longValue() == 1) {
+						nuPontoscartao++;
+					}
+				}
+			}
+			
+			//-- Atualiza Pontos Cartao Usuario
+			Usuariodata usuariodata = getUsuariodataDAO().findUsuariodata( jogosusuario.get(0) );
+			usuariodata.setNuPontoscartao(nuPontoscartao);
+			this.update(usuariodata);
+		}
+	}
+	
+	private void processaResultadoListas(Loteca lotecaativa, Data data, List<Lotecausuario> usuarios) {
+		try {
+			Map<Long, Classifclube> mapClassifclube = this.findAllClassifclubeMap(data);
+			for (Lotecausuario lotecausuario : usuarios) {
+				List<Clubeusuario> clubeusuarios = this.findAllClubeusuario(lotecausuario);
+				long nuPontosLista = 0;
+				for (Clubeusuario clubeusuario : clubeusuarios) {
+					long nuPosicao = clubeusuario.getNuPosicao();
+					Classifclube classifclube = mapClassifclube.get(clubeusuario.getClube().getCdClube());
+					long nuClassificacao = classifclube.getNuClassificacao();
+					//-- Valida o campeao
+					if (nuClassificacao == 1 && nuPosicao == 1) {
+						nuPontosLista += 2;
+					}
+					
+					//-- Valida acerto na posicao
+					if (nuPosicao < 11 || nuPosicao > 16) {
+						if (nuClassificacao == nuPosicao) {
+							nuPontosLista += 2;
+						}
+					}
+					
+					if (nuPosicao < 11 && nuClassificacao < 11) {
+						nuPontosLista++;
+					} else if (nuPosicao > 16 && nuClassificacao > 16) {
+						nuPontosLista++;
+					}
+				}
+				//-- Atualiza Pontos Listas
+				Usuariodata usuariodata = getUsuariodataDAO().findUsuariodata(lotecausuario, data);
+				usuariodata.setNuPontoslista(nuPontosLista);
+				usuariodata.setNuTotalpontos( usuariodata.getNuPontoscartao() +  nuPontosLista );
+				this.update(usuariodata);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void atualizaPosicaoJogador(Loteca lotecaativa, Data data) {
+		try {
+			List<Usuariodata> usuariodatas = getUsuariodataDAO().findAllUsuariodata(lotecaativa, data);
+			Collections.sort(usuariodatas, new Comparator<Usuariodata>() {
+				@Override
+				public int compare(Usuariodata o1, Usuariodata o2) {
+					// compara primeiro os pontos totais
+					int ok =  o2.getNuTotalpontos().compareTo(o1.getNuTotalpontos());
+					// se der empate busca a posicao anterior
+					if (ok == 0) {
+						ok =  o1.getNuPosicao().compareTo(o2.getNuPosicao());
+					}
+					return ok;
+				}
+			});
+			long nuPosicao = 0;
+			for (Usuariodata ud : usuariodatas) {
+				ud.setNuPosicao(++nuPosicao);
+				super.update(ud);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	public void processaResultadosData(Data data) throws ServiceException {
-		
+		Loteca lotecaativa = LtcServiceLocator.getInstance().getLotecaService().findLotecaAtiva();
+		List<Lotecausuario> usuarios = LtcServiceLocator.getInstance().getLotecaService().findAllLotecausuarioByLoteca(lotecaativa);
+		this.processaResultadoCanhotos(lotecaativa, data, usuarios);
+		this.processaResultadoListas(lotecaativa, data, usuarios);
+		this.atualizaPosicaoJogador(lotecaativa, data);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map<Long, Classifclube> findAllClassifclubeMap(Data data) throws ServiceException {
+		Classifclube cc = new Classifclube();
+		cc.setData(data);
+		List<Classifclube> classifclubes = (List<Classifclube>) super.findAll(cc);
+		Map<Long, Classifclube> retorno = new HashMap<Long, Classifclube>();
+		for (Classifclube cfc : classifclubes) {
+			retorno.put(cfc.getClube().getCdClube() , cfc);
+		}
+		return retorno;
 	}
 	
 }

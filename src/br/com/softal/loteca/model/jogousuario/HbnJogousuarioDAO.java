@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import br.com.softal.base.dao.GenericDAOImpl;
+import br.com.softal.loteca.model.data.Data;
 import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
 import br.com.softal.loteca.util.Constantes;
 
@@ -40,4 +41,35 @@ public class HbnJogousuarioDAO extends GenericDAOImpl<Jogousuario> implements Jo
 		}
 		return lista;
 	}
+	
+	@Override
+	public List<Jogousuario> findAllJogoUsuario(Data data, Lotecausuario lotecausuario) {
+		List<Jogousuario> lista = new ArrayList<Jogousuario>();
+		StringBuilder hql = new StringBuilder();
+		hql.append("FROM Jogousuario ju ");
+		hql.append("LEFT JOIN FETCH ju.lotecausuario lu ");
+		hql.append("LEFT JOIN FETCH ju.jogo jo ");
+		hql.append("LEFT JOIN FETCH jo.data dt ");
+		hql.append("WHERE lu.flAtivo = 1 ");
+		hql.append("AND lu.nuSeqlotecausuario = :nuSeqlotecausuario ");
+		hql.append("AND dt.cdData = :cdData ");		
+		hql.append("order by lu.nuSeqlotecausuario, jo.cdJogo asc");
+		Session session = getHibernateTemplate().getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			Query query = session.createQuery( hql.toString() );
+			query.setLong("nuSeqlotecausuario", lotecausuario.getNuSeqlotecausuario() );
+			query.setLong("cdData", data.getCdData() );
+			lista = query.list();
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
+	
+	
 }
