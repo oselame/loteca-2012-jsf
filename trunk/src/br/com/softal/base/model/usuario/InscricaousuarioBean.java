@@ -13,6 +13,7 @@ import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 
 import org.primefaces.event.FlowEvent;
+import org.primefaces.model.DualListModel;
 
 import br.com.softal.base.bean.AbstractManegedBean;
 import br.com.softal.base.model.projeto.Projeto;
@@ -33,6 +34,16 @@ public class InscricaousuarioBean extends AbstractManegedBean<Usuario> {
 	private Map<Long, Projeto> mapProjetos = new HashMap<Long, Projeto>();
 	private Long cdProjeto;
 	
+	private DualListModel<String> clubes;
+	
+	public DualListModel<String> getClubes() {
+		return clubes;
+	}
+
+	public void setClubes(DualListModel<String> clubes) {
+		this.clubes = clubes;
+	}
+
 	public boolean isSkip() {  
         return skip;  
     }  
@@ -99,6 +110,10 @@ public class InscricaousuarioBean extends AbstractManegedBean<Usuario> {
 		getEntity().setProjeto( mapProjetos.get( cdProjeto ) );*/
 	}
 	
+	public void clubeChange(ValueChangeEvent e) {
+		System.out.println(e.getSource().toString());
+	}
+	
 	public void projetoChange2() {
 		this.setCdProjeto( getEntity().getProjeto().getCdProjeto() );
 		getEntity().setProjeto( mapProjetos.get( this.getCdProjeto() ) );
@@ -146,6 +161,8 @@ public class InscricaousuarioBean extends AbstractManegedBean<Usuario> {
 	}
 	
 	private void carregaClubesUsuario() {
+		List<String> clubesSource = new ArrayList<String>();  
+        List<String> clubesTarget = new ArrayList<String>();
 		try {
 			setClubeusuarios(new ArrayList<Clubeusuario>());
 			Clube clube = new Clube();
@@ -160,10 +177,14 @@ public class InscricaousuarioBean extends AbstractManegedBean<Usuario> {
 				cu.setNuPontos(0l);
 				cu.setNuPosicao( c.getCdClube() );
 				getClubeusuarios().add(cu);
+				
+				clubesSource.add(c.getNmClube());
 			}
 		} catch (Exception e) {
 			getMessages().addWarningMessage("msg_warning_nao_exite_loteca_ativa");
 		}
+		
+        clubes = new DualListModel<String>(clubesSource, clubesTarget);
 	}
 	
 }
