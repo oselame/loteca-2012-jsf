@@ -3,6 +3,7 @@ package br.com.softal.loteca.util;
 public class Constantes {
 	
 	public static final String USUARIO_LOGADO = "usuario_logado";
+	public static final String LOTECA_ATIVA = "loteca_ativa";
 	
 	public static final long lOTECA_SITUACAO_CADASTRAMENTO 		= 1L;
 	public static final long lOTECA_SITUACAO_ANDAMENTO 			= 2L;

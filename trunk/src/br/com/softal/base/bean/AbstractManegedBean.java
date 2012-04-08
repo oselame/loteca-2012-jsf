@@ -9,6 +9,10 @@ import br.com.softal.base.message.MessagesWeb;
 import br.com.softal.base.model.Entity;
 import br.com.softal.base.model.usuario.Usuario;
 import br.com.softal.base.service.DefaultServiceImpl;
+import br.com.softal.base.service.ServiceException;
+import br.com.softal.loteca.LtcServiceLocator;
+import br.com.softal.loteca.model.loteca.Loteca;
+import br.com.softal.loteca.service.LotecaService;
 import br.com.softal.loteca.sets.SpringFactory;
 import br.com.softal.loteca.util.Constantes;
 
@@ -32,6 +36,21 @@ public abstract class AbstractManegedBean<E extends Entity> implements Serializa
 		defaultService = (DefaultServiceImpl) SpringFactory.getInstance().getBean("defaultService"); 
 	}
 	
+	public Loteca getLotecaativa() throws ServiceException {
+		if (FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey(Constantes.LOTECA_ATIVA)) {
+			return (Loteca) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get(Constantes.LOTECA_ATIVA);
+		} else {
+			try {
+				Loteca loteca =  this.getLotecaService().findLotecaAtiva();
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(Constantes.LOTECA_ATIVA, loteca);
+				return loteca;
+			} catch (Exception e) {
+				throw new ServiceException(e);
+			}
+		}
+	}
+
+
 	public Usuario getUsuariologado() {
 		return (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get(Constantes.USUARIO_LOGADO);
 	}
@@ -97,6 +116,10 @@ public abstract class AbstractManegedBean<E extends Entity> implements Serializa
 
 	public MessagesWeb getMessages() {
 		return messages;
+	}
+	
+	protected LotecaService getLotecaService() {
+		return LtcServiceLocator.getInstance().getLotecaService();
 	}
 
 	protected abstract void initializeEntity();

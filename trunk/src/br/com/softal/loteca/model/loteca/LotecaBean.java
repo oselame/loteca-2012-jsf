@@ -25,8 +25,7 @@ public class LotecaBean extends AbstractManegedBean<Loteca> implements Serializa
 		setEntity(new Loteca());
 	}
 	
-	
-	private LotecaService getLotecaService() {
+	protected LotecaService getLotecaService() {
 		return LtcServiceLocator.getInstance().getLotecaService();
 	}
 	

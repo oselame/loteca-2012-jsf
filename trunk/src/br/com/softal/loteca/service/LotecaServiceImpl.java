@@ -7,12 +7,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.catalina.ha.backend.CollectedInfo;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import br.com.softal.base.dao.DaoException;
+import br.com.softal.base.model.grupo.Grupo;
 import br.com.softal.base.model.usuario.HbnUsuarioDAO;
 import br.com.softal.base.model.usuario.Usuario;
+import br.com.softal.base.model.usuariogrupo.Usuariogrupo;
 import br.com.softal.base.service.DefaultServiceImpl;
 import br.com.softal.base.service.ServiceException;
 import br.com.softal.loteca.LtcServiceLocator;
@@ -505,4 +506,60 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 		return retorno;
 	}
 	
+	
+	@Override
+	public List<Usuariodata> findAllDadosRankingLotecaAtiva() throws ServiceException {
+		Loteca lotecaativa =  this.findLotecaAtiva();
+		return  getUsuariodataDAO().findDadosRankingLotecaAtiva(lotecaativa);
+	}
+	
+	@Override
+	public List<Classifclube> findAllClassifclubeAtual() throws ServiceException {
+		try {
+			return getClassifclubeDAO().findAllClassifclubeAtual();
+		} catch (DaoException e) {
+			e.printStackTrace();
+		}
+		return new ArrayList<Classifclube>();
+	}
+	
+	private Grupo findUserGrupo() {
+		Grupo grupo = new Grupo();
+		grupo.setCdGrupo( 2 );
+		return (Grupo) this.findByPrimaryKey(grupo);
+	}
+	
+	@Override
+	public void saveUsuarioWizard(Usuario usuario, List<Clubeusuario> clubeusuarios) throws ServiceException {
+		try {
+			int pos = usuario.getDeEmail().indexOf("@");
+			String deLogin = usuario.getDeEmail().substring(0, pos);
+			usuario.setDeLogin(deLogin);
+			usuario.setFlAtivo(1l);
+			usuario.setFlAdm(0l);
+			usuario.setFlForaempresa(0l);
+			usuario.setFlEnviosenha(0l);
+			super.save(usuario);
+			
+			Usuariogrupo usuariogrupo = new Usuariogrupo();
+			usuariogrupo.setUsuario(usuario);
+			usuariogrupo.setGrupo(this.findUserGrupo());
+			super.save(usuariogrupo);
+			
+			Lotecausuario lotecausuario = new Lotecausuario();
+			lotecausuario.setUsuario(usuario);
+			lotecausuario.setLoteca(this.findLotecaAtiva());
+			lotecausuario.setFlAtivo(0l);
+			super.save(lotecausuario);
+			
+			long nuPosicao = 0;
+			for (Clubeusuario clubeusuario : clubeusuarios) {
+				clubeusuario.setLotecausuario(lotecausuario);
+				clubeusuario.setNuPosicao( ++nuPosicao );
+				super.save(clubeusuario);
+			}
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
+	}
 }

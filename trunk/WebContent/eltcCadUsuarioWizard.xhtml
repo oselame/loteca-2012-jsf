@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/usuariotemplate.xhtml">
+	<ui:define name="context">
+		<h:form id="usuarioForm">
+			<p:growl id="growl" showDetail="true" />
+			<p:panel header="Inscrição">
+				<p:wizard widgetVar="wiz" flowListener="#{inscricaousuarioBean.onFlowProcess}"
+					backLabel="Voltar" nextLabel="Avançar" id="wizusuario">
+					
+					<p:tab id="dadosusuario" title="Dados">
+						<p:messages showDetail="true" showSummary="false" />
+						<h:panelGrid columns="2" style="width:100%" columnClasses="headerColumn alignRight bold" >
+							<h:outputLabel value="#{msg.usuario_nmusuario} *:" for="nmUsuario" />
+							<p:inputText value="#{inscricaousuarioBean.entity.nmUsuario}" id="nmUsuario"
+								required="true" requiredMessage="#{msg.usuario_nmusuario_requirido}" 
+								maxlength="100" style="width: 100%" />
+								
+							<h:outputLabel value="#{msg.usuario_desenha} *:" for="deSenha_input" />
+								
+							<h:panelGrid columns="3" style="width:100%" border="0" cellpadding="0" cellspacing="0" columnClasses="x, headerColumn alignRight bold, x">
+								<p:password value="#{inscricaousuarioBean.entity.deSenha}" id="deSenha" match="deSenhaaux"
+									required="true" requiredMessage="#{msg.usuario_desenha_requirido}" 
+									feedback="true" promptLabel="Informe a Senha"
+									maxlength="20" style="width: 100%" redisplay="true" validatorMessage="#{msg.usuario_senha_confirmacao_direrentes}"/>
+									
+								<h:outputLabel value="#{msg.usuario_desenhaaux} *: &nbsp;" for="deSenhaaux_input" />
+								<p:password value="#{inscricaousuarioBean.deSenhaaux}" id="deSenhaaux"
+									required="true" requiredMessage="#{msg.usuario_desenhaaux_requirido}"  
+									feedback="true" promptLabel="Confirmação da Senha"
+									maxlength="20" style="width: 100%" redisplay="true" />
+							</h:panelGrid>
+								
+							<h:outputLabel value="#{msg.usuario_deemail} *:" for="deEmail"/>
+							<p:inputText value="#{inscricaousuarioBean.entity.deEmail}" id="deEmail"
+								required="true" requiredMessage="#{msg.usuario_deemail_requirido}" 
+								maxlength="100" style="width: 100%">
+								<f:validator validatorId="emailValidator"></f:validator>
+							</p:inputText>
+								
+							<h:outputLabel value="#{msg.usuario_deemailpessoal} *:" for="deEmailpessoal"/>
+							<p:inputText value="#{inscricaousuarioBean.entity.deEmailpessoal}" id="deEmailpessoal"
+								required="false" requiredMessage="#{msg.usuario_deemailpessoal_requirido}" 
+								maxlength="100" style="width: 100%" >
+								<f:validator validatorId="emailValidator"></f:validator>
+							</p:inputText>
+								
+							<h:outputLabel value="#{msg.usuario_cdprojeto} *:" for="cdProjeto" />
+							<h:selectOneRadio value="#{inscricaousuarioBean.entity.projeto.cdProjeto}" id="cdProjeto" style="width: 100%" 
+								required="false" requiredMessage="#{msg.usuario_cdprojeto_requirido}">
+								<f:selectItems value="#{inscricaousuarioBean.projetos}" var="proj" itemLabel="#{proj.nmProjeto}" itemValue="#{proj.cdProjeto}" />
+								<p:ajax update="cdProjetoAux" listener="#{inscricaousuarioBean.projetoChange2}"></p:ajax>
+							</h:selectOneRadio>
+						</h:panelGrid>
+						<h:inputHidden value="#{inscricaousuarioBean.cdProjeto}" id="cdProjetoAux"
+							required="true" requiredMessage="#{msg.usuario_cdprojeto_requirido}"/>
+					</p:tab>
+					
+					<p:tab id="timeusuario" title="Classificação dos Clubes">
+						<p:panel header="#{msg.lotecausuario_clubes_usuario}">
+							<p:panelGrid columns="2">
+								<p:orderList value="#{inscricaousuarioBean.clubeusuarios}" var="clubeusuario" 
+									iconOnly="true" effect="highlight" 
+									itemValue="#{clubeusuario}" converter="clubeusuarioConverter" 
+									controlsLocation="left" id="customList">
+							         <p:column style="width:100%;"> 
+						         		#{clubeusuario.clube.nmClube}
+							        </p:column>
+							    </p:orderList>	
+							    <p:columnGroup>
+									Para realizar a classificação dos clubes, clique sobre o clube desejado e arraste para a posição desejada.<br/>
+									Dentro dessa classificação, os 10 (dez) primeiros clubes e os 4 (quatro) últimos serão sua aposta para a 
+									classificação final do Campeonato Brasileiro Serie A de 2012.
+							    </p:columnGroup>	
+							</p:panelGrid>
+			            </p:panel>
+					</p:tab>
+		
+					<p:tab id="confirm" title="Confirmação">
+						<p:messages showDetail="true" showSummary="false" />
+						<p:panel header="Confirmação" style="width:100%">
+							<h:panelGrid columns="2" style="width:100%" columnClasses="headerColumn alignRight bold" >
+								<h:outputLabel value="#{msg.usuario_nmusuario} *:"/>
+								<h:outputText value="#{inscricaousuarioBean.entity.nmUsuario}" />
+									
+								<h:outputLabel value="#{msg.usuario_deemail} *:" />
+								<h:outputText value="#{inscricaousuarioBean.entity.deEmail}" />
+									
+								<h:outputLabel value="#{msg.usuario_deemailpessoal} *:"/>
+								<h:outputText value="#{inscricaousuarioBean.entity.deEmailpessoal}"/>
+									
+								<h:outputLabel value="#{msg.usuario_cdprojeto} *:" />
+								<h:outputText value="#{inscricaousuarioBean.entity.projeto.cdProjeto} - #{inscricaousuarioBean.entity.projeto.nmProjeto}" />
+							</h:panelGrid>
+							<p:dataList var="row" value="#{inscricaousuarioBean.clubeusuarios}" type="ordered">
+								<f:facet name="header">Clubes</f:facet>
+								${row.clube.nmClube}
+							</p:dataList>
+							<f:facet name="footer">
+								<p:commandButton value="#{msg.button_save}" action="#{inscricaousuarioBean.saveUsuarioWizard}" ajax="false" />
+							</f:facet>
+						</p:panel>
+					</p:tab>
+				</p:wizard>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+</html>

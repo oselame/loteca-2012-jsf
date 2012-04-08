@@ -18,7 +18,7 @@ public class SistemaBean extends AbstractManegedBean {
 	public String getNomesistema() {
 		if (nomesistema == null) {
 			try {
-				nomesistema = getLotecaService().findLotecaAtiva().getDeLoteca();
+				nomesistema = super.getLotecaService().findLotecaAtiva().getDeLoteca();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -32,9 +32,5 @@ public class SistemaBean extends AbstractManegedBean {
 
 	@Override
 	protected void initializeEntity() {}
-	
-	private LotecaService getLotecaService() {
-		return LtcServiceLocator.getInstance().getLotecaService();
-	}
 	
 }
