@@ -36,22 +36,30 @@ public class DashboardBean implements Serializable {
 		DashboardColumn column1 = new DefaultDashboardColumn();
 		DashboardColumn column2 = new DefaultDashboardColumn();
 		//DashboardColumn column3 = new DefaultDashboardColumn();
-
-		column1.addWidget("dhbclassificacao");
-		column1.addWidget("dhbinscricao");
-
-		column2.addWidget("dhbranking");
-		column2.addWidget("weather");
-
-		//column3.addWidget("politics");
-
-		model.addColumn(column1);
-		model.addColumn(column2);
-		//model.addColumn(column3);
-		
 		this.carregaLotecaativa();		
-		this.carregaRanking();
-		this.carregaClassificacao();
+		
+		if (lotecaativa.getTpSituacao() == Constantes.lOTECA_SITUACAO_CADASTRAMENTO) {
+			column1.addWidget("dhbregulamento");
+			column2.addWidget("dhbinscricao");
+			
+			model.addColumn(column1);
+			model.addColumn(column2);
+		} else if (lotecaativa.getTpSituacao() == Constantes.lOTECA_SITUACAO_ANDAMENTO) {
+			column1.addWidget("dhbclassificacao");
+			column2.addWidget("dhbranking");
+			
+			
+			model.addColumn(column1);
+			model.addColumn(column2);
+			
+			this.carregaRanking();
+			this.carregaClassificacao();
+		} else {
+			column1.addWidget("dhbregulamento");
+			
+			model.addColumn(column1);
+		}
+
 	}
 	
 	private void carregaLotecaativa() {
