@@ -11,10 +11,10 @@
 				value="/images/zebra.jpg"
 				width="70"  />
 		</div>
-		<div id="nomesistema">#{sistemaBean.nomesistema}</div>
+		<div id="nomesistema">#{sistemaBean.nomesistema}<span id="spancomplemento">&nbsp;&nbsp;#{sistemaBean.complemento}</span></div>
 		
 		<div id="divlogin">
-			<h:form id="loginForm" prependId="false" >
+			<h:form id="loginForm" prependId="false" rendered="#{sistemaBean.exibirLogin}">
 				<h:panelGrid columns="3" border="0" width="100%" style="text-align: left;">
 					<h:panelGroup>
 	               	 	Login: <br/>

@@ -7,7 +7,9 @@ public class HbnLotecaDAO extends GenericDAOImpl<Loteca> implements LotecaDAO {
 	
 	@Override
 	public Loteca findLotecaAtiva() {
-		String hql = "FROM Loteca x where x.tpSituacao = " + Constantes.lOTECA_SITUACAO_ANDAMENTO;
+		String hql = "FROM Loteca x ";
+		hql +=  "where x.cdLoteca = (Select max(y.cdLoteca) from Loteca y " + 
+				"where y.tpSituacao < " + Constantes.lOTECA_SITUACAO_CONCLUIDA + ")";
 		try {
 			return (Loteca) getHibernateTemplate().find(hql).get(0);
 		} catch (Exception e) {
