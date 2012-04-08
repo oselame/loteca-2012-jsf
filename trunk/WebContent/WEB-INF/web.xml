@@ -1,101 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
-  <display-name>Loteca Jsf</display-name>
-    <filter>
-    	<filter-name>SetCharacterEncoding</filter-name>
-    	<filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
-    	<init-param>
-      	<param-name>encoding</param-name>
-      	<param-value>UTF-8</param-value>
-    	</init-param>
-  	</filter>
-  	<filter-mapping>
-    	<filter-name>SetCharacterEncoding</filter-name>
-    	<url-pattern>/*</url-pattern>
-  	</filter-mapping>
-  	
-  	<!-- spring security 
-    <filter>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-    </filter>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>Loteca Jsf</display-name>
+	<filter>
+		<filter-name>SetCharacterEncoding</filter-name>
+		<filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>SetCharacterEncoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
-    <filter-mapping>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    
-    <listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
-	-->
-	  <!-- Change to "Production" when you are ready to deploy -->
-	  <context-param>
-	    <param-name>javax.faces.PROJECT_STAGE</param-name>
-	    <param-value>Development</param-value>
-	  </context-param>
-	
+	<!-- Change to "Production" when you are ready to deploy -->
+	<context-param>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Development</param-value>
+	</context-param>
+
 	<!-- ========================== SPRING RELATED ============================= -->
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
             /WEB-INF/applicationContext.xml
             /WEB-INF/spring-security.xml
         </param-value>
-    </context-param>
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-    <!-- Spring Security -->
-    <filter>  
-        <filter-name>springSecurityFilterChain</filter-name>  
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>  
-    </filter>  
-    <filter-mapping>  
-        <filter-name>springSecurityFilterChain</filter-name>  
-        <url-pattern>/*</url-pattern>  
-        <dispatcher>REQUEST</dispatcher>  
-        <dispatcher>FORWARD</dispatcher>  
-    </filter-mapping> 
-<!-- ////////////////////////// END: SPRING RELATED //////////////////////// -->	
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<!-- Spring Security -->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	<!-- ////////////////////////// END: SPRING RELATED //////////////////////// -->
+
+	<!-- Primefaces -->
+	<context-param>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>aristo</param-value>
+	</context-param>
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>Resource Servlet</servlet-name>
+		<servlet-class>org.primefaces.resource.ResourceServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Resource Servlet</servlet-name>
+		<url-pattern>/primefaces_resource/*</url-pattern>
+	</servlet-mapping>
 	
-  <!-- Primefaces -->
-  <context-param>
-    <param-name>primefaces.THEME</param-name>
-    <param-value>aristo</param-value>
-  </context-param>
-  <servlet>
-    <servlet-name>Faces Servlet</servlet-name>
-    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet>
-    <servlet-name>Resource Servlet</servlet-name>
-    <servlet-class>org.primefaces.resource.ResourceServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>*.xhtml</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>Resource Servlet</servlet-name>
-    <url-pattern>/primefaces_resource/*</url-pattern>
-  </servlet-mapping>
-  
+	<context-param>
+	    <param-name>facelets.LIBRARIES</param-name>
+	    <param-value>/WEB-INF/springsecurity.taglib.xml</param-value>
+	</context-param>
+
 	<error-page>
-	   	<error-code>401</error-code>
-	   	<location>/401.xhtml</location>
+		<error-code>401</error-code>
+		<location>/401.xhtml</location>
 	</error-page>
 	<error-page>
-	   	<error-code>403</error-code>
-	   	<location>/403.xhtml</location>
+		<error-code>403</error-code>
+		<location>/403.xhtml</location>
 	</error-page>
 	<error-page>
-	   	<error-code>404</error-code>
-	   	<location>/404.xhtml</location>
+		<error-code>404</error-code>
+		<location>/404.xhtml</location>
 	</error-page>
 
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-  </welcome-file-list>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
 </web-app>
