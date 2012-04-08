@@ -158,4 +158,33 @@ public class HbnUsuariodataDAO extends GenericDAOImpl<Usuariodata> implements Us
 		return lista;
 	}
 	
+	@Override
+	public List<Usuariodata> findDadosRankingLotecaAtiva(Loteca lotecaativa) {
+		List<Usuariodata> lista = new ArrayList<Usuariodata>();
+		StringBuilder hql = new StringBuilder();
+		hql.append("FROM Usuariodata ud ");
+		hql.append("LEFT JOIN FETCH ud.lotecausuario lo ");
+		hql.append("LEFT JOIN FETCH lo.loteca lot ");
+		hql.append("LEFT JOIN FETCH ud.data dt ");
+		hql.append("WHERE lot.cdLoteca = :cdLoteca ");
+		hql.append("AND lo.flAtivo = 1 ");
+		hql.append("AND dt.cdData = (SELECT max(dx.cdData) from Data dx where dx.tpSituacao = :tpSituacao)  ");
+		hql.append("order by ud.nuPosicaofinal asc");
+		Session session = getHibernateTemplate().getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			Query query = session.createQuery(hql.toString());
+			query.setLong("cdLoteca", lotecaativa.getCdLoteca() );
+			query.setLong("tpSituacao", Constantes.DATA_SITUACAO_CONCLUIDO );
+			lista = query.list();
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
+	
 }

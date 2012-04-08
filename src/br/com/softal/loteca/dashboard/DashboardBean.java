@@ -1,10 +1,11 @@
 package br.com.softal.loteca.dashboard;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.DashboardReorderEvent;
@@ -13,30 +14,56 @@ import org.primefaces.model.DashboardModel;
 import org.primefaces.model.DefaultDashboardColumn;
 import org.primefaces.model.DefaultDashboardModel;
 
+import br.com.softal.loteca.LtcServiceLocator;
+import br.com.softal.loteca.model.classifclube.Classifclube;
+import br.com.softal.loteca.model.loteca.Loteca;
+import br.com.softal.loteca.model.usuariodata.Usuariodata;
+import br.com.softal.loteca.util.Constantes;
+
 @SuppressWarnings("serial")
 @ManagedBean(name="dashboardBean")
-@SessionScoped
+@RequestScoped
 public class DashboardBean implements Serializable {
 
 	private DashboardModel model;
+	private List<Usuariodata> ranking;
+	private List<Classifclube> classifclubes;
+	private Usuariodata usuariodata;
+	private Loteca lotecaativa;
 
 	public DashboardBean() {
 		model = new DefaultDashboardModel();
 		DashboardColumn column1 = new DefaultDashboardColumn();
 		DashboardColumn column2 = new DefaultDashboardColumn();
-		DashboardColumn column3 = new DefaultDashboardColumn();
+		//DashboardColumn column3 = new DefaultDashboardColumn();
 
-		column1.addWidget("dhblogin");
-		column1.addWidget("finance");
+		column1.addWidget("dhbclassificacao");
+		column1.addWidget("dhbinscricao");
 
-		column2.addWidget("lifestyle");
+		column2.addWidget("dhbranking");
 		column2.addWidget("weather");
 
-		column3.addWidget("politics");
+		//column3.addWidget("politics");
 
 		model.addColumn(column1);
 		model.addColumn(column2);
-		model.addColumn(column3);
+		//model.addColumn(column3);
+		
+		this.carregaLotecaativa();		
+		this.carregaRanking();
+		this.carregaClassificacao();
+	}
+	
+	private void carregaLotecaativa() {
+		if (!FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey(Constantes.LOTECA_ATIVA)) {
+			try {
+				lotecaativa = LtcServiceLocator.getInstance().getLotecaService().findLotecaAtiva();
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(Constantes.LOTECA_ATIVA, lotecaativa);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} 
+		lotecaativa = (Loteca) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get(Constantes.LOTECA_ATIVA);
 	}
 
 	public void handleReorder(DashboardReorderEvent event) {
@@ -57,4 +84,45 @@ public class DashboardBean implements Serializable {
 	public DashboardModel getModel() {
 		return model;
 	}
+
+	public List<Usuariodata> getRanking() {
+		return ranking;
+	}
+
+	public void setRanking(List<Usuariodata> ranking) {
+		this.ranking = ranking;
+	}
+	
+	public Usuariodata getUsuariodata() {
+		return usuariodata;
+	}
+
+	public void setUsuariodata(Usuariodata usuariodata) {
+		this.usuariodata = usuariodata;
+	}
+	
+	public List<Classifclube> getClassifclubes() {
+		return classifclubes;
+	}
+
+	public void setClassifclubes(List<Classifclube> classifclubes) {
+		this.classifclubes = classifclubes;
+	}
+
+	private void carregaRanking() {
+		try {
+			setRanking( LtcServiceLocator.getInstance().getLotecaService().findAllDadosRankingLotecaAtiva() );
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void carregaClassificacao() {
+		try {
+			setClassifclubes( LtcServiceLocator.getInstance().getLotecaService().findAllClassifclubeAtual() );
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

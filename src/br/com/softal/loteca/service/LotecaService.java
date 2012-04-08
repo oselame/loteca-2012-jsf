@@ -13,6 +13,7 @@ import br.com.softal.loteca.model.data.Data;
 import br.com.softal.loteca.model.jogousuario.Jogousuario;
 import br.com.softal.loteca.model.loteca.Loteca;
 import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
+import br.com.softal.loteca.model.usuariodata.Usuariodata;
 
 public interface LotecaService extends DefaultService {
 	
@@ -35,4 +36,9 @@ public interface LotecaService extends DefaultService {
 	void gerarJogosusuarios(Data data) throws ServiceException;
 	Map<Long, Classifclube> findAllClassifclubeMap(Data data) throws ServiceException;
 	
+	/*******************************************************************/
+	List<Usuariodata> findAllDadosRankingLotecaAtiva() throws ServiceException;
+	List<Classifclube> findAllClassifclubeAtual() throws ServiceException;
+	
+	void saveUsuarioWizard(Usuario usuario, List<Clubeusuario> clubeusuarios) throws ServiceException;
 }
