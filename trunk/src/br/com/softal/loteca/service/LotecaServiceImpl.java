@@ -32,6 +32,7 @@ import br.com.softal.loteca.model.loteca.HbnLotecaDAO;
 import br.com.softal.loteca.model.loteca.Loteca;
 import br.com.softal.loteca.model.lotecausuario.HbnLotecausuarioDAO;
 import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
+import br.com.softal.loteca.model.usuariodata.CanhotoDTO;
 import br.com.softal.loteca.model.usuariodata.HbnUsuariodataDAO;
 import br.com.softal.loteca.model.usuariodata.Usuariodata;
 import br.com.softal.loteca.model.usuariodata.UsuariodataDTO;
@@ -558,6 +559,15 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 				clubeusuario.setNuPosicao( ++nuPosicao );
 				super.save(clubeusuario);
 			}
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
+	}
+	
+	@Override
+	public List<CanhotoDTO> findCanhotosConcurso(Data data) throws ServiceException {
+		try {
+			return getJogousuarioDAO().findCanhotosConcurso(data);
 		} catch (Exception e) {
 			throw new ServiceException(e);
 		}

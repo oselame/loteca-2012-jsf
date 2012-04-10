@@ -317,33 +317,17 @@ public class DataBean extends AbstractManegedBean<Data> {
              context.getApplication().getStateManager().saveView(context);
              context.responseComplete();
          } catch (Exception e) {
+        	 e.printStackTrace();
          }
 	}
 	
 	private List<CanhotoDTO> getDados() {
-		List<CanhotoDTO> lista = new ArrayList<CanhotoDTO>();
-		CanhotoDTO dto = new CanhotoDTO();
-		dto.setFlLinha1Coluna1(1l);
-		dto.setFlLinha1Coluna2(1l);
-		dto.setFlLinha1Duplo(1l);
-		
-		dto.setFlLinha2Empate(1l);
-		dto.setFlLinha3Coluna1(1l);
-		dto.setFlLinha4Coluna2(1l);
-		dto.setFlLinha5Coluna1(1l);
-		dto.setFlLinha6Coluna1(1l);
-		dto.setFlLinha7Coluna2(1l);
-		dto.setFlLinha8Empate(1l);
-		dto.setFlLinha9Coluna2(1l);
-		dto.setFlLinha10Empate(1l);
-		dto.setFlLinha11Coluna1(1l);
-		dto.setFlLinha12Coluna1(1l);
-		dto.setFlLinha13Empate(1l);
-		dto.setFlLinha14Coluna1(1l);
-		
-		lista.add(dto);
-		
-		return lista;
+		try {
+			return LtcServiceLocator.getInstance().getLotecaService().findCanhotosConcurso(getEntity());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 
