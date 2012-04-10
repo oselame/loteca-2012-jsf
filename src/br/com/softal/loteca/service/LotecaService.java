@@ -3,6 +3,7 @@ package br.com.softal.loteca.service;
 import java.util.List;
 import java.util.Map;
 
+import br.com.softal.base.dao.DaoException;
 import br.com.softal.base.model.usuario.Usuario;
 import br.com.softal.base.service.DefaultService;
 import br.com.softal.base.service.ServiceException;
@@ -13,6 +14,7 @@ import br.com.softal.loteca.model.data.Data;
 import br.com.softal.loteca.model.jogousuario.Jogousuario;
 import br.com.softal.loteca.model.loteca.Loteca;
 import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
+import br.com.softal.loteca.model.usuariodata.CanhotoDTO;
 import br.com.softal.loteca.model.usuariodata.Usuariodata;
 
 public interface LotecaService extends DefaultService {
@@ -41,4 +43,5 @@ public interface LotecaService extends DefaultService {
 	List<Classifclube> findAllClassifclubeAtual() throws ServiceException;
 	
 	void saveUsuarioWizard(Usuario usuario, List<Clubeusuario> clubeusuarios) throws ServiceException;
+	List<CanhotoDTO> findCanhotosConcurso(Data data) throws ServiceException;
 }
