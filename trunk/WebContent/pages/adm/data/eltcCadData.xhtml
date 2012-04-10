@@ -68,6 +68,10 @@
 								<p:commandButton value="#{msg.botao_enviar_email_resultado_jogo}"  action="#{dataBean.enviaremailresultado}" ajax="false" 
 									immediate="true" update="growl"
 									rendered="#{dataBean.entity.tpSituacao eq 4}" />
+									
+								<p:commandButton value="#{msg.botao_imprimir_canhotos}"  action="#{dataBean.imprimirCanhotos}" ajax="false" 
+									immediate="true" update="growl"
+									rendered="#{dataBean.entity.tpSituacao eq 4}" />
 							</f:facet>
 						</h:panelGrid>
 						

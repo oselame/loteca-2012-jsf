@@ -3,13 +3,23 @@ package br.com.softal.loteca.model.data;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.mail.Email;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+
 import org.primefaces.event.FlowEvent;
 import org.springframework.dao.DataIntegrityViolationException;
 
@@ -21,6 +31,7 @@ import br.com.softal.loteca.model.jogo.Jogo;
 import br.com.softal.loteca.model.jogousuario.Jogousuario;
 import br.com.softal.loteca.model.loteca.Loteca;
 import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
+import br.com.softal.loteca.model.usuariodata.CanhotoDTO;
 
 @SuppressWarnings("serial")
 @ManagedBean(name="dataBean")
@@ -279,6 +290,61 @@ public class DataBean extends AbstractManegedBean<Data> {
             return event.getNewStep();  
         }  
     }  
+	
+	public void imprimirCanhotos() {
+		try {
+			this.gerarRelatoriCanhatos();
+			super.getMessages().addSucessMessage("msg_sucess_canhotos_impressos_com_sucesso");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void gerarRelatoriCanhatos() {
+		 FacesContext context = FacesContext.getCurrentInstance();
+		 ServletContext servletContext = (ServletContext) context.getExternalContext().getContext();
+		 String sourceFileName = servletContext.getRealPath("/relatorios/cartoes.jasper");
+		 Map<String, Object> params = new HashMap<String, Object>();
+		  
+		 try {
+             HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
+             response.setContentType("application/pdf");
+             response.addHeader("Content-disposition", "attachment; filename=\"cartoes.pdf\"");
+             List<CanhotoDTO> usuarios = getDados();
+             JRDataSource dataSource = new JRBeanCollectionDataSource( usuarios );
+             JasperPrint impressao = JasperFillManager.fillReport(sourceFileName, params, dataSource);
+             JasperExportManager.exportReportToPdfStream(impressao, response.getOutputStream());
+             context.getApplication().getStateManager().saveView(context);
+             context.responseComplete();
+         } catch (Exception e) {
+         }
+	}
+	
+	private List<CanhotoDTO> getDados() {
+		List<CanhotoDTO> lista = new ArrayList<CanhotoDTO>();
+		CanhotoDTO dto = new CanhotoDTO();
+		dto.setFlLinha1Coluna1(1l);
+		dto.setFlLinha1Coluna2(1l);
+		dto.setFlLinha1Duplo(1l);
+		
+		dto.setFlLinha2Empate(1l);
+		dto.setFlLinha3Coluna1(1l);
+		dto.setFlLinha4Coluna2(1l);
+		dto.setFlLinha5Coluna1(1l);
+		dto.setFlLinha6Coluna1(1l);
+		dto.setFlLinha7Coluna2(1l);
+		dto.setFlLinha8Empate(1l);
+		dto.setFlLinha9Coluna2(1l);
+		dto.setFlLinha10Empate(1l);
+		dto.setFlLinha11Coluna1(1l);
+		dto.setFlLinha12Coluna1(1l);
+		dto.setFlLinha13Empate(1l);
+		dto.setFlLinha14Coluna1(1l);
+		
+		lista.add(dto);
+		
+		return lista;
+	}
 	
 
 }
