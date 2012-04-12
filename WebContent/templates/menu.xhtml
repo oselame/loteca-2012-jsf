@@ -27,6 +27,7 @@
 				</p:submenu>
 				<p:submenu label="#{msg.menu_loteca}" rendered="#{sec:areAllGranted('ROLE_USER')}">
 					<p:menuitem action="#{jogousuarioBean.abrirCadJogousuario}" value="#{msg.menu_jogo_usuario}" ajax="false"/>
+					<p:menuitem action="#{jogousuarioBean.abrirConResultadoRodada}" value="#{msg.menu_resultado_rodada}" ajax="false"/>
 				</p:submenu>
 		</p:menu>
 	</h:form>

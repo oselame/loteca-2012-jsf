@@ -58,12 +58,6 @@ public class JogousuarioBean extends AbstractManegedBean<Jogousuario> implements
 		setJogousuarios(new ArrayList<Jogousuario>());
 	}
 	
-	public String abrirCadJogousuario() {
-		getJogousuarios().add(new Jogousuario());
-		this.carregaJogoUsuario();
-		return "/pages/user/jogousuario/eltcCadJogousuario.xhtml";
-	}
-	
 	private void carregaJogoUsuario() {
 		try {
 			Lotecausuario lotecausuario = LtcServiceLocator.getInstance().getLotecaService().findLotecausuarioAtivo(super.getUsuariologado()); 
@@ -78,6 +72,10 @@ public class JogousuarioBean extends AbstractManegedBean<Jogousuario> implements
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void carregaResultadoJogoUsuario() {
+		
 	}
 	
 	public String salvarCadJogousuario() {
@@ -109,6 +107,18 @@ public class JogousuarioBean extends AbstractManegedBean<Jogousuario> implements
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public String abrirCadJogousuario() {
+		getJogousuarios().add(new Jogousuario());
+		this.carregaJogoUsuario();
+		return "/pages/user/jogousuario/eltcCadJogousuario.xhtml";
+	}
+	
+	public String abrirConResultadoRodada() {
+		getJogousuarios().add(new Jogousuario());
+		this.carregaJogoUsuario();
+		return "/pages/user/jogousuario/eltcConResultadoRodada.xhtml";
 	}
 	
 }
