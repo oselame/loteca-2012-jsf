@@ -572,4 +572,31 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 			throw new ServiceException(e);
 		}
 	}
+	
+	@Override
+	public List<Jogousuario> findAllJogoUsuario(Data data, Lotecausuario lotecausuario) throws ServiceException {
+		return getJogousuarioDAO().findAllJogoUsuario(data, lotecausuario);
+	}
+	
+	@Override
+	public void gerarJogosAleatoriosUsuarioSemApostas(Data data) throws ServiceException {
+		try {
+			List<Usuariodata> usuarios = getUsuariodataDAO().findAllUsuariodataSemAposta(data);
+			for (Usuariodata usudata : usuarios) {
+				List<Jogousuario> jogos = this.findAllJogoUsuario(data, usudata.getLotecausuario());
+				this.saveAllJogousuario(jogos, true);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public Boolean existeUsuarioSemAposta(Data data) throws ServiceException {
+		try {
+			return getUsuariodataDAO().existeUsuarioSemAposta(data);
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
+	}
 }

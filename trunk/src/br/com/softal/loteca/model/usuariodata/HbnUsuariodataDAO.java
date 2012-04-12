@@ -187,4 +187,56 @@ public class HbnUsuariodataDAO extends GenericDAOImpl<Usuariodata> implements Us
 		return lista;
 	}
 	
+	@Override
+	public List<Usuariodata> findAllUsuariodataSemAposta(Data data) throws DaoException {
+		List<Usuariodata> lista = new ArrayList<Usuariodata>();
+		StringBuilder hql = new StringBuilder();
+		hql.append("FROM Usuariodata ud ");
+		hql.append("LEFT JOIN FETCH ud.lotecausuario lo ");
+		hql.append("LEFT JOIN FETCH lo.loteca lot ");
+		hql.append("LEFT JOIN FETCH ud.data dt ");
+		hql.append("WHERE lo.flAtivo = 1 ");
+		hql.append("AND dt.cdData = :cdData ");
+		Session session = getHibernateTemplate().getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			Query query = session.createQuery(hql.toString());
+			query.setLong("cdData", data.getCdData() );
+			lista = query.list();
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
+	
+	@Override
+	public Boolean existeUsuarioSemAposta(Data data) throws DaoException {
+		StringBuilder hql = new StringBuilder();
+		hql.append("SELECT count(ud.flApostou) ");
+		hql.append("FROM Usuariodata ud ");
+		hql.append("LEFT JOIN ud.lotecausuario lo ");
+		hql.append("LEFT JOIN lo.loteca lot ");
+		hql.append("LEFT JOIN ud.data dt ");
+		hql.append("WHERE lo.flAtivo = 1 ");
+		hql.append("AND dt.cdData = :cdData ");
+		hql.append("AND (ud.flApostou is null or ud.flApostou = 0) ");
+		Session session = getHibernateTemplate().getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			Query query = session.createQuery(hql.toString());
+			query.setLong("cdData", data.getCdData() );
+			return ((Long) query.uniqueResult()) > 0;
+		} catch (Exception e) {
+			tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return false;
+	}
+	
 }

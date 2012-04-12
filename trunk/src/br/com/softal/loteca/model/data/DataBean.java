@@ -146,6 +146,7 @@ public class DataBean extends AbstractManegedBean<Data> {
 			
 			getEntity().setFlEnviouemailjogoliberado(1l);
 			this.save();
+			super.getMessages().addSucessMessage("msg_sucess_envio_email_jogo_liberado");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -156,6 +157,7 @@ public class DataBean extends AbstractManegedBean<Data> {
 			LtcServiceLocator.getInstance().getLotecaService().processaResultadosData(getEntity());
 			getEntity().setFlAtualizouresultados(1l);
 			this.save();
+			super.getMessages().addSucessMessage("msg_sucess_processamento_resultado");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -193,6 +195,7 @@ public class DataBean extends AbstractManegedBean<Data> {
 			EmailData.enviaEmailResultado(getEntity(), usuarios);
 			getEntity().setFlEnviouemailresultado(1l);
 			this.save();
+			super.getMessages().addSucessMessage("msg_sucess_envio_email_resultado_cadastrado");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -309,7 +312,8 @@ public class DataBean extends AbstractManegedBean<Data> {
 		 try {
              HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
              response.setContentType("application/pdf");
-             response.addHeader("Content-disposition", "attachment; filename=\"cartoes.pdf\"");
+             String nmArquivo = "cartoes_" + getEntity().getCdData() + ".pdf";
+             response.addHeader("Content-disposition", "attachment; filename=" + nmArquivo);
              List<CanhotoDTO> usuarios = getDados();
              JRDataSource dataSource = new JRBeanCollectionDataSource( usuarios );
              JasperPrint impressao = JasperFillManager.fillReport(sourceFileName, params, dataSource);
@@ -330,5 +334,23 @@ public class DataBean extends AbstractManegedBean<Data> {
 		return null;
 	}
 	
+	
+	public void gerarjogosaleatorios() {
+		try {
+			super.getMessages().addSucessMessage("msg_sucess_jogos_aleatorios_gerados_com_sucesso");
+			LtcServiceLocator.getInstance().getLotecaService().gerarJogosAleatoriosUsuarioSemApostas(getEntity());
+		} catch (Exception e) {
+			super.getMessages().addWarningMessage("msg_warning_ocorreu_erro_na_geracao_dos_jogos_aleatorios");
+			e.printStackTrace();
+		}
+	}
+	
+	public boolean getExisteUsuarioSemAposta() {
+		try {
+			return LtcServiceLocator.getInstance().getLotecaService().existeUsuarioSemAposta(getEntity());
+		} catch (ServiceException e) {
+			return true;
+		}
+	}
 
 }

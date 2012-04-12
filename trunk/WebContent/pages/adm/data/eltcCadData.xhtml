@@ -46,7 +46,10 @@
 							</h:selectOneMenu>
 							
 							<f:facet name="footer">
+								<!-- SALVAR -->
 								<p:commandButton value="#{msg.button_save}" action="#{dataBean.save}" ajax="false" update="growl"/>
+								
+								<!-- GERAR JOGOS -->
 								<p:commandButton value="#{msg.botao_gerar_jogos}"  action="#{dataBean.gerarjogos}" ajax="false" 
 									immediate="true" update="growl"
 									rendered="#{dataBean.entity.tpSituacao eq 1}" />
@@ -59,6 +62,12 @@
 									onclick="confirmEmailJogoLiberadoDialog.show()"
 									id="showConfirmEmailJogoLiberadoDialog"
 									rendered="#{dataBean.entity.tpSituacao eq 2 and dataBean.entity.blEnviouemailjogoliberado}" />
+									
+								<!-- GERAR JOGOS ALEATORIOS PARTICIPANTES SEM JOGOS -->
+								<p:commandButton value="#{msg.botao_gerar_jogos_aleatorios_data}"  action="#{dataBean.gerarjogosaleatorios}" ajax="false" 
+									immediate="true" update="growl"
+									rendered="#{dataBean.entity.tpSituacao eq 2 and dataBean.existeUsuarioSemAposta}" />
+									
 									
 								<!-- PROCESSANDO RESULTADOS -->
 								<p:commandButton value="#{msg.botao_processar_resultados}"  action="#{dataBean.processarResultados}" ajax="false" 
