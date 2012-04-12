@@ -13,5 +13,6 @@ public interface JogousuarioDAO extends GenericDAO<Jogousuario> {
 	List<Jogousuario> findAllJogoUsuarioDataAtiva(Lotecausuario lotecausuario) throws DaoException;
 	List<Jogousuario> findAllJogoUsuario(Data data, Lotecausuario lotecausuario) throws DaoException;
 	List<CanhotoDTO> findCanhotosConcurso(Data data) throws DaoException;
+	/*List<Jogousuario> findAllJogoUsuarioSemAposta(Data data) throws DaoException;*/
 	
 }

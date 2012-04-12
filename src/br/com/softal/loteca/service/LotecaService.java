@@ -44,4 +44,8 @@ public interface LotecaService extends DefaultService {
 	
 	void saveUsuarioWizard(Usuario usuario, List<Clubeusuario> clubeusuarios) throws ServiceException;
 	List<CanhotoDTO> findCanhotosConcurso(Data data) throws ServiceException;
+	
+	void gerarJogosAleatoriosUsuarioSemApostas(Data data) throws ServiceException;
+	List<Jogousuario> findAllJogoUsuario(Data data, Lotecausuario lotecausuario) throws ServiceException;
+	Boolean existeUsuarioSemAposta(Data data) throws ServiceException;
 }

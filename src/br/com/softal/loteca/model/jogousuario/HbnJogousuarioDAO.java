@@ -73,6 +73,38 @@ public class HbnJogousuarioDAO extends GenericDAOImpl<Jogousuario> implements Jo
 		return lista;
 	}
 	
+	/*@Override
+	public List<Jogousuario> findAllJogoUsuarioSemAposta(Data data) throws DaoException {
+		List<Jogousuario> lista = new ArrayList<Jogousuario>();
+		StringBuilder hql = new StringBuilder();
+		hql.append("FROM Jogousuario ju ");
+		hql.append("LEFT JOIN FETCH ju.lotecausuario lu ");
+		hql.append("LEFT JOIN FETCH ju.jogo jo ");
+		hql.append("LEFT JOIN FETCH jo.data dt ");
+		hql.append("WHERE lu.flAtivo = 1 ");
+		hql.append("AND dt.cdData = :cdData ");		
+		hql.append("AND EXISTS (FROM Usuariodata ud ");
+		hql.append("		    join ud.lotecausuario ulu ");		
+		hql.append("		    join ud.data udt ");		
+		hql.append("		    where ud.flApostou = 1 ");		
+		hql.append("		    and udt.cdData = dt.cdData ");		
+		hql.append("		    and ulu.nuSeqlotecausuario = lu.nuSeqlotecausuario) ");		
+		hql.append("order by lu.nuSeqlotecausuario, jo.cdJogo asc");
+		Session session = getHibernateTemplate().getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			Query query = session.createQuery( hql.toString() );
+			query.setLong("cdData", data.getCdData() );
+			lista = query.list();
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}*/
 	
 	@Override
 	public List<CanhotoDTO> findCanhotosConcurso(Data data) throws DaoException {
