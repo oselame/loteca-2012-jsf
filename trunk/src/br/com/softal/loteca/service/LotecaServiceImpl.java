@@ -447,24 +447,32 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 	private void atualizaPosicaoJogadorLoteca(Loteca lotecaativa, Data data, List<Usuariodata> usuariodatas) {
 		try {
 			List<UsuariodataDTO> posicoes = getUsuariodataDAO().findAllUsuariodataFinal(lotecaativa, data);
-			Map<Long, Long> resultado = new HashMap<Long, Long>();
+			Map<Long, UsuariodataDTO> resultado = new HashMap<Long, UsuariodataDTO>();
 			for (UsuariodataDTO dto : posicoes) {
-				resultado.put(dto.getNuSeqlotecausuario(), dto.getNuPontosfinal());
+				resultado.put(dto.getNuSeqlotecausuario(), dto);
 			}
 			for (Usuariodata ud : usuariodatas) {
-				ud.setNuPontosfinal( resultado.get(ud.getLotecausuario().getNuSeqlotecausuario()) );
+				ud.setNuPontosrodada( resultado.get(ud.getLotecausuario().getNuSeqlotecausuario()).getNuPontosranking() );
+				ud.setNuPontosfinal( resultado.get(ud.getLotecausuario().getNuSeqlotecausuario()).getNuPontosfinal() );
 			}
 			
+			//--
 			Collections.sort(usuariodatas, new Comparator<Usuariodata>() {
 				@Override
 				public int compare(Usuariodata o1, Usuariodata o2) {
-					// compara primeiro os pontos totais
-					int ok =  o2.getNuPontosfinal().compareTo(o1.getNuPontosfinal());
-					// se der empate busca a posicao anterior
-					/*if (ok == 0) {
-						ok =  o1.getNuPosicaofinal().compareTo(o2.getNuPosicaofinal());
-					}*/
-					return ok;
+					return o2.getNuPontosrodada().compareTo(o1.getNuPontosrodada());
+				}
+			});
+			long nuPosicao = 0;
+			for (Usuariodata ud : usuariodatas) {
+				ud.setNuPosicao(++nuPosicao);
+			}
+
+			//--
+			Collections.sort(usuariodatas, new Comparator<Usuariodata>() {
+				@Override
+				public int compare(Usuariodata o1, Usuariodata o2) {
+					return o2.getNuPontosfinal().compareTo(o1.getNuPontosfinal());
 				}
 			});
 			long nuPosicaofinal = 0;
@@ -487,7 +495,7 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 			this.processaResultadoListas(lotecaativa, data, usuarios);
 			
 			List<Usuariodata> usuariodatas = getUsuariodataDAO().findAllUsuariodata(lotecaativa, data);
-			this.atualizaPosicaoJogadorRodada(usuariodatas);
+			//this.atualizaPosicaoJogadorRodada(usuariodatas);
 			this.atualizaPosicaoJogadorLoteca(lotecaativa, data, usuariodatas);
 		} catch (Exception e) {
 			e.printStackTrace();

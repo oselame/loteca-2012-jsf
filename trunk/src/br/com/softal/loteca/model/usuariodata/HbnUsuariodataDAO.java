@@ -140,6 +140,7 @@ public class HbnUsuariodataDAO extends GenericDAOImpl<Usuariodata> implements Us
 					UsuariodataDTO dto = new UsuariodataDTO();
 					dto.setCdData( data.getCdData() );
 					dto.setNuSeqlotecausuario( rs.getLong("nuSeqlotecausuario") );
+					dto.setNuPontosranking( rs.getLong("nuPontoscartao") );
 					
 					long nuPontosfinal = rs.getLong("nuPontoscartao") + rs.getLong("nuPontoslista");
 					dto.setNuPontosfinal( nuPontosfinal );
