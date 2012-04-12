@@ -4,6 +4,7 @@ public class UsuariodataDTO {
 
 	private Long cdData;
 	private Long nuSeqlotecausuario;
+	private Long nuPontosranking;
 	private Long nuPontosfinal;
 
 	public Long getCdData() {
@@ -28,6 +29,14 @@ public class UsuariodataDTO {
 
 	public void setNuPontosfinal(Long nuPontosfinal) {
 		this.nuPontosfinal = nuPontosfinal;
+	}
+
+	public Long getNuPontosranking() {
+		return nuPontosranking;
+	}
+
+	public void setNuPontosranking(Long nuPontosranking) {
+		this.nuPontosranking = nuPontosranking;
 	}
 
 }
