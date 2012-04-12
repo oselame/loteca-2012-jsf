@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition
+	template="/templates/template.xhtml">
+
+	<ui:define name="context">
+			<h:form>
+				<p:messages showDetail="true" showSummary="false" />
+				
+			
+				<p:dataTable id="jogousuarios" var="row" value="#{jogousuarioBean.jogousuarios}"
+					rowKey="#{row.nuSeqjogousuario}" emptyMessage="#{msg.warning_nenhum_registro_encontrado}">
+					
+					<f:facet name="header">
+						#{msg.jogo_usuario_cadastrar}
+					</f:facet>
+										
+					<p:column headerText="#{msg.jogo_usuario_jogo_cdjogo}"  style="width:40px;" styleClass="#{row.tpJogo eq 1 ? 'linhaDuplo' : ''}">
+						<h:outputText value="#{row.jogo.cdJogo}" />
+					</p:column>				
+					<p:column headerText="#{msg.jogo_usuario_jogo_dejogo}" styleClass="#{row.tpJogo eq 1 ? 'linhaDuplo' : ''}">
+						<h:outputText value="#{row.jogo.deJogo}" />
+					</p:column>				
+					<p:column headerText="#{msg.jogo_usuario_coluna1}" style="width:80px;" styleClass="alignCenter #{row.tpJogo eq 1 ? 'linhaDuplo' : ''}">
+						<p:selectBooleanCheckbox value="#{row.blColuna1}"/>
+					</p:column>				
+					<p:column headerText="#{msg.jogo_usuario_empate}" style="width:80px;" styleClass="alignCenter #{row.tpJogo eq 1 ? 'linhaDuplo' : ''}">
+						<p:selectBooleanCheckbox value="#{row.blEmpate}"/>
+					</p:column>				
+					<p:column headerText="#{msg.jogo_usuario_coluna2}" style="width:80px;" styleClass="alignCenter #{row.tpJogo eq 1 ? 'linhaDuplo' : ''}">
+						<p:selectBooleanCheckbox value="#{row.blColuna2}"/>
+					</p:column>				
+				</p:dataTable>				
+			</h:form>
+	</ui:define>
+</ui:composition>
+</html>
