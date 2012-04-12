@@ -428,9 +428,9 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 					// compara primeiro os pontos totais
 					int ok =  o2.getNuPontosrodada().compareTo(o1.getNuPontosrodada());
 					// se der empate busca a posicao anterior
-					if (ok == 0) {
+					/*if (ok == 0) {
 						ok =  o1.getNuPosicao().compareTo(o2.getNuPosicao());
-					}
+					}*/
 					return ok;
 				}
 			});
@@ -461,9 +461,9 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 					// compara primeiro os pontos totais
 					int ok =  o2.getNuPontosfinal().compareTo(o1.getNuPontosfinal());
 					// se der empate busca a posicao anterior
-					if (ok == 0) {
+					/*if (ok == 0) {
 						ok =  o1.getNuPosicaofinal().compareTo(o2.getNuPosicaofinal());
-					}
+					}*/
 					return ok;
 				}
 			});

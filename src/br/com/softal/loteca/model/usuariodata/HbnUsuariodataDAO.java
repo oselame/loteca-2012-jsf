@@ -110,11 +110,12 @@ public class HbnUsuariodataDAO extends GenericDAOImpl<Usuariodata> implements Us
 		hql.append(" SELECT "); 
 		hql.append("   lu.nuSeqlotecausuario, ");
 		hql.append("   ud.cdData, ");
-		hql.append("   (SELECT sum(x.nuPontosrodada) "); 
+		hql.append("   ud.nuPontoslista, ");
+		hql.append("   (SELECT sum(x.nuPontoscartao) "); 
 		hql.append("           FROM eltcusuariodata x "); 
 		hql.append("           WHERE x.cdData <= ud.cdData "); 
 		hql.append("           AND x.nuSeqlotecausuario = ud.nuSeqlotecausuario "); 
-		hql.append("           GROUP BY x.nuSeqlotecausuario) AS nuPontosfinal "); 
+		hql.append("           GROUP BY x.nuSeqlotecausuario) AS nuPontoscartao "); 
 		hql.append("  FROM eltcusuariodata ud "); 
 		hql.append("  join eltclotecausuario lu on "); 
 		hql.append("     ud.nuSeqlotecausuario = lu.nuSeqlotecausuario ");
@@ -139,7 +140,9 @@ public class HbnUsuariodataDAO extends GenericDAOImpl<Usuariodata> implements Us
 					UsuariodataDTO dto = new UsuariodataDTO();
 					dto.setCdData( data.getCdData() );
 					dto.setNuSeqlotecausuario( rs.getLong("nuSeqlotecausuario") );
-					dto.setNuPontosfinal( rs.getLong("nuPontosfinal") );
+					
+					long nuPontosfinal = rs.getLong("nuPontoscartao") + rs.getLong("nuPontoslista");
+					dto.setNuPontosfinal( nuPontosfinal );
 					lista.add(dto);
 				}
 				tx.commit();
