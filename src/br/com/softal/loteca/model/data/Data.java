@@ -9,15 +9,21 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import br.com.softal.base.model.Entity;
 import br.com.softal.loteca.model.classifclube.Classifclube;
 import br.com.softal.loteca.model.jogo.Jogo;
+import br.com.softal.loteca.model.loteca.Loteca;
 
 @SuppressWarnings("serial")
 @javax.persistence.Entity
@@ -56,6 +62,11 @@ public class Data extends Entity {
 	
 	@Column(name = "declassificacao")
 	private String deClassificacao;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="cdloteca", insertable=true, updatable=true)
+	@Fetch(FetchMode.JOIN)
+	private Loteca loteca;
 	
 	@OneToMany(mappedBy="data", fetch=FetchType.LAZY)
 	private List<Jogo> jogos;
@@ -215,6 +226,13 @@ public class Data extends Entity {
 		this.flAtualizouclassificacao = (blAtualizouclassificacao == null) ? 0l : (blAtualizouclassificacao ?  1l : 0l);
 	}
 	
+	public Loteca getLoteca() {
+		return loteca;
+	}
+
+	public void setLoteca(Loteca loteca) {
+		this.loteca = loteca;
+	}
 
 	/****************************************************************************************************************/
 

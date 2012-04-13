@@ -209,6 +209,7 @@ public class DataBean extends AbstractManegedBean<Data> {
 			getEntity().setFlAtualizouclassificacao(0l);
 			getEntity().setFlEnviouemailjogoliberado(0l);
 			getEntity().setFlEnviouemailresultado(0l);
+			getEntity().setLoteca( super.getLotecaativa() );
 			
 			super.save();
 			this.inserirJogos();
