@@ -24,6 +24,8 @@ import br.com.softal.loteca.model.clube.HbnClubeDAO;
 import br.com.softal.loteca.model.clubeusuario.Clubeusuario;
 import br.com.softal.loteca.model.clubeusuario.HbnClubeusuarioDAO;
 import br.com.softal.loteca.model.data.Data;
+import br.com.softal.loteca.model.data.DataDAO;
+import br.com.softal.loteca.model.data.HbnDataDAO;
 import br.com.softal.loteca.model.jogo.Jogo;
 import br.com.softal.loteca.model.jogousuario.HbnJogousuarioDAO;
 import br.com.softal.loteca.model.jogousuario.Jogousuario;
@@ -48,7 +50,16 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 	private HbnUsuarioDAO usuarioDAO;
 	private HbnJogousuarioDAO jogousuarioDAO;
 	private HbnUsuariodataDAO usuariodataDAO;
+	private HbnDataDAO dataDAO;
 	
+	private HbnDataDAO getDataDAO() {
+		return dataDAO;
+	}
+
+	public void setDataDAO(HbnDataDAO dataDAO) {
+		this.dataDAO = dataDAO;
+	}
+
 	private HbnLotecaDAO getLotecaDAO() {
 		return lotecaDAO;
 	}
@@ -603,6 +614,15 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 	public Boolean existeUsuarioSemAposta(Data data) throws ServiceException {
 		try {
 			return getUsuariodataDAO().existeUsuarioSemAposta(data);
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
+	}
+	
+	@Override
+	public List<Data> findAllDatasEncerradas(Loteca loteca) throws ServiceException {
+		try {
+			return getDataDAO().findAllDatasEncerradas(loteca);
 		} catch (Exception e) {
 			throw new ServiceException(e);
 		}
