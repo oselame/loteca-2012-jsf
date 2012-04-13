@@ -14,11 +14,13 @@
 		<div id="nomesistema">#{sistemaBean.nomesistema}</div>
 		
 		<div id="divlogin">
+                    <h:form>
 			<h:panelGrid style="text-align: right;">
 				Bem vindo <s>pé frio</s> #{authenticationBean.usuariologado.nmUsuario}
 				<br/>
-				<h:outputLink value="#{request.contextPath}/j_spring_security_logout">Sair</h:outputLink>
+                                <h:outputLink value="#{request.contextPath}/j_spring_security_logout">Sair</h:outputLink>
 			</h:panelGrid>
+                    </h:form>
 		</div>
 	</div>
 </h:body>

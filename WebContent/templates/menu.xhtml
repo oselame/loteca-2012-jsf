@@ -6,29 +6,29 @@
 <h:body>
 	<h:form>
 		<p:menu style="width: 96%">
-				<!-- 
-				<p:submenu label="#{msg.menu_inicio}" >
-					<p:menuitem url="/conteudo.xhtml" value="#{msg.menu_grupos}" />
-				</p:submenu>
-				 -->
-				
-				<p:submenu label="#{msg.menu_seguranca}" rendered="#{sec:areAllGranted('ROLE_ADMIN')}">
-					<p:menuitem url="/pages/adm/grupo/eltcConGrupo.xhtml" value="#{msg.menu_grupos}" />
-					<p:menuitem url="/pages/adm/action/eltcConAction.xhtml" value="#{msg.menu_actions}" />
-					<p:menuitem url="/pages/adm/grupoaction/eltcConGrupoaction.xhtml" value="#{msg.menu_grupo_actions}" />
-					<p:menuitem url="/pages/adm/projeto/eltcConProjeto.xhtml" value="#{msg.menu_projetos}" />
-					<p:menuitem url="/pages/adm/usuario/eltcConUsuario.xhtml" value="#{msg.menu_usuarios}" />
-					<p:menuitem url="/pages/adm/usuariogrupo/eltcConUsuariogrupo.xhtml" value="#{msg.menu_loteca_usuario_grupo}" />
-				</p:submenu>
-				<p:submenu label="#{msg.menu_administracao}" rendered="#{sec:areAllGranted('ROLE_ADMIN')}">
-					<p:menuitem url="/pages/adm/clube/eltcConClube.xhtml" value="#{msg.menu_times}" />
-					<p:menuitem url="/pages/adm/lotecausuario/eltcConLotecausuario.xhtml" value="#{msg.menu_loteca_usuario}" />
-					<p:menuitem url="/pages/adm/data/eltcConData.xhtml" value="#{msg.menu_data}" />
-				</p:submenu>
-				<p:submenu label="#{msg.menu_loteca}" rendered="#{sec:areAllGranted('ROLE_USER')}">
-					<p:menuitem action="#{jogousuarioBean.abrirCadJogousuario}" value="#{msg.menu_jogo_usuario}" ajax="false"/>
-					<p:menuitem action="#{jogousuarioBean.abrirConResultadoRodada}" value="#{msg.menu_resultado_rodada}" ajax="false"/>
-				</p:submenu>
+                    <!-- 
+                    <p:submenu label="#{msg.menu_inicio}" >
+                            <p:menuitem url="/conteudo.xhtml" value="#{msg.menu_grupos}" />
+                    </p:submenu>
+                        -->
+
+                    <p:submenu label="#{msg.menu_seguranca}" rendered="#{sec:areAllGranted('ROLE_ADMIN')}">
+                            <p:menuitem url="/pages/adm/grupo/eltcConGrupo.xhtml" value="#{msg.menu_grupos}" />
+                            <p:menuitem url="/pages/adm/action/eltcConAction.xhtml" value="#{msg.menu_actions}" />
+                            <p:menuitem url="/pages/adm/grupoaction/eltcConGrupoaction.xhtml" value="#{msg.menu_grupo_actions}" />
+                            <p:menuitem url="/pages/adm/projeto/eltcConProjeto.xhtml" value="#{msg.menu_projetos}" />
+                            <p:menuitem url="/pages/adm/usuario/eltcConUsuario.xhtml" value="#{msg.menu_usuarios}" />
+                            <p:menuitem url="/pages/adm/usuariogrupo/eltcConUsuariogrupo.xhtml" value="#{msg.menu_loteca_usuario_grupo}" />
+                    </p:submenu>
+                    <p:submenu label="#{msg.menu_administracao}" rendered="#{sec:areAllGranted('ROLE_ADMIN')}">
+                            <p:menuitem url="/pages/adm/clube/eltcConClube.xhtml" value="#{msg.menu_times}" />
+                            <p:menuitem url="/pages/adm/lotecausuario/eltcConLotecausuario.xhtml" value="#{msg.menu_loteca_usuario}" />
+                            <p:menuitem url="/pages/adm/data/eltcConData.xhtml" value="#{msg.menu_data}" />
+                    </p:submenu>
+                    <p:submenu label="#{msg.menu_loteca}" rendered="#{sec:areAllGranted('ROLE_USER')}">
+                            <p:menuitem action="#{jogousuarioBean.abrirCadJogousuario}" value="#{msg.menu_jogo_usuario}" ajax="false"/>
+                            <p:menuitem action="#{jogousuarioBean.abrirConResultadoRodada}" value="#{msg.menu_resultado_rodada}" ajax="false"/>
+                    </p:submenu>
 		</p:menu>
 	</h:form>
 </h:body>
