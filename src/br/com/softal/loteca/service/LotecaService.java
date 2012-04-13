@@ -20,15 +20,21 @@ import br.com.softal.loteca.model.usuariodata.Usuariodata;
 public interface LotecaService extends DefaultService {
 	
 	Loteca findLotecaAtiva() throws ServiceException;
+	
 	Usuario findUsuarioByLogin(String deLogin) throws ServiceException;
+	
 	List<Lotecausuario> findAllLotecausuarioByLoteca(Long cdLoteca) throws ServiceException;
 	List<Lotecausuario> findAllLotecausuarioByLoteca(Loteca loteca) throws ServiceException;
+	
 	List<Clube> findAllClubeByLoteca(long cdLoteca) throws ServiceException;
 	List<Clubeusuario> findAllClubeusuario(Clubeusuario clubeusuario) throws ServiceException;
 	List<Clubeusuario> findAllClubeusuario(Lotecausuario lotecausuario) throws ServiceException;
+	
+	List<Data> findAllDatasEncerradas(Loteca loteca) throws ServiceException;
 	void deleteClassifclube(Data data) throws ServiceException;
-	void geraClassificacao(Loteca loteca, Data data) throws ServiceException;
 	void processaResultadosData(Data data) throws ServiceException;
+	
+	void geraClassificacao(Loteca loteca, Data data) throws ServiceException;
 	//List<Jogousuario> findAllJogoUsuarioDataEmAndamento(Jogousuario jogousuario) throws ServiceException;
 	Data findDataEmAndamentoLotecaAtiva() throws ServiceException;
 	Lotecausuario findLotecausuarioAtivo(Usuario usuario) throws ServiceException;
