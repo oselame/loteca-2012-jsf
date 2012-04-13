@@ -2,8 +2,6 @@ package br.com.softal.loteca.menu;
 
 import java.io.Serializable;
 
-import javax.el.ELContext;
-import javax.el.ExpressionFactory;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -16,7 +14,6 @@ import org.primefaces.model.MenuModel;
 import br.com.softal.base.message.MessagesWeb;
 import br.com.softal.base.model.usuario.Usuario;
 import br.com.softal.base.model.usuariogrupo.Usuariogrupo;
-import br.com.softal.loteca.model.jogousuario.JogousuarioBean;
 import br.com.softal.loteca.util.Constantes;
 
 
@@ -39,10 +36,6 @@ public class MenuBean implements Serializable {
 		model = new DefaultMenuModel();
 		MessagesWeb msg = new MessagesWeb();
 		Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get(Constantes.USUARIO_LOGADO);
-		
-		FacesContext facesCtx = FacesContext.getCurrentInstance();
-		ELContext elCtx = facesCtx.getELContext();
-		ExpressionFactory expFact = facesCtx.getApplication().getExpressionFactory();
 		
 		for (Usuariogrupo usuariogrupo : usuario.getUsuariogrupos()) {
 			if (usuariogrupo.getGrupo().getNmGrupo().equals(Constantes.ROLE_ADMIN)) {
@@ -119,7 +112,6 @@ public class MenuBean implements Serializable {
 				//-- aposta
 				MenuItem miJogousuario = new MenuItem();
 				miJogousuario.setValue(msg.getMessage("menu_jogo_usuario"));
-				miJogousuario.setActionExpression(expFact.createMethodExpression(elCtx, "#{jogousuarioBean.abrirCadJogousuario}", JogousuarioBean.class, new Class[0])); 
 				miJogousuario.setAjax(false);
 				miJogousuario.setUrl("#");
 				smLoteca.getChildren().add(miJogousuario);
@@ -127,7 +119,7 @@ public class MenuBean implements Serializable {
 				//-- resultado
 				MenuItem miResultado = new MenuItem();
 				miResultado.setValue(msg.getMessage("menu_jogo_usuario"));
-				miResultado.setActionExpression(expFact.createMethodExpression(elCtx, "#{jogousuarioBean.abrirCadJogousuario}", JogousuarioBean.class, new Class[0])); 
+				//--miResultado.setActionExpression(expFact.createMethodExpression(elCtx, "#{jogousuarioBean.abrirCadJogousuario}", JogousuarioBean.class, new Class[0])); 
 				miResultado.setAjax(false);
 				miResultado.setUrl("#");
 				smLoteca.getChildren().add(miResultado);
