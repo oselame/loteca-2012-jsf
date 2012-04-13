@@ -11,6 +11,7 @@ import javax.faces.context.FacesContext;
 import br.com.softal.base.bean.AbstractManegedBean;
 import br.com.softal.base.service.ServiceException;
 import br.com.softal.loteca.LtcServiceLocator;
+import br.com.softal.loteca.model.loteca.Loteca;
 import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
 
 @SuppressWarnings("serial")
@@ -74,10 +75,6 @@ public class JogousuarioBean extends AbstractManegedBean<Jogousuario> implements
 		}
 	}
 	
-	private void carregaResultadoJogoUsuario() {
-		
-	}
-	
 	public String salvarCadJogousuario() {
 		try {
 			LtcServiceLocator.getInstance().getLotecaService().saveAllJogousuario( getJogousuarios() );
@@ -114,10 +111,18 @@ public class JogousuarioBean extends AbstractManegedBean<Jogousuario> implements
 		this.carregaJogoUsuario();
 		return "/pages/user/jogousuario/eltcCadJogousuario.xhtml";
 	}
+        
+        private void carregaResultadoJogoUsuario() {
+            try {
+               Loteca lotecaativa = super.getLotecaativa();
+            } catch (Exception e) {
+                    e.printStackTrace();
+            }	
+	}
 	
 	public String abrirConResultadoRodada() {
 		getJogousuarios().add(new Jogousuario());
-		this.carregaJogoUsuario();
+		this.carregaResultadoJogoUsuario();
 		return "/pages/user/jogousuario/eltcConResultadoRodada.xhtml";
 	}
 	
