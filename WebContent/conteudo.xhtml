@@ -8,60 +8,13 @@
 	
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="context">
+		<p:growl id="growl" showDetail="true" />
 		<p:tabView id="tabView">
 			<p:tab id="tab1" title="#{msg.dashboard_ranking}">
-				<p:dataTable id="ranking" var="row" value="#{dashboardBean.ranking}" 
-					emptyMessage="#{msg.warning_nenhum_registro_encontrado}" >
-					
-					<p:column headerText="#{msg.dashboard_ranking_sigla_posicao}" style="width:20px">
-						<h:outputText value="#{row.nuPosicaofinal}" />
-					</p:column>
-					<p:column headerText="#{msg.dashboard_ranking_participante}" >
-						<h:outputText value="#{row.lotecausuario.usuario.nmUsuario}" />
-					</p:column>
-					<p:column headerText="#{msg.dashboard_ranking_pontos_final}" style="width:20px">
-						<h:outputText value="#{row.nuPontosfinal}" />
-					</p:column>
-				</p:dataTable>
+				<ui:include src="eltcIncRankingFragment.xhtml" />
  			</p:tab>
  			<p:tab id="tab2" title="#{msg.dashboard_classificacao}">
- 				<p:dataTable id="classificacao" var="row" value="#{dashboardBean.classifclubes}" 
-					emptyMessage="#{msg.warning_nenhum_registro_encontrado}">
-					
-					<p:column headerText="#{msg.dashboard_classifclube_classificacao}" style="width:10px">
-						<h:outputText value="#{row.nuClassificacao}" />
-					</p:column>
-					<p:column headerText="#{msg.dashboard_classifclube_clube}" >
-						<h:outputText value="#{row.clube.nmClube}" />
-					</p:column>
-					<p:column headerText="#{msg.classifclube_nupontos_sigla}" style="width:10px">
-						<h:outputText value="#{row.nuPontos}" />
-					</p:column>
-					<p:column headerText="#{msg.classifclube_nujogos_sigla}" style="width:10px">
-						<h:outputText value="#{row.nuJogos}" />
-					</p:column>
-					<p:column headerText="#{msg.classifclube_nuvitorias_sigla}" style="width:10px">
-						<h:outputText value="#{row.nuVitorias}" />
-					</p:column>
-					<p:column headerText="#{msg.classifclube_nuempates_sigla}" style="width:10px">
-						<h:outputText value="#{row.nuEmpates}" />
-					</p:column>
-					<p:column headerText="#{msg.classifclube_nuderrotas_sigla}" style="width:10px">
-						<h:outputText value="#{row.nuDerrotas}" />
-					</p:column>
-					<p:column headerText="#{msg.classifclube_nugolspro_sigla}" style="width:10px">
-						<h:outputText value="#{row.nuGolspro}" />
-					</p:column>
-					<p:column headerText="#{msg.classifclube_nugolscontra_sigla}" style="width:10px">
-						<h:outputText value="#{row.nuGolscontra}" />
-					</p:column>
-					<p:column headerText="#{msg.classifclube_nusaldogols_sigla}" style="width:10px">
-						<h:outputText value="#{row.nuSaldogols}" />
-					</p:column>
-					<p:column headerText="#{msg.classifclube_nupercaprov_sigla}" style="width:10px">
-						<h:outputText value="#{row.nuPercaprov}" />
-					</p:column>
-				</p:dataTable>
+				<ui:include src="eltcIncClassificacaoFragment.xhtml" />
  			</p:tab>
 		</p:tabView>
 	</ui:define>

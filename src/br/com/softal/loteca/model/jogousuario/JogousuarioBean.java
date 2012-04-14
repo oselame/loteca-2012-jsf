@@ -6,12 +6,14 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
+import javax.faces.model.SelectItem;
 
 import br.com.softal.base.bean.AbstractManegedBean;
 import br.com.softal.base.service.ServiceException;
+import br.com.softal.base.util.DateUtil;
 import br.com.softal.loteca.LtcServiceLocator;
-import br.com.softal.loteca.model.loteca.Loteca;
+import br.com.softal.loteca.model.data.Data;
 import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
 
 @SuppressWarnings("serial")
@@ -22,6 +24,8 @@ public class JogousuarioBean extends AbstractManegedBean<Jogousuario> implements
 	private Long cdLoteca;
 	private List<Jogousuario> jogousuarios; 
 	private Boolean jogohabilitado;
+	private Long cdData;
+	private List<SelectItem> datasencerradas;
 	
 	public Long getCdLoteca() {
 		return cdLoteca;
@@ -46,9 +50,25 @@ public class JogousuarioBean extends AbstractManegedBean<Jogousuario> implements
 	public void setJogohabilitado(Boolean jogohabilitado) {
 		this.jogohabilitado = jogohabilitado;
 	}
+	
+	public Long getCdData() {
+		return cdData;
+	}
+
+	public void setCdData(Long cdData) {
+		this.cdData = cdData;
+	}
+	
+	public List<SelectItem> getDatasencerradas() {
+		return datasencerradas;
+	}
+
+	public void setDatasencerradas(List<SelectItem> datasencerradas) {
+		this.datasencerradas = datasencerradas;
+	}
 
 	public JogousuarioBean() {
-		
+		setDatasencerradas(new ArrayList<SelectItem>());
 	}
 	
 	/*****************************************************************************************************/
@@ -112,18 +132,45 @@ public class JogousuarioBean extends AbstractManegedBean<Jogousuario> implements
 		return "/pages/user/jogousuario/eltcCadJogousuario.xhtml";
 	}
         
-        private void carregaResultadoJogoUsuario() {
-            try {
-               Loteca lotecaativa = super.getLotecaativa();
-            } catch (Exception e) {
-                    e.printStackTrace();
-            }	
-	}
+    private void populaComboDatas() {
+    	try {
+    		getDatasencerradas().clear();
+         	List<Data> datas = LtcServiceLocator.getInstance().getLotecaService().findAllDatasEncerradas( this.getLotecaativa() );
+         	for (Data data : datas) {
+         		SelectItem sItem = new SelectItem(data.getCdData(), DateUtil.dateToStr( data.getDtData() ));
+         		getDatasencerradas().add( sItem );
+         	}
+        } catch (Exception e) {
+                e.printStackTrace();
+        }	
+    }
 	
 	public String abrirConResultadoRodada() {
-		getJogousuarios().add(new Jogousuario());
-		this.carregaResultadoJogoUsuario();
+		 try {
+			 setCdData( null );
+			 setRows( null );
+			 this.populaComboDatas();
+         } catch (Exception e) {
+        	 e.printStackTrace();
+         }	
 		return "/pages/user/jogousuario/eltcConResultadoRodada.xhtml";
+	}
+	
+	public void carregaResultadoJogoUsuarioChange(ValueChangeEvent event) {
+		try {
+			if ((Long)event.getNewValue() != null) {
+				this.cdData = (Long) event.getNewValue();
+				Data data = LtcServiceLocator.getInstance().getLotecaService().findData(this.cdData);
+				Lotecausuario lotecausuario = LtcServiceLocator.getInstance().getLotecaService().findLotecausuarioAtivo(super.getUsuariologado()); 
+				List<Jogousuario> lista = LtcServiceLocator.getInstance().getLotecaService().findAllJogoUsuario(data, lotecausuario);
+				setRows(lista);
+			} else {
+				setCdData( null );
+				setRows( new ArrayList<Jogousuario>() );
+			}
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

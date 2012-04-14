@@ -19,8 +19,10 @@ public class HbnDataDAO extends GenericDAOImpl<Data> implements DataDAO {
     public List<Data> findAllDatasEncerradas(Loteca loteca) throws DaoException {
     	List<Data> datas = new ArrayList<Data>();
     	StringBuilder hql = new StringBuilder();
+		hql.append("SELECT dt ");
 		hql.append("FROM Data dt ");
-		hql.append("WHERE dt.cdLoteca = :cdLoteca ");
+		hql.append("LEFT JOIN dt.loteca ltc ");
+		hql.append("WHERE ltc.cdLoteca = :cdLoteca ");
 		hql.append("AND dt.tpSituacao = :tpSituacao ");
 		hql.append("ORDER BY dt.cdData desc ");
 		Session session = getHibernateTemplate().getSessionFactory().openSession();

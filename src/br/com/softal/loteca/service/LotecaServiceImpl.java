@@ -627,4 +627,15 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 			throw new ServiceException(e);
 		}
 	}
+	
+	@Override
+	public Data findData(Long cdData) throws ServiceException {
+		try {
+			Data data = new Data();
+			data.setCdData(cdData);
+			return (Data) super.findByPrimaryKey(data);
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
+	}
 }
