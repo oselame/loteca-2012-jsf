@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://java.sun.com/jsf/html"
+             xmlns:ui="http://java.sun.com/jsf/facelets"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:f="http://java.sun.com/jsf/core" >
+		<h:panelGrid style="width:100%">
+			<h:form id="formRanking">
+				<p:dataTable id="ranking" var="row" value="#{dashboardBean.ranking}" 
+					emptyMessage="#{msg.warning_nenhum_registro_encontrado}" style="width:100%">
+					
+					<p:column headerText="#{msg.dashboard_ranking_sigla_posicao}" style="width:20px" styleClass="alignCenter">
+						<h:outputText value="#{row.nuPosicaofinal}" />
+					</p:column>
+					<p:column headerText="#{msg.dashboard_ranking_participante}" >
+						<h:outputText value="#{row.lotecausuario.usuario.nmUsuario}" />
+					</p:column>
+					<p:column headerText="PR" style="width:20px" styleClass="alignCenter">
+						<h:outputText value="#{row.nuPontosrodada}" />
+					</p:column>
+					<p:column headerText="PL" style="width:20px" styleClass="alignCenter">
+						<h:outputText value="#{row.nuPontoslista}" />
+					</p:column>
+					<p:column headerText="PT" style="width:20px" styleClass="alignCenter">
+						<h:outputText value="#{row.nuPontosfinal}" />
+					</p:column>
+					<p:column style="width:20px" headerText="TU" >  
+						<p:commandButton id="selectButton"  oncomplete="usuariodataDialog.show()" icon="ui-icon-search" title="Times do participante">  
+						    <f:setPropertyActionListener value="usuariodata" target="#{dashboardBean.usuariodata}" />  
+						</p:commandButton>  
+       				</p:column>
+				</p:dataTable>
+				<p:dialog header="Times do participante" widgetVar="usuariodataDialog" resizable="false" id="usuariodataDialogId" showEffect="fade" hideEffect="explode" modal="true">  
+					<h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">  
+					   <h:outputText value="Falta fazer" />  
+					   <h:outputText value="Falta fazer" />  
+					</h:panelGrid>  
+				</p:dialog>  
+			</h:form>
+			<f:facet name="footer">
+				<h:panelGrid columns="2" style="width:100%">
+					<h:outputLabel value="PR" /><h:outputLabel value="Pontos no Ranking" />								
+					<h:outputLabel value="PL" /><h:outputLabel value="Pontos nas Listas (10 classificados e 4 rebaixados)" />								
+					<h:outputLabel value="PT" /><h:outputLabel value="Pontuação Total (PT = PR + PL)" />
+					<h:outputLabel value="TU" /><h:outputLabel value="Lista de times (10 classificados e 4 rebaixados)" /> 									
+				</h:panelGrid>
+			</f:facet>
+		</h:panelGrid>
+</ui:fragment>

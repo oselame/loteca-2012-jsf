@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://java.sun.com/jsf/html"
+             xmlns:ui="http://java.sun.com/jsf/facelets"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:f="http://java.sun.com/jsf/core" >
+		<h:panelGrid style="width:100%">
+			<h:form id="formClassificacao">
+				<p:dataTable id="classificacao" var="row" value="#{dashboardBean.classifclubes}" 
+					emptyMessage="#{msg.warning_nenhum_registro_encontrado}">
+					
+					<p:column headerText="#{msg.dashboard_classifclube_classificacao}" style="width:10px">
+						<h:outputText value="#{row.nuClassificacao}" />
+					</p:column>
+					<p:column headerText="#{msg.dashboard_classifclube_clube}" >
+						<h:outputText value="#{row.clube.nmClube}" />
+					</p:column>
+					<p:column headerText="#{msg.classifclube_nupontos_sigla}" style="width:10px">
+						<h:outputText value="#{row.nuPontos}" />
+					</p:column>
+					<p:column headerText="#{msg.classifclube_nujogos_sigla}" style="width:10px">
+						<h:outputText value="#{row.nuJogos}" />
+					</p:column>
+					<p:column headerText="#{msg.classifclube_nuvitorias_sigla}" style="width:10px">
+						<h:outputText value="#{row.nuVitorias}" />
+					</p:column>
+					<p:column headerText="#{msg.classifclube_nuempates_sigla}" style="width:10px">
+						<h:outputText value="#{row.nuEmpates}" />
+					</p:column>
+					<p:column headerText="#{msg.classifclube_nuderrotas_sigla}" style="width:10px">
+						<h:outputText value="#{row.nuDerrotas}" />
+					</p:column>
+					<p:column headerText="#{msg.classifclube_nugolspro_sigla}" style="width:10px">
+						<h:outputText value="#{row.nuGolspro}" />
+					</p:column>
+					<p:column headerText="#{msg.classifclube_nugolscontra_sigla}" style="width:10px">
+						<h:outputText value="#{row.nuGolscontra}" />
+					</p:column>
+					<p:column headerText="#{msg.classifclube_nusaldogols_sigla}" style="width:10px">
+						<h:outputText value="#{row.nuSaldogols}" />
+					</p:column>
+					<p:column headerText="#{msg.classifclube_nupercaprov_sigla}" style="width:10px">
+						<h:outputText value="#{row.nuPercaprov}" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
+			<f:facet name="footer">
+				<h:panelGrid columns="6" style="width:100%">
+					<h:outputLabel value="P" /><h:outputLabel value="Pontos" />
+					<h:outputLabel value="J" /><h:outputLabel value="Jogos" />			
+					<h:outputLabel value="V" /><h:outputLabel value="Vitória" />			
+					<h:outputLabel value="E" /><h:outputLabel value="Empate" />			
+					<h:outputLabel value="D" /><h:outputLabel value="Derrota" />			
+					<h:outputLabel value="GP" /><h:outputLabel value="Gols Pro" />			
+					<h:outputLabel value="SC" /><h:outputLabel value="Gols Contra" />			
+					<h:outputLabel value="SG" /><h:outputLabel value="Saldo de Gols" />
+					<h:outputLabel value="%" /><h:outputLabel value="% Aproveitamento" />								
+				</h:panelGrid>
+			</f:facet>
+		</h:panelGrid>
+</ui:fragment>
