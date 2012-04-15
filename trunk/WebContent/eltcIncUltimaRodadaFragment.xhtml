@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://java.sun.com/jsf/html"
+             xmlns:ui="http://java.sun.com/jsf/facelets"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:f="http://java.sun.com/jsf/core" >
+		<h:panelGrid style="width:100%">
+			<h:form id="formUltimaRodada">
+				<p:dataTable id="jogo" var="row" value="#{dashboardBean.ultimadataencerrada.jogos}" 
+					emptyMessage="#{msg.warning_nenhum_registro_encontrado}">
+					<f:facet name="header">#{dashboardBean.ultimadataencerrada.deObservacao}</f:facet>
+					
+					<p:column headerText="" style="width:10px">
+						<h:outputText value="#{row.cdJogo}" />
+					</p:column>
+					<p:column headerText="#{msg.jogo_usuario_jogo_dejogo}">
+						<h:outputText value="#{row.deJogo}" />
+					</p:column>
+					<p:column headerText="#{msg.jogo_usuario_coluna1_sigla}" style="width:10px" 
+						styleClass="#{row.tpResultadofinal eq 1 ? 'resultadoRed' : ''}">
+					</p:column>
+					<p:column headerText="#{msg.jogo_usuario_empate_sigla}" style="width:10px"
+						styleClass="#{row.tpResultadofinal eq 0 ? 'resultadoRed' : ''}">
+					</p:column>
+					<p:column headerText="#{msg.jogo_usuario_coluna2_sigla}" style="width:10px"
+						styleClass="#{row.tpResultadofinal eq 2 ? 'resultadoRed' : ''}">
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</h:panelGrid>
+</ui:fragment>

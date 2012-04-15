@@ -16,6 +16,7 @@ import org.primefaces.model.DefaultDashboardModel;
 
 import br.com.softal.loteca.LtcServiceLocator;
 import br.com.softal.loteca.model.classifclube.Classifclube;
+import br.com.softal.loteca.model.data.Data;
 import br.com.softal.loteca.model.loteca.Loteca;
 import br.com.softal.loteca.model.usuariodata.Usuariodata;
 import br.com.softal.loteca.util.Constantes;
@@ -30,6 +31,7 @@ public class DashboardBean implements Serializable {
 	private List<Classifclube> classifclubes;
 	private Usuariodata usuariodata;
 	private Loteca lotecaativa;
+	private Data ultimadataencerrada;
 
 	public DashboardBean() {
 		model = new DefaultDashboardModel();
@@ -46,6 +48,7 @@ public class DashboardBean implements Serializable {
 			model.addColumn(column2);
 		} else if (lotecaativa.getTpSituacao() == Constantes.lOTECA_SITUACAO_ANDAMENTO) {
 			column1.addWidget("dhbclassificacao");
+			column1.addWidget("dhbultimarodada");
 			column2.addWidget("dhbranking");
 			
 			
@@ -54,6 +57,7 @@ public class DashboardBean implements Serializable {
 			
 			this.carregaRanking();
 			this.carregaClassificacao();
+			this.carregaUltimadataencerrada();
 		} else {
 			column1.addWidget("dhbregulamento");
 			
@@ -116,7 +120,15 @@ public class DashboardBean implements Serializable {
 	public void setClassifclubes(List<Classifclube> classifclubes) {
 		this.classifclubes = classifclubes;
 	}
+	
+	public Data getUltimadataencerrada() {
+		return ultimadataencerrada;
+	}
 
+	public void setUltimadataencerrada(Data ultimadataencerrada) {
+		this.ultimadataencerrada = ultimadataencerrada;
+	}
+	
 	private void carregaRanking() {
 		try {
 			setRanking( LtcServiceLocator.getInstance().getLotecaService().findAllDadosRankingLotecaAtiva() );
@@ -128,6 +140,14 @@ public class DashboardBean implements Serializable {
 	private void carregaClassificacao() {
 		try {
 			setClassifclubes( LtcServiceLocator.getInstance().getLotecaService().findAllClassifclubeAtual() );
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void carregaUltimadataencerrada() {
+		try {
+			setUltimadataencerrada( LtcServiceLocator.getInstance().getLotecaService().findUltimaDataEncerrada( this.lotecaativa ) );
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
