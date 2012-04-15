@@ -26,7 +26,7 @@
 						<h:outputText value="#{row.nuPontosfinal}" />
 					</p:column>
 					<p:column style="width:20px" headerText="TU" >  
-						<p:commandButton id="selectButton" update=":formRanking:display" oncomplete="usuariodataDialog.show()" 
+						<p:commandButton id="selectButton" update=":tabView:formRanking:display" oncomplete="usuariodataDialog.show()" 
 							icon="ui-icon-search" title="Times do participante">  
 						    <f:setPropertyActionListener value="#{row}" target="#{clubeusuarioBean.usuariodata}" />
 						</p:commandButton>  

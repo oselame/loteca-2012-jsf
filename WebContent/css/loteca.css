@@ -31,3 +31,7 @@
 .alignCenter {
 	text-align: center;
 }
+
+.valignTop {
+	vertical-align: top;
+}

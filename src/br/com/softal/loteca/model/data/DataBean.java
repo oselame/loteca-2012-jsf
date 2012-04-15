@@ -139,7 +139,7 @@ public class DataBean extends AbstractManegedBean<Data> {
 	
 	public void enviaremailjogoliberado() {
 		try {
-			Loteca lotecaativa = LtcServiceLocator.getInstance().getLotecaService().findLotecaAtiva();
+			Loteca lotecaativa = super.getLotecaativa();
 			List<Lotecausuario> usuarios = LtcServiceLocator.getInstance().getLotecaService().findAllLotecausuarioByLoteca(lotecaativa);
 			EmailData.enviaEmailJogoLiberado(getEntity(), usuarios);
 			
@@ -164,7 +164,7 @@ public class DataBean extends AbstractManegedBean<Data> {
 	
 	public String salvaClassificacaojogos() {
 		try {
-			Loteca lotecaativa = LtcServiceLocator.getInstance().getLotecaService().findLotecaAtiva();
+			Loteca lotecaativa = super.getLotecaativa();
 			LtcServiceLocator.getInstance().getLotecaService().geraClassificacao(lotecaativa, getEntity());
 			getEntity().setFlAtualizouclassificacao(1l);
 			this.save();
@@ -189,7 +189,7 @@ public class DataBean extends AbstractManegedBean<Data> {
 	
 	public void enviaremailresultado() {
 		try {
-			Loteca lotecaativa = LtcServiceLocator.getInstance().getLotecaService().findLotecaAtiva();
+			Loteca lotecaativa = super.getLotecaativa();
 			List<Lotecausuario> usuarios = LtcServiceLocator.getInstance().getLotecaService().findAllLotecausuarioByLoteca(lotecaativa);
 			EmailData.enviaEmailResultado(getEntity(), usuarios);
 			getEntity().setFlEnviouemailresultado(1l);
@@ -304,9 +304,11 @@ public class DataBean extends AbstractManegedBean<Data> {
 	}
 	
 	private void gerarRelatoriCanhatos() {
+		String jasperName = "cartoes.jasper";
+		jasperName = "cartaounico.jasper";
 		 FacesContext context = FacesContext.getCurrentInstance();
 		 ServletContext servletContext = (ServletContext) context.getExternalContext().getContext();
-		 String sourceFileName = servletContext.getRealPath("/relatorios/cartoes.jasper");
+		 String sourceFileName = servletContext.getRealPath("/relatorios/" + jasperName);
 		 Map<String, Object> params = new HashMap<String, Object>();
 		  
 		 try {

@@ -10,10 +10,12 @@ public class HbnClubeusuarioDAO extends GenericDAOImpl<Clubeusuario> implements 
 	@Override
 	public List<Clubeusuario> findAllClubeusuario(Clubeusuario clubeusuario)
 			throws ServiceException {
-		String hql = "FROM Clubeusuario x " + 
-			"left join fetch x.clube " +
-			"left join fetch x.lotecausuario lu " +
-			"where lu.nuSeqlotecausuario = " + clubeusuario.getLotecausuario().getNuSeqlotecausuario();
+		String hql = " FROM Clubeusuario x " + 
+			" left join fetch x.clube cl" +
+			" left join fetch x.lotecausuario lu " +
+			" where lu.nuSeqlotecausuario = " + clubeusuario.getLotecausuario().getNuSeqlotecausuario() + 
+			" order by x.nuPosicao asc";
+			//--" order by cl.cdClube asc";
 		try {
 			return getHibernateTemplate().find(hql);
 		} catch (Exception e) {
