@@ -401,23 +401,30 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 					long nuPosicao = clubeusuario.getNuPosicao();
 					Classifclube classifclube = mapClassifclube.get(clubeusuario.getClube().getCdClube());
 					long nuClassificacao = classifclube.getNuClassificacao();
+					long nuPontosClube = 0;
 					//-- Valida o campeao
 					if (nuClassificacao == 1 && nuPosicao == 1) {
 						nuPontosLista += 2;
+						nuPontosClube += 2;
 					}
 					
 					//-- Valida acerto na posicao
 					if (nuPosicao < 11 || nuPosicao > 16) {
 						if (nuClassificacao == nuPosicao) {
 							nuPontosLista += 2;
+							nuPontosClube += 2;
 						}
 					}
 					
 					if (nuPosicao < 11 && nuClassificacao < 11) {
 						nuPontosLista++;
+						nuPontosClube++;
 					} else if (nuPosicao > 16 && nuClassificacao > 16) {
 						nuPontosLista++;
+						nuPontosClube++;
 					}
+					clubeusuario.setNuPontos( nuPontosClube );
+					this.update(clubeusuario);
 				}
 				//-- Atualiza Pontos Listas
 				Usuariodata usuariodata = getUsuariodataDAO().findUsuariodata(lotecausuario, data);
