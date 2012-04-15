@@ -3,7 +3,6 @@ package br.com.softal.loteca.service;
 import java.util.List;
 import java.util.Map;
 
-import br.com.softal.base.dao.DaoException;
 import br.com.softal.base.model.usuario.Usuario;
 import br.com.softal.base.service.DefaultService;
 import br.com.softal.base.service.ServiceException;
@@ -31,6 +30,7 @@ public interface LotecaService extends DefaultService {
 	List<Clubeusuario> findAllClubeusuario(Lotecausuario lotecausuario) throws ServiceException;
 	
 	List<Data> findAllDatasEncerradas(Loteca loteca) throws ServiceException;
+	Data findUltimaDataEncerrada(Loteca loteca) throws ServiceException;
 	void deleteClassifclube(Data data) throws ServiceException;
 	void processaResultadosData(Data data) throws ServiceException;
 	Data findData(Long cdData) throws ServiceException;

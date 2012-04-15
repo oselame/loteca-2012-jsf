@@ -5,6 +5,7 @@ import br.com.softal.base.dao.DaoException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -40,6 +41,43 @@ public class HbnDataDAO extends GenericDAOImpl<Data> implements DataDAO {
 			session.close();
 		}
 		return datas;
+    }
+    
+    @Override
+    public Data findUltimaDataEncerrada(Loteca loteca) throws DaoException {
+    	List<Data> datas = new ArrayList<Data>();
+    	StringBuilder hql = new StringBuilder();
+    	hql.append("SELECT dt ");
+    	hql.append("FROM Data dt ");
+    	//hql.append("LEFT JOIN fetch dt.jogos jgs ");
+    	hql.append("LEFT JOIN dt.loteca ltc ");
+    	hql.append("WHERE ltc.cdLoteca = :cdLoteca ");
+    	//hql.append("AND dt.tpSituacao = :tpSituacao ");
+    	hql.append("AND dt.cdData = (SELECT MAX(dx.cdData) FROM Data dx ");
+    	hql.append("				LEFT JOIN dx.loteca ltcx ");
+    	hql.append("				 WHERE ltcx.cdLoteca = ltc.cdLoteca ");
+    	hql.append("				 AND dx.tpSituacao = :tpSituacao ) ");
+    	Session session = getHibernateTemplate().getSessionFactory().openSession();
+    	Transaction tx = session.beginTransaction();
+    	try {
+    		Query query = session.createQuery( hql.toString() );
+    		query.setLong("cdLoteca", loteca.getCdLoteca() );
+    		query.setLong("tpSituacao", Constantes.DATA_SITUACAO_CONCLUIDO );
+    		datas = query.list();
+    		if (datas.size() > 0) {
+    			Hibernate.initialize(datas.get(0).getJogos());
+        	}
+    		tx.commit();
+    	} catch (Exception e) {
+    		tx.rollback();
+    		e.printStackTrace();
+    	} finally {
+    		session.close();
+    	}
+    	if (datas.size() > 0) {
+    		return datas.get(0);
+    	}
+    	return null;
     }
 	
 //	@Override

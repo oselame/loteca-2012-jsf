@@ -24,7 +24,6 @@ import br.com.softal.loteca.model.clube.HbnClubeDAO;
 import br.com.softal.loteca.model.clubeusuario.Clubeusuario;
 import br.com.softal.loteca.model.clubeusuario.HbnClubeusuarioDAO;
 import br.com.softal.loteca.model.data.Data;
-import br.com.softal.loteca.model.data.DataDAO;
 import br.com.softal.loteca.model.data.HbnDataDAO;
 import br.com.softal.loteca.model.jogo.Jogo;
 import br.com.softal.loteca.model.jogousuario.HbnJogousuarioDAO;
@@ -159,14 +158,22 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 	
 	@Override
 	public List<Clubeusuario> findAllClubeusuario(Clubeusuario clubeusuario) throws ServiceException {
-		return getClubeusuarioDAO().findAllClubeusuario(clubeusuario);
+		try {
+			return getClubeusuarioDAO().findAllClubeusuario(clubeusuario);
+		} catch (DaoException e) {
+			throw new ServiceException(e);
+		}
 	}
 	
 	@Override
 	public List<Clubeusuario> findAllClubeusuario(Lotecausuario lotecausuario) throws ServiceException {
-		Clubeusuario clubeusuario = new Clubeusuario();
-		clubeusuario.setLotecausuario(lotecausuario);
-		return getClubeusuarioDAO().findAllClubeusuario(clubeusuario);
+		try {	
+			Clubeusuario clubeusuario = new Clubeusuario();
+			clubeusuario.setLotecausuario(lotecausuario);
+			return getClubeusuarioDAO().findAllClubeusuario(clubeusuario);
+		} catch (DaoException e) {
+			throw new ServiceException(e);
+		}
 	}
 	
 	@Override
@@ -641,6 +648,15 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 			Data data = new Data();
 			data.setCdData(cdData);
 			return (Data) super.findByPrimaryKey(data);
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
+	}
+	
+	@Override
+	public Data findUltimaDataEncerrada(Loteca loteca) throws ServiceException {
+		try {
+			return getDataDAO().findUltimaDataEncerrada(loteca);
 		} catch (Exception e) {
 			throw new ServiceException(e);
 		}

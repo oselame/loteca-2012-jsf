@@ -8,92 +8,79 @@
 	template="/templates/template.xhtml">
 
 	<ui:define name="context">
-		<style>
-			.resultado {
-				background-color: #E2FDFF;
-			}
-			.acerto {
-				background-color: #00FF00;
-			}
-			.erro {
-				background-color: #FE5400;
-			}
-		</style>
-	
+		<h:form id="resultadoForm">
+			<p:messages showDetail="true" showSummary="false" />
+			<p:panelGrid columns="2" style="width:100%" columnClasses="headerColumn alignRight bold">
+				<f:facet name="header">
+					#{msg.jogo_usuario_resultado}
+				</f:facet>
+				<h:outputLabel value="#{msg.data_dtdata}:" for="cdData" />
+				<h:selectOneMenu value="#{jogousuarioBean.cdData}" id="cdData" style="width: 100%" 
+					required="false" requiredMessage="#{msg.lotecausuario_cdloteca_requirido}" 
+					valueChangeListener="#{jogousuarioBean.carregaResultadoJogoUsuarioChange}"
+					onchange="submit()" immediate="true">
+					<f:selectItem itemLabel="#{msg.selectonemenu_selecione}" itemValue="" />
+					<f:selectItems value="#{jogousuarioBean.datasencerradas}" var="data" itemLabel="#{data.dtData}" itemValue="#{data.cdData}" />
+				</h:selectOneMenu>
+			</p:panelGrid>
+			<br/>
 		
-			<h:form id="resultadoForm">
-				<p:messages showDetail="true" showSummary="false" />
-				<p:panelGrid columns="2" style="width:100%" columnClasses="headerColumn alignRight bold">
-					<f:facet name="header">
-						#{msg.jogo_usuario_resultado}
-					</f:facet>
-					<h:outputLabel value="#{msg.data_dtdata}:" for="cdData" />
-					<h:selectOneMenu value="#{jogousuarioBean.cdData}" id="cdData" style="width: 100%" 
-						required="false" requiredMessage="#{msg.lotecausuario_cdloteca_requirido}" 
-						valueChangeListener="#{jogousuarioBean.carregaResultadoJogoUsuarioChange}"
-						onchange="submit()" immediate="true">
-						<f:selectItem itemLabel="#{msg.selectonemenu_selecione}" itemValue="" />
-						<f:selectItems value="#{jogousuarioBean.datasencerradas}" var="data" itemLabel="#{data.dtData}" itemValue="#{data.cdData}" />
-					</h:selectOneMenu>
-				</p:panelGrid>
-				<br/>
-			
-				<p:dataTable id="jogousuarios" var="row" value="#{jogousuarioBean.rows}"
-					rowKey="#{row.nuSeqjogousuario}" emptyMessage="#{msg.warning_nenhum_registro_encontrado}" selectionMode="single">
-					
-					<f:facet name="header">
-						#{msg.jogo_usuario_aposta}
-					</f:facet>
-										
-					<p:column headerText="#{msg.jogo_usuario_jogo_cdjogo}"  
-						style="width:40px;" styleClass="alignRight">
-						<h:outputText value="#{row.jogo.cdJogo}" />
-					</p:column>				
-					<p:column headerText="#{msg.jogo_usuario_jogo_dejogo}" styleClass="">
-						<h:outputText value="#{row.jogo.deJogo}" />
-							#{row.tpJogo eq 1 ? '(Duplo)' : ''}
-					</p:column>				
-					<p:column headerText="1" style="width:10px;" 
-						styleClass="alignCenter   
-							#{row.jogo.tpResultadofinal eq 1 ? 'resultadoClass' : ''}
-							#{row.jogo.tpResultadofinal eq 1 and row.flColuna1 eq 1 ? 'acertoClass' : ''}
-							#{row.tpJogo ne 1 and row.jogo.tpResultadofinal ne 1 and row.flColuna1 eq 1 ? 'erroClass' : ''}
-							">
-						<p:selectBooleanCheckbox value="#{row.blColuna1}" disabled="true" id="flColuna1"/>
-					</p:column>				
-					<p:column headerText="E" style="width:10px;" 
-						styleClass="alignCenter   
-							#{row.jogo.tpResultadofinal eq 0 ? 'resultadoClass' : ''}
-							#{row.jogo.tpResultadofinal eq 0 and row.flEmpate eq 1 ? 'acertoClass' : ''}
-							#{row.tpJogo ne 1 and row.jogo.tpResultadofinal ne 0 and row.flEmpate eq 1 ? 'erroClass' : ''}
-							">
-						<p:selectBooleanCheckbox value="#{row.blEmpate}" disabled="true" id="flEmpate"/>
-					</p:column>				
-					<p:column headerText="2" style="width:10px;" 
-						styleClass="alignCenter   
-						#{row.jogo.tpResultadofinal eq 2 ? 'resultadoClass' : ''}
-						#{row.jogo.tpResultadofinal eq 2 and row.flColuna2 eq 1 ? 'acertoClass' : ''}
-						#{row.tpJogo ne 1 and row.jogo.tpResultadofinal ne 2 and row.flColuna2 eq 1 ? 'erroClass' : ''}
+			<p:dataTable id="jogousuarios" var="row" value="#{jogousuarioBean.rows}"
+				rowKey="#{row.nuSeqjogousuario}" emptyMessage="#{msg.warning_nenhum_registro_encontrado}" selectionMode="single">
+				
+				<f:facet name="header">
+					#{msg.jogo_usuario_aposta}
+				</f:facet>
+									
+				<p:column headerText="#{msg.jogo_usuario_jogo_cdjogo}"  
+					style="width:40px;" styleClass="alignRight">
+					<h:outputText value="#{row.jogo.cdJogo}" />
+				</p:column>				
+				<p:column headerText="#{msg.jogo_usuario_jogo_dejogo}" styleClass="">
+					<h:outputText value="#{row.jogo.deJogo}" />
+						#{row.tpJogo eq 1 ? '(Duplo)' : ''}
+				</p:column>				
+				<p:column headerText="1" style="width:10px;" 
+					styleClass="alignCenter   
+						#{row.jogo.tpResultadofinal eq 1 ? 'resultadoClass' : ''}
+						#{row.jogo.tpResultadofinal eq 1 and row.flColuna1 eq 1 ? 'acertoClass' : ''}
+						#{row.tpJogo ne 1 and row.jogo.tpResultadofinal ne 1 and row.flColuna1 eq 1 ? 'erroClass' : ''}
 						">
-						<p:selectBooleanCheckbox value="#{row.blColuna2}" disabled="true" id="flColuna2"/>
-					</p:column>				
-					<p:column headerText="D" style="width:10px;" 
-						styleClass="alignCenter">
-						<p:selectBooleanCheckbox value="#{row.tpJogo eq 1}" disabled="true" id="tpJogo"/>
-					</p:column>			
-				</p:dataTable>	
-				<br/>
-				<table>
-					<tr>
-						<td class="resultado" style="border-width: 1px;border-style: solid;width: 20px;">&nbsp;</td>
-						<td style="width: 50px">Resultado</td>
-						<td class="acerto" style="border-width: 1px;border-style: solid;width: 20px;">&nbsp;</td>
-						<td style="width: 50px">Acerto</td>
-						<td class="erro" style="border-width: 1px;border-style: solid;width: 20px;">&nbsp;</td>
-						<td style="width: 50px">Erro</td>
-					</tr>
-				</table>			
-			</h:form>
+					<p:selectBooleanCheckbox value="#{row.blColuna1}" disabled="true" id="flColuna1"/>
+				</p:column>				
+				<p:column headerText="E" style="width:10px;" 
+					styleClass="alignCenter   
+						#{row.jogo.tpResultadofinal eq 0 ? 'resultadoClass' : ''}
+						#{row.jogo.tpResultadofinal eq 0 and row.flEmpate eq 1 ? 'acertoClass' : ''}
+						#{row.tpJogo ne 1 and row.jogo.tpResultadofinal ne 0 and row.flEmpate eq 1 ? 'erroClass' : ''}
+						">
+					<p:selectBooleanCheckbox value="#{row.blEmpate}" disabled="true" id="flEmpate"/>
+				</p:column>				
+				<p:column headerText="2" style="width:10px;" 
+					styleClass="alignCenter   
+					#{row.jogo.tpResultadofinal eq 2 ? 'resultadoClass' : ''}
+					#{row.jogo.tpResultadofinal eq 2 and row.flColuna2 eq 1 ? 'acertoClass' : ''}
+					#{row.tpJogo ne 1 and row.jogo.tpResultadofinal ne 2 and row.flColuna2 eq 1 ? 'erroClass' : ''}
+					">
+					<p:selectBooleanCheckbox value="#{row.blColuna2}" disabled="true" id="flColuna2"/>
+				</p:column>				
+				<p:column headerText="D" style="width:10px;" 
+					styleClass="alignCenter">
+					<p:selectBooleanCheckbox value="#{row.tpJogo eq 1}" disabled="true" id="tpJogo"/>
+				</p:column>			
+			</p:dataTable>	
+			<br/>
+			<table>
+				<tr>
+					<td class="resultado" style="border-width: 1px;border-style: solid;width: 20px;">&nbsp;</td>
+					<td style="width: 50px">Resultado</td>
+					<td class="acerto" style="border-width: 1px;border-style: solid;width: 20px;">&nbsp;</td>
+					<td style="width: 50px">Acerto</td>
+					<td class="erro" style="border-width: 1px;border-style: solid;width: 20px;">&nbsp;</td>
+					<td style="width: 50px">Erro</td>
+				</tr>
+			</table>			
+		</h:form>
 	<script>
 		jQuery(function() {
 			jQuery(".resultadoClass").addClass("resultado");
