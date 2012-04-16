@@ -5,14 +5,29 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>	
 
 <ui:composition template="/templates/usuariotemplate.xhtml">
 	<ui:define name="context">
 		<h:form id="usuarioForm">
 			<p:growl id="growl" showDetail="true" />
 			<p:panel header="Inscrição">
+				<script>
+					function oteste() {
+						/*
+						jQuery("ui.ui-widget-content").addClass("teste");
+						jQuery("ul.ui-widget-content").height("585");
+						*/
+					}
+				</script>
+				<style>
+					.ui-orderlist .ui-orderlist-list {
+						height: 585px !important;
+					}
+				</style>
 				<p:wizard widgetVar="wiz" flowListener="#{inscricaousuarioBean.onFlowProcess}"
-					backLabel="Voltar" nextLabel="Avançar" id="wizusuario">
+					backLabel="Voltar" nextLabel="Avançar" id="wizusuario" onnext="javascript:oteste();" onback="javascript:oteste();">
 					
 					<p:tab id="dadosusuario" title="Dados">
 						<p:messages showDetail="true" showSummary="false" />
@@ -64,11 +79,11 @@
 					
 					<p:tab id="timeusuario" title="Classificação dos Clubes">
 						<p:panel header="#{msg.lotecausuario_clubes_usuario}">
-							<p:panelGrid columns="2">
+							<p:panelGrid columns="2" style="height: 585px;" id="pnClubes">
 								<p:orderList value="#{inscricaousuarioBean.clubeusuarios}" var="clubeusuario" 
 									iconOnly="true" effect="highlight" 
 									itemValue="#{clubeusuario}" converter="clubeusuarioConverter" 
-									controlsLocation="left" id="customList" >
+									controlsLocation="left" id="customList" styleClass="teste">
 							         <p:column style="width:100%;"> 
 						         		#{clubeusuario.clube.nmClube}
 							        </p:column>
@@ -90,8 +105,19 @@
 		
 					<p:tab id="confirm" title="Confirmação">
 						<p:messages showDetail="true" showSummary="false" />
+						<p:panel header="Dados para depósito bancário" style="width:100%">
+							<strong>Para: </strong>Adriano Oselame (ramal 8463) e-mail: adriano.oselame@softplan.com.br<br/> 
+							<strong>Banco: </strong>Banco do Brasil 
+							<strong>Agência: </strong>3191-7 
+							<strong>Conta: </strong>9036-0
+						</p:panel>
+						<br/>
+						
 						<p:panel header="Confirmação" style="width:100%">
 							<h:panelGrid columns="2" style="width:100%" columnClasses="headerColumn alignRight bold" >
+								<h:outputLabel value="#{msg.usuario_delogin} *:"/>
+								<h:outputText value="#{inscricaousuarioBean.entity.deLogin}" style="color:#FF0000;font-weight: bold;" />
+								
 								<h:outputLabel value="#{msg.usuario_nmusuario} *:"/>
 								<h:outputText value="#{inscricaousuarioBean.entity.nmUsuario}" />
 									
@@ -115,6 +141,12 @@
 					</p:tab>
 				</p:wizard>
 			</p:panel>
+			<script>
+				jQuery(function() {
+					jQuery("ui.ui-widget-content").addClass("teste");
+					jQuery("ul.ui-widget-content").height("585");
+				});
+			</script>
 		</h:form>
 	</ui:define>
 </ui:composition>

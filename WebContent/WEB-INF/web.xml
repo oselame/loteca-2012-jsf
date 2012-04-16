@@ -18,9 +18,10 @@
 	</filter-mapping>
 
 	<!-- Change to "Production" when you are ready to deploy -->
+	<!-- Development, UnitTest, SystemTest ou Production -->
 	<context-param>
 		<param-name>javax.faces.PROJECT_STAGE</param-name>
-		<param-value>Development</param-value>
+		<param-value>Production</param-value>
 	</context-param>
 
 	<!-- ========================== SPRING RELATED ============================= -->

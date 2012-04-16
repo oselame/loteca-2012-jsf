@@ -12,8 +12,10 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.primefaces.event.FlowEvent;
 import org.primefaces.model.DualListModel;
+import org.springframework.dao.DataIntegrityViolationException;
 
 import br.com.softal.base.bean.AbstractManegedBean;
 import br.com.softal.base.model.projeto.Projeto;
@@ -95,9 +97,10 @@ public class InscricaousuarioBean extends AbstractManegedBean<Usuario> {
 			getEntity().getProjeto().setCdProjeto( this.getCdProjeto() );
 			
 			super.getLotecaService().saveUsuarioWizard(getEntity(), getClubeusuarios());
-			super.getMessages().addSucessMessage("mensagem_registro_salvo_com_sucesso");
+			super.getMessages().addSucessMessage("msg_sucess_registro_usuario_realizado_com_sucesso_aguarde_inicio_campeonato");
 			return "eltcDashboard.xhtml";
 		} catch (Exception e) {
+			super.getMessages().addWarningMessage("msg_warning_email_ja_cadastrado_na_base");
 			e.printStackTrace();
 		}
 		return null;
