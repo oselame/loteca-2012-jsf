@@ -48,4 +48,30 @@ public class HbnLotecausuarioDAO extends GenericDAOImpl<Lotecausuario> implement
 		}
 		return (lista.size() > 0) ? lista.get(0) : null;
 	}
+	
+	public Lotecausuario findLotecausuarioInscricao(Usuario usuario) {
+		List<Lotecausuario> lista = new ArrayList<Lotecausuario>();
+		StringBuilder hql = new StringBuilder();
+		hql.append("SELECT lu ");
+		hql.append("FROM Lotecausuario lu ");
+		hql.append("LEFT JOIN FETCH lu.loteca lo ");
+		hql.append("LEFT JOIN FETCH lu.usuario us ");
+		hql.append("WHERE us.cdUsuario = :cdUsuario ");
+		hql.append("AND lo.tpSituacao = :tpSituacao");		
+		Session session = getHibernateTemplate().getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			Query query = session.createQuery( hql.toString() );
+			query.setLong("cdUsuario", usuario.getCdUsuario() );
+			query.setLong("tpSituacao", Constantes.DATA_SITUACAO_CADASTRAMENTO );
+			lista = query.list();
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return (lista.size() > 0) ? lista.get(0) : null;
+	}
 }

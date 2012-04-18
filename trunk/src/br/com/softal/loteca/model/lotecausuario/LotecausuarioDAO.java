@@ -10,5 +10,6 @@ public interface LotecausuarioDAO extends GenericDAO<Lotecausuario> {
 	
 	List<Lotecausuario> findAllLotecausuarioByLoteca(long cdLoteca) throws DaoException;
 	Lotecausuario findLotecausuarioAtivo(Usuario usuario) throws DaoException;
+	Lotecausuario findLotecausuarioInscricao(Usuario usuario) throws DaoException;
 
 }

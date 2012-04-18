@@ -190,4 +190,17 @@ public class InscricaousuarioBean extends AbstractManegedBean<Usuario> {
         clubes = new DualListModel<String>(clubesSource, clubesTarget);
 	}
 	
+	
+	public String editarDadosInscricaoUsuario() {
+		try {
+			setEntity( super.getUsuariologado() );
+			Lotecausuario lotecausuario = super.getLotecaService().findLotecausuarioInscricao( super.getUsuariologado() );
+			setClubeusuarios( super.getLotecaService().findAllClubeusuario( lotecausuario ) );
+			return "/pages/user/usuario/eltcCadDadosUsuario.xhtml";
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	
 }

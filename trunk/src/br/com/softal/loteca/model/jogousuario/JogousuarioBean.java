@@ -81,10 +81,10 @@ public class JogousuarioBean extends AbstractManegedBean<Jogousuario> implements
 	
 	private void carregaJogoUsuario() {
 		try {
-			Lotecausuario lotecausuario = LtcServiceLocator.getInstance().getLotecaService().findLotecausuarioAtivo(super.getUsuariologado()); 
+			Lotecausuario lotecausuario = super.getLotecaService().findLotecausuarioAtivo(super.getUsuariologado()); 
 			if (lotecausuario != null) {
 				getEntity().setLotecausuario(lotecausuario);
-				List<Jogousuario> jogousuarios = LtcServiceLocator.getInstance().getLotecaService().findAllJogoUsuarioDataAtiva( lotecausuario );
+				List<Jogousuario> jogousuarios = super.getLotecaService().findAllJogoUsuarioDataAtiva( lotecausuario );
 				setJogousuarios(jogousuarios);
 				this.setJogohabilitado(getJogousuarios().size() > 0);
 			} else {
@@ -97,7 +97,7 @@ public class JogousuarioBean extends AbstractManegedBean<Jogousuario> implements
 	
 	public String salvarCadJogousuario() {
 		try {
-			LtcServiceLocator.getInstance().getLotecaService().saveAllJogousuario( getJogousuarios() );
+			super.getLotecaService().saveAllJogousuario( getJogousuarios() );
 			super.getMessages().addSucessMessage("mensagem_registro_salvo_com_sucesso");
 		} catch (ServiceException e) {
 			super.getMessages().addWarningMessage(e.getMessage());
@@ -108,7 +108,7 @@ public class JogousuarioBean extends AbstractManegedBean<Jogousuario> implements
 	
 	public String gerarCadJogousuarioAleatorio() {
 		try {
-			LtcServiceLocator.getInstance().getLotecaService().saveAllJogousuario( getJogousuarios(), true);
+			super.getLotecaService().saveAllJogousuario( getJogousuarios(), true);
 			super.getMessages().addSucessMessage("msg_sucess_jogo_aleatorio_gerado_com_sucesso");
 		} catch (ServiceException e) {
 			super.getMessages().addWarningMessage(e.getMessage());
@@ -135,7 +135,7 @@ public class JogousuarioBean extends AbstractManegedBean<Jogousuario> implements
     private void populaComboDatas() {
     	try {
     		getDatasencerradas().clear();
-         	List<Data> datas = LtcServiceLocator.getInstance().getLotecaService().findAllDatasEncerradas( this.getLotecaativa() );
+         	List<Data> datas = super.getLotecaService().findAllDatasEncerradas( this.getLotecaativa() );
          	for (Data data : datas) {
          		SelectItem sItem = new SelectItem(data.getCdData(), DateUtil.dateToStr( data.getDtData() ));
          		getDatasencerradas().add( sItem );
@@ -160,9 +160,9 @@ public class JogousuarioBean extends AbstractManegedBean<Jogousuario> implements
 		try {
 			if ((Long)event.getNewValue() != null) {
 				this.cdData = (Long) event.getNewValue();
-				Data data = LtcServiceLocator.getInstance().getLotecaService().findData(this.cdData);
-				Lotecausuario lotecausuario = LtcServiceLocator.getInstance().getLotecaService().findLotecausuarioAtivo(super.getUsuariologado()); 
-				List<Jogousuario> lista = LtcServiceLocator.getInstance().getLotecaService().findAllJogoUsuario(data, lotecausuario);
+				Data data = super.getLotecaService().findData(this.cdData);
+				Lotecausuario lotecausuario = super.getLotecaService().findLotecausuarioAtivo(super.getUsuariologado()); 
+				List<Jogousuario> lista = super.getLotecaService().findAllJogoUsuario(data, lotecausuario);
 				setRows(lista);
 			} else {
 				setCdData( null );
