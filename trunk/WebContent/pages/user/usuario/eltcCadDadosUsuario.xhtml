@@ -15,68 +15,71 @@
 		</style>
 		<h:form>
 			<p:messages showDetail="true" showSummary="false" />
-			
 			<p:panel header="#{msg.usuario_cadastrar}">
-				<h:inputHidden value="#{inscricaousuarioBean.entity.status}"  />
-				<h:panelGrid columns="2" style="width:100%" columnClasses="headerColumn alignRight bold" >
-				
-					<h:outputLabel value="#{msg.usuario_delogin}:" for="deLogin"/>
-					<h:outputText value="#{inscricaousuarioBean.entity.deLogin}" /> 
-					
-					<h:outputLabel value="#{msg.usuario_nmusuario} *:" for="nmUsuario" />
-					<p:inputText value="#{inscricaousuarioBean.entity.nmUsuario}" id="nmUsuario"
-						required="true" requiredMessage="#{msg.usuario_nmusuario_requirido}" 
-						maxlength="100" style="width: 100%" />
+				<p:tabView id="tabView">
+					<p:tab id="tab1" title="Dados do Usuário">
+						<h:panelGrid columns="2" style="width:100%" columnClasses="headerColumn alignRight bold" >
 						
-					<h:outputLabel value="#{msg.usuario_desenha} *:" for="deSenha_input" />
-						
-					<h:panelGrid columns="3" style="width:100%" border="0" cellpadding="0" cellspacing="0" columnClasses="x, headerColumn alignRight bold, x" >
-						<p:password value="#{inscricaousuarioBean.entity.deSenha}" id="deSenha" match="deSenhaaux"
-							required="true" requiredMessage="#{msg.usuario_desenha_requirido}" 
-							maxlength="20" style="width: 100%" redisplay="true" validatorMessage="#{msg.usuario_senha_confirmacao_direrentes}"/>
+							<h:outputLabel value="#{msg.usuario_delogin}:" for="deLogin"/>
+							<h:outputText value="#{inscricaousuarioBean.entity.deLogin}" /> 
 							
-						<h:outputLabel value="#{msg.usuario_desenhaaux} *: &nbsp;" for="deSenhaaux_input" />
-						<p:password value="#{inscricaousuarioBean.deSenhaaux}" id="deSenhaaux"
-							required="true" requiredMessage="#{msg.usuario_desenhaaux_requirido}" 
-							maxlength="20" style="width: 100%" redisplay="true" />
-					</h:panelGrid>
-						
-					<h:outputLabel value="#{msg.usuario_deemail} *:" for="deEmail"/>
-					<p:inputText value="#{inscricaousuarioBean.entity.deEmail}" id="deEmail"
-						required="true" requiredMessage="#{msg.usuario_deemail_requirido}" 
-						maxlength="100" style="width: 100%">
-						<f:validator validatorId="emailValidator"></f:validator>
-					</p:inputText>
-						
-					<h:outputLabel value="#{msg.usuario_deemailpessoal} *:" for="deEmailpessoal"/>
-					<p:inputText value="#{inscricaousuarioBean.entity.deEmailpessoal}" id="deEmailpessoal"
-						required="false" requiredMessage="#{msg.usuario_deemailpessoal_requirido}" 
-						maxlength="100" style="width: 100%">
-						<f:validator validatorId="emailValidator"></f:validator>
-					</p:inputText>
-						
-					<h:outputLabel value="#{msg.usuario_cdprojeto} *:" for="cdProjeto" />
-					<h:selectOneMenu value="#{inscricaousuarioBean.entity.projeto.cdProjeto}" id="cdProjeto" style="width: 100%" 
-						required="true" requiredMessage="#{msg.usuario_cdprojeto_requirido}">
-						<f:selectItem itemLabel="#{msg.selectonemenu_selecione}" itemValue="" />
-						<f:selectItems value="#{inscricaousuarioBean.projetos}" var="proj" itemLabel="#{proj.nmProjeto}" itemValue="#{proj.cdProjeto}" />
-					</h:selectOneMenu>
-				</h:panelGrid>
-				
-				<br/>
-				<p:panel header="#{msg.lotecausuario_clubes_usuario}">
-					<p:orderList value="#{inscricaousuarioBean.clubeusuarios}" var="clubeusuario" 
-						iconOnly="true" effect="highlight" 
-						itemValue="#{clubeusuario}" converter="clubeusuarioConverter" 
-						controlsLocation="left" id="customList">
-					         <p:column style="width:100%;"> 
-					         	#{clubeusuario.nuPosicao} - #{clubeusuario.clube.nmClube}
-					        </p:column>
-					    </p:orderList>		
-	            </p:panel>
-				
+							<h:outputLabel value="#{msg.usuario_nmusuario} *:" for="nmUsuario" />
+							<p:inputText value="#{inscricaousuarioBean.entity.nmUsuario}" id="nmUsuario"
+								required="true" requiredMessage="#{msg.usuario_nmusuario_requirido}" 
+								maxlength="100" style="width: 100%" />
+								
+							<h:outputLabel value="#{msg.usuario_desenha} *:" for="deSenha_input" />
+								
+							<h:panelGrid columns="3" style="width:100%" border="0" cellpadding="0" cellspacing="0" columnClasses="x, headerColumn alignRight bold, x" >
+								<p:password value="#{inscricaousuarioBean.entity.deSenha}" id="deSenha" match="deSenhaaux"
+									required="true" requiredMessage="#{msg.usuario_desenha_requirido}" 
+									maxlength="20" style="width: 100%" redisplay="true" validatorMessage="#{msg.usuario_senha_confirmacao_direrentes}"/>
+									
+								<h:outputLabel value="#{msg.usuario_desenhaaux} *: &nbsp;" for="deSenhaaux_input" />
+								<p:password value="#{inscricaousuarioBean.deSenhaaux}" id="deSenhaaux"
+									required="true" requiredMessage="#{msg.usuario_desenhaaux_requirido}" 
+									maxlength="20" style="width: 100%" redisplay="true" />
+							</h:panelGrid>
+								
+							<h:outputLabel value="#{msg.usuario_deemail} *:" for="deEmail"/>
+							<p:inputText value="#{inscricaousuarioBean.entity.deEmail}" id="deEmail"
+								required="true" requiredMessage="#{msg.usuario_deemail_requirido}" 
+								maxlength="100" style="width: 100%">
+								<f:validator validatorId="emailValidator"></f:validator>
+							</p:inputText>
+								
+							<h:outputLabel value="#{msg.usuario_deemailpessoal} *:" for="deEmailpessoal"/>
+							<p:inputText value="#{inscricaousuarioBean.entity.deEmailpessoal}" id="deEmailpessoal"
+								required="false" requiredMessage="#{msg.usuario_deemailpessoal_requirido}" 
+								maxlength="100" style="width: 100%">
+								<f:validator validatorId="emailValidator"></f:validator>
+							</p:inputText>
+								
+							<h:outputLabel value="#{msg.usuario_cdprojeto} *:" for="cdProjeto" />
+							<h:selectOneMenu value="#{inscricaousuarioBean.entity.projeto.cdProjeto}" id="cdProjeto" style="width: 100%" 
+								required="true" requiredMessage="#{msg.usuario_cdprojeto_requirido}">
+								<f:selectItem itemLabel="#{msg.selectonemenu_selecione}" itemValue="" />
+								<f:selectItems value="#{inscricaousuarioBean.projetos}" var="proj" itemLabel="#{proj.nmProjeto}" itemValue="#{proj.cdProjeto}" />
+							</h:selectOneMenu>
+						</h:panelGrid>
+					</p:tab>
+					
+					<p:tab id="tab2" title="Clubes">
+						<p:panel header="#{msg.lotecausuario_clubes_usuario}">
+							<p:orderList value="#{inscricaousuarioBean.clubeusuarios}" var="clubeusuario" 
+								iconOnly="true" effect="highlight" 
+								itemValue="#{clubeusuario}" converter="clubeusuarioConverter" 
+								controlsLocation="left" id="customList">
+							         <p:column style="width:100%;"> 
+							         	#{clubeusuario.nuPosicao} - #{clubeusuario.clube.nmClube}
+							        </p:column>
+							    </p:orderList>		
+			            </p:panel>
+					</p:tab>
+				</p:tabView>
 				<f:facet name="footer">
-				dsds
+					<!-- SALVAR -->
+					<p:commandButton value="#{msg.button_save}" action="#{inscricaousuarioBean.saveDadosInscricaoUsuario}" ajax="false" update="growl"/>
 				</f:facet>
 			</p:panel>
 		</h:form>

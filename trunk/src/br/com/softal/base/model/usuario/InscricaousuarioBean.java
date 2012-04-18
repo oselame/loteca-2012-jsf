@@ -12,10 +12,8 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 
-import org.hibernate.exception.ConstraintViolationException;
 import org.primefaces.event.FlowEvent;
 import org.primefaces.model.DualListModel;
-import org.springframework.dao.DataIntegrityViolationException;
 
 import br.com.softal.base.bean.AbstractManegedBean;
 import br.com.softal.base.model.projeto.Projeto;
@@ -107,10 +105,6 @@ public class InscricaousuarioBean extends AbstractManegedBean<Usuario> {
 	}
 	
 	public void projetoChange(ValueChangeEvent e) {
-		/*Long cdProjeto = (Long) e.getNewValue();
-		this.setCdProjeto( cdProjeto );
-		getEntity().getProjeto().setCdProjeto( cdProjeto );
-		getEntity().setProjeto( mapProjetos.get( cdProjeto ) );*/
 	}
 	
 	public void clubeChange(ValueChangeEvent e) {
@@ -158,6 +152,7 @@ public class InscricaousuarioBean extends AbstractManegedBean<Usuario> {
 	
 	public String abrirCadInscricaoUsuario() {
 		initializeEntity();
+		setEntity(new Usuario());
 		getEntity().setStatusInsert();
 		this.carregaClubesUsuario();
 		return "eltcCadUsuarioWizard.xhtml";
@@ -194,12 +189,25 @@ public class InscricaousuarioBean extends AbstractManegedBean<Usuario> {
 	public String editarDadosInscricaoUsuario() {
 		try {
 			setEntity( super.getUsuariologado() );
+			setDeSenhaaux( getEntity().getDeSenha() );
 			Lotecausuario lotecausuario = super.getLotecaService().findLotecausuarioInscricao( super.getUsuariologado() );
 			setClubeusuarios( super.getLotecaService().findAllClubeusuario( lotecausuario ) );
 			return "/pages/user/usuario/eltcCadDadosUsuario.xhtml";
 		} catch (Exception e) {
 			return null;
 		}
+	}
+	
+	public String saveDadosInscricaoUsuario() {
+		try {
+			super.getLotecaService().saveDadosInscricaoUsuario(getEntity(), getClubeusuarios());
+			super.getMessages().addSucessMessage("msg_sucess_registro_usuario_realizado_com_sucesso_aguarde_inicio_campeonato");
+			return "/pages/user/usuario/eltcCadDadosUsuario.xhtml";
+		} catch (Exception e) {
+			super.getMessages().addWarningMessage("msg_warning_email_ja_cadastrado_na_base");
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	

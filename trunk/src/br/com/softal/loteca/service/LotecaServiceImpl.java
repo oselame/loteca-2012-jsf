@@ -603,6 +603,33 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 	}
 	
 	@Override
+	public void saveDadosInscricaoUsuario(Usuario usuario, List<Clubeusuario> clubeusuarios) throws ServiceException {
+		try {
+			super.update(usuario);
+			
+			/*Usuariogrupo usuariogrupo = new Usuariogrupo();
+			usuariogrupo.setUsuario(usuario);
+			usuariogrupo.setGrupo(this.findUserGrupo());
+			super.save(usuariogrupo);
+			
+			Lotecausuario lotecausuario = new Lotecausuario();
+			lotecausuario.setUsuario(usuario);
+			lotecausuario.setLoteca(this.findLotecaAtiva());
+			lotecausuario.setFlAtivo(0l);
+			super.save(lotecausuario);*/
+			
+			long nuPosicao = 0;
+			for (Clubeusuario clubeusuario : clubeusuarios) {
+				//clubeusuario.setLotecausuario(lotecausuario);
+				clubeusuario.setNuPosicao( ++nuPosicao );
+				super.update(clubeusuario);
+			}
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
+	}
+	
+	@Override
 	public List<CanhotoDTO> findCanhotosConcurso(Data data) throws ServiceException {
 		try {
 			return getJogousuarioDAO().findCanhotosConcurso(data);
