@@ -40,6 +40,9 @@ public class SistemaBean extends AbstractManegedBean {
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
+		
+		//FIXME: TEMPORARIAMENTE
+		setExibirLogin( true );
 	}
 	
 	public String getNomesistema() {
@@ -75,6 +78,14 @@ public class SistemaBean extends AbstractManegedBean {
 
 	public void setExibirLogin(Boolean exibirLogin) {
 		this.exibirLogin = exibirLogin;
+	}
+	
+	public Loteca getLotecaativa() {
+		return lotecaativa;
+	}
+
+	public void setLotecaativa(Loteca lotecaativa) {
+		this.lotecaativa = lotecaativa;
 	}
 
 	@Override

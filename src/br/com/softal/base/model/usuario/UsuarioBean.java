@@ -27,8 +27,7 @@ public class UsuarioBean extends AbstractManegedBean<Usuario> {
 	
 	@ManagedProperty(value = "#{projetoBean}")
 	private ProjetoBean projetoBean;
-	
-	
+
 	public ProjetoBean getProjetoBean() {
 		return projetoBean;
 	}
