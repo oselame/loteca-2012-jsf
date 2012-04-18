@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition
+	template="/templates/template.xhtml">
+
+	<ui:define name="context">
+			<h:form>
+				<p:dataTable id="usuarios" var="row" value="#{usuarioBean.rows}"
+					rowKey="#{row.cdUsuario}" selection="#{usuarioBean.entity}"
+					selectionMode="single" emptyMessage="#{msg.warning_nenhum_registro_encontrado}"
+					paginator="true" rows="5" >
+					
+					<f:facet name="header">
+						#{msg.usuario_consultar}
+					</f:facet>
+					
+					<p:column headerText="#{msg.usuario_delogin}" filterStyle="width:100%"
+						filterBy="#{row.deLogin}" filterMatchMode="contains" style="width:30px">
+						<h:outputText value="#{row.deLogin}" />
+					</p:column>
+					
+					<p:column headerText="#{msg.usuario_nmusuario}"  filterStyle="width:100%"
+						filterBy="#{row.nmUsuario}" filterMatchMode="contains">
+						<h:outputText value="#{row.nmUsuario}" />
+					</p:column>
+					
+					<p:column headerText="#{msg.usuario_deemail}"  filterStyle="width:100%"
+						filterBy="#{row.deEmail}" filterMatchMode="contains" style="width:130px">
+						<h:outputText value="#{row.deEmail}" />
+					</p:column>
+					
+					<p:column style="width:10px">
+						<p:commandButton id="selectButton" icon="ui-icon-search" title="Editar" action="#{usuarioBean.editar}" ajax="false">
+							<f:setPropertyActionListener value="#{row}" target="#{usuarioBean.entity}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+				<p:messages showDetail="true" showSummary="false" />
+			</h:form>
+
+			<h:form>
+				<h:panelGrid columns="2">
+					<p:commandButton value="#{msg.button_novo}"
+						action="#{usuarioBean.adicionar}" ajax="false" />
+				</h:panelGrid>
+			</h:form>
+	</ui:define>
+</ui:composition>
+</html>
