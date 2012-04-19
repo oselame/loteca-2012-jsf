@@ -13,29 +13,24 @@
 		<h:form id="usuarioForm">
 			<p:growl id="growl" showDetail="true" />
 			<p:panel header="Inscrição">
-				<script>
-					function oteste() {
-						/*
-						jQuery("ui.ui-widget-content").addClass("teste");
-						jQuery("ul.ui-widget-content").height("585");
-						*/
-					}
-				</script>
 				<style>
 					.ui-orderlist .ui-orderlist-list {
 						height: 585px !important;
 					}
 				</style>
 				<p:wizard widgetVar="wiz" flowListener="#{inscricaousuarioBean.onFlowProcess}"
-					backLabel="Voltar" nextLabel="Avançar" id="wizusuario" onnext="javascript:oteste();" onback="javascript:oteste();">
+					backLabel="Voltar" nextLabel="Avançar" id="wizusuario">
 					
 					<p:tab id="dadosusuario" title="Dados">
 						<p:messages showDetail="true" showSummary="false" />
 						<h:panelGrid columns="2" style="width:100%" columnClasses="headerColumn alignRight bold" >
-							<h:outputLabel value="#{msg.usuario_nmusuario} *:" for="nmUsuario" />
+								<h:outputLabel value="#{msg.usuario_delogin} *:"/>
+								<h:outputText value="#{inscricaousuarioBean.entity.deLogin}" id="deLogin" style="color:#FF0000;font-weight: bold;" />
+						
+							<h:outputLabel value="#{msg.usuario_nmusuario_completo} *:" for="nmUsuario" />
 							<p:inputText value="#{inscricaousuarioBean.entity.nmUsuario}" id="nmUsuario"
-								required="true" requiredMessage="#{msg.usuario_nmusuario_requirido}" 
-								maxlength="100" style="width: 100%" />
+								required="true" requiredMessage="#{msg.usuario_nmusuario_completo_requirido}" 
+								maxlength="100" style="width: 100%"/>
 								
 							<h:outputLabel value="#{msg.usuario_desenha} *:" for="deSenha_input" />
 								
@@ -43,12 +38,15 @@
 								<p:password value="#{inscricaousuarioBean.entity.deSenha}" id="deSenha" match="deSenhaaux"
 									required="true" requiredMessage="#{msg.usuario_desenha_requirido}" 
 									feedback="true" promptLabel="Informe a Senha"
-									maxlength="20" style="width: 100%" redisplay="true" validatorMessage="#{msg.usuario_senha_confirmacao_direrentes}"/>
+									maxlength="20" style="width: 100%" redisplay="true" 
+									goodLabel="Boa" strongLabel="Forte" weakLabel="Fraca"
+									validatorMessage="#{msg.usuario_senha_confirmacao_direrentes}"/>
 									
 								<h:outputLabel value="#{msg.usuario_desenhaaux} *: &nbsp;" for="deSenhaaux_input" />
 								<p:password value="#{inscricaousuarioBean.deSenhaaux}" id="deSenhaaux"
 									required="true" requiredMessage="#{msg.usuario_desenhaaux_requirido}"  
 									feedback="true" promptLabel="Confirmação da Senha"
+									goodLabel="Boa" strongLabel="Forte" weakLabel="Fraca"
 									maxlength="20" style="width: 100%" redisplay="true" />
 							</h:panelGrid>
 								
@@ -57,11 +55,12 @@
 								required="true" requiredMessage="#{msg.usuario_deemail_requirido}" 
 								maxlength="100" style="width: 100%">
 								<f:validator validatorId="emailValidator"></f:validator>
+								<p:ajax event="blur" update="deLogin" listener="#{inscricaousuarioBean.montaLogin}"/> 
 							</p:inputText>
 								
 							<h:outputLabel value="#{msg.usuario_deemailpessoal} *:" for="deEmailpessoal"/>
 							<p:inputText value="#{inscricaousuarioBean.entity.deEmailpessoal}" id="deEmailpessoal"
-								required="false" requiredMessage="#{msg.usuario_deemailpessoal_requirido}" 
+								required="true" requiredMessage="#{msg.usuario_deemailpessoal_requirido}" 
 								maxlength="100" style="width: 100%" >
 								<f:validator validatorId="emailValidator"></f:validator>
 							</p:inputText>
