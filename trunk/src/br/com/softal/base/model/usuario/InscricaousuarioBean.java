@@ -137,6 +137,12 @@ public class InscricaousuarioBean extends AbstractManegedBean<Usuario> {
 	public void setDeSenhaaux(String deSenhaaux) {
 		this.deSenhaaux = deSenhaaux;
 	}
+	
+	public void montaLogin() {
+		int pos = getEntity().getDeEmail().indexOf("@");
+		String deLogin = getEntity().getDeEmail().substring(0, pos);
+		getEntity().setDeLogin(deLogin);
+	}
 
 	public String onFlowProcess(FlowEvent event) {  
         if(skip) {  
@@ -144,7 +150,7 @@ public class InscricaousuarioBean extends AbstractManegedBean<Usuario> {
         } else {  
         	System.out.println( getEntity().getProjeto().getCdProjeto() );
         	if (!event.getOldStep().equalsIgnoreCase("confirm") && event.getNewStep().equalsIgnoreCase("confirm")) {
-        		//-- processaJogos();
+        		//montaLogin();
         	}
             return event.getNewStep();  
         }  
@@ -152,9 +158,9 @@ public class InscricaousuarioBean extends AbstractManegedBean<Usuario> {
 	
 	public String abrirCadInscricaoUsuario() {
 		initializeEntity();
-		setEntity(new Usuario());
 		getEntity().setStatusInsert();
 		this.carregaClubesUsuario();
+		getEntity().setDeLogin("Gerado a partir do e-mail");
 		return "eltcCadUsuarioWizard.xhtml";
 	}
 	
@@ -200,6 +206,7 @@ public class InscricaousuarioBean extends AbstractManegedBean<Usuario> {
 	
 	public String saveDadosInscricaoUsuario() {
 		try {
+			montaLogin();
 			super.getLotecaService().saveDadosInscricaoUsuario(getEntity(), getClubeusuarios());
 			super.getMessages().addSucessMessage("msg_sucess_registro_usuario_realizado_com_sucesso_aguarde_inicio_campeonato");
 			return "/pages/user/usuario/eltcCadDadosUsuario.xhtml";
