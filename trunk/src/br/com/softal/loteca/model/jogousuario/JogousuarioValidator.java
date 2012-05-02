@@ -17,9 +17,10 @@ public class JogousuarioValidator {
 			j.setFlEmpate(0l);
 			j.setFlColuna2(0l);
 			
-			if (random.nextInt(3) == 0) {
+			int col = random.nextInt(3);
+			if (col == 0) {
 				j.setFlColuna1(1l);
-			} else if (random.nextInt(3) == 1) {
+			} else if (col == 1) {
 				j.setFlEmpate(1l);
 			} else {
 				j.setFlColuna2(1l);					
