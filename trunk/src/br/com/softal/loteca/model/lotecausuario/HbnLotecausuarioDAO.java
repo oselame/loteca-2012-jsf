@@ -9,7 +9,6 @@ import org.hibernate.Transaction;
 
 import br.com.softal.base.dao.GenericDAOImpl;
 import br.com.softal.base.model.usuario.Usuario;
-import br.com.softal.loteca.model.jogousuario.Jogousuario;
 import br.com.softal.loteca.util.Constantes;
 
 public class HbnLotecausuarioDAO extends GenericDAOImpl<Lotecausuario> implements LotecausuarioDAO {

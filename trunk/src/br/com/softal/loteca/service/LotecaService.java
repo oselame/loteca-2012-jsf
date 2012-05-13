@@ -13,6 +13,7 @@ import br.com.softal.loteca.model.data.Data;
 import br.com.softal.loteca.model.jogousuario.Jogousuario;
 import br.com.softal.loteca.model.loteca.Loteca;
 import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
+import br.com.softal.loteca.model.usuariodata.AproveitamentoDTO;
 import br.com.softal.loteca.model.usuariodata.CanhotoDTO;
 import br.com.softal.loteca.model.usuariodata.Usuariodata;
 
@@ -57,4 +58,5 @@ public interface LotecaService extends DefaultService {
 	void gerarJogosAleatoriosUsuarioSemApostas(Data data) throws ServiceException;
 	List<Jogousuario> findAllJogoUsuario(Data data, Lotecausuario lotecausuario) throws ServiceException;
 	Boolean existeUsuarioSemAposta(Data data) throws ServiceException;
+	List<AproveitamentoDTO> findAllAproveitamento(Loteca lotecaativa) throws ServiceException;
 }

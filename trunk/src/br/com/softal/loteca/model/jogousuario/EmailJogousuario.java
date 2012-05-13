@@ -8,8 +8,6 @@ import br.com.softal.base.mail.LtcEmailFactory;
 import br.com.softal.base.mail.LtcHtmlEmail;
 import br.com.softal.base.model.usuario.Usuario;
 import br.com.softal.loteca.model.data.Data;
-import br.com.softal.loteca.model.jogo.Jogo;
-import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
 
 public class EmailJogousuario {
 	
