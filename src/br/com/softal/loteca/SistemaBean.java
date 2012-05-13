@@ -2,7 +2,6 @@ package br.com.softal.loteca;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 
 import br.com.softal.base.bean.AbstractManegedBean;
 import br.com.softal.base.service.ServiceException;

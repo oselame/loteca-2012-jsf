@@ -9,15 +9,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import br.com.softal.base.model.Entity;
 import br.com.softal.base.model.action.Action;
 import br.com.softal.base.model.grupo.Grupo;
-import br.com.softal.loteca.model.loteca.Loteca;
 
 @SuppressWarnings("serial")
 @javax.persistence.Entity

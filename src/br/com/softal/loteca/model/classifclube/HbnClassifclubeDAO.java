@@ -10,7 +10,6 @@ import org.hibernate.Transaction;
 import br.com.softal.base.dao.DaoException;
 import br.com.softal.base.dao.GenericDAOImpl;
 import br.com.softal.loteca.model.data.Data;
-import br.com.softal.loteca.model.usuariodata.Usuariodata;
 import br.com.softal.loteca.util.Constantes;
 
 public class HbnClassifclubeDAO extends GenericDAOImpl<Classifclube> implements

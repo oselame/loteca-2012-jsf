@@ -14,7 +14,9 @@ import br.com.softal.base.service.ServiceException;
 import br.com.softal.base.util.DateUtil;
 import br.com.softal.loteca.LtcServiceLocator;
 import br.com.softal.loteca.model.data.Data;
+import br.com.softal.loteca.model.loteca.Loteca;
 import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
+import br.com.softal.loteca.model.usuariodata.AproveitamentoDTO;
 
 @SuppressWarnings("serial")
 @ManagedBean(name="jogousuarioBean")
@@ -26,7 +28,16 @@ public class JogousuarioBean extends AbstractManegedBean<Jogousuario> implements
 	private Boolean jogohabilitado;
 	private Long cdData;
 	private List<SelectItem> datasencerradas;
+	private String deAproveitamento;
 	
+	public String getDeAproveitamento() {
+		return deAproveitamento;
+	}
+
+	public void setDeAproveitamento(String deAproveitamento) {
+		this.deAproveitamento = deAproveitamento;
+	}
+
 	public Long getCdLoteca() {
 		return cdLoteca;
 	}
@@ -171,6 +182,21 @@ public class JogousuarioBean extends AbstractManegedBean<Jogousuario> implements
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	/*public String aproveitamentoAjax() {
+		return JogousuarioJson.getDados();
+	}*/
+	
+	public String abrirConGraficoAproveitamento() {
+		try {
+			Loteca lotecaativa = super.getLotecaativa();
+			List<AproveitamentoDTO> aproveitamentos = LtcServiceLocator.getInstance().getLotecaService().findAllAproveitamento(lotecaativa);
+			setDeAproveitamento( JogousuarioJson.getDados( aproveitamentos ) );
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		return "/pages/user/jogousuario/eltcConGraficoAproveitamento.xhtml";
 	}
 	
 }

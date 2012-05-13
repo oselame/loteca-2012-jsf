@@ -33,6 +33,7 @@ import br.com.softal.loteca.model.loteca.HbnLotecaDAO;
 import br.com.softal.loteca.model.loteca.Loteca;
 import br.com.softal.loteca.model.lotecausuario.HbnLotecausuarioDAO;
 import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
+import br.com.softal.loteca.model.usuariodata.AproveitamentoDTO;
 import br.com.softal.loteca.model.usuariodata.CanhotoDTO;
 import br.com.softal.loteca.model.usuariodata.HbnUsuariodataDAO;
 import br.com.softal.loteca.model.usuariodata.Usuariodata;
@@ -689,6 +690,15 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 	public Data findUltimaDataEncerrada(Loteca loteca) throws ServiceException {
 		try {
 			return getDataDAO().findUltimaDataEncerrada(loteca);
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
+	}
+	
+	@Override
+	public List<AproveitamentoDTO> findAllAproveitamento(Loteca lotecaativa) throws ServiceException {
+		try {
+			return getUsuariodataDAO().findAllAproveitamento(lotecaativa);
 		} catch (Exception e) {
 			throw new ServiceException(e);
 		}

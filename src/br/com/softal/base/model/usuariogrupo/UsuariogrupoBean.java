@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.ValueChangeEvent;
@@ -15,9 +14,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import br.com.softal.base.bean.AbstractManegedBean;
 import br.com.softal.base.model.grupo.Grupo;
 import br.com.softal.base.model.usuario.Usuario;
-import br.com.softal.base.service.ServiceException;
 import br.com.softal.loteca.LtcServiceLocator;
-import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
 
 @SuppressWarnings("serial")
 @ManagedBean(name = "usuariogrupoBean")

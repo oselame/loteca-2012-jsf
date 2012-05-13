@@ -2,7 +2,6 @@ package br.com.softal.loteca.model.clube;
 
 import java.util.List;
 
-import org.hibernate.Query;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 

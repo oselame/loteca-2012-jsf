@@ -243,4 +243,44 @@ public class HbnUsuariodataDAO extends GenericDAOImpl<Usuariodata> implements Us
 		return false;
 	}
 	
+	public List<AproveitamentoDTO> findAllAproveitamento(Loteca lotecaativa) throws DaoException {
+		List<AproveitamentoDTO> lista = new ArrayList<AproveitamentoDTO>();
+		StringBuilder hql = new StringBuilder();
+		hql.append("select u.nmUsuario, ud.cdData, d.dtData, ud.nuPontosrodada, ud.nuPosicao          \n"); 
+		hql.append("from eltcusuariodata ud                                                           \n"); 
+		hql.append("left join eltclotecausuario lu on lu.nuSeqlotecausuario = ud.nuSeqlotecausuario   \n"); 
+		hql.append("left join esegusuario u on u.cdUsuario = lu.cdUsuario                             \n"); 
+		hql.append("left join eltcdata d on d.cdData = ud.cdData                                      \n"); 
+		hql.append("where lu.cdLoteca = ?		                                          			  \n"); 
+		hql.append("order by  u.nmUsuario, ud.cdData		                                          \n"); 
+		Session session = getHibernateTemplate().getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				conn = session.connection();
+				pstmt = conn.prepareStatement(hql.toString());
+				pstmt.setLong(1, lotecaativa.getCdLoteca());
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					lista.add( AproveitamentoDTO.popule(rs) );
+				}
+				tx.commit();
+			} catch (Exception e) {
+				tx.rollback();
+				e.printStackTrace();
+			} finally {
+				rs.close();
+				pstmt.close();
+				conn.close();
+				session.close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lista;
+	}
+	
 }
