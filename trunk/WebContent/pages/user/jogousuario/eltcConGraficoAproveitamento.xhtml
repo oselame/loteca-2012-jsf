@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition
+	template="/templates/template.xhtml">
+
+	<ui:define name="context">
+		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	    <script type="text/javascript">
+		      // Load the Visualization API and the piechart package.
+		      google.load('visualization', '1.0', {'packages':['corechart']});
+		
+		      // Set a callback to run when the Google Visualization API is loaded.
+		      google.setOnLoadCallback(drawChart);
+		
+		      // Callback that creates and populates a data table,
+		      // instantiates the pie chart, passes in the data and
+		      // draws it.
+		      function drawChart() {
+				var jsonData = new google.visualization.DataTable(#{jogousuarioBean.deAproveitamento});
+		
+			      var options_seplan = {'title':'Aproveitamento (Cartões)',
+			                            'is3D':false,
+			                            'isStacked':true,
+			                            'fontSize':11,
+			                            'axisTitlesPosition':'in',
+			                            'legend':'right',
+			                            'chartArea':{ left: 130, top: 15, width: "60%", height: "60%"},
+			                            'vAxis': {title: ' ', titleTextStyle: {color: 'red'}},
+			                            'width':700,
+			                            'height':400};
+		
+		      var chart_seplan = new google.visualization.BarChart(document.getElementById('chart_div_seplan'));
+		      chart_seplan.draw(jsonData, options_seplan);
+		    }
+	    </script>
+		<h:form id="resultadoForm">
+			<div id="chart_div_seplan" />
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
