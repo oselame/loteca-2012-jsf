@@ -1,7 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 </h:head>
@@ -15,6 +16,7 @@
 		<div id="nomesistema">#{sistemaBean.nomesistema}<span id="spancomplemento">&nbsp;&nbsp;#{sistemaBean.complemento}</span></div>
 		
 		<div id="divlogin">
+			<p:messages showDetail="true" showSummary="false" />
 			<h:form id="loginForm" prependId="false" rendered="#{sistemaBean.exibirLogin}">
 				<h:panelGrid columns="3" border="0" width="100%" style="text-align: left;">
 					<h:panelGroup>
