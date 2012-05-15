@@ -251,7 +251,9 @@ public class HbnUsuariodataDAO extends GenericDAOImpl<Usuariodata> implements Us
 		hql.append("left join eltclotecausuario lu on lu.nuSeqlotecausuario = ud.nuSeqlotecausuario   \n"); 
 		hql.append("left join esegusuario u on u.cdUsuario = lu.cdUsuario                             \n"); 
 		hql.append("left join eltcdata d on d.cdData = ud.cdData                                      \n"); 
-		hql.append("where lu.cdLoteca = ?		                                          			  \n"); 
+		hql.append("where lu.cdLoteca = ?		                                          			  \n");
+		hql.append("and d.tpSituacao = ?		                                          			  \n");
+		
 		hql.append("order by  u.nmUsuario, ud.cdData		                                          \n"); 
 		Session session = getHibernateTemplate().getSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();
@@ -263,6 +265,7 @@ public class HbnUsuariodataDAO extends GenericDAOImpl<Usuariodata> implements Us
 				conn = session.connection();
 				pstmt = conn.prepareStatement(hql.toString());
 				pstmt.setLong(1, lotecaativa.getCdLoteca());
+				pstmt.setLong(2, Constantes.DATA_SITUACAO_CONCLUIDO);
 				rs = pstmt.executeQuery();
 				while (rs.next()) {
 					lista.add( AproveitamentoDTO.popule(rs) );
