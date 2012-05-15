@@ -147,7 +147,12 @@ public class DashboardBean implements Serializable {
 	
 	private void carregaUltimadataencerrada() {
 		try {
-			setUltimadataencerrada( LtcServiceLocator.getInstance().getLotecaService().findUltimaDataEncerrada( this.lotecaativa ) );
+			Data findUltimaDataEncerrada = LtcServiceLocator.getInstance().getLotecaService().findUltimaDataEncerrada( this.lotecaativa );
+			if (findUltimaDataEncerrada != null) {
+				setUltimadataencerrada( findUltimaDataEncerrada );
+			} else {
+				setUltimadataencerrada(new Data());
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

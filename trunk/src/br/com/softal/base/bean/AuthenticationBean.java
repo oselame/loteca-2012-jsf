@@ -3,6 +3,8 @@ package br.com.softal.base.bean;
 import java.io.IOException;
 import java.io.Serializable;
 
+import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
@@ -12,10 +14,12 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 
 import br.com.softal.base.model.usuario.Usuario;
 import br.com.softal.base.service.ServiceException;
@@ -36,8 +40,17 @@ public class AuthenticationBean extends AbstractManegedBean<Usuario> implements 
         return null;
     }
 	
+	@PostConstruct  
+    @SuppressWarnings("unused")  
+    private void handleErrorMessage()  {  
+        Exception e = (Exception) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get(AbstractAuthenticationProcessingFilter.SPRING_SECURITY_LAST_EXCEPTION_KEY);  
+        if (e instanceof BadCredentialsException)  {  
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(AbstractAuthenticationProcessingFilter.SPRING_SECURITY_LAST_EXCEPTION_KEY, null);  
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Username or password not valid.", null));  
+        }  
+    } 
+	
 	public void carregaUsuarioLogado() {
-		
         SecurityContext context = SecurityContextHolder.getContext();
         if (context instanceof SecurityContext){
             Authentication authentication = context.getAuthentication();
@@ -53,7 +66,11 @@ public class AuthenticationBean extends AbstractManegedBean<Usuario> implements 
 				} catch (ServiceException e) {
 					e.printStackTrace();
 				}
+            } else {
+            	super.getMessages().addSucessMessage("msg_erro_usuario_senha_invalido");
             }
+        } else {
+        	super.getMessages().addSucessMessage("msg_erro_usuario_senha_invalido");
         }
 	}
 	
