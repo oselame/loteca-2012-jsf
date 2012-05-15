@@ -204,6 +204,14 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 			if ((Long)event.getNewValue() != null) {
 				long cdLoteca = (Long) event.getNewValue();
 				List<Lotecausuario> lista = LtcServiceLocator.getInstance().getLotecaService().findAllLotecausuarioByLoteca(cdLoteca);
+				
+				Collections.sort(lista, new Comparator<Lotecausuario>() {
+					@Override
+					public int compare(Lotecausuario o1, Lotecausuario o2) {
+						return o1.getUsuario().getNmUsuario().compareTo(o2.getUsuario().getNmUsuario());
+					}
+				});
+				
 				setRows(lista);
 				setCdLoteca(cdLoteca);
 			} else {
