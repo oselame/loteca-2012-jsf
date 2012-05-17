@@ -30,6 +30,8 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 	private Long cdLoteca;
 	private List<SelectItem> lotecas;
 	private List<SelectItem> usuarios;
+	private List<Clubeusuario> clubesclassificados;
+	private List<Clubeusuario> clubesrebaixados;
 	
 	public LotecausuarioBean() {
 	}
@@ -58,6 +60,30 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 		this.usuarios = usuarios;
 	}
 	
+	public List<Clubeusuario> getClubesclassificados() {
+		if (getEntity().getClubeusuarios().size() > 0) {
+			clubesclassificados = new ArrayList<Clubeusuario>();
+			clubesclassificados.addAll( getEntity().getClubeusuarios().subList(0, 10) );
+		}
+		return clubesclassificados;
+	}
+
+	public void setClubesclassificados(List<Clubeusuario> clubesclassificados) {
+		this.clubesclassificados = clubesclassificados;
+	}
+
+	public List<Clubeusuario> getClubesrebaixados() {
+		if (getEntity().getClubeusuarios().size() > 0) {
+			clubesrebaixados = new ArrayList<Clubeusuario>();
+			clubesrebaixados.addAll( getEntity().getClubeusuarios().subList(16, 20) );
+		}
+		return clubesrebaixados;
+	}
+
+	public void setClubesrebaixados(List<Clubeusuario> clubesrebaixados) {
+		this.clubesrebaixados = clubesrebaixados;
+	}
+
 	@SuppressWarnings("unchecked")
 	private void carregaLotecas() {
 		List<Loteca> listaLotecas = (List<Loteca>) LtcServiceLocator.getInstance().getLotecaService().findAll(new Loteca());
