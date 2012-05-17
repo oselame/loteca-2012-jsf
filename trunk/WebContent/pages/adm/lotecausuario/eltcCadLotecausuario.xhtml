@@ -47,11 +47,29 @@
 				<p:orderList value="#{lotecausuarioBean.entity.clubeusuarios}" var="clubeusuario" 
 					iconOnly="true" effect="highlight" 
 					itemValue="#{clubeusuario}" converter="clubeusuarioConverter" 
-					controlsLocation="left" id="customList">
+					controlsLocation="left" id="customList" rendered="#{sistemaBean.lotecaativa.tpSituacao eq 1}">
 				         <p:column style="width:100%;"> 
 				         	#{clubeusuario.nuPosicao} - #{clubeusuario.clube.nmClube}
 				        </p:column>
-				    </p:orderList>		
+			    </p:orderList>	
+			    
+				<h:panelGrid columns="2" style="width:100%" >
+					<p:orderList value="#{lotecausuarioBean.clubesclassificados}" var="clubeclass" 
+						rendered="#{sistemaBean.lotecaativa.tpSituacao ne 1}"
+						converter="clubeusuarioConverter" controlsLocation="none" disabled="true">
+					         <p:column style="width:100%;"> 
+					         	#{clubeclass.nuPosicao} - #{clubeclass.clube.nmClube}
+					        </p:column>
+			   		</p:orderList>	
+			   		
+					<p:orderList value="#{lotecausuarioBean.clubesrebaixados}" var="clubereba" 
+						rendered="#{sistemaBean.lotecaativa.tpSituacao ne 1}"
+						converter="clubeusuarioConverter" controlsLocation="none" disabled="true">
+					         <p:column style="width:100%;"> 
+					         	#{clubereba.nuPosicao} - #{clubereba.clube.nmClube}
+					        </p:column>
+			   		</p:orderList>	
+				</h:panelGrid>			    	
             </p:panel>
 		</h:form>
 	</ui:define>
