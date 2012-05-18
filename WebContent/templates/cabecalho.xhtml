@@ -7,8 +7,6 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 </h:head>
 <h:body>
-	<style>
-</style>
 	<div id="cabecalho">
 		<div id="logo">
 			<h:graphicImage value="/images/zebra.jpg" width="70"/>
@@ -16,7 +14,7 @@
 		<div id="nomesistema">#{sistemaBean.nomesistema}<span id="spancomplemento">&nbsp;&nbsp;#{sistemaBean.complemento}</span></div>
 		
 		<div id="divlogin">
-			<p:messages showDetail="true" showSummary="false" />
+			<p:growl></p:growl>
 			<h:form id="loginForm" prependId="false" rendered="#{sistemaBean.exibirLogin}">
 				<h:panelGrid columns="3" border="0" width="100%" style="text-align: left;">
 					<h:panelGroup>
@@ -30,8 +28,10 @@
 					<h:panelGroup>
 						<br/>
 						<h:commandButton type="submit" id="login"
-							action="#{authenticationBean.doLogin()}" value="Entrar" />
+							action="#{authenticationBean.doLogin}" value="Entrar" />
 					</h:panelGroup>
+					<h:commandLink value="Esqueceu sua senha?" action="#{authenticationBean.abrirEsqueciMinhasenha}"
+						 immediate="true"/>
 				</h:panelGrid>
 			</h:form>
 		</div>
