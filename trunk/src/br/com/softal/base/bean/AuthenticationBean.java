@@ -21,6 +21,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 
+import br.com.softal.base.model.usuario.EmailUsuario;
 import br.com.softal.base.model.usuario.Usuario;
 import br.com.softal.base.service.ServiceException;
 import br.com.softal.loteca.LtcServiceLocator;
@@ -85,6 +86,20 @@ public class AuthenticationBean extends AbstractManegedBean<Usuario> implements 
     public String doLogout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "/logout.xhtml";
+    }
+    
+    public String abrirEsqueciMinhasenha() {
+    	return "eltcEsqueciminhasenha.xhtml";
+    }
+    public String enviarMinhaSenha() {
+    	try {
+    		Usuario usuario = LtcServiceLocator.getInstance().getLotecaService().findUsuarioByLoginEmail(getEntity().getDeLogin());
+    		EmailUsuario.enviaEmailEsqueciMinhaSenha( usuario );
+    		super.getMessages().addSucessMessage("msg_email_recuperacao_de_senha_enviado_com_sucesso");
+    	} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	return "eltcEsqueciminhasenha.xhtml";
     }
     
 	@Override
