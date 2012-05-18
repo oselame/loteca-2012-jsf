@@ -139,6 +139,15 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 	}
 	
 	@Override
+	public Usuario findUsuarioByLoginEmail(String deLoginEmail) throws ServiceException {
+		try {
+			return getUsuarioDAO().findUsuarioByLoginEmail( deLoginEmail );
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
+	}
+	
+	@Override
 	public List<Lotecausuario> findAllLotecausuarioByLoteca(Long cdLoteca) {
 		return getLotecausuarioDAO().findAllLotecausuarioByLoteca(cdLoteca);
 	}
