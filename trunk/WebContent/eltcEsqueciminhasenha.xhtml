@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/iniciotemplate.xhtml">
+	<ui:define name="context">
+		<style>
+			.coluna1{
+				width: 25%;
+			}
+			.coluna2{
+			}
+			.coluna3{
+				width: 25%;
+			}
+			
+			.campoTexto {
+				width: 100%;
+			}
+			
+			.borderZero{
+				border-width: 0px;
+				border-style: none;
+			}
+			
+			.cabecalhoColuna {
+				text-align: right;
+				font-weight: bold;
+			}
+		</style>
+		<br />
+		<br />
+		<h:form>
+			<p:growl></p:growl>
+			<h:panelGrid columns="3" style="width:100%" columnClasses="coluna1, coluna2, coluna3">
+				<h:panelGroup>&nbsp;</h:panelGroup>
+				
+				<h:panelGroup>
+					<p:panelGrid columns="1" style="width:100% ">
+						<f:facet name="header">Esqueci minha senha</f:facet>
+						<p:panelGrid columns="3" style="width:100% " border="0" cellpadding="0" cellspacing="0" columnClasses="coluna1 cabecalhoColuna borderZero, borderZero, coluna1 borderZero">
+							<h:outputLabel value="Login/E-mail:" />
+							<h:inputText value="#{authenticationBean.entity.deLogin}" required="true"  
+								requiredMessage="Campo 'Login/E-mail' não informado." 
+								styleClass="campoTexto"/>
+							<h:commandButton value="Enviar" action="#{authenticationBean.enviarMinhaSenha}" />
+						</p:panelGrid>					
+					</p:panelGrid>
+				</h:panelGroup>
+				
+				<h:panelGroup>&nbsp;</h:panelGroup>
+			</h:panelGrid>
+		</h:form>
+		<br />
+		<br /> 
+				
+	</ui:define>
+</ui:composition>
+
+</html>
