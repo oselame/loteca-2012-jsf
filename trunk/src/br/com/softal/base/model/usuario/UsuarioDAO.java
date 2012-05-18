@@ -6,5 +6,6 @@ import br.com.softal.base.dao.GenericDAO;
 public interface UsuarioDAO extends GenericDAO<Usuario> {
 
 	Usuario findUsuarioByLogin(String deLogin) throws DaoException;
+	Usuario findUsuarioByLoginEmail(String deLoginEmail) throws DaoException;
 
 }
