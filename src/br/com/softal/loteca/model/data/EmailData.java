@@ -75,7 +75,7 @@ public class EmailData {
 		html.append("<html>");
 		html.append("\t<body>");
 		html.append("\t\t<h3>Loteca - Resultado da Loteca já cadastrado.</h3><br><br>");
-		html.append("\t\tAcesso: http://soft030:8029/LotecaJsf");
+		html.append("\t\tAcesso: http://soft030-013:8029/loteca");
 		html.append("\t</body>");
 		html.append("</html>");
 		return html.toString();
@@ -84,7 +84,7 @@ public class EmailData {
 	private static String montaEmailResultadoText(Data data, Usuario usuario) {
 		StringBuilder html = new StringBuilder();
 		html.append("Loteca - Resultado da Loteca já cadastrado.\n\n");
-		html.append("Acesso: http://soft030:8029/LotecaJsf");
+		html.append("Acesso: http://soft030-013:8029/loteca");
 		return html.toString();
 	}
 	
