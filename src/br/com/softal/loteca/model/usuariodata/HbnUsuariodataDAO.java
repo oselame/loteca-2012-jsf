@@ -200,6 +200,7 @@ public class HbnUsuariodataDAO extends GenericDAOImpl<Usuariodata> implements Us
 		hql.append("LEFT JOIN FETCH lo.loteca lot ");
 		hql.append("LEFT JOIN FETCH ud.data dt ");
 		hql.append("WHERE lo.flAtivo = 1 ");
+		hql.append("AND (ud.flApostou is null or ud.flApostou = 0) ");
 		hql.append("AND dt.cdData = :cdData ");
 		Session session = getHibernateTemplate().getSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();
