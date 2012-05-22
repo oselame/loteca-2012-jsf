@@ -247,7 +247,7 @@ public class HbnUsuariodataDAO extends GenericDAOImpl<Usuariodata> implements Us
 	public List<AproveitamentoDTO> findAllAproveitamento(Loteca lotecaativa) throws DaoException {
 		List<AproveitamentoDTO> lista = new ArrayList<AproveitamentoDTO>();
 		StringBuilder hql = new StringBuilder();
-		hql.append("select u.nmUsuario, ud.cdData, d.dtData, ud.nuPontosrodada, ud.nuPosicao          \n"); 
+		hql.append("select u.nmUsuario, ud.cdData, d.dtData, ud.nuPontoscartao, ud.nuPosicao          \n"); 
 		hql.append("from eltcusuariodata ud                                                           \n"); 
 		hql.append("left join eltclotecausuario lu on lu.nuSeqlotecausuario = ud.nuSeqlotecausuario   \n"); 
 		hql.append("left join esegusuario u on u.cdUsuario = lu.cdUsuario                             \n"); 
