@@ -58,6 +58,7 @@
 								<p:commandButton value="#{msg.botao_enviar_email_jogo_liberado}"  action="#{dataBean.enviaremailjogoliberado}" ajax="false" 
 									immediate="true" update="growl"
 									rendered="#{dataBean.entity.tpSituacao eq 2 and !dataBean.entity.blEnviouemailjogoliberado}" />
+									
 								<p:commandButton value="#{msg.botao_enviar_email_jogo_liberado}"   
 									onclick="confirmEmailJogoLiberadoDialog.show()"
 									id="showConfirmEmailJogoLiberadoDialog"
@@ -66,7 +67,7 @@
 								<!-- GERAR JOGOS ALEATORIOS PARTICIPANTES SEM JOGOS -->
 								<p:commandButton value="#{msg.botao_gerar_jogos_aleatorios_data}"  action="#{dataBean.gerarjogosaleatorios}" ajax="false" 
 									immediate="true" update="growl"
-									rendered="#{dataBean.entity.tpSituacao eq 2 and dataBean.existeUsuarioSemAposta}" />
+									rendered="#{dataBean.entity.tpSituacao eq 3 and dataBean.existeUsuarioSemAposta}" />
 									
 									
 								<!-- PROCESSANDO RESULTADOS -->
