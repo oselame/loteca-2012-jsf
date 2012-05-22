@@ -9,8 +9,17 @@ public class AproveitamentoDTO {
 	private Date dtData;
 	private String nmUsuario;
 	private Long nuPontosrodada;
+	private Long nuPontoscartao;
 	
 	public AproveitamentoDTO() {
+	}
+
+	public Long getNuPontoscartao() {
+		return nuPontoscartao;
+	}
+
+	public void setNuPontoscartao(Long nuPontoscartao) {
+		this.nuPontoscartao = nuPontoscartao;
 	}
 
 	public Long getCdData() {
@@ -51,6 +60,7 @@ public class AproveitamentoDTO {
 		try { dto.setDtData(rs.getDate("dtData")); } catch (Exception e) {}
 		try { dto.setNmUsuario(rs.getString("nmUsuario")); } catch (Exception e) {}
 		try { dto.setNuPontosrodada(rs.getLong("nuPontosrodada")); } catch (Exception e) {}
+		try { dto.setNuPontoscartao(rs.getLong("nuPontoscartao")); } catch (Exception e) {}
 		return dto;
 		
 	}

@@ -93,8 +93,8 @@ public class JogousuarioJson {
 				retorno += "{\"v\":\"" + nmUsuario + "\",\"f\":null},";
 				nuTTPontos = 0;
 			}
-			retorno += "{\"v\":" + dto.getNuPontosrodada() + ",\"f\":null},";
-			nuTTPontos += dto.getNuPontosrodada();
+			retorno += "{\"v\":" + dto.getNuPontoscartao() + ",\"f\":null},";
+			nuTTPontos += dto.getNuPontoscartao();
 			
 		}
 		retorno += "{\"v\":" + (nuTotalDisputados - nuTTPontos) + ",\"f\":null}";
