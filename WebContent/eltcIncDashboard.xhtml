@@ -49,6 +49,14 @@
 					<iframe src="regulamento/regulamento2012.pdf" style="height: 500px;width: 435px;">
 					</iframe>
 				</p:panel>
+				
+				<p:panel id="dhbcampeoes" header="#{msg.dashboard_votos_campeao}">
+					<ui:include src="eltcIncVotosCampeaoFragment.xhtml" />
+				</p:panel>
+				
+				<p:panel id="dhbrebaixados" header="#{msg.dashboard_votos_rebaixados}">
+					<ui:include src="eltcIncVotosRebaixadosFragment.xhtml" />
+				</p:panel>
 			</p:dashboard>
 </h:body>
 </html>
