@@ -20,6 +20,7 @@ import br.com.softal.loteca.LtcServiceLocator;
 import br.com.softal.loteca.model.classifclube.Classifclube;
 import br.com.softal.loteca.model.classifclube.HbnClassifclubeDAO;
 import br.com.softal.loteca.model.clube.Clube;
+import br.com.softal.loteca.model.clube.ClubeDTO;
 import br.com.softal.loteca.model.clube.HbnClubeDAO;
 import br.com.softal.loteca.model.clubeusuario.Clubeusuario;
 import br.com.softal.loteca.model.clubeusuario.HbnClubeusuarioDAO;
@@ -712,4 +713,23 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 			throw new ServiceException(e);
 		}
 	}
+	
+	@Override
+	public List<ClubeDTO> findAllVotosCampeao(long cdLoteca)
+			throws ServiceException {
+		try {
+			return getClubeDAO().findAllVotosCampeao(cdLoteca);
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
+	}
+	
+	@Override
+	public List<ClubeDTO> findAllVotosRebaixados(long cdLoteca)
+			throws ServiceException {
+		try {
+			return getClubeDAO().findAllVotosRebaixados(cdLoteca);
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}	}
 }
