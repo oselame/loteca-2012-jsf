@@ -3,11 +3,13 @@ package br.com.softal.loteca.service;
 import java.util.List;
 import java.util.Map;
 
+import br.com.softal.base.dao.DaoException;
 import br.com.softal.base.model.usuario.Usuario;
 import br.com.softal.base.service.DefaultService;
 import br.com.softal.base.service.ServiceException;
 import br.com.softal.loteca.model.classifclube.Classifclube;
 import br.com.softal.loteca.model.clube.Clube;
+import br.com.softal.loteca.model.clube.ClubeDTO;
 import br.com.softal.loteca.model.clubeusuario.Clubeusuario;
 import br.com.softal.loteca.model.data.Data;
 import br.com.softal.loteca.model.jogousuario.Jogousuario;
@@ -60,4 +62,8 @@ public interface LotecaService extends DefaultService {
 	List<Jogousuario> findAllJogoUsuario(Data data, Lotecausuario lotecausuario) throws ServiceException;
 	Boolean existeUsuarioSemAposta(Data data) throws ServiceException;
 	List<AproveitamentoDTO> findAllAproveitamento(Loteca lotecaativa) throws ServiceException;
+	
+	List<ClubeDTO> findAllVotosCampeao(long cdLoteca) throws ServiceException;
+	List<ClubeDTO> findAllVotosRebaixados(long cdLoteca) throws ServiceException;
+
 }

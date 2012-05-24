@@ -9,5 +9,7 @@ public interface ClubeDAO extends GenericDAO<Clube> {
 	
 	List<Clube> findAllClubeByLoteca(long cdLoteca) throws DaoException;
 	Clube findClubePorNome(Clube clube) throws DaoException;
+	List<ClubeDTO> findAllVotosCampeao(long cdLoteca) throws DaoException;
+	List<ClubeDTO> findAllVotosRebaixados(long cdLoteca) throws DaoException;
 	
 }

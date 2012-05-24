@@ -16,6 +16,7 @@ import org.primefaces.model.DefaultDashboardModel;
 
 import br.com.softal.loteca.LtcServiceLocator;
 import br.com.softal.loteca.model.classifclube.Classifclube;
+import br.com.softal.loteca.model.clube.ClubeDTO;
 import br.com.softal.loteca.model.data.Data;
 import br.com.softal.loteca.model.loteca.Loteca;
 import br.com.softal.loteca.model.usuariodata.Usuariodata;
@@ -29,6 +30,8 @@ public class DashboardBean implements Serializable {
 	private DashboardModel model;
 	private List<Usuariodata> ranking;
 	private List<Classifclube> classifclubes;
+	private List<ClubeDTO> campeoes;
+	private List<ClubeDTO> rebaixados;	
 	private Usuariodata usuariodata;
 	private Loteca lotecaativa;
 	private Data ultimadataencerrada;
@@ -37,7 +40,6 @@ public class DashboardBean implements Serializable {
 		model = new DefaultDashboardModel();
 		DashboardColumn column1 = new DefaultDashboardColumn();
 		DashboardColumn column2 = new DefaultDashboardColumn();
-		//DashboardColumn column3 = new DefaultDashboardColumn();
 		this.carregaLotecaativa();		
 		
 		if (lotecaativa.getTpSituacao() == Constantes.lOTECA_SITUACAO_CADASTRAMENTO) {
@@ -49,8 +51,10 @@ public class DashboardBean implements Serializable {
 		} else if (lotecaativa.getTpSituacao() == Constantes.lOTECA_SITUACAO_ANDAMENTO) {
 			column1.addWidget("dhbclassificacao");
 			column1.addWidget("dhbultimarodada");
-			column2.addWidget("dhbranking");
+			column1.addWidget("dhbcampeoes");
+			column1.addWidget("dhbrebaixados");
 			
+			column2.addWidget("dhbranking");
 			
 			model.addColumn(column1);
 			model.addColumn(column2);
@@ -58,6 +62,7 @@ public class DashboardBean implements Serializable {
 			this.carregaRanking();
 			this.carregaClassificacao();
 			this.carregaUltimadataencerrada();
+			this.carregaVotosClubes();
 		} else {
 			column1.addWidget("dhbregulamento");
 			
@@ -129,6 +134,22 @@ public class DashboardBean implements Serializable {
 		this.ultimadataencerrada = ultimadataencerrada;
 	}
 	
+	public List<ClubeDTO> getCampeoes() {
+		return campeoes;
+	}
+
+	public void setCampeoes(List<ClubeDTO> campeoes) {
+		this.campeoes = campeoes;
+	}
+
+	public List<ClubeDTO> getRebaixados() {
+		return rebaixados;
+	}
+
+	public void setRebaixados(List<ClubeDTO> rebaixados) {
+		this.rebaixados = rebaixados;
+	}
+
 	private void carregaRanking() {
 		try {
 			setRanking( LtcServiceLocator.getInstance().getLotecaService().findAllDadosRankingLotecaAtiva() );
@@ -155,6 +176,17 @@ public class DashboardBean implements Serializable {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+	
+	private void carregaVotosClubes() {
+		try {
+			if (lotecaativa != null) {
+				setCampeoes( LtcServiceLocator.getInstance().getLotecaService().findAllVotosCampeao(lotecaativa.getCdLoteca()) );
+				setRebaixados( LtcServiceLocator.getInstance().getLotecaService().findAllVotosRebaixados(lotecaativa.getCdLoteca()) );
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 	}
 	
