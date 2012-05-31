@@ -46,8 +46,8 @@
 						#{row.jogo.tpResultadofinal eq 1 and row.flColuna1 eq 1 ? 'acertoClass' : ''}
 						#{row.tpJogo ne 1 and row.jogo.tpResultadofinal ne 1 and row.flColuna1 eq 1 ? 'erroClass' : ''}
 						">
-					<p:graphicImage url="/images/icoOK.gif" rendered="#{row.jogo.tpResultadofinal eq 1 and row.flColuna1 eq 1}" width="20"/>
-					<p:graphicImage url="/images/icoNao.gif" rendered="#{row.jogo.tpResultadofinal ne 1 and row.flColuna1 eq 1}" width="20"/>
+					<p:graphicImage url="/images/ok.jpg" rendered="#{row.jogo.tpResultadofinal eq 1 and row.flColuna1 eq 1}" width="20"/>
+					<p:graphicImage url="/images/nok.jpg" rendered="#{row.jogo.tpResultadofinal ne 1 and row.flColuna1 eq 1}" width="20"/>
 				</p:column>				
 				<p:column headerText="E" style="width:10px;" 
 					styleClass="alignCenter   
@@ -55,8 +55,8 @@
 						#{row.jogo.tpResultadofinal eq 0 and row.flEmpate eq 1 ? 'acertoClass' : ''}
 						#{row.tpJogo ne 1 and row.jogo.tpResultadofinal ne 0 and row.flEmpate eq 1 ? 'erroClass' : ''}
 						">
-					<p:graphicImage url="/images/icoOK.gif" rendered="#{row.jogo.tpResultadofinal eq 0 and row.flEmpate eq 1}" width="20"/>
-					<p:graphicImage url="/images/icoNao.gif" rendered="#{row.jogo.tpResultadofinal ne 0 and row.flEmpate eq 1}" width="20"/>
+					<p:graphicImage url="/images/ok.jpg" rendered="#{row.jogo.tpResultadofinal eq 0 and row.flEmpate eq 1}" width="20"/>
+					<p:graphicImage url="/images/nok.jpg" rendered="#{row.jogo.tpResultadofinal ne 0 and row.flEmpate eq 1}" width="20"/>
 				</p:column>				
 				<p:column headerText="2" style="width:10px;" 
 					styleClass="alignCenter   
@@ -64,8 +64,8 @@
 					#{row.jogo.tpResultadofinal eq 2 and row.flColuna2 eq 1 ? 'acertoClass' : ''}
 					#{row.tpJogo ne 1 and row.jogo.tpResultadofinal ne 2 and row.flColuna2 eq 1 ? 'erroClass' : ''}
 					">
-					<p:graphicImage url="/images/icoOK.gif" rendered="#{row.jogo.tpResultadofinal eq 2 and row.flColuna2 eq 1}" width="20"/>
-					<p:graphicImage url="/images/icoNao.gif" rendered="#{row.jogo.tpResultadofinal ne 2 and row.flColuna2 eq 1}" width="20"/>
+					<p:graphicImage url="/images/ok.jpg" rendered="#{row.jogo.tpResultadofinal eq 2 and row.flColuna2 eq 1}" width="20"/>
+					<p:graphicImage url="/images/nok.jpg" rendered="#{row.jogo.tpResultadofinal ne 2 and row.flColuna2 eq 1}" width="20"/>
 				</p:column>				
 				<p:column headerText="D" style="width:10px;" 
 					styleClass="alignCenter">
@@ -77,9 +77,9 @@
 				<tr>
 					<td class="resultado" style="border-width: 1px;border-style: solid;width: 20px;">&nbsp;</td>
 					<td style="width: 50px">Resultado</td>
-					<td class="" style="border-width: 1px;border-style: solid;width: 20px;"><p:graphicImage url="/images/icoOK.gif" width="20"/></td>
+					<td class="" style="border-width: 1px;border-style: solid;width: 20px;"><p:graphicImage url="/images/ok.jpg" width="20"/></td>
 					<td style=": 50px">Acerto</td>
-					<td class="" style="border-width: 1px;border-style: solid;width: 20px;"><p:graphicImage url="/images/icoNao.gif" width="20"/></td>
+					<td class="" style="border-width: 1px;border-style: solid;width: 20px;"><p:graphicImage url="/images/nok.jpg" width="20"/></td>
 					<td style="width: 50px">Erro</td>
 				</tr>
 			</table>			
