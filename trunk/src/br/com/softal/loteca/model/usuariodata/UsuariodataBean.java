@@ -75,8 +75,9 @@ public class UsuariodataBean extends AbstractManegedBean<Usuariodata> implements
 			 setCdData( null );
 			 setRows( null );
 			 this.populaComboDatas();
+			 setDtos( new ArrayList<AproveitamentoDTO>() );
         } catch (Exception e) {
-       	 e.printStackTrace();
+       	 	e.printStackTrace();
         }	
 		return "/pages/user/usuariodata/eltcConPontosCartoes.xhtml";
 	}
