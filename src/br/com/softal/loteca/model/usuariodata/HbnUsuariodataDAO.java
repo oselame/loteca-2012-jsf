@@ -6,6 +6,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import br.com.softal.base.dao.DaoException;
 import br.com.softal.base.dao.GenericDAOImpl;
 import br.com.softal.loteca.model.data.Data;
@@ -13,10 +17,6 @@ import br.com.softal.loteca.model.jogousuario.Jogousuario;
 import br.com.softal.loteca.model.loteca.Loteca;
 import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
 import br.com.softal.loteca.util.Constantes;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 
 public class HbnUsuariodataDAO extends GenericDAOImpl<Usuariodata> implements UsuariodataDAO {
@@ -266,6 +266,69 @@ public class HbnUsuariodataDAO extends GenericDAOImpl<Usuariodata> implements Us
 				pstmt = conn.prepareStatement(hql.toString());
 				pstmt.setLong(1, lotecaativa.getCdLoteca());
 				pstmt.setLong(2, Constantes.DATA_SITUACAO_CONCLUIDO);
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					lista.add( AproveitamentoDTO.popule(rs) );
+				}
+				tx.commit();
+			} catch (Exception e) {
+				tx.rollback();
+				e.printStackTrace();
+			} finally {
+				rs.close();
+				pstmt.close();
+				conn.close();
+				session.close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lista;
+	}
+	
+	public List<AproveitamentoDTO> findAllRanking(Long cdLoteca, Long cdData) throws DaoException {
+		List<AproveitamentoDTO> lista = new ArrayList<AproveitamentoDTO>();
+		StringBuilder hql = new StringBuilder();
+		hql.append("select   \n"); 
+		hql.append("  u.nmUsuario  \n"); 
+		hql.append("  ,ud.cdData  \n"); 
+		hql.append("  ,d.dtData  \n"); 
+		hql.append("  ,ud.nuPontoscartao  \n"); 
+		hql.append("  ,ud.nuPosicao         \n"); 
+		
+		hql.append("  ,ud.nuPontosfinal  \n"); 
+		hql.append("  ,ud.nuPosicaofinal   \n"); 
+		hql.append("from eltcusuariodata ud                                                           \n"); 
+		hql.append("left join eltclotecausuario lu on lu.nuSeqlotecausuario = ud.nuSeqlotecausuario   \n"); 
+		hql.append("left join esegusuario u on u.cdUsuario = lu.cdUsuario                             \n"); 
+		hql.append("left join eltcdata d on d.cdData = ud.cdData                                      \n"); 
+		hql.append("where lu.cdLoteca = ?		                                          			  \n"); 
+		hql.append("and d.tpSituacao = ?		                                          			  \n"); 
+		if (cdData != null) {
+			hql.append("and ud.cdData = ?		                                          			  \n"); 
+		}
+		
+		hql.append("order by  		                                          \n");
+		if (cdData != null) {
+			hql.append(" 	ud.nuPontoscartao desc, ud.nuPosicao asc	      \n"); 
+		} else {
+			hql.append(" 	ud.nuPosicaofinal desc	  \n"); 
+		}
+		Session session = getHibernateTemplate().getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				conn = session.connection();
+				pstmt = conn.prepareStatement(hql.toString());
+				pstmt.setLong(1, cdLoteca);
+				pstmt.setLong(2, Constantes.DATA_SITUACAO_CONCLUIDO);
+				if (cdData != null) {
+					pstmt.setLong(3, cdData);
+				}
+				
 				rs = pstmt.executeQuery();
 				while (rs.next()) {
 					lista.add( AproveitamentoDTO.popule(rs) );

@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition
+	template="/templates/template.xhtml">
+
+	<ui:define name="context">
+		<h:form id="pontoscartoesForm">
+			<p:messages showDetail="true" showSummary="false" />
+			<p:panelGrid columns="2" style="width:100%" columnClasses="headerColumn alignRight bold">
+				<f:facet name="header">
+					#{msg.menu_pontos_cartoes}
+				</f:facet>
+				<h:outputLabel value="#{msg.data_dtdata}:" for="cdData" />
+				<h:selectOneMenu value="#{usuariodataBean.cdData}" id="cdData" style="width: 100%" 
+					required="false" requiredMessage="#{msg.lotecausuario_cdloteca_requirido}" 
+					valueChangeListener="#{usuariodataBean.carregaResultadoPontosCartoesChange}"
+					onchange="submit()" immediate="true">
+					<f:selectItem itemLabel="#{msg.selectonemenu_selecione}" itemValue="" />
+					<f:selectItems value="#{usuariodataBean.datasencerradas}" var="data" itemLabel="#{data.dtData}" itemValue="#{data.cdData}" />
+				</h:selectOneMenu>
+			</p:panelGrid>
+			<br/>
+			<p:dataTable id="pontoscartoes" var="row" value="#{usuariodataBean.dtos}"
+				rowKey="#{row.nuSeqjogousuario}" emptyMessage="#{msg.warning_nenhum_registro_encontrado}" rowIndexVar="idx">
+				<p:column style="width:30px;">
+					<h:outputText value="#{idx + 1}"/>
+				</p:column>
+				<p:column headerText="#{msg.pontos_cartoes_participante}"  
+					 styleClass="alignLeft" sortBy="#{row.nmUsuario}">
+					<h:outputText value="#{row.nmUsuario}"/>
+				</p:column>	
+				<p:column headerText="#{msg.pontos_cartoes_pontos}"  
+					style="width:40px;" styleClass="alignRight" sortBy="#{row.nuPontoscartao}">
+					<h:outputText value="#{row.nuPontoscartao}" />
+				</p:column>	
+			</p:dataTable>
+		
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

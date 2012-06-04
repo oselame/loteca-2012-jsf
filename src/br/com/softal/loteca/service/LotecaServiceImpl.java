@@ -731,5 +731,16 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 			return getClubeDAO().findAllVotosRebaixados(cdLoteca);
 		} catch (Exception e) {
 			throw new ServiceException(e);
-		}	}
+		}	
+	}
+	
+	@Override
+	public List<AproveitamentoDTO> findAllRanking(Long cdLoteca, Long cdData)
+			throws ServiceException {
+		try {
+			return getUsuariodataDAO().findAllRanking(cdLoteca, cdData);
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}	
+	}
 }
