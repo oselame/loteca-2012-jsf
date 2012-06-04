@@ -18,5 +18,6 @@ public interface UsuariodataDAO extends GenericDAO<Usuariodata> {
 	List<Usuariodata> findAllUsuariodataSemAposta(Data data) throws DaoException;
 	Boolean existeUsuarioSemAposta(Data data) throws DaoException;
 	List<AproveitamentoDTO> findAllAproveitamento(Loteca lotecaativa) throws DaoException;
+	List<AproveitamentoDTO> findAllRanking(Long cdLoteca, Long cdData) throws DaoException;
 
 }
