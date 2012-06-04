@@ -105,7 +105,7 @@ public class Jogousuario extends Entity {
 	public void setBlColuna1(Boolean blColuna1) {
 		this.flColuna1 = (blColuna1 == null) ? 0l : (blColuna1 ?  1l : 0l);
 	}
-
+	
 	public Long getFlEmpate() {
 		return flEmpate;
 	}
