@@ -8,8 +8,11 @@ public class AproveitamentoDTO {
 	private Long cdData;
 	private Date dtData;
 	private String nmUsuario;
-	private Long nuPontosrodada;
+	
 	private Long nuPontoscartao;
+	private Long nuPosicaocartoes;
+	
+	private Long nuPontosrodada;
 	private Long nuPosicao;
 	
 	private Long nuPontosfinal;
@@ -82,17 +85,28 @@ public class AproveitamentoDTO {
 	public void setNuPosicao(Long nuPosicao) {
 		this.nuPosicao = nuPosicao;
 	}
+	
+	public Long getNuPosicaocartoes() {
+		return nuPosicaocartoes;
+	}
+
+	public void setNuPosicaocartoes(Long nuPosicaocartoes) {
+		this.nuPosicaocartoes = nuPosicaocartoes;
+	}
 
 	public static AproveitamentoDTO popule(ResultSet rs) {
 		AproveitamentoDTO dto = new AproveitamentoDTO();
-		try { dto.setCdData(			rs.getLong("cdData")); 			} catch (Exception e) {}
-		try { dto.setDtData(			rs.getDate("dtData")); 			} catch (Exception e) {}
-		try { dto.setNmUsuario(			rs.getString("nmUsuario")); 	} catch (Exception e) {}
-		try { dto.setNuPontosrodada(	rs.getLong("nuPontosrodada")); 	} catch (Exception e) {}
-		try { dto.setNuPontoscartao(	rs.getLong("nuPontoscartao")); 	} catch (Exception e) {}
-		try { dto.setNuPontosfinal(		rs.getLong("nuPontosfinal")); 	} catch (Exception e) {}
-		try { dto.setNuPosicaofinal(	rs.getLong("nuPosicaofinal")); 	} catch (Exception e) {}
-		try { dto.setNuPosicao(			rs.getLong("nuPosicao")); 		} catch (Exception e) {}
+		try { dto.setCdData(			rs.getLong("cdData")); 				} catch (Exception e) {}
+		try { dto.setDtData(			rs.getDate("dtData")); 				} catch (Exception e) {}
+		try { dto.setNmUsuario(			rs.getString("nmUsuario")); 		} catch (Exception e) {}
+		try { dto.setNuPontosrodada(	rs.getLong("nuPontosrodada")); 		} catch (Exception e) {}
+		try { dto.setNuPosicaocartoes(  rs.getLong("nuPosicaocartoes")); 	} catch (Exception e) {}
+		
+		try { dto.setNuPontoscartao(	rs.getLong("nuPontoscartao")); 		} catch (Exception e) {}
+		try { dto.setNuPosicao(			rs.getLong("nuPosicao")); 			} catch (Exception e) {}
+		
+		try { dto.setNuPontosfinal(		rs.getLong("nuPontosfinal")); 		} catch (Exception e) {}
+		try { dto.setNuPosicaofinal(	rs.getLong("nuPosicaofinal")); 		} catch (Exception e) {}
 		return dto;
 		
 	}

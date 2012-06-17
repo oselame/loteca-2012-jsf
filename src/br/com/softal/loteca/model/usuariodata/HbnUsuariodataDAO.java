@@ -110,12 +110,13 @@ public class HbnUsuariodataDAO extends GenericDAOImpl<Usuariodata> implements Us
 		hql.append(" SELECT "); 
 		hql.append("   lu.nuSeqlotecausuario, ");
 		hql.append("   ud.cdData, ");
+		hql.append("   ud.nuPontoscartao, ");
 		hql.append("   ud.nuPontoslista, ");
 		hql.append("   (SELECT sum(x.nuPontoscartao) "); 
 		hql.append("           FROM eltcusuariodata x "); 
 		hql.append("           WHERE x.cdData <= ud.cdData "); 
 		hql.append("           AND x.nuSeqlotecausuario = ud.nuSeqlotecausuario "); 
-		hql.append("           GROUP BY x.nuSeqlotecausuario) AS nuPontoscartao "); 
+		hql.append("           GROUP BY x.nuSeqlotecausuario) AS nuPontosrodada "); 
 		hql.append("  FROM eltcusuariodata ud "); 
 		hql.append("  join eltclotecausuario lu on "); 
 		hql.append("     ud.nuSeqlotecausuario = lu.nuSeqlotecausuario ");
@@ -140,9 +141,10 @@ public class HbnUsuariodataDAO extends GenericDAOImpl<Usuariodata> implements Us
 					UsuariodataDTO dto = new UsuariodataDTO();
 					dto.setCdData( data.getCdData() );
 					dto.setNuSeqlotecausuario( rs.getLong("nuSeqlotecausuario") );
-					dto.setNuPontosranking( rs.getLong("nuPontoscartao") );
+					dto.setNuPontoscartao( rs.getLong("nuPontoscartao") );
+					dto.setNuPontosranking( rs.getLong("nuPontosrodada") );
 					
-					long nuPontosfinal = rs.getLong("nuPontoscartao") + rs.getLong("nuPontoslista");
+					long nuPontosfinal = rs.getLong("nuPontosrodada") + rs.getLong("nuPontoslista");
 					dto.setNuPontosfinal( nuPontosfinal );
 					lista.add(dto);
 				}
@@ -293,11 +295,16 @@ public class HbnUsuariodataDAO extends GenericDAOImpl<Usuariodata> implements Us
 		hql.append("  u.nmUsuario  \n"); 
 		hql.append("  ,ud.cdData  \n"); 
 		hql.append("  ,d.dtData  \n"); 
+		
 		hql.append("  ,ud.nuPontoscartao  \n"); 
+		hql.append("  ,ud.nuPosicaocartoes  \n"); 
+		
+		hql.append("  ,ud.nuPontosrodada    \n"); 
 		hql.append("  ,ud.nuPosicao         \n"); 
 		
 		hql.append("  ,ud.nuPontosfinal  \n"); 
 		hql.append("  ,ud.nuPosicaofinal   \n"); 
+		
 		hql.append("from eltcusuariodata ud                                                           \n"); 
 		hql.append("left join eltclotecausuario lu on lu.nuSeqlotecausuario = ud.nuSeqlotecausuario   \n"); 
 		hql.append("left join esegusuario u on u.cdUsuario = lu.cdUsuario                             \n"); 
@@ -306,13 +313,15 @@ public class HbnUsuariodataDAO extends GenericDAOImpl<Usuariodata> implements Us
 		hql.append("and d.tpSituacao = ?		                                          			  \n"); 
 		if (cdData != null) {
 			hql.append("and ud.cdData = ?		                                          			  \n"); 
+		} else {
+			hql.append("and ud.cdData = (select max(cddata) from eltcdata dt where dt.cdLoteca = lu.cdLoteca and dt.tpSituacao = d.tpSituacao) \n");
 		}
 		
 		hql.append("order by  		                                          \n");
 		if (cdData != null) {
-			hql.append(" 	ud.nuPontoscartao desc, ud.nuPosicao asc	      \n"); 
+			hql.append(" 	ud.nuPontoscartao desc, ud.nuPosicaocartoes asc	  \n"); 
 		} else {
-			hql.append(" 	ud.nuPosicaofinal desc	  \n"); 
+			hql.append(" 	ud.nuPontosrodada desc, ud.nuPosicao asc	      \n"); 
 		}
 		Session session = getHibernateTemplate().getSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();

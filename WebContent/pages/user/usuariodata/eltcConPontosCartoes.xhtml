@@ -19,23 +19,50 @@
 					required="false" requiredMessage="#{msg.lotecausuario_cdloteca_requirido}" 
 					valueChangeListener="#{usuariodataBean.carregaResultadoPontosCartoesChange}"
 					onchange="submit()" immediate="true">
-					<f:selectItem itemLabel="#{msg.selectonemenu_selecione}" itemValue="" />
+					<f:selectItem itemLabel="#{msg.pontos_cartoes_acumulado}" itemValue="" />
 					<f:selectItems value="#{usuariodataBean.datasencerradas}" var="data" itemLabel="#{data.dtData}" itemValue="#{data.cdData}" />
 				</h:selectOneMenu>
 			</p:panelGrid>
 			<br/>
+			
 			<p:dataTable id="pontoscartoes" var="row" value="#{usuariodataBean.dtos}"
-				rowKey="#{row.nuSeqjogousuario}" emptyMessage="#{msg.warning_nenhum_registro_encontrado}" rowIndexVar="idx">
-				<p:column style="width:30px;">
-					<h:outputText value="#{idx + 1}"/>
+				rowKey="#{row.nuSeqjogousuario}" emptyMessage="#{msg.warning_nenhum_registro_encontrado}" rowIndexVar="idx"
+				rendered="#{not empty usuariodataBean.cdData and usuariodataBean.cdData gt 0}">
+				<p:column style="width:30px;" 
+					styleClass="#{row.nuPosicaocartoes eq 24 ? 'rosaClass' : ''}"
+					sortBy="#{row.nuPosicaocartoes}">
+					<h:outputText value="#{row.nuPosicaocartoes}"/>
 				</p:column>
 				<p:column headerText="#{msg.pontos_cartoes_participante}"  
-					 styleClass="alignLeft" sortBy="#{row.nmUsuario}">
+					 styleClass="alignLeft #{row.nuPosicaocartoes eq 24 ? 'rosaClass' : ''}" 
+					 sortBy="#{row.nmUsuario}">
+					<h:outputText value="#{row.nmUsuario}"/>
+				</p:column>	
+				<p:column headerText="#{msg.pontos_cartoes_pontos}"  style="width:40px;" 
+					styleClass="alignRight #{row.nuPosicaocartoes eq 24 ? 'rosaClass' : ''}"
+					sortBy="#{row.nuPontoscartao}">
+					<h:outputText value="#{row.nuPontoscartao}" />
+				</p:column>	
+			</p:dataTable>
+			
+			<p:dataTable id="pontosrodada" var="row" value="#{usuariodataBean.dtos}"
+				rowKey="#{row.nuSeqjogousuario}" emptyMessage="#{msg.warning_nenhum_registro_encontrado}" rowIndexVar="idx"
+				rendered="#{empty usuariodataBean.cdData or usuariodataBean.cdData eq 0}">
+				<p:column style="width:30px;" 
+					styleClass="#{row.nuPosicao eq 24 ? 'rosaClass' : ''}"
+					sortBy="#{row.nuPosicao}">
+					<h:outputText value="#{row.nuPosicao}"/>
+				</p:column>
+				<p:column headerText="#{msg.pontos_cartoes_participante}"  
+					 styleClass="alignLeft #{row.nuPosicao eq 24 ? 'rosaClass' : ''}"
+					 sortBy="#{row.nmUsuario}">
 					<h:outputText value="#{row.nmUsuario}"/>
 				</p:column>	
 				<p:column headerText="#{msg.pontos_cartoes_pontos}"  
-					style="width:40px;" styleClass="alignRight" sortBy="#{row.nuPontoscartao}">
-					<h:outputText value="#{row.nuPontoscartao}" />
+					style="width:40px;" 
+					styleClass="alignRight #{row.nuPosicao eq 24 ? 'rosaClass' : ''}"
+					sortBy="#{row.nuPontoscartao}">
+					<h:outputText value="#{row.nuPontosrodada}" />
 				</p:column>	
 			</p:dataTable>
 		
