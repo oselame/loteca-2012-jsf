@@ -75,7 +75,9 @@ public class UsuariodataBean extends AbstractManegedBean<Usuariodata> implements
 			 setCdData( null );
 			 setRows( null );
 			 this.populaComboDatas();
-			 setDtos( new ArrayList<AproveitamentoDTO>() );
+			 
+			 List<AproveitamentoDTO> dtos = super.getLotecaService().findAllRanking(this.getLotecaativa().getCdLoteca(), null);
+			 setDtos( dtos );
         } catch (Exception e) {
        	 	e.printStackTrace();
         }	
@@ -90,7 +92,7 @@ public class UsuariodataBean extends AbstractManegedBean<Usuariodata> implements
 				dtos = super.getLotecaService().findAllRanking(this.getLotecaativa().getCdLoteca(), cdData);
 			} else {
 				setCdData( null );
-				//dtos = super.getLotecaService().findAllRanking(this.getLotecaativa().getCdLoteca(), null);
+				dtos = super.getLotecaService().findAllRanking(this.getLotecaativa().getCdLoteca(), null);
 			}
 			setDtos(dtos);
 		} catch (ServiceException e) {

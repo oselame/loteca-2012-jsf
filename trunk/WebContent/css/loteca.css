@@ -59,6 +59,11 @@
 
 }
 
+.rosaClass {
+	color: #FF0088;
+	font-weight: bold;
+}
+
 .teste {
     height: 585px;
     font-weight: bold;

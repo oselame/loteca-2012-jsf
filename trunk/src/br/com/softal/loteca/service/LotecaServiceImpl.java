@@ -497,7 +497,19 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 				ud.setNuPontosfinal( resultado.get(ud.getLotecausuario().getNuSeqlotecausuario()).getNuPontosfinal() );
 			}
 			
-			//--
+			//-- Posicao por rodada Cartoes
+			Collections.sort(usuariodatas, new Comparator<Usuariodata>() {
+				@Override
+				public int compare(Usuariodata o1, Usuariodata o2) {
+					return o2.getNuPontoscartao().compareTo(o1.getNuPontoscartao());
+				}
+			});
+			long nuPosicaoCartoes = 0;
+			for (Usuariodata ud : usuariodatas) {
+				ud.setNuPosicaocartoes(++nuPosicaoCartoes);
+			}			
+			
+			//-- Posicao acumulado por rodada Cartoes
 			Collections.sort(usuariodatas, new Comparator<Usuariodata>() {
 				@Override
 				public int compare(Usuariodata o1, Usuariodata o2) {
