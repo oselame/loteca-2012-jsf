@@ -60,6 +60,9 @@ public class Usuariodata extends Entity {
 	
 	@Column(name = "nupontosfinal")
 	private Long nuPontosfinal;
+	
+	@Column(name = "nuposicaocartoes")
+	private Long nuPosicaocartoes;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "nuseqlotecausuario", insertable = true, updatable = true)
@@ -80,7 +83,7 @@ public class Usuariodata extends Entity {
 			Long flPagou,  Long nuPosicao, Long nuPontoscartao, 
 			Long nuPontoslista, 
 			Long nuPontosrodada, Long nuPosicaofinal, Long nuPontosfinal,		
-			Long nuSeqlotecausuario, Long cdData) {
+			Long nuSeqlotecausuario, Long nuPosicaocartoes, Long cdData) {
 		super();
 		this.nuSequsuariodata = nuSequsuariodata;
 		this.flApostou = flApostou;
@@ -94,6 +97,7 @@ public class Usuariodata extends Entity {
 		this.nuPontosrodada = nuPontosrodada;
 		this.nuPosicaofinal = nuPosicaofinal;
 		this.nuPontosfinal = nuPontosfinal;
+		this.nuPosicaocartoes = nuPosicaocartoes;
 		this.inicializaRelacionamentos();
 		getLotecausuario().setNuSeqlotecausuario(nuSeqlotecausuario);
 		getData().setCdData(cdData);
@@ -217,4 +221,12 @@ public class Usuariodata extends Entity {
 		this.nuPontosfinal = nuPontosfinal;
 	}
 
+	public Long getNuPosicaocartoes() {
+		return nuPosicaocartoes;
+	}
+
+	public void setNuPosicaocartoes(Long nuPosicaocartoes) {
+		this.nuPosicaocartoes = nuPosicaocartoes;
+	}
+	
 }
