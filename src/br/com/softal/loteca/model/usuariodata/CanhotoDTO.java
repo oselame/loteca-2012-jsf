@@ -6,6 +6,7 @@ import java.io.Serializable;
 public class CanhotoDTO implements Serializable {
 
 	private String deLogin;
+	private Long cdData;
 
 	private Long flLinha1Coluna1;
 	private Long flLinha1Empate;
@@ -76,6 +77,14 @@ public class CanhotoDTO implements Serializable {
 	private Long flLinha14Empate;
 	private Long flLinha14Coluna2;
 	private Long flLinha14Duplo;
+	
+	public Long getCdData() {
+		return cdData;
+	}
+
+	public void setCdData(Long cdData) {
+		this.cdData = cdData;
+	}
 
 	public String getDeLogin() {
 		return deLogin;

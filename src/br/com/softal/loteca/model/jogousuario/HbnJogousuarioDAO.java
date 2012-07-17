@@ -131,6 +131,7 @@ public class HbnJogousuarioDAO extends GenericDAOImpl<Jogousuario> implements Jo
 					nuSeqlotecausuario = ju.getLotecausuario().getNuSeqlotecausuario();
 					dto = new CanhotoDTO();
 					dto.setDeLogin( ju.getLotecausuario().getUsuario().getDeLogin() );
+					dto.setCdData( data.getCdData() );
 					lista.add(dto);
 				}
 				int key = ju.getJogo().getCdJogo().intValue();
