@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="255" pageHeight="425" columnWidth="255" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="1.6105100000000014"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="96"/>
+	<property name="ireport.y" value="100"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -322,7 +322,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="31" y="215" width="8" height="5" backcolor="#000000">
+				<reportElement mode="Opaque" x="31" y="214" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha9Coluna1} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -330,7 +330,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="103" y="215" width="8" height="5" backcolor="#000000">
+				<reportElement mode="Opaque" x="103" y="214" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha9Empate} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -338,7 +338,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="176" y="215" width="8" height="5" backcolor="#000000">
+				<reportElement mode="Opaque" x="176" y="214" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha9Coluna2} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -346,7 +346,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="194" y="215" width="8" height="5" backcolor="#000000">
+				<reportElement mode="Opaque" x="194" y="214" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha9Duplo} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -354,7 +354,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="103" y="228" width="8" height="5" backcolor="#000000">
+				<reportElement mode="Opaque" x="103" y="227" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha10Empate} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -362,7 +362,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="194" y="228" width="8" height="5" backcolor="#000000">
+				<reportElement mode="Opaque" x="194" y="227" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha10Duplo} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -370,7 +370,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="31" y="228" width="8" height="5" backcolor="#000000">
+				<reportElement mode="Opaque" x="31" y="227" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha10Coluna1} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -378,7 +378,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="176" y="228" width="8" height="5" backcolor="#000000">
+				<reportElement mode="Opaque" x="176" y="227" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha10Coluna2} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -386,7 +386,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="103" y="242" width="8" height="5" backcolor="#000000">
+				<reportElement mode="Opaque" x="103" y="241" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha11Empate} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -394,7 +394,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="31" y="242" width="8" height="5" backcolor="#000000">
+				<reportElement mode="Opaque" x="31" y="241" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha11Coluna1} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -402,7 +402,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="176" y="242" width="8" height="5" backcolor="#000000">
+				<reportElement mode="Opaque" x="176" y="241" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha11Coluna2} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -410,7 +410,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="194" y="242" width="8" height="5" backcolor="#000000">
+				<reportElement mode="Opaque" x="194" y="241" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha11Duplo} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -418,7 +418,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="31" y="256" width="8" height="5" backcolor="#000000">
+				<reportElement mode="Opaque" x="31" y="255" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha12Coluna1} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -426,7 +426,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="176" y="256" width="8" height="5" backcolor="#000000">
+				<reportElement mode="Opaque" x="176" y="255" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha12Coluna2} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -434,7 +434,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="194" y="256" width="8" height="5" backcolor="#000000">
+				<reportElement mode="Opaque" x="194" y="255" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha12Duplo} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -442,7 +442,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="103" y="256" width="8" height="5" backcolor="#000000">
+				<reportElement mode="Opaque" x="103" y="255" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha12Empate} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -450,7 +450,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="103" y="269" width="8" height="5" backcolor="#000000">
+				<reportElement mode="Opaque" x="103" y="268" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha13Empate} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -458,7 +458,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="194" y="269" width="8" height="5" backcolor="#000000">
+				<reportElement mode="Opaque" x="194" y="268" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha13Duplo} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -466,7 +466,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="176" y="269" width="8" height="5" backcolor="#000000">
+				<reportElement mode="Opaque" x="176" y="268" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha13Coluna2} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -474,7 +474,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="31" y="269" width="8" height="5" backcolor="#000000">
+				<reportElement mode="Opaque" x="31" y="268" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha13Coluna1} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
