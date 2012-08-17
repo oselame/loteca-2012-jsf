@@ -148,6 +148,10 @@ public class Usuario extends Entity {
 	public Long getFlForaempresa() {
 		return flForaempresa;
 	}
+	
+	public Boolean isForaempresa() {
+		return this.getFlForaempresa() != null && this.getFlForaempresa().longValue() == 1l;
+	}
 
 	public void setFlForaempresa(Long flForaempresa) {
 		this.flForaempresa = flForaempresa;
