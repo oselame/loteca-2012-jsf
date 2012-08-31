@@ -130,9 +130,11 @@ public class JogousuarioBean extends AbstractManegedBean<Jogousuario> implements
 	
 	public void enviarJogoEmailPessoal() {
 		try {
+			super.getLotecaService().saveAllJogousuario( getJogousuarios() );
 			EmailJogousuario.enviaEmailJogousuarioParaEmailPessoal(getJogousuarios(), getUsuariologado());
 			super.getMessages().addSucessMessage("msg_sucess_email_enviado_com_sucesso");
 		} catch (Exception e) {
+			super.getMessages().addWarningMessage(e.getMessage());
 			e.printStackTrace();
 		}
 	}
