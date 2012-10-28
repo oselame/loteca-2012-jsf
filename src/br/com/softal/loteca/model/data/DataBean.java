@@ -306,6 +306,7 @@ public class DataBean extends AbstractManegedBean<Data> {
 	private void gerarRelatoriCanhatos() {
 		String jasperName = "cartoes.jasper";
 		jasperName = "cartaounico.jasper";
+		jasperName = "cartaounicoafastado.jasper";
 		 FacesContext context = FacesContext.getCurrentInstance();
 		 ServletContext servletContext = (ServletContext) context.getExternalContext().getContext();
 		 String sourceFileName = servletContext.getRealPath("/relatorios/" + jasperName);
