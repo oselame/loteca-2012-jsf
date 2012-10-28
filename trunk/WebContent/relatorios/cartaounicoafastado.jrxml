@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="255" pageHeight="425" columnWidth="255" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.6105100000000014"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="100"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="deLogin" class="java.lang.String"/>
+	<field name="flLinha1Coluna1" class="java.lang.Long"/>
+	<field name="flLinha1Empate" class="java.lang.Long"/>
+	<field name="flLinha1Coluna2" class="java.lang.Long"/>
+	<field name="flLinha1Duplo" class="java.lang.Long"/>
+	<field name="flLinha2Coluna1" class="java.lang.Long"/>
+	<field name="flLinha2Empate" class="java.lang.Long"/>
+	<field name="flLinha2Coluna2" class="java.lang.Long"/>
+	<field name="flLinha2Duplo" class="java.lang.Long"/>
+	<field name="flLinha3Coluna1" class="java.lang.Long"/>
+	<field name="flLinha3Empate" class="java.lang.Long"/>
+	<field name="flLinha3Coluna2" class="java.lang.Long"/>
+	<field name="flLinha3Duplo" class="java.lang.Long"/>
+	<field name="flLinha4Coluna1" class="java.lang.Long"/>
+	<field name="flLinha4Empate" class="java.lang.Long"/>
+	<field name="flLinha4Coluna2" class="java.lang.Long"/>
+	<field name="flLinha4Duplo" class="java.lang.Long"/>
+	<field name="flLinha5Coluna1" class="java.lang.Long"/>
+	<field name="flLinha5Empate" class="java.lang.Long"/>
+	<field name="flLinha5Coluna2" class="java.lang.Long"/>
+	<field name="flLinha5Duplo" class="java.lang.Long"/>
+	<field name="flLinha6Coluna1" class="java.lang.Long"/>
+	<field name="flLinha6Empate" class="java.lang.Long"/>
+	<field name="flLinha6Coluna2" class="java.lang.Long"/>
+	<field name="flLinha6Duplo" class="java.lang.Long"/>
+	<field name="flLinha7Coluna1" class="java.lang.Long"/>
+	<field name="flLinha7Empate" class="java.lang.Long"/>
+	<field name="flLinha7Coluna2" class="java.lang.Long"/>
+	<field name="flLinha7Duplo" class="java.lang.Long"/>
+	<field name="flLinha8Coluna1" class="java.lang.Long"/>
+	<field name="flLinha8Empate" class="java.lang.Long"/>
+	<field name="flLinha8Coluna2" class="java.lang.Long"/>
+	<field name="flLinha8Duplo" class="java.lang.Long"/>
+	<field name="flLinha9Coluna1" class="java.lang.Long"/>
+	<field name="flLinha9Empate" class="java.lang.Long"/>
+	<field name="flLinha9Coluna2" class="java.lang.Long"/>
+	<field name="flLinha9Duplo" class="java.lang.Long"/>
+	<field name="flLinha10Coluna1" class="java.lang.Long"/>
+	<field name="flLinha10Empate" class="java.lang.Long"/>
+	<field name="flLinha10Coluna2" class="java.lang.Long"/>
+	<field name="flLinha10Duplo" class="java.lang.Long"/>
+	<field name="flLinha11Coluna1" class="java.lang.Long"/>
+	<field name="flLinha11Empate" class="java.lang.Long"/>
+	<field name="flLinha11Coluna2" class="java.lang.Long"/>
+	<field name="flLinha11Duplo" class="java.lang.Long"/>
+	<field name="flLinha12Coluna1" class="java.lang.Long"/>
+	<field name="flLinha12Empate" class="java.lang.Long"/>
+	<field name="flLinha12Coluna2" class="java.lang.Long"/>
+	<field name="flLinha12Duplo" class="java.lang.Long"/>
+	<field name="flLinha13Coluna1" class="java.lang.Long"/>
+	<field name="flLinha13Empate" class="java.lang.Long"/>
+	<field name="flLinha13Coluna2" class="java.lang.Long"/>
+	<field name="flLinha13Duplo" class="java.lang.Long"/>
+	<field name="flLinha14Coluna1" class="java.lang.Long"/>
+	<field name="flLinha14Empate" class="java.lang.Long"/>
+	<field name="flLinha14Coluna2" class="java.lang.Long"/>
+	<field name="flLinha14Duplo" class="java.lang.Long"/>
+	<detail>
+		<band height="398" splitType="Stretch">
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="33" y="105" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha1Coluna1} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="105" y="105" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha1Empate} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="178" y="105" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha1Coluna2} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="196" y="105" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha1Duplo} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="105" y="119" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha2Empate} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="33" y="119" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha2Coluna1} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="196" y="119" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha2Duplo} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="178" y="119" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha2Coluna2} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="105" y="133" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha3Empate} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="178" y="133" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha3Coluna2} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="33" y="133" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha3Coluna1} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="196" y="133" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha3Duplo} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="105" y="147" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha4Empate} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="178" y="147" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha4Coluna2} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="33" y="147" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha4Coluna1} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="196" y="147" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha4Duplo} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="178" y="160" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha5Coluna2} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="196" y="160" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha5Duplo} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="105" y="160" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha5Empate} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="33" y="160" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha5Coluna1} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="178" y="174" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha6Coluna2} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="105" y="174" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha6Empate} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="33" y="174" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha6Coluna1} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="196" y="174" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha6Duplo} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="105" y="188" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha7Empate} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="33" y="188" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha7Coluna1} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="196" y="188" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha7Duplo} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="178" y="188" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha7Coluna2} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="196" y="201" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha8Duplo} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="105" y="201" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha8Empate} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="178" y="201" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha8Coluna2} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="33" y="201" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha8Coluna1} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="33" y="214" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha9Coluna1} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="105" y="214" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha9Empate} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="178" y="214" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha9Coluna2} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="196" y="214" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha9Duplo} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="105" y="227" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha10Empate} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="196" y="227" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha10Duplo} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="33" y="227" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha10Coluna1} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="178" y="227" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha10Coluna2} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="105" y="241" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha11Empate} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="33" y="241" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha11Coluna1} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="178" y="241" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha11Coluna2} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="196" y="241" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha11Duplo} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="33" y="255" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha12Coluna1} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="178" y="255" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha12Coluna2} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="196" y="255" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha12Duplo} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="105" y="255" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha12Empate} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="105" y="268" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha13Empate} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="196" y="268" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha13Duplo} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="178" y="268" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha13Coluna2} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="33" y="268" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha13Coluna1} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="196" y="280" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha14Duplo} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="178" y="280" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha14Coluna2} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="105" y="280" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha14Empate} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="2">
+				<reportElement mode="Opaque" x="33" y="280" width="8" height="5" backcolor="#000000">
+					<printWhenExpression><![CDATA[$F{flLinha14Coluna1} == 1]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="20" y="337" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{deLogin}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

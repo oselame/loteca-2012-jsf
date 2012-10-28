@@ -107,6 +107,7 @@
 									#{jj.deJogo}
 								</p:column>
 								<p:column headerText="#{msg.jogo_tpresultadofinal}">
+									<!-- 
 									<h:selectOneMenu value="#{jj.tpResultadofinal}" id="tpResultadofinal" style="width: 100%" 
 										required="true" requiredMessage="#{msg.jogo_tpresultadofinal_requirido}">
 										<f:selectItem itemLabel="#{msg.selectonemenu_selecione}" itemValue="" />
@@ -114,6 +115,12 @@
 										<f:selectItem itemLabel="#{msg.jogo_tpresultadofinal_empate}" itemValue="0" />
 										<f:selectItem itemLabel="#{msg.jogo_tpresultadofinal_coluna2}" itemValue="2" />
 									</h:selectOneMenu>
+									-->
+									<h:selectOneRadio  value="#{jj.tpResultadofinal}" id="tpResultadofinal" border="0">
+										<f:selectItem itemLabel="#{msg.jogo_tpresultadofinal_coluna1}" itemValue="1" />
+										<f:selectItem itemLabel="#{msg.jogo_tpresultadofinal_empate}" itemValue="0" />
+										<f:selectItem itemLabel="#{msg.jogo_tpresultadofinal_coluna2}" itemValue="2" />
+									</h:selectOneRadio>
 								</p:column>
 							</p:dataTable>
 							<f:facet name="footer">
