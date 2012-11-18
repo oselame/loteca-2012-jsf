@@ -24,6 +24,17 @@
 	margin-top: 45px;
 }
 
+#divloginErro {
+	text-align: left;
+	float: right;
+	margin-top: 30px;
+}
+
+#divErro {
+	text-align: center;
+	color: red;
+}
+
 #spancomplemento {
 	font-size: 10px;
 	color: red;

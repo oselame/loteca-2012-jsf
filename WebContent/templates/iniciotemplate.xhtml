@@ -26,23 +26,20 @@
 <h:body>
 		<div id="mainContainer">
 		<div id="header">
-			<ui:include src="cabecalho.xhtml" />
+			<ui:insert name="login" src="cabecalho.xhtml">
+				<ui:include name="login" src="cabecalho.xhtml" />
+			</ui:insert>
 		</div>
-		<!-- header, END -->
 		<div id="sideBarContentContainer">
-			<!-- sideBar, END -->
 			<div id="contentX">
 				<ui:insert name="context">&nbsp;</ui:insert>
 			</div>
-			<!-- content, END -->
 			<div style="clear: both"></div>
 		</div>
-		<!-- sideBarContentContainer -->
 		<div id="footer">
 			<ui:include src="rodape.xhtml" />
 		</div>
 	</div>
-	<!-- mainContainer -->
 </h:body>
 
 </html>
