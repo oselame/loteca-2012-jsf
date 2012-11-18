@@ -9,7 +9,7 @@
 
     <http auto-config="true">
 		<form-login login-page="/eltcDashboard.xhtml" 
-			authentication-failure-url="/eltcDashboard.xhtml?erro=invalido" 
+			authentication-failure-url="/eltcDashboardErro.xhtml" 
 			default-target-url="/conteudo.xhtml" />	
 		<intercept-url pattern="/templates/template.xhtml" access="ROLE_USER, ROLE_ADMIN" />
 		<intercept-url pattern="/pages/user/**" access="ROLE_USER, ROLE_ADMIN" />
