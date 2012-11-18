@@ -6,14 +6,22 @@
 <h:head>
 </h:head>
 <h:body>
-	<h:form >
-		<h:panelGrid columns="2">
-			Usuário: <h:inputText value="#{j_username}" />
-			Senha: <h:inputText value="#{j_password}" />
-			<f:facet name="footer">
-				<h:commandButton value="Logar" action="j_spring_security_check" />
-			</f:facet>
-		</h:panelGrid>
+		<h:form id="loginForm2" prependId="false" rendered="#{sistemaBean.exibirLogin}" style="text-align: center;">
+		<div id="header">
+			<h:panelGrid columns="2" border="0" width="300" style="border-width: 1px; border-style: solid;text-align: center;">
+				<h:outputLabel>Login:</h:outputLabel>
+				<h:inputText id="j_username" required="true" style="width:100px" requiredMessage="Campo 'Login' não informado." />
+	
+				<h:outputLabel>Senha:</h:outputLabel>
+				<h:inputSecret id="j_password" required="true" style="width:100px" requiredMessage="Campo 'Senha' não informado." />
+	
+				<h:outputLabel />
+				<h:commandButton type="submit" id="login" action="#{authenticationBean.doLogin}" value="Entrar" />
+				
+				<h:outputLabel />
+				<h:commandLink value="Recuperação de senha" action="#{authenticationBean.abrirEsqueciMinhasenha}" immediate="true" />
+			</h:panelGrid>
+		</div>
 	</h:form>
 </h:body>
 </html>
