@@ -13,6 +13,7 @@ import br.com.softal.loteca.model.jogo.Jogo;
 import br.com.softal.loteca.model.jogousuario.Jogousuario;
 import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
 import br.com.softal.loteca.model.usuariodata.Usuariodata;
+import br.com.softal.loteca.util.Constantes;
 
 public class EmailData {
 	
@@ -78,8 +79,8 @@ public class EmailData {
 		StringBuilder html = new StringBuilder();
 		html.append("<html>");
 		html.append("\t<body>");
-		html.append("\t\t<h3>Loteca - Resultado da Loteca já cadastrado.</h3><br><br>");
-		html.append("\t\tAcesso: http://soft030-013:8029/loteca");
+		html.append("\t\t<h3>Loteca - Resultado da Loteca jï¿½ cadastrado.</h3><br><br>");
+		html.append("\t\tAcesso: http://" + Constantes.SERVIDOR_PORTA + "/loteca");
 		html.append("\t</body>");
 		html.append("</html>");
 		return html.toString();
@@ -146,7 +147,7 @@ public class EmailData {
 			html.append("\t\t<h3>Resultado rodada</h3><br><br>");
 			html.append("\t\t<table border=\"0\" width=\"100%\">");
 			html.append("\t\t\t<tr>");
-			html.append("\t\t\t\t<td>Código</td>");
+			html.append("\t\t\t\t<td>Cï¿½digo</td>");
 			html.append("\t\t\t\t<td>Jogo</td>");
 			html.append("\t\t\t\t<td align=\"center\">Coluna 1</td>");
 			html.append("\t\t\t\t<td align=\"center\">Empate</td>");
@@ -175,22 +176,22 @@ public class EmailData {
 	
 	private static String montaEmailResultadoText(Data data, Usuario usuario) {
 		StringBuilder html = new StringBuilder();
-		html.append("Loteca - Resultado da Loteca já cadastrado.\n\n");
-		html.append("Acesso: http://soft030-013:8029/loteca");
+		html.append("Loteca - Resultado da Loteca jï¿½ cadastrado.\n\n");
+		html.append("\t\tAcesso: http://" + Constantes.SERVIDOR_PORTA + "/loteca");
 		return html.toString();
 	}
 	
 	private static String montaEmailResultadoTextForaEmpresa(Data data, Usuario usuario, List<Usuariodata> rankingLotecaAtiva, List<Jogousuario> listaJogousuario) {
 		StringBuilder html = new StringBuilder();
-		html.append("Loteca - Resultado da Loteca já cadastrado.\n\n");
-		html.append("Acesso: http://soft030-013:8029/loteca");
+		html.append("Loteca - Resultado da Loteca jï¿½ cadastrado.\n\n");
+		html.append("\t\tAcesso: http://" + Constantes.SERVIDOR_PORTA + "/loteca");
 		return html.toString();
 	}
 	
 	public static void enviaEmailResultado(Data data, List<Lotecausuario> usuarios) {
 		try {
 			LtcHtmlEmail email = LtcEmailFactory.getInstance().createHtmlEmail();
-			email.setSubject("Loteca - Resultado da Loteca já cadastrado");
+			email.setSubject("Loteca - Resultado da Loteca jï¿½ cadastrado");
 			for (Lotecausuario lc : usuarios) {
 				if (!lc.getUsuario().isForaempresa()) {
 					email.setHtmlMsg( EmailData.montaEmailResultadoHtml(data, lc.getUsuario()) );
@@ -207,7 +208,7 @@ public class EmailData {
 					List<Jogousuario> listaJogousuario = LtcServiceLocator.getInstance().getLotecaService().findAllJogoUsuario(data, lc);
 					
 					LtcHtmlEmail email2 = LtcEmailFactory.getInstance().createHtmlEmail();
-					email2.setSubject("Loteca - Resultado da Loteca já cadastrado");
+					email2.setSubject("Loteca - Resultado da Loteca jï¿½ cadastrado");
 					email2.setHtmlMsg( EmailData.montaEmailResultadoHtmlForaEmpresa(data, lc.getUsuario(), listaRankingLotecaAtiva, listaJogousuario) );
 					email2.setTextMsg( EmailData.montaEmailResultadoTextForaEmpresa(data, lc.getUsuario(), listaRankingLotecaAtiva, listaJogousuario) );
 					email2.addTo(lc.getUsuario().getDeEmail());
