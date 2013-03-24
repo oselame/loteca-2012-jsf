@@ -140,6 +140,15 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 	}
 	
 	@Override
+	public Usuario findUsuarioByLonginSenha(Usuario usuario) throws ServiceException {
+		try {
+			return getUsuarioDAO().findUsuarioByLonginSenha(usuario);
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
+	}
+	
+	@Override
 	public Usuario findUsuarioByLoginEmail(String deLoginEmail) throws ServiceException {
 		try {
 			return getUsuarioDAO().findUsuarioByLoginEmail( deLoginEmail );
@@ -601,19 +610,31 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 			usuario.setFlAdm(0l);
 			usuario.setFlForaempresa(0l);
 			usuario.setFlEnviosenha(0l);
-			super.save(usuario);
+			if (usuario.isStatusInsert()) {
+				super.save(usuario);
+			} else if (usuario.isStatusUpdate()) {
+				super.update(usuario);
+			}
 			
-			Usuariogrupo usuariogrupo = new Usuariogrupo();
-			usuariogrupo.setUsuario(usuario);
-			usuariogrupo.setGrupo(this.findUserGrupo());
-			super.save(usuariogrupo);
+			if (usuario.isStatusInsert()) {
+				Usuariogrupo usuariogrupo = new Usuariogrupo();
+				usuariogrupo.setUsuario(usuario);
+				usuariogrupo.setGrupo(this.findUserGrupo());
+				super.save(usuariogrupo);
+			} 
 			
 			Lotecausuario lotecausuario = new Lotecausuario();
 			lotecausuario.setUsuario(usuario);
 			lotecausuario.setLoteca(this.findLotecaAtiva());
 			lotecausuario.setFlAtivo(0l);
-			super.save(lotecausuario);
+			Lotecausuario lotecausuario2 = this.findLotecausuario(lotecausuario);
+			if (lotecausuario2 == null) {
+				super.save(lotecausuario);
+			} else {
+				lotecausuario = lotecausuario2;
+			}
 			
+			this.excluirTodosClubesUsuario( lotecausuario );
 			long nuPosicao = 0;
 			for (Clubeusuario clubeusuario : clubeusuarios) {
 				clubeusuario.setLotecausuario(lotecausuario);
@@ -751,6 +772,35 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 			throws ServiceException {
 		try {
 			return getUsuariodataDAO().findAllRanking(cdLoteca, cdData);
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}	
+	}
+	
+	@Override
+	public Lotecausuario findLotecausuario(Lotecausuario lotecausuario)
+			throws ServiceException {
+		try {
+			return getLotecausuarioDAO().findLotecausuario(lotecausuario);
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}	
+	}
+	
+	@Override
+	public void excluirTodosClubesUsuario(Lotecausuario lotecausuario) throws ServiceException {
+		try {
+			this.getClubeusuarioDAO().excluirTodosClubesUsuario(lotecausuario);
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}	
+	}
+	
+	@Override
+	public List<Clubeusuario> findAllClubeusuarioByLotecausuario(
+			Lotecausuario lotecausuario) throws ServiceException {
+		try {
+			return getClubeusuarioDAO().findAllClubeusuarioByLotecausuario(lotecausuario);
 		} catch (Exception e) {
 			throw new ServiceException(e);
 		}	

@@ -41,7 +41,10 @@
 
 				<p:panel id="dhbinscricao" header="#{msg.dashboard_inscricao}">
 					<h:form>
-						<p:commandLink value="Clique aqui"  action="#{inscricaousuarioBean.abrirCadInscricaoUsuario}" ajax="false"/> para realizar a sua inscrição.
+						<p:commandLink value="já sou cadastrado e quero participar da loteca."  action="#{inscricaousuarioBean.abrirCadInscricaoUsuarioJaExistente}" ajax="false"/><br/><br/>
+						
+						<p:commandLink value="Não sou cadastrado e quero participar da loteca."  action="#{inscricaousuarioBean.abrirCadInscricaoUsuario}" ajax="false"/><br/>
+						
 					</h:form>
 				</p:panel>
 

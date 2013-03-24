@@ -7,6 +7,8 @@ import br.com.softal.base.model.Entity;
 
 public class DefaultServiceImpl implements DefaultService {
 	
+	private static final long serialVersionUID = 1L;
+	
 	private GenericDAOImpl<Entity> genericDAO;
 	
 	public DefaultServiceImpl() {
