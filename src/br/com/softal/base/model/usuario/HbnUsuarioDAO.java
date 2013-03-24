@@ -81,4 +81,31 @@ public class HbnUsuarioDAO extends GenericDAOImpl<Usuario> implements UsuarioDAO
 		return null;
 	}
 	
+	@Override
+	public Usuario findUsuarioByLonginSenha(Usuario usuario) throws DaoException {
+		StringBuilder hql = new StringBuilder();
+		hql.append("FROM Usuario u ");
+		hql.append("LEFT JOIN FETCH u.projeto ");
+		hql.append("WHERE u.deLogin = :deLogin ");
+		hql.append("and u.deSenha = :deSenha ");
+		Session session = getHibernateTemplate().getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			Query query = session.createQuery( hql.toString() );
+			query.setString("deLogin", usuario.getDeLogin() );
+			query.setString("deSenha", usuario.getDeSenha() );
+			List<Usuario> lista = query.list();
+			if (lista.size() == 1) {
+				return lista.get(0);
+			} 
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return null;
+	}
+	
 }

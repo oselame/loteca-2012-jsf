@@ -28,7 +28,7 @@ public class SistemaBean extends AbstractManegedBean {
 			if (lotecaativa != null) {
 				nomesistema = lotecaativa.getDeLoteca();
 				if (lotecaativa.getTpSituacao() == Constantes.lOTECA_SITUACAO_CADASTRAMENTO) {
-					//setComplemento("( em cadastro )");
+					setExibirLogin( false );
 				} else if (lotecaativa.getTpSituacao() == Constantes.lOTECA_SITUACAO_ANDAMENTO) {
 					setExibirLogin( true );
 				}
@@ -41,7 +41,7 @@ public class SistemaBean extends AbstractManegedBean {
 		}
 		
 		//FIXME: TEMPORARIAMENTE
-		setExibirLogin( true );
+		//setExibirLogin( true );
 	}
 	
 	public String getNomesistema() {

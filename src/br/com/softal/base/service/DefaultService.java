@@ -1,10 +1,11 @@
 package br.com.softal.base.service;
 
+import java.io.Serializable;
 import java.util.List;
 
 import br.com.softal.base.model.Entity;
 
-public interface DefaultService {
+public interface DefaultService extends Serializable {
 
 	void save(Entity entity);
 
