@@ -43,11 +43,11 @@ public class DashboardBean implements Serializable {
 		this.carregaLotecaativa();		
 		
 		if (lotecaativa.getTpSituacao() == Constantes.lOTECA_SITUACAO_CADASTRAMENTO) {
-			column1.addWidget("dhbregulamento");
-			column2.addWidget("dhbinscricao");
+			//column1.addWidget("dhbregulamento");
+			//column2.addWidget("dhbinscricao");
 			
-			model.addColumn(column1);
-			model.addColumn(column2);
+			//model.addColumn(column1);
+			//model.addColumn(column2);
 		} else if (lotecaativa.getTpSituacao() == Constantes.lOTECA_SITUACAO_ANDAMENTO) {
 			column1.addWidget("dhbpremiacao");
 			column1.addWidget("dhbclassificacao");

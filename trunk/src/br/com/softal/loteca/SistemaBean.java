@@ -18,22 +18,26 @@ public class SistemaBean extends AbstractManegedBean {
 	private Boolean exibirLogin;
 	private Boolean exibirDashboard;
 	private Loteca lotecaativa;
+	private Boolean exibirInscricao;
+	private Boolean existeLotecaativa;
 	
 	public SistemaBean()  {
 		setExibirLogin(false);
 		setExibirDashboard(false);
 		try {
-			lotecaativa = super.getLotecaativa();
 			setNomesistema("Loteca");
+			lotecaativa = super.getLotecaativa();
+			setExisteLotecaativa( lotecaativa != null );
 			if (lotecaativa != null) {
 				nomesistema = lotecaativa.getDeLoteca();
 				if (lotecaativa.getTpSituacao() == Constantes.lOTECA_SITUACAO_CADASTRAMENTO) {
 					setExibirLogin( false );
+					setExibirInscricao( true );
+					setExibirDashboard( false );
 				} else if (lotecaativa.getTpSituacao() == Constantes.lOTECA_SITUACAO_ANDAMENTO) {
 					setExibirLogin( true );
-				}
 				setExibirDashboard(true);
-			} else {
+				}
 				//getMessages().addWarningMessage("msg_warning_nao_exite_campeonato_vigente");
 			}
 		} catch (ServiceException e) {
@@ -87,6 +91,18 @@ public class SistemaBean extends AbstractManegedBean {
 		this.lotecaativa = lotecaativa;
 	}
 
+	public Boolean getExibirInscricao() {
+		return exibirInscricao == null ? false : exibirInscricao;
+	}
+	public void setExibirInscricao(Boolean exibirInscricao) {
+		this.exibirInscricao = exibirInscricao;
+	}
+	public Boolean getExisteLotecaativa() {
+		return existeLotecaativa == null ? false : existeLotecaativa;
+	}
+	public void setExisteLotecaativa(Boolean existeLotecaativa) {
+		this.existeLotecaativa = existeLotecaativa;
+	}
 	@Override
 	protected void initializeEntity() {}
 	
