@@ -79,7 +79,7 @@ public class EmailData {
 		StringBuilder html = new StringBuilder();
 		html.append("<html>");
 		html.append("\t<body>");
-		html.append("\t\t<h3>Loteca - Resultado da Loteca j� cadastrado.</h3><br><br>");
+		html.append("\t\t<h3>Loteca - Resultado da Loteca já cadastrado.</h3><br><br>");
 		html.append("\t\tAcesso: http://" + Constantes.SERVIDOR_PORTA + "/loteca");
 		html.append("\t</body>");
 		html.append("</html>");
@@ -176,30 +176,30 @@ public class EmailData {
 	
 	private static String montaEmailResultadoText(Data data, Usuario usuario) {
 		StringBuilder html = new StringBuilder();
-		html.append("Loteca - Resultado da Loteca j� cadastrado.\n\n");
+		html.append("Loteca - Resultado da Loteca já cadastrado.\n\n");
 		html.append("\t\tAcesso: http://" + Constantes.SERVIDOR_PORTA + "/loteca");
 		return html.toString();
 	}
 	
 	private static String montaEmailResultadoTextForaEmpresa(Data data, Usuario usuario, List<Usuariodata> rankingLotecaAtiva, List<Jogousuario> listaJogousuario) {
 		StringBuilder html = new StringBuilder();
-		html.append("Loteca - Resultado da Loteca j� cadastrado.\n\n");
+		html.append("Loteca - Resultado da Loteca já cadastrado.\n\n");
 		html.append("\t\tAcesso: http://" + Constantes.SERVIDOR_PORTA + "/loteca");
 		return html.toString();
 	}
 	
 	public static void enviaEmailResultado(Data data, List<Lotecausuario> usuarios) {
 		try {
-			LtcHtmlEmail email = LtcEmailFactory.getInstance().createHtmlEmail();
-			email.setSubject("Loteca - Resultado da Loteca j� cadastrado");
 			for (Lotecausuario lc : usuarios) {
 				if (!lc.getUsuario().isForaempresa()) {
+					LtcHtmlEmail email = LtcEmailFactory.getInstance().createHtmlEmail();
+					email.setSubject("Loteca - Resultado da Loteca já cadastrado");
 					email.setHtmlMsg( EmailData.montaEmailResultadoHtml(data, lc.getUsuario()) );
 					email.setTextMsg( EmailData.montaEmailResultadoText(data, lc.getUsuario()) );
 					email.addTo(lc.getUsuario().getDeEmail());
+					email.send();
 				}
 			}
-			email.send();
 			
 			
 			List<Usuariodata> listaRankingLotecaAtiva = LtcServiceLocator.getInstance().getLotecaService().findAllDadosRankingLotecaAtiva();
@@ -208,10 +208,10 @@ public class EmailData {
 					List<Jogousuario> listaJogousuario = LtcServiceLocator.getInstance().getLotecaService().findAllJogoUsuario(data, lc);
 					
 					LtcHtmlEmail email2 = LtcEmailFactory.getInstance().createHtmlEmail();
-					email2.setSubject("Loteca - Resultado da Loteca j� cadastrado");
+					email2.setSubject("Loteca - Resultado da Loteca já cadastrado");
 					email2.setHtmlMsg( EmailData.montaEmailResultadoHtmlForaEmpresa(data, lc.getUsuario(), listaRankingLotecaAtiva, listaJogousuario) );
 					email2.setTextMsg( EmailData.montaEmailResultadoTextForaEmpresa(data, lc.getUsuario(), listaRankingLotecaAtiva, listaJogousuario) );
-					email2.addTo(lc.getUsuario().getDeEmail());
+					email2.addTo(lc.getUsuario().getDeEmailpessoal());
 					email2.send();
 				}
 			}
