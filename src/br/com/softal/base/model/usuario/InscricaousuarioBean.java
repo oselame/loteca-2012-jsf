@@ -206,6 +206,7 @@ public class InscricaousuarioBean extends AbstractManegedBean<Usuario> {
 			usuario = super.getLotecaService().findUsuarioByLonginSenha(this.getEntity());
 			usuario.setStatusUpdate();
 			this.setEntity(usuario);
+			this.setCdProjeto( usuario.getProjeto().getCdProjeto() );
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
