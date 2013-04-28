@@ -19,6 +19,7 @@ import br.com.softal.loteca.model.classifclube.Classifclube;
 import br.com.softal.loteca.model.clube.ClubeDTO;
 import br.com.softal.loteca.model.data.Data;
 import br.com.softal.loteca.model.loteca.Loteca;
+import br.com.softal.loteca.model.usuariodata.AproveitamentoDTO;
 import br.com.softal.loteca.model.usuariodata.Usuariodata;
 import br.com.softal.loteca.util.Constantes;
 
@@ -35,6 +36,7 @@ public class DashboardBean implements Serializable {
 	private Usuariodata usuariodata;
 	private Loteca lotecaativa;
 	private Data ultimadataencerrada;
+	private List<AproveitamentoDTO> campeoeslotecas;
 
 	public DashboardBean() {
 		model = new DefaultDashboardModel();
@@ -49,6 +51,7 @@ public class DashboardBean implements Serializable {
 			//model.addColumn(column1);
 			//model.addColumn(column2);
 		} else if (lotecaativa.getTpSituacao() == Constantes.lOTECA_SITUACAO_ANDAMENTO) {
+			column1.addWidget("dhbcampeoeslotecas");
 			column1.addWidget("dhbpremiacao");
 			column1.addWidget("dhbclassificacao");
 			column1.addWidget("dhbultimarodada");
@@ -64,6 +67,7 @@ public class DashboardBean implements Serializable {
 			this.carregaClassificacao();
 			this.carregaUltimadataencerrada();
 			this.carregaVotosClubes();
+			this.carregaCampeoesLotecas();
 		} else {
 			column1.addWidget("dhbregulamento");
 			
@@ -151,6 +155,14 @@ public class DashboardBean implements Serializable {
 		this.rebaixados = rebaixados;
 	}
 
+	public List<AproveitamentoDTO> getCampeoeslotecas() {
+		return campeoeslotecas;
+	}
+
+	public void setCampeoeslotecas(List<AproveitamentoDTO> campeoeslotecas) {
+		this.campeoeslotecas = campeoeslotecas;
+	}
+
 	private void carregaRanking() {
 		try {
 			setRanking( LtcServiceLocator.getInstance().getLotecaService().findAllDadosRankingLotecaAtiva() );
@@ -182,13 +194,27 @@ public class DashboardBean implements Serializable {
 	
 	private void carregaVotosClubes() {
 		try {
-			if (lotecaativa != null) {
+			if (existeLotecaAtiva()) {
 				setCampeoes( LtcServiceLocator.getInstance().getLotecaService().findAllVotosCampeao(lotecaativa.getCdLoteca()) );
 				setRebaixados( LtcServiceLocator.getInstance().getLotecaService().findAllVotosRebaixados(lotecaativa.getCdLoteca()) );
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
+	}
+	
+	private void carregaCampeoesLotecas() {
+		try {
+			if (existeLotecaAtiva()) {
+				setCampeoeslotecas(  LtcServiceLocator.getInstance().getLotecaService().findAllCampeoes() );
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private boolean existeLotecaAtiva() {
+		return lotecaativa != null;
 	}
 	
 }

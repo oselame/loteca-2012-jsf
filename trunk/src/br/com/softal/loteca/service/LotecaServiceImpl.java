@@ -805,4 +805,12 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 			throw new ServiceException(e);
 		}	
 	}
+	
+	public List<AproveitamentoDTO> findAllCampeoes() throws ServiceException {
+		try {
+			return getUsuariodataDAO().findAllCampeoes();
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}	
+	}
 }
