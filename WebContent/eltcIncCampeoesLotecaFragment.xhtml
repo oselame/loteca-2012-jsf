@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://java.sun.com/jsf/html"
+             xmlns:ui="http://java.sun.com/jsf/facelets"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:f="http://java.sun.com/jsf/core" >
+		<h:panelGrid style="width:100%">
+			<h:form id="formCampeoesLotecas">
+				<p:dataTable id="camp" var="row" value="#{dashboardBean.campeoeslotecas}" 
+					emptyMessage="#{msg.warning_nenhum_registro_encontrado}" style="width:100%">
+					
+					<p:column headerText="#{msg.dashboard_ranking_sigla_posicao}" style="width:20px" styleClass="alignCenter">
+						<h:outputText value="#{row.nuPosicaofinal}" />
+					</p:column>
+					
+					<p:column headerText="Campeoes" style="width:20px" styleClass="alignCenter">
+						<h:outputText value="#{row.nmUsuario}" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</h:panelGrid>
+</ui:fragment>
