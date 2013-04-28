@@ -358,4 +358,52 @@ public class HbnUsuariodataDAO extends GenericDAOImpl<Usuariodata> implements Us
 		return lista;
 	}
 	
+	public List<AproveitamentoDTO> findAllCampeoes() throws DaoException {
+		List<AproveitamentoDTO> lista = new ArrayList<AproveitamentoDTO>();
+		StringBuilder hql = new StringBuilder();
+		hql.append(" select  \n"); 
+		hql.append(" 	l.nuAno \n"); 
+		hql.append(" 	,u.nmUsuario    \n"); 
+		hql.append(" 	,ud.nuPontosfinal  \n"); 
+		hql.append(" 	,ud.nuPosicaofinal   \n"); 
+		hql.append(" from eltcusuariodata ud    \n"); 
+		hql.append(" left join eltclotecausuario lu on lu.nuSeqlotecausuario = ud.nuSeqlotecausuario     \n"); 
+		hql.append(" left join esegusuario u on u.cdUsuario = lu.cdUsuario   \n"); 
+		hql.append(" left join eltcdata d on d.cdData = ud.cdData     \n"); 
+		hql.append(" left join eltcloteca l on l.cdLoteca = lu.cdLoteca   \n"); 
+		hql.append(" where l.tpSituacao = 2	 \n"); 
+		hql.append(" and ud.cdData = (select max(cddata) from eltcdata dt where dt.cdLoteca = lu.cdLoteca and dt.tpSituacao = d.tpSituacao)  \n"); 
+		hql.append(" and ud.nuPosicaofinal between 1 and 5 \n"); 
+		hql.append(" order by  l.nuAno, ud.nuPosicaofinal asc	 \n"); 
+		
+		
+		Session session = getHibernateTemplate().getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				conn = session.connection();
+				pstmt = conn.prepareStatement(hql.toString());
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					lista.add( AproveitamentoDTO.popule(rs) );
+				}
+				tx.commit();
+			} catch (Exception e) {
+				tx.rollback();
+				e.printStackTrace();
+			} finally {
+				rs.close();
+				pstmt.close();
+				conn.close();
+				session.close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lista;
+	}
+	
 }

@@ -71,5 +71,7 @@ public interface LotecaService extends DefaultService {
 	
 	List<ClubeDTO> findAllVotosCampeao(long cdLoteca) throws ServiceException;
 	List<ClubeDTO> findAllVotosRebaixados(long cdLoteca) throws ServiceException;
+	
+	List<AproveitamentoDTO> findAllCampeoes() throws ServiceException;
 
 }
