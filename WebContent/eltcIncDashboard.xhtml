@@ -8,7 +8,7 @@
 <h:head></h:head>
 <h:body>
 			<p:growl id="growl" showDetail="true" />
-			<h:panelGrid rendered="#{!sistemaBean.existeLotecaativa}">
+			<h:panelGrid rendered="#{!sistemaBean.exibirDashboard}">
 				<div id="j_idt26" class="ui-messages ui-widget">
 					<div class="ui-messages-warn ui-corner-all">
 						<span class="ui-messages-warn-icon"></span>
@@ -24,22 +24,12 @@
 					</div>
 			</h:panelGrid>
 
-			<h:panelGrid rendered="#{sistemaBean.exibirInscricao}" width="100%">
-				<h:form>
-					<div style="text-align: center;width: 100%">
-						<br/><br/>
-						<p:commandLink value="Clique aqui"  action="#{inscricaousuarioBean.abrirCadInscricaoUsuarioJaExistente}" ajax="false"/> 
-						se você já está cadastrado e quer participar da loteca.<br /><br />
-						<p:commandLink value="Aqui"  action="#{inscricaousuarioBean.abrirCadInscricaoUsuario}" ajax="false"/>
-						se você é um novo participante.<br/> <br/>
-						<a href="#{facesContext.externalContext.requestContextPath}/regulamento/regulamento2013.pdf">Regulamento da Loteca 2013</a>
-						<br/> <br/><br/>
-					</div>
-				</h:form>				
-			</h:panelGrid>
-			
 			<p:dashboard id="board" model="#{dashboardBean.model}" style="width:100%" rendered="#{sistemaBean.exibirDashboard}">
 				<p:ajax event="reorder" listener="#{dashboardBean.handleReorder}" update="growl" />
+
+				<p:panel id="dhbcampeoeslotecas" header="#{msg.dashboard_ranking}">
+					<ui:include src="eltcIncCampeoesLotecaFragment.xhtml" />
+				</p:panel>
 
 				<p:panel id="dhbranking" header="#{msg.dashboard_ranking}">
 					<ui:include src="eltcIncRankingFragment.xhtml" />
@@ -53,24 +43,19 @@
 					<ui:include src="eltcIncUltimaRodadaFragment.xhtml" />
 				</p:panel>
 
-				<!-- 
 				<p:panel id="dhbinscricao" header="#{msg.dashboard_inscricao}">
 					<h:form>
-						<p:commandLink value="Clique aqui"  action="#{inscricaousuarioBean.abrirCadInscricaoUsuarioJaExistente}" ajax="false"/> 
-						se você já está cadastrado e quer participar da loteca.<br /><br />
+						<p:commandLink value="já sou cadastrado e quero participar da loteca."  action="#{inscricaousuarioBean.abrirCadInscricaoUsuarioJaExistente}" ajax="false"/><br/><br/>
 						
-						<p:commandLink value="Aqui"  action="#{inscricaousuarioBean.abrirCadInscricaoUsuario}" ajax="false"/>
-						se você é um novo participante.<br/> <br/>
+						<p:commandLink value="Não sou cadastrado e quero participar da loteca."  action="#{inscricaousuarioBean.abrirCadInscricaoUsuario}" ajax="false"/><br/>
 						
-						<a href="regulamento/regulamento2013.pdf">Regulamento da Loteca 2013</a>
 					</h:form>
 				</p:panel>
 
 				<p:panel id="dhbregulamento" header="#{msg.dashboard_regulamento}">
-					<iframe src="regulamento/regulamento2013.pdf" style="height: 500px;width: 435px;">
+					<iframe src="regulamento/regulamento2012.pdf" style="height: 500px;width: 435px;">
 					</iframe>
 				</p:panel>
-				 -->
 				
 				<p:panel id="dhbcampeoes" header="#{msg.dashboard_votos_campeao}">
 					<ui:include src="eltcIncVotosCampeaoFragment.xhtml" />
