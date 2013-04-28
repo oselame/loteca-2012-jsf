@@ -16,9 +16,12 @@
 					<p:column headerText="#{msg.dashboard_ranking_participante}" >
 						<h:outputText value="#{row.lotecausuario.usuario.nmUsuario}" />
 					</p:column>
+					<p:column headerText="UR" style="width:20px" styleClass="alignCenter">
+						<h:outputText value="#{row.nuPontoscartao}" />
+					</p:column>
 					<p:column headerText="PR" style="width:20px" styleClass="alignCenter">
 						<h:outputText value="#{row.nuPontosrodada}" />
-					</p:column>
+					</p:column>					
 					<p:column headerText="PL" style="width:20px" styleClass="alignCenter">
 						<h:outputText value="#{row.nuPontoslista}" />
 					</p:column>
@@ -85,6 +88,7 @@
 			</h:form>
 			<f:facet name="footer">
 				<h:panelGrid columns="2" style="width:100%"  columnClasses="bold alignRight, boldx">
+					<h:outputLabel value="UR" /><h:outputLabel value="Última Rodada" />		
 					<h:outputLabel value="PR" /><h:outputLabel value="Pontos no Ranking" />								
 					<h:outputLabel value="PL" /><h:outputLabel value="Pontos nas Listas (10 classificados e 4 rebaixados)" />								
 					<h:outputLabel value="PT" /><h:outputLabel value="Pontuação Total (PT = PR + PL)" />
