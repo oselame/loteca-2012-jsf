@@ -7,68 +7,88 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head></h:head>
 <h:body>
-			<p:growl id="growl" showDetail="true" />
-			<h:panelGrid rendered="#{!sistemaBean.exibirDashboard}">
-				<div id="j_idt26" class="ui-messages ui-widget">
-					<div class="ui-messages-warn ui-corner-all">
-						<span class="ui-messages-warn-icon"></span>
-							<ul>
-								<li>
-									<span class="ui-messages-warn-summary">Alerta</span>
-								</li>
-								<li>
-									<span class="ui-messages-warn-summary">Nenhum campeonato cadastrado</span>
-								</li>
-							</ul>
-						</div>
-					</div>
-			</h:panelGrid>
+	<p:growl id="growl" showDetail="true" />
+	<h:panelGrid rendered="#{!sistemaBean.exibirDashboard}">
+		<div id="j_idt26" class="ui-messages ui-widget">
+			<div class="ui-messages-warn ui-corner-all">
+				<span class="ui-messages-warn-icon"></span>
+				<ul>
+					<li><span class="ui-messages-warn-summary">Alerta</span></li>
+					<li><span class="ui-messages-warn-summary">Nenhum
+							campeonato cadastrado</span></li>
+				</ul>
+			</div>
+		</div>
+	</h:panelGrid>
 
-			<p:dashboard id="board" model="#{dashboardBean.model}" style="width:100%" rendered="#{sistemaBean.exibirDashboard}">
-				<p:ajax event="reorder" listener="#{dashboardBean.handleReorder}" update="growl" />
+	<h:panelGrid rendered="#{sistemaBean.exibirInscricao}" width="100%">
+		<h:form>
+			<div style="text-align: center; width: 100%">
+				<br />
+				<br />
+				<p:commandLink value="Clique aqui"
+					action="#{inscricaousuarioBean.abrirCadInscricaoUsuarioJaExistente}"
+					ajax="false" />
+				se você já está cadastrado e quer participar da loteca.<br />
+				<br />
+				<p:commandLink value="Aqui"
+					action="#{inscricaousuarioBean.abrirCadInscricaoUsuario}"
+					ajax="false" />
+				se você é um novo participante.<br /> <br /> <a
+					href="#{facesContext.externalContext.requestContextPath}/regulamento/regulamento2013.pdf">Regulamento
+					da Loteca 2013</a> <br /> <br />
+				<br />
+			</div>
+		</h:form>
+	</h:panelGrid>
 
-				<p:panel id="dhbcampeoeslotecas" header="#{msg.dashboard_ranking}">
-					<ui:include src="eltcIncCampeoesLotecaFragment.xhtml" />
-				</p:panel>
 
-				<p:panel id="dhbranking" header="#{msg.dashboard_ranking}">
-					<ui:include src="eltcIncRankingFragment.xhtml" />
-				</p:panel>
 
-				<p:panel id="dhbclassificacao" header="#{msg.dashboard_classificacao}">
-					<ui:include src="eltcIncClassificacaoFragment.xhtml" />
-				</p:panel>
-				
-				<p:panel id="dhbultimarodada" header="#{msg.dashboard_ultima_rodada}">
-					<ui:include src="eltcIncUltimaRodadaFragment.xhtml" />
-				</p:panel>
 
-				<p:panel id="dhbinscricao" header="#{msg.dashboard_inscricao}">
-					<h:form>
-						<p:commandLink value="já sou cadastrado e quero participar da loteca."  action="#{inscricaousuarioBean.abrirCadInscricaoUsuarioJaExistente}" ajax="false"/><br/><br/>
-						
-						<p:commandLink value="Não sou cadastrado e quero participar da loteca."  action="#{inscricaousuarioBean.abrirCadInscricaoUsuario}" ajax="false"/><br/>
-						
-					</h:form>
-				</p:panel>
 
-				<p:panel id="dhbregulamento" header="#{msg.dashboard_regulamento}">
-					<iframe src="regulamento/regulamento2012.pdf" style="height: 500px;width: 435px;">
-					</iframe>
-				</p:panel>
-				
-				<p:panel id="dhbcampeoes" header="#{msg.dashboard_votos_campeao}">
-					<ui:include src="eltcIncVotosCampeaoFragment.xhtml" />
-				</p:panel>
-				
-				<p:panel id="dhbrebaixados" header="#{msg.dashboard_votos_rebaixados}">
-					<ui:include src="eltcIncVotosRebaixadosFragment.xhtml" />
-				</p:panel>
-				
-				<p:panel id="dhbpremiacao" header="#{msg.dashboard_premiacao}">
-					<ui:include src="eltcIncPremiacaoFragment.xhtml" />
-				</p:panel>
-				
-			</p:dashboard>
+
+
+
+
+
+
+
+
+
+	<p:dashboard id="board" model="#{dashboardBean.model}"
+		style="width:100%" rendered="#{sistemaBean.exibirDashboard}">
+		<p:ajax event="reorder" listener="#{dashboardBean.handleReorder}"
+			update="growl" />
+
+		<p:panel id="dhbcampeoeslotecas" header="#{msg.dashboard_ranking}">
+			<ui:include src="eltcIncCampeoesLotecaFragment.xhtml" />
+		</p:panel>
+
+		<p:panel id="dhbranking" header="#{msg.dashboard_ranking}">
+			<ui:include src="eltcIncRankingFragment.xhtml" />
+		</p:panel>
+
+		<p:panel id="dhbclassificacao" header="#{msg.dashboard_classificacao}">
+			<ui:include src="eltcIncClassificacaoFragment.xhtml" />
+		</p:panel>
+
+		<p:panel id="dhbultimarodada" header="#{msg.dashboard_ultima_rodada}">
+			<ui:include src="eltcIncUltimaRodadaFragment.xhtml" />
+		</p:panel>
+
+
+		<p:panel id="dhbcampeoes" header="#{msg.dashboard_votos_campeao}">
+			<ui:include src="eltcIncVotosCampeaoFragment.xhtml" />
+		</p:panel>
+
+		<p:panel id="dhbrebaixados" header="#{msg.dashboard_votos_rebaixados}">
+			<ui:include src="eltcIncVotosRebaixadosFragment.xhtml" />
+		</p:panel>
+
+		<p:panel id="dhbpremiacao" header="#{msg.dashboard_premiacao}">
+			<ui:include src="eltcIncPremiacaoFragment.xhtml" />
+		</p:panel>
+
+	</p:dashboard>
 </h:body>
 </html>
