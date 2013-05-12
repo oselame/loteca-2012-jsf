@@ -20,8 +20,11 @@
 							<h:outputText value="Data*:" />
 							<p:calendar value="#{dataBean.entity.dtData}" 
 								id="dtData" showOn="button" pattern="dd/MM/yyyy"
-								converter="javax.faces.DateTime"
-								converterMessage="Não foi possível converter para DateTime."/>
+								converterMessage="Não foi possível converter para DateTime.">
+								<f:convertDateTime timeZone="America/Sao_Paulo" 
+									pattern="dd/MM/yyyy"
+									/>
+							</p:calendar>
 							
 							<h:outputText value="Observação*:" />
 							<p:inputText required="true" label="Observação" value="#{dataBean.entity.deObservacao}" style="width:100%"/>
