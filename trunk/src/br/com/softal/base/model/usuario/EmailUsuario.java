@@ -12,15 +12,15 @@ public class EmailUsuario {
 		
 		html.append("<html>");
 		html.append("\t<body>");
-		html.append("\t\t<h3>Recuperação de Senha</h3><br>");
+		html.append("\t\t<h3>RecuperaÃ§Ã£o de Senha</h3><br>");
 		html.append("\t\t<br><br>");
 		html.append("\t\tCaro " + usuario.getNmUsuario());
 		html.append("\t\t<br><br>");
-		html.append("\t\tSua senha é <strong>" + usuario.getDeSenha() + "</strong>");
+		html.append("\t\tSua senha Ã© <strong>" + usuario.getDeSenha() + "</strong>");
 		html.append("\t\t<br><br>");
 		html.append("\t\tAtenciosamente");
 		html.append("\t\t<br><br>");
-		html.append("\t\tOrganização da loteca");
+		html.append("\t\tOrganizaÃ§Ã£o da loteca");
 	
 		html.append("\t</body>");
 		html.append("</html>");
@@ -29,15 +29,15 @@ public class EmailUsuario {
 	
 	private static String montaEmailJogoLiberadoText(Usuario usuario) {
 		StringBuilder html = new StringBuilder();
-		html.append("Recuperação de Senha");
+		html.append("RecuperaÃ§Ã£o de Senha");
 		html.append("----------------------------------");
 		html.append("\t\tCaro " + usuario.getNmUsuario());
 		html.append("\t\t\n\n");
-		html.append("\t\tSua senha é <strong>" + usuario.getDeSenha() + "</strong>");
+		html.append("\t\tSua senha Ã© <strong>" + usuario.getDeSenha() + "</strong>");
 		html.append("\t\t\n\n");
 		html.append("\t\tAtenciosamente");
 		html.append("\t\t\n\n");
-		html.append("\t\tOrganização da loteca");
+		html.append("\t\tOrganizaÃ§Ã£o da loteca");
 		
 		
 		return html.toString();
@@ -46,7 +46,7 @@ public class EmailUsuario {
 	public static void enviaEmailEsqueciMinhaSenha(Usuario usuario) {
 		try {
 			LtcHtmlEmail email = LtcEmailFactory.getInstance().createHtmlEmail();
-			email.setSubject( "Loteca - Recuperação de Senha" );
+			email.setSubject( "Loteca - RecuperaÃ§Ã£o de Senha" );
 			email.setHtmlMsg( EmailUsuario.montaEmailJogoLiberadoHtml(usuario) );
 			email.setTextMsg( EmailUsuario.montaEmailJogoLiberadoText(usuario) );
 			email.addTo(usuario.getDeEmail());
