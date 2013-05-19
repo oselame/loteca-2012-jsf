@@ -1,6 +1,7 @@
 package br.com.softal.loteca.dashboard;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -18,6 +19,7 @@ import br.com.softal.loteca.LtcServiceLocator;
 import br.com.softal.loteca.model.classifclube.Classifclube;
 import br.com.softal.loteca.model.clube.ClubeDTO;
 import br.com.softal.loteca.model.data.Data;
+import br.com.softal.loteca.model.jogo.Jogo;
 import br.com.softal.loteca.model.loteca.Loteca;
 import br.com.softal.loteca.model.usuariodata.AproveitamentoDTO;
 import br.com.softal.loteca.model.usuariodata.Usuariodata;
@@ -185,7 +187,9 @@ public class DashboardBean implements Serializable {
 			if (findUltimaDataEncerrada != null) {
 				setUltimadataencerrada( findUltimaDataEncerrada );
 			} else {
-				setUltimadataencerrada(new Data());
+				Data data = new Data();
+				//--data.inicializaRelacionamentos();
+				setUltimadataencerrada(data);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
