@@ -12,6 +12,9 @@ public class Enuns {
             this.valor = valor;
         }
         
+        public long longValue() {
+        	return this.valor;
+        }
     };
     
 }
