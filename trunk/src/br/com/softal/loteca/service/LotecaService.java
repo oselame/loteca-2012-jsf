@@ -58,7 +58,7 @@ public interface LotecaService extends DefaultService {
 	
 	/*******************************************************************/
 	List<Usuariodata> findAllDadosRankingLotecaAtiva() throws ServiceException;
-	List<Classifclube> findAllClassifclubeAtual() throws ServiceException;
+	List<Classifclube> findAllClassifclubeAtual(Loteca loteca) throws ServiceException;
 	
 	void saveUsuarioWizard(Usuario usuario, List<Clubeusuario> clubeusuarios) throws ServiceException;
 	void saveDadosInscricaoUsuario(Usuario usuario, List<Clubeusuario> clubeusuarios) throws ServiceException;

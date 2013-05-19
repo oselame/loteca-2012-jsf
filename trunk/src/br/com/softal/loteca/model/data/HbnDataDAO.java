@@ -13,6 +13,7 @@ import org.hibernate.Transaction;
 import br.com.softal.base.dao.GenericDAOImpl;
 import br.com.softal.loteca.model.loteca.Loteca;
 import br.com.softal.loteca.util.Constantes;
+import br.com.softal.loteca.util.Enuns.SituacaoData;
 
 public class HbnDataDAO extends GenericDAOImpl<Data> implements DataDAO {
 
@@ -31,7 +32,7 @@ public class HbnDataDAO extends GenericDAOImpl<Data> implements DataDAO {
 		try {
 			Query query = session.createQuery( hql.toString() );
 			query.setLong("cdLoteca", loteca.getCdLoteca() );
-			query.setLong("tpSituacao", Constantes.DATA_SITUACAO_CONCLUIDO );
+			query.setLong("tpSituacao", SituacaoData.CONCLUIDA.longValue()); //-- Constantes.DATA_SITUACAO_CONCLUIDO );
 			datas = query.list();
 			tx.commit();
 		} catch (Exception e) {
@@ -62,7 +63,7 @@ public class HbnDataDAO extends GenericDAOImpl<Data> implements DataDAO {
     	try {
     		Query query = session.createQuery( hql.toString() );
     		query.setLong("cdLoteca", loteca.getCdLoteca() );
-    		query.setLong("tpSituacao", Constantes.DATA_SITUACAO_CONCLUIDO );
+    		query.setLong("tpSituacao",  SituacaoData.CONCLUIDA.longValue() ); //-- Constantes.DATA_SITUACAO_CONCLUIDO );
     		datas = query.list();
     		if (datas.size() > 0) {
     			Hibernate.initialize(datas.get(0).getJogos());

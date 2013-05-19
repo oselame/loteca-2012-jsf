@@ -40,6 +40,9 @@ import br.com.softal.loteca.model.usuariodata.HbnUsuariodataDAO;
 import br.com.softal.loteca.model.usuariodata.Usuariodata;
 import br.com.softal.loteca.model.usuariodata.UsuariodataDTO;
 import br.com.softal.loteca.util.Constantes;
+import br.com.softal.loteca.util.Enuns.SituacaoData;
+import br.com.softal.loteca.util.Enuns.TipoJogo;
+import br.com.softal.loteca.util.Enuns.TipoResultado;
 
 public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaService {
 	
@@ -218,7 +221,7 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 				for (String classif : classificacoes) {
 					String[] vclassif = classif.split(";");
 					if (vclassif.length != 11) {
-						throw new ServiceException("ClassificaÁ„o inv·lida");
+						throw new ServiceException("Classifica√ß√£o inv√°lida");
 					}
 					
 					//-- Busca o clube pelo nome
@@ -265,7 +268,7 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 	@Override
 	public Data findDataEmAndamentoLotecaAtiva() {
 		Data data = new Data();
-		data.setTpSituacao( Constantes.DATA_SITUACAO_EM_ANDAMENTO );
+		data.setTpSituacao( SituacaoData.ANDAMENTO.longValue() ); //-- Constantes.DATA_SITUACAO_EM_ANDAMENTO );
 		List<Data> lista = (List<Data>) super.findAll(data);
 		return lista.size() > 0 ? lista.get(0) : null;
 	}
@@ -368,39 +371,39 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 			long nuPontoscartao = 0;
 			for (Jogousuario jogousuario : jogosusuario) {
 				/**************************** JOGO SIMPLES ****************************/
-				if (jogousuario.getTpJogo().longValue() == Constantes.JOGO_TPJOGO_SIMPLES) {
+				if (jogousuario.getTpJogo().longValue() == TipoJogo.SIMPLES.longValue()) {
 					//-- Coluna 1
-					if (jogousuario.getJogo().getTpResultadofinal().longValue() == Constantes.JOGO_TIPO_RESULTADO_COLUNA1 &&  jogousuario.getFlColuna1().longValue() == 1) {
+					if (jogousuario.getJogo().getTpResultadofinal().longValue() == TipoResultado.COLUNA1.longValue()  &&  jogousuario.getFlColuna1().longValue() == 1) {
 						nuPontoscartao++;
 					} else
 					//-- Empate
-					if (jogousuario.getJogo().getTpResultadofinal().longValue() == Constantes.JOGO_TIPO_RESULTADO_EMPATE &&  jogousuario.getFlEmpate().longValue() == 1) {
+					if (jogousuario.getJogo().getTpResultadofinal().longValue() == TipoResultado.EMPATE.longValue() &&  jogousuario.getFlEmpate().longValue() == 1) {
 						nuPontoscartao++;
 					} else
 					//-- Coluna 2
-					if (jogousuario.getJogo().getTpResultadofinal().longValue() == Constantes.JOGO_TIPO_RESULTADO_COLUNA2 &&  jogousuario.getFlColuna2().longValue() == 1) {
+					if (jogousuario.getJogo().getTpResultadofinal().longValue() == TipoResultado.COLUNA2.longValue() &&  jogousuario.getFlColuna2().longValue() == 1) {
 						nuPontoscartao++;
 					}
 				}
 				
 				/**************************** JOGO DUPLO ****************************/
-				if (jogousuario.getTpJogo().longValue() == Constantes.JOGO_TPJOGO_DUPLO) {
+				if (jogousuario.getTpJogo().longValue() == TipoJogo.DUPLO.longValue()) {
 					//-- Coluna 1
-					if (jogousuario.getJogo().getTpResultadofinal().longValue() == Constantes.JOGO_TIPO_RESULTADO_COLUNA1 &&  jogousuario.getFlColuna1().longValue() == 1) {
+					if (jogousuario.getJogo().getTpResultadofinal().longValue() == TipoResultado.COLUNA1.longValue() &&  jogousuario.getFlColuna1().longValue() == 1) {
 						nuPontoscartao++;
 					} else
 					//-- Empate
-					if (jogousuario.getJogo().getTpResultadofinal().longValue() == Constantes.JOGO_TIPO_RESULTADO_EMPATE &&  jogousuario.getFlEmpate().longValue() == 1) {
+					if (jogousuario.getJogo().getTpResultadofinal().longValue() == TipoResultado.EMPATE.longValue() &&  jogousuario.getFlEmpate().longValue() == 1) {
 						nuPontoscartao++;
 					} else
 					//-- Coluna 2
-					if (jogousuario.getJogo().getTpResultadofinal().longValue() == Constantes.JOGO_TIPO_RESULTADO_COLUNA2 &&  jogousuario.getFlColuna2().longValue() == 1) {
+					if (jogousuario.getJogo().getTpResultadofinal().longValue() == TipoResultado.COLUNA2.longValue() &&  jogousuario.getFlColuna2().longValue() == 1) {
 						nuPontoscartao++;
 					}
 				}
 				
 				/**************************** JOGO TRIPLO ****************************/
-				if (jogousuario.getTpJogo().longValue() == Constantes.JOGO_TPJOGO_TRIPLO) {
+				if (jogousuario.getTpJogo().longValue() == TipoJogo.TRIPLO.longValue()) {
 					//-- Coluna 1
 					if (jogousuario.getFlColuna1().longValue() == 1) {
 						nuPontoscartao++;
@@ -585,9 +588,9 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 	}
 	
 	@Override
-	public List<Classifclube> findAllClassifclubeAtual() throws ServiceException {
+	public List<Classifclube> findAllClassifclubeAtual(Loteca loteca) throws ServiceException {
 		try {
-			return getClassifclubeDAO().findAllClassifclubeAtual();
+			return getClassifclubeDAO().findAllClassifclubeAtual(loteca);
 		} catch (DaoException e) {
 			e.printStackTrace();
 		}
