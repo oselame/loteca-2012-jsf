@@ -13,6 +13,7 @@ import br.com.softal.loteca.model.data.Data;
 import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
 import br.com.softal.loteca.model.usuariodata.CanhotoDTO;
 import br.com.softal.loteca.util.Constantes;
+import br.com.softal.loteca.util.Enuns.SituacaoData;
 
 public class HbnJogousuarioDAO extends GenericDAOImpl<Jogousuario> implements JogousuarioDAO {
 	
@@ -32,7 +33,7 @@ public class HbnJogousuarioDAO extends GenericDAOImpl<Jogousuario> implements Jo
 		try {
 			Query query = session.createQuery( hql.toString() );
 			query.setLong("nuSeqlotecausuario", lotecausuario.getNuSeqlotecausuario() );
-			query.setLong("tpSituacao", Constantes.DATA_SITUACAO_EM_ANDAMENTO );
+			query.setLong("tpSituacao", SituacaoData.ANDAMENTO.longValue()); //-- Constantes.DATA_SITUACAO_EM_ANDAMENTO );
 			lista = query.list();
 			tx.commit();
 		} catch (Exception e) {

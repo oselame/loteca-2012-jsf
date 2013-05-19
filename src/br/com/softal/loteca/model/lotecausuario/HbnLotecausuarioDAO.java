@@ -11,6 +11,7 @@ import br.com.softal.base.dao.DaoException;
 import br.com.softal.base.dao.GenericDAOImpl;
 import br.com.softal.base.model.usuario.Usuario;
 import br.com.softal.loteca.util.Constantes;
+import br.com.softal.loteca.util.Enuns.SituacaoLoteca;
 
 public class HbnLotecausuarioDAO extends GenericDAOImpl<Lotecausuario> implements LotecausuarioDAO {
 	
@@ -37,7 +38,7 @@ public class HbnLotecausuarioDAO extends GenericDAOImpl<Lotecausuario> implement
 		try {
 			Query query = session.createQuery( hql.toString() );
 			query.setLong("cdUsuario", usuario.getCdUsuario() );
-			query.setLong("tpSituacao", Constantes.DATA_SITUACAO_EM_ANDAMENTO );
+			query.setLong("tpSituacao", SituacaoLoteca.ANDAMENTO.longValue() ); //-- Constantes.DATA_SITUACAO_EM_ANDAMENTO
 			lista = query.list();
 			tx.commit();
 		} catch (Exception e) {
@@ -63,7 +64,7 @@ public class HbnLotecausuarioDAO extends GenericDAOImpl<Lotecausuario> implement
 		try {
 			Query query = session.createQuery( hql.toString() );
 			query.setLong("cdUsuario", usuario.getCdUsuario() );
-			query.setLong("tpSituacao", Constantes.DATA_SITUACAO_CADASTRAMENTO );
+			query.setLong("tpSituacao", SituacaoLoteca.CADASTRAMENTO.longValue() ); //-- Constantes.DATA_SITUACAO_CADASTRAMENTO
 			lista = query.list();
 			tx.commit();
 		} catch (Exception e) {

@@ -1,3 +1,4 @@
+
 package br.com.softal.loteca.model.usuariodata;
 
 import java.sql.Connection;
@@ -17,6 +18,8 @@ import br.com.softal.loteca.model.jogousuario.Jogousuario;
 import br.com.softal.loteca.model.loteca.Loteca;
 import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
 import br.com.softal.loteca.util.Constantes;
+import br.com.softal.loteca.util.Enuns.SituacaoData;
+import br.com.softal.loteca.util.Enuns.SituacaoLoteca;
 
 
 public class HbnUsuariodataDAO extends GenericDAOImpl<Usuariodata> implements UsuariodataDAO {
@@ -123,7 +126,7 @@ public class HbnUsuariodataDAO extends GenericDAOImpl<Usuariodata> implements Us
 		hql.append("     and lu.flAtivo = 1 "); 
 		hql.append("  join eltcloteca l on ");  
 		hql.append("   	lu.cdLoteca = l.cdLoteca ");  
-		hql.append("  	and l.tpSituacao = " + Constantes.lOTECA_SITUACAO_ANDAMENTO); 	
+		hql.append("  	and l.tpSituacao = " + SituacaoLoteca.ANDAMENTO.longValue()); 	//--  Constantes.lOTECA_SITUACAO_ANDAMENTO
 		hql.append(" WHERE ud.cdData = ? ");
 		hql.append(" ORDER BY ud.cdData asc, 3 DESC, ud.nuPosicaofinal asc "); 
 		Session session = getHibernateTemplate().getSessionFactory().openSession();
@@ -181,7 +184,7 @@ public class HbnUsuariodataDAO extends GenericDAOImpl<Usuariodata> implements Us
 		try {
 			Query query = session.createQuery(hql.toString());
 			query.setLong("cdLoteca", lotecaativa.getCdLoteca() );
-			query.setLong("tpSituacao", Constantes.DATA_SITUACAO_CONCLUIDO );
+			query.setLong("tpSituacao",  SituacaoData.CONCLUIDA.longValue() ); //-- Constantes.DATA_SITUACAO_CONCLUIDO );
 			lista = query.list();
 			tx.commit();
 		} catch (Exception e) {
@@ -267,7 +270,7 @@ public class HbnUsuariodataDAO extends GenericDAOImpl<Usuariodata> implements Us
 				conn = session.connection();
 				pstmt = conn.prepareStatement(hql.toString());
 				pstmt.setLong(1, lotecaativa.getCdLoteca());
-				pstmt.setLong(2, Constantes.DATA_SITUACAO_CONCLUIDO);
+				pstmt.setLong(2,  SituacaoData.CONCLUIDA.longValue() ) ; //--Constantes.DATA_SITUACAO_CONCLUIDO);
 				rs = pstmt.executeQuery();
 				while (rs.next()) {
 					lista.add( AproveitamentoDTO.popule(rs) );
@@ -333,7 +336,7 @@ public class HbnUsuariodataDAO extends GenericDAOImpl<Usuariodata> implements Us
 				conn = session.connection();
 				pstmt = conn.prepareStatement(hql.toString());
 				pstmt.setLong(1, cdLoteca);
-				pstmt.setLong(2, Constantes.DATA_SITUACAO_CONCLUIDO);
+				pstmt.setLong(2,  SituacaoData.CONCLUIDA.longValue() ); //--Constantes.DATA_SITUACAO_CONCLUIDO);
 				if (cdData != null) {
 					pstmt.setLong(3, cdData);
 				}
@@ -362,7 +365,7 @@ public class HbnUsuariodataDAO extends GenericDAOImpl<Usuariodata> implements Us
 		List<AproveitamentoDTO> lista = new ArrayList<AproveitamentoDTO>();
 		StringBuilder hql = new StringBuilder();
 		hql.append(" select  \n"); 
-		hql.append(" 	l.nuAno \n"); 
+		hql.append(" 	l.nuAno as nuanoloteca \n"); 
 		hql.append(" 	,u.nmUsuario    \n"); 
 		hql.append(" 	,ud.nuPontosfinal  \n"); 
 		hql.append(" 	,ud.nuPosicaofinal   \n"); 
@@ -371,7 +374,7 @@ public class HbnUsuariodataDAO extends GenericDAOImpl<Usuariodata> implements Us
 		hql.append(" left join esegusuario u on u.cdUsuario = lu.cdUsuario   \n"); 
 		hql.append(" left join eltcdata d on d.cdData = ud.cdData     \n"); 
 		hql.append(" left join eltcloteca l on l.cdLoteca = lu.cdLoteca   \n"); 
-		hql.append(" where l.tpSituacao = 2	 \n"); 
+		hql.append(" where l.tpSituacao = " + SituacaoLoteca.ANDAMENTO.longValue()); //--2 
 		hql.append(" and ud.cdData = (select max(cddata) from eltcdata dt where dt.cdLoteca = lu.cdLoteca and dt.tpSituacao = d.tpSituacao)  \n"); 
 		hql.append(" and ud.nuPosicaofinal between 1 and 5 \n"); 
 		hql.append(" order by  l.nuAno, ud.nuPosicaofinal asc	 \n"); 

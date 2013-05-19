@@ -7,6 +7,7 @@ import br.com.softal.base.bean.AbstractManegedBean;
 import br.com.softal.base.service.ServiceException;
 import br.com.softal.loteca.model.loteca.Loteca;
 import br.com.softal.loteca.util.Constantes;
+import br.com.softal.loteca.util.Enuns.SituacaoLoteca;
 
 @SuppressWarnings({ "serial", "rawtypes" })
 @ManagedBean(name="sistemaBean")
@@ -30,11 +31,11 @@ public class SistemaBean extends AbstractManegedBean {
 			setExisteLotecaativa( lotecaativa != null );
 			if (lotecaativa != null) {
 				nomesistema = lotecaativa.getDeLoteca();
-				if (lotecaativa.getTpSituacao() == Constantes.lOTECA_SITUACAO_CADASTRAMENTO) {
+				if (lotecaativa.getTpSituacao() == SituacaoLoteca.CADASTRAMENTO.longValue()) { //-- Constantes.lOTECA_SITUACAO_CADASTRAMENTO
 					setExibirLogin( false );
 					setExibirInscricao( true );
 					setExibirDashboard( false );
-				} else if (lotecaativa.getTpSituacao() == Constantes.lOTECA_SITUACAO_ANDAMENTO) {
+				} else if (lotecaativa.getTpSituacao() == SituacaoLoteca.ANDAMENTO.longValue()) { //--Constantes.lOTECA_SITUACAO_ANDAMENTO
 					setExibirLogin( true );
 				setExibirDashboard(true);
 				}

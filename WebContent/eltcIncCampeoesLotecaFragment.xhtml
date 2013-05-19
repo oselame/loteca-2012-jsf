@@ -5,19 +5,24 @@
              xmlns:ui="http://java.sun.com/jsf/facelets"
              xmlns:p="http://primefaces.org/ui"
              xmlns:f="http://java.sun.com/jsf/core" >
-		<h:panelGrid style="width:100%">
-			<h:form id="formCampeoesLotecas">
-				<p:dataTable id="camp" var="row" value="#{dashboardBean.campeoeslotecas}" 
-					emptyMessage="#{msg.warning_nenhum_registro_encontrado}" style="width:100%">
-					
-					<p:column headerText="#{msg.dashboard_ranking_sigla_posicao}" style="width:20px" styleClass="alignCenter">
-						<h:outputText value="#{row.nuPosicaofinal}" />
-					</p:column>
-					
-					<p:column headerText="Campeoes" style="width:20px" styleClass="alignCenter">
-						<h:outputText value="#{row.nmUsuario}" />
-					</p:column>
-				</p:dataTable>
-			</h:form>
-		</h:panelGrid>
+    <h:panelGrid style="width:100%">
+        <h:form id="formCampeoesLotecas">
+            
+            <p:accordionPanel value="#{dashboardBean.campeoesporano}" var="ano">
+                <p:tab title="#{ano}">
+                   <p:dataTable id="camp" var="row" value="#{ano.campeoeslotecas}" 
+                         emptyMessage="#{msg.warning_nenhum_registro_encontrado}" style="width:100%">
+
+                    <p:column headerText="#{msg.dashboard_ranking_sigla_posicao}" style="width:20px" styleClass="alignCenter">
+                        <h:outputText value="#{row.nuPosicaofinal}" />
+                    </p:column>
+
+                    <p:column headerText="Campeoes" style="width:20px" styleClass="alignCenter">
+                        <h:outputText value="#{row.nmUsuario}" />
+                    </p:column>
+                </p:dataTable>
+                </p:tab>
+            </p:accordionPanel>
+        </h:form>
+    </h:panelGrid>
 </ui:fragment>

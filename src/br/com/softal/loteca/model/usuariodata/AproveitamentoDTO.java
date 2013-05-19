@@ -1,3 +1,4 @@
+
 package br.com.softal.loteca.model.usuariodata;
 
 import java.sql.ResultSet;
@@ -17,6 +18,8 @@ public class AproveitamentoDTO {
 	
 	private Long nuPontosfinal;
 	private Long nuPosicaofinal;
+        
+        private Long nuAnoloteca;
 	
 	public AproveitamentoDTO() {
 	}
@@ -94,6 +97,16 @@ public class AproveitamentoDTO {
 		this.nuPosicaocartoes = nuPosicaocartoes;
 	}
 
+        public Long getNuAnoloteca() {
+            return nuAnoloteca;
+        }
+
+        public void setNuAnoloteca(Long nuAnoloteca) {
+            this.nuAnoloteca = nuAnoloteca;
+        }
+
+        
+
 	public static AproveitamentoDTO popule(ResultSet rs) {
 		AproveitamentoDTO dto = new AproveitamentoDTO();
 		try { dto.setCdData(			rs.getLong("cdData")); 				} catch (Exception e) {}
@@ -107,6 +120,10 @@ public class AproveitamentoDTO {
 		
 		try { dto.setNuPontosfinal(		rs.getLong("nuPontosfinal")); 		} catch (Exception e) {}
 		try { dto.setNuPosicaofinal(	rs.getLong("nuPosicaofinal")); 		} catch (Exception e) {}
+                
+                try { dto.setNuAnoloteca(	rs.getLong("nuanoloteca")); 		} catch (Exception e) {}
+                
+                
 		return dto;
 		
 	}
