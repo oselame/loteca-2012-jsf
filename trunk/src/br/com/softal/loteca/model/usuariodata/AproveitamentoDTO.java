@@ -3,6 +3,7 @@ package br.com.softal.loteca.model.usuariodata;
 
 import java.sql.ResultSet;
 import java.util.Date;
+import java.util.List;
 
 public class AproveitamentoDTO {
 
@@ -19,7 +20,9 @@ public class AproveitamentoDTO {
 	private Long nuPontosfinal;
 	private Long nuPosicaofinal;
         
-        private Long nuAnoloteca;
+    private Long nuAnoloteca;
+    
+    private List<AproveitamentoDTO> campeoes;
 	
 	public AproveitamentoDTO() {
 	}
@@ -97,15 +100,21 @@ public class AproveitamentoDTO {
 		this.nuPosicaocartoes = nuPosicaocartoes;
 	}
 
-        public Long getNuAnoloteca() {
-            return nuAnoloteca;
-        }
+    public Long getNuAnoloteca() {
+        return nuAnoloteca;
+    }
 
-        public void setNuAnoloteca(Long nuAnoloteca) {
-            this.nuAnoloteca = nuAnoloteca;
-        }
+    public void setNuAnoloteca(Long nuAnoloteca) {
+        this.nuAnoloteca = nuAnoloteca;
+    }
+    
+	public List<AproveitamentoDTO> getCampeoes() {
+		return campeoes;
+	}
 
-        
+	public void setCampeoes(List<AproveitamentoDTO> campeoes) {
+		this.campeoes = campeoes;
+	}
 
 	public static AproveitamentoDTO popule(ResultSet rs) {
 		AproveitamentoDTO dto = new AproveitamentoDTO();

@@ -42,25 +42,12 @@
 		</h:form>
 	</h:panelGrid>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 	<p:dashboard id="board" model="#{dashboardBean.model}"
 		style="width:100%" rendered="#{sistemaBean.exibirDashboard}">
 		<p:ajax event="reorder" listener="#{dashboardBean.handleReorder}"
 			update="growl" />
 
-		<p:panel id="dhbcampeoeslotecas" header="#{msg.dashboard_ranking}">
+		<p:panel id="dhbcampeoeslotecas" header="#{msg.dashboard_campeoes}">
 			<ui:include src="eltcIncCampeoesLotecaFragment.xhtml" />
 		</p:panel>
 

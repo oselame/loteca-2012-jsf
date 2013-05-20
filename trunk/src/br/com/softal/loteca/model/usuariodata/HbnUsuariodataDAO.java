@@ -374,7 +374,7 @@ public class HbnUsuariodataDAO extends GenericDAOImpl<Usuariodata> implements Us
 		hql.append(" left join esegusuario u on u.cdUsuario = lu.cdUsuario   \n"); 
 		hql.append(" left join eltcdata d on d.cdData = ud.cdData     \n"); 
 		hql.append(" left join eltcloteca l on l.cdLoteca = lu.cdLoteca   \n"); 
-		hql.append(" where l.tpSituacao = " + SituacaoLoteca.ANDAMENTO.longValue()); //--2 
+		hql.append(" where l.tpSituacao = " + SituacaoLoteca.CONCLUIDA.longValue()); //--2 
 		hql.append(" and ud.cdData = (select max(cddata) from eltcdata dt where dt.cdLoteca = lu.cdLoteca and dt.tpSituacao = d.tpSituacao)  \n"); 
 		hql.append(" and ud.nuPosicaofinal between 1 and 5 \n"); 
 		hql.append(" order by  l.nuAno, ud.nuPosicaofinal asc	 \n"); 
