@@ -8,9 +8,9 @@
     <h:panelGrid style="width:100%">
         <h:form id="formCampeoesLotecas">
             
-            <p:accordionPanel value="#{dashboardBean.campeoesporano}" var="ano">
-                <p:tab title="#{ano}">
-                   <p:dataTable id="camp" var="row" value="#{ano.campeoeslotecas}" 
+            <p:accordionPanel value="#{dashboardBean.campeoeslotecas}" var="ano">
+                <p:tab title="#{ano.nuAnoloteca}">
+                   <p:dataTable id="camp" var="row" value="#{ano.campeoes}" 
                          emptyMessage="#{msg.warning_nenhum_registro_encontrado}" style="width:100%">
 
                     <p:column headerText="#{msg.dashboard_ranking_sigla_posicao}" style="width:20px" styleClass="alignCenter">

@@ -44,10 +44,8 @@ public class DashboardBean implements Serializable {
 	private Loteca lotecaativa;
 	private Data ultimadataencerrada;
 	private List<AproveitamentoDTO> campeoeslotecas;
-	private Map<String, List<AproveitamentoDTO>> campeoesporano;
 
 	public DashboardBean() {
-		campeoesporano = new HashMap<String, List<AproveitamentoDTO>>();
 		model = new DefaultDashboardModel();
 		DashboardColumn column1 = new DefaultDashboardColumn();
 		DashboardColumn column2 = new DefaultDashboardColumn();
@@ -250,21 +248,24 @@ public class DashboardBean implements Serializable {
 			if (!existeLotecaAtiva()) {
 				// return false;
 			}
-			List<AproveitamentoDTO> lista = LtcServiceLocator.getInstance()
-					.getLotecaService().findAllCampeoes();
+			List<AproveitamentoDTO> lista = LtcServiceLocator.getInstance().getLotecaService().findAllCampeoes();
 			Long nuAno = 0L;
 			List<AproveitamentoDTO> listaAno = new ArrayList<AproveitamentoDTO>();
+			AproveitamentoDTO anoLoteca = new AproveitamentoDTO();
 			for (AproveitamentoDTO dto : lista) {
 				if (!dto.getNuAnoloteca().equals(nuAno)) {
 					nuAno = dto.getNuAnoloteca();
-					listaAno = new ArrayList<AproveitamentoDTO>();
-					campeoesporano.put(dto.getNuAnoloteca().toString(),
-							listaAno);
+					
+					anoLoteca = new AproveitamentoDTO();
+					anoLoteca.setNuAnoloteca(nuAno);
+					anoLoteca.setCampeoes(new ArrayList<AproveitamentoDTO>());
+					
+					listaAno.add(anoLoteca);
 				}
-				lista.add(dto);
+				anoLoteca.getCampeoes().add(dto);
 			}
 
-			setCampeoeslotecas(lista);
+			setCampeoeslotecas(listaAno);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -274,15 +275,6 @@ public class DashboardBean implements Serializable {
 
 	private boolean existeLotecaAtiva() {
 		return lotecaativa != null;
-	}
-
-	public Map<String, List<AproveitamentoDTO>> getCampeoesporano() {
-		return campeoesporano;
-	}
-
-	public void setCampeoesporano(
-			Map<String, List<AproveitamentoDTO>> campeoesporano) {
-		this.campeoesporano = campeoesporano;
 	}
 
 }
