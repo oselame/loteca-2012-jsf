@@ -21,8 +21,12 @@ public class EmailData {
 		StringBuilder html = new StringBuilder();
 		html.append("<html>");
 		html.append("\t<body>");
-		html.append("\t\t<h3>" + data.getDeObservacao() + "</h3><br>");
-	
+		html.append("\t\t<h3>" + data.getDeObservacao() + "</h3>");
+		
+		html.append("<br /><br />");
+		html.append("\t\tAcesso: http://" + Constantes.SERVIDOR_PORTA + "/loteca");
+		html.append("<br /><br />");
+		
 		html.append("\t\t<table border=\"0\" style=\"border-style: solid; border-width: 1px;\">");
 		html.append("\t\t\t<tr style=\"background-color: #2b3a3c; color: white;\">");
 		html.append("\t\t\t\t<td colspan=\"2\">Jogo</td>");
@@ -49,6 +53,10 @@ public class EmailData {
 	private static String montaEmailJogoLiberadoText(Data data, Usuario usuario) {
 		StringBuilder html = new StringBuilder();
 		html.append(data.getDeObservacao() + "\n");
+		
+		html.append("\n\n");
+		html.append("\t\tAcesso: http://" + Constantes.SERVIDOR_PORTA + "/loteca");
+		html.append("\n\n");
 		
 		for (Jogo j : data.getJogos()) {
 			html.append(j.getCdJogo() + ") [   ] [   ] [   ] " + j.getDeJogo() + "\n");
