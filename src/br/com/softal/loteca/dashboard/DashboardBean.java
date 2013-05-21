@@ -59,12 +59,12 @@ public class DashboardBean implements Serializable {
 			// model.addColumn(column2);
 		} else if (lotecaativa.getTpSituacao() == SituacaoLoteca.ANDAMENTO.longValue()) { // -- Constantes.lOTECA_SITUACAO_ANDAMENTO
 			// --column1.addWidget("dhbpremiacao");
-			if (this.carregaCampeoesLotecas()) {
-				column1.addWidget("dhbcampeoeslotecas");
-			}
-
 			if (this.carregaClassificacao()) {
 				column1.addWidget("dhbclassificacao");
+			}
+			
+			if (this.carregaCampeoesLotecas()) {
+				column1.addWidget("dhbcampeoeslotecas");
 			}
 
 			if (this.carregaVotosClubes()) {
@@ -224,10 +224,8 @@ public class DashboardBean implements Serializable {
 			if (!existeLotecaAtiva()) {
 				return false;
 			}
-			setCampeoes(LtcServiceLocator.getInstance().getLotecaService()
-					.findAllVotosCampeao(lotecaativa.getCdLoteca()));
-			setRebaixados(LtcServiceLocator.getInstance().getLotecaService()
-					.findAllVotosRebaixados(lotecaativa.getCdLoteca()));
+			setCampeoes(LtcServiceLocator.getInstance().getLotecaService().findAllVotosCampeao(lotecaativa.getCdLoteca()));
+			setRebaixados(LtcServiceLocator.getInstance().getLotecaService().findAllVotosRebaixados(lotecaativa.getCdLoteca()));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;

@@ -29,6 +29,8 @@ public interface LotecaService extends DefaultService {
 	
 	List<Lotecausuario> findAllLotecausuarioByLoteca(Long cdLoteca) throws ServiceException;
 	List<Lotecausuario> findAllLotecausuarioByLoteca(Loteca loteca) throws ServiceException;
+	List<Lotecausuario> findAllLotecausuarioAtivoByLoteca(Loteca loteca) throws ServiceException;	
+	
 	Lotecausuario findLotecausuarioAtivo(Usuario usuario) throws ServiceException;
 	Lotecausuario findLotecausuarioInscricao(Usuario usuario) throws ServiceException;
 	Lotecausuario findLotecausuario(Lotecausuario lotecausuario) throws ServiceException;

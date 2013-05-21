@@ -53,6 +53,7 @@ public class HbnClubeDAO extends GenericDAOImpl<Clube> implements ClubeDAO {
 		hql.append("	c.nuSeqclube = cu.nuSeqclube                     \n");
 		hql.append("WHERE lu.cdLoteca = ?                                \n");
 		hql.append("AND cu.nuPosicao = 1                                 \n");
+		hql.append("AND lu.flAtivo = 1                                   \n");		
 		hql.append("GROUP BY c.nmClube                                   \n");
 		hql.append("ORDER BY 2 DESC		                                 \n");
 		Session session = getHibernateTemplate().getSessionFactory().openSession();
@@ -99,6 +100,7 @@ public class HbnClubeDAO extends GenericDAOImpl<Clube> implements ClubeDAO {
 		hql.append("JOIN eltcclube c ON                                  \n");
 		hql.append("	c.nuSeqclube = cu.nuSeqclube                     \n");
 		hql.append("WHERE lu.cdLoteca = ?                                \n");
+		hql.append("AND lu.flAtivo = 1                                   \n");
 		hql.append("AND cu.nuPosicao in (17, 18, 19, 20)                 \n");
 		hql.append("GROUP BY c.nmClube                                   \n");
 		hql.append("ORDER BY 2 DESC		                                 \n");

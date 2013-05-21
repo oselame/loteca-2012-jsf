@@ -146,7 +146,7 @@ public class DataBean extends AbstractManegedBean<Data> {
 	public void enviaremailjogoliberado() {
 		try {
 			Loteca lotecaativa = super.getLotecaativa();
-			List<Lotecausuario> usuarios = LtcServiceLocator.getInstance().getLotecaService().findAllLotecausuarioByLoteca(lotecaativa);
+			List<Lotecausuario> usuarios = LtcServiceLocator.getInstance().getLotecaService().findAllLotecausuarioAtivoByLoteca(lotecaativa);
 			EmailData.enviaEmailJogoLiberado(getEntity(), usuarios);
 			
 			getEntity().setFlEnviouemailjogoliberado(1l);
