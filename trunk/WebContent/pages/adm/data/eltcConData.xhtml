@@ -12,7 +12,7 @@
 			<h:form>
 				<p:dataTable id="datas" var="row" value="#{dataBean.rows}"
 					rowKey="#{row.cdData}" selection="#{dataBean.entity}"
-					selectionMode="single" emptyMessage="#{msg.warning_nenhum_registro_encontrado}">
+					selectionMode="single" emptyMessage="#{msg.warning_nenhum_registro_encontrado}" >
 					
 					<f:facet name="header">
 						#{msg.data_consultar}
@@ -22,7 +22,9 @@
 						<h:outputText value="#{row.cdData}"  />
 					</p:column>
 					<p:column headerText="#{msg.data_dtdata}">
-						<h:outputText value="#{row.dtData}" pattern="dd/MM/yyyy" converter="javax.faces.DateTime" />
+						<h:outputText value="#{row.dtData}"  converter="javax.faces.DateTime">
+							<f:convertDateTime pattern="dd/MM/yyyy"/> 
+						</h:outputText>
 					</p:column>
 					<p:column headerText="#{msg.data_deobservacao}">
 						<h:outputText value="#{row.deObservacao}" />

@@ -17,20 +17,30 @@
 						<h:panelGrid columns="2" style="width:100%"
 							columnClasses="headerColumn alignRight bold">
 							<h:outputText value="#{msg.data_dtdata}*:" />
-							<h:outputText value="#{dataBean.entity.dtData}"
-								pattern="dd/MM/yyyy" converter="javax.faces.DateTime" />
+							<h:outputText value="#{dataBean.entity.dtData}" converter="javax.faces.DateTime">
+								<f:convertDateTime pattern="dd/MM/yyyy"/>
+							</h:outputText>
 		
 							<h:outputText value="#{msg.data_deobservacao}*:" />
 							<h:outputText value="#{dataBean.entity.deObservacao}" />
 							
 							<h:outputText value="" />
 							<h:panelGroup>
-								<h:panelGrid columns="1" style="width:100%" >
-									<p:selectBooleanCheckbox value="#{dataBean.entity.blEnviouemailjogoliberado}" itemLabel="#{msg.data_flenviouemailjogoliberado}" disabled="true"></p:selectBooleanCheckbox>
-									<p:selectBooleanCheckbox value="#{dataBean.entity.blAtualizoutimes}" itemLabel="#{msg.data_flatualizoutimes}" disabled="true"></p:selectBooleanCheckbox>
-									<p:selectBooleanCheckbox value="#{dataBean.entity.blAtualizouclassificacao}" itemLabel="#{msg.data_flAtualizouclassificacao}" disabled="true"></p:selectBooleanCheckbox>
-									<p:selectBooleanCheckbox value="#{dataBean.entity.blAtualizouresultados}" itemLabel="#{msg.data_flatualizouresultados}" disabled="true"></p:selectBooleanCheckbox>
-									<p:selectBooleanCheckbox value="#{dataBean.entity.blEnviouemailresultado}" itemLabel="#{msg.data_flenviouemailresultado}" disabled="true"></p:selectBooleanCheckbox>
+								<h:panelGrid columns="2" style="width:100%"  columnClasses="alignRigth, alignLeft" > 
+									<p:selectBooleanCheckbox value="#{dataBean.entity.blEnviouemailjogoliberado}" disabled="true"></p:selectBooleanCheckbox>
+									<p:outputLabel value="#{msg.data_flenviouemailjogoliberado}" />
+									
+									<p:selectBooleanCheckbox value="#{dataBean.entity.blAtualizoutimes}" disabled="true"></p:selectBooleanCheckbox>
+									<p:outputLabel value="#{msg.data_flatualizoutimes}" />
+									
+									<p:selectBooleanCheckbox value="#{dataBean.entity.blAtualizouclassificacao}" disabled="true"></p:selectBooleanCheckbox>
+									<p:outputLabel value="#{msg.data_flAtualizouclassificacao}" />
+									
+									<p:selectBooleanCheckbox value="#{dataBean.entity.blAtualizouresultados}" disabled="true"></p:selectBooleanCheckbox>
+									<p:outputLabel value="#{msg.data_flatualizouresultados}" />
+									
+									<p:selectBooleanCheckbox value="#{dataBean.entity.blEnviouemailresultado}" disabled="true"></p:selectBooleanCheckbox>
+									<p:outputLabel value="#{msg.data_flenviouemailresultado}" />
 								</h:panelGrid>
 							</h:panelGroup>
 							

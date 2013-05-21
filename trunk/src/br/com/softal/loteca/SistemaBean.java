@@ -37,7 +37,7 @@ public class SistemaBean extends AbstractManegedBean {
 					setExibirDashboard( false );
 				} else if (lotecaativa.getTpSituacao() == SituacaoLoteca.ANDAMENTO.longValue()) { //--Constantes.lOTECA_SITUACAO_ANDAMENTO
 					setExibirLogin( true );
-				setExibirDashboard(true);
+					setExibirDashboard(true);
 				}
 				//getMessages().addWarningMessage("msg_warning_nao_exite_campeonato_vigente");
 			}

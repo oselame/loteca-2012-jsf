@@ -51,15 +51,13 @@ public class DashboardBean implements Serializable {
 		DashboardColumn column2 = new DefaultDashboardColumn();
 		this.carregaLotecaativa();
 
-		if (lotecaativa.getTpSituacao() == SituacaoLoteca.CADASTRAMENTO
-				.longValue()) { // -- Constantes.lOTECA_SITUACAO_CADASTRAMENTO
+		if (lotecaativa.getTpSituacao() == SituacaoLoteca.CADASTRAMENTO.longValue()) { // -- Constantes.lOTECA_SITUACAO_CADASTRAMENTO
 			// column1.addWidget("dhbregulamento");
 			// column2.addWidget("dhbinscricao");
 
 			// model.addColumn(column1);
 			// model.addColumn(column2);
-		} else if (lotecaativa.getTpSituacao() == SituacaoLoteca.ANDAMENTO
-				.longValue()) { // -- Constantes.lOTECA_SITUACAO_ANDAMENTO
+		} else if (lotecaativa.getTpSituacao() == SituacaoLoteca.ANDAMENTO.longValue()) { // -- Constantes.lOTECA_SITUACAO_ANDAMENTO
 			// --column1.addWidget("dhbpremiacao");
 			if (this.carregaCampeoesLotecas()) {
 				column1.addWidget("dhbcampeoeslotecas");
@@ -93,21 +91,15 @@ public class DashboardBean implements Serializable {
 	}
 
 	private void carregaLotecaativa() {
-		if (!FacesContext.getCurrentInstance().getExternalContext()
-				.getSessionMap().containsKey(Constantes.LOTECA_ATIVA)) {
+		if (!FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey(Constantes.LOTECA_ATIVA)) {
 			try {
-				lotecaativa = LtcServiceLocator.getInstance()
-						.getLotecaService().findLotecaAtiva();
-				FacesContext.getCurrentInstance().getExternalContext()
-						.getSessionMap()
-						.put(Constantes.LOTECA_ATIVA, lotecaativa);
+				lotecaativa = LtcServiceLocator.getInstance().getLotecaService().findLotecaAtiva();
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(Constantes.LOTECA_ATIVA, lotecaativa);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		lotecaativa = (Loteca) FacesContext.getCurrentInstance()
-				.getExternalContext().getSessionMap()
-				.get(Constantes.LOTECA_ATIVA);
+		lotecaativa = (Loteca) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get(Constantes.LOTECA_ATIVA);
 	}
 
 	public void handleReorder(DashboardReorderEvent event) {
