@@ -225,6 +225,10 @@ public class LotecausuarioBean extends AbstractManegedBean<Lotecausuario> implem
 		return "eltcCadLotecausuario";
 	}
 	
+	public void atualizaAtivo() {
+		System.out.println( "xxxx" );
+	}
+	
 	public void carregaUsuariosloteca(ValueChangeEvent event) {
 		try {
 			if ((Long)event.getNewValue() != null) {

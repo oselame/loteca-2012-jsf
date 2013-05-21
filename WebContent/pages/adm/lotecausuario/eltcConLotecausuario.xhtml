@@ -37,7 +37,8 @@
 						<h:outputText value="#{row.usuario.nmUsuario}" />
 					</p:column>
 					<p:column headerText="#{msg.lotecausuario_flativo}" style="width:80px;text-align:center;">
-						<p:selectBooleanCheckbox value="#{row.blAtivo}" disabled="true" />
+						<p:selectBooleanCheckbox value="#{row.blAtivo}" disabled="true" >
+						</p:selectBooleanCheckbox>
 					</p:column>
 					<p:column style="width:15px">
 						<p:commandButton id="selectButton" icon="ui-icon-search" title="Editar" action="#{lotecausuarioBean.editar}" ajax="false">

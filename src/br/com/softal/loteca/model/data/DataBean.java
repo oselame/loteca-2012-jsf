@@ -81,6 +81,12 @@ public class DataBean extends AbstractManegedBean<Data> {
 	@PostConstruct
 	public void init() {
 		super.findAll();
+		Collections.sort( this.getRows(), new Comparator<Data>() {
+			@Override
+			public int compare(Data o1, Data o2) {
+				return o2.getDtData().compareTo(o1.getDtData());
+			}
+		} );
 	}
 	
 	@Override
