@@ -21,9 +21,8 @@ public class LtcEmailProperties {
 	public boolean isDebug() {
 		if (mail.containsKey("email_debug")) {
 			return Boolean.valueOf(mail.getString("email_debug"));
-		} else {
-			return false;
 		}
+		return false;
 	}
 	
 	public String getHostName() {

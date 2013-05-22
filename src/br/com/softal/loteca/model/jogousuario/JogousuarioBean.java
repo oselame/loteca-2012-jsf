@@ -13,6 +13,7 @@ import br.com.softal.base.bean.AbstractManegedBean;
 import br.com.softal.base.service.ServiceException;
 import br.com.softal.base.util.DateUtil;
 import br.com.softal.loteca.LtcServiceLocator;
+import br.com.softal.loteca.dto.ApostaDto;
 import br.com.softal.loteca.model.data.Data;
 import br.com.softal.loteca.model.loteca.Loteca;
 import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
@@ -29,6 +30,8 @@ public class JogousuarioBean extends AbstractManegedBean<Jogousuario> implements
 	private Long cdData;
 	private List<SelectItem> datasencerradas;
 	private String deAproveitamento;
+	
+	private ApostaDto aposta;
 	
 	public String getDeAproveitamento() {
 		return deAproveitamento;
@@ -82,12 +85,21 @@ public class JogousuarioBean extends AbstractManegedBean<Jogousuario> implements
 		setDatasencerradas(new ArrayList<SelectItem>());
 	}
 	
+	public ApostaDto getAposta() {
+		return aposta;
+	}
+
+	public void setAposta(ApostaDto aposta) {
+		this.aposta = aposta;
+	}
+
 	/*****************************************************************************************************/
 	
 	@Override
 	protected void initializeEntity() {
 		setEntity(new Jogousuario());
 		setJogousuarios(new ArrayList<Jogousuario>());
+		setAposta(new ApostaDto());
 	}
 	
 	private void carregaJogoUsuario() {
@@ -199,6 +211,25 @@ public class JogousuarioBean extends AbstractManegedBean<Jogousuario> implements
 			e.printStackTrace();
 		}
 		return "/pages/user/jogousuario/eltcConGraficoAproveitamento.xhtml";
+	}
+	
+	public void enviarAposta() {
+		try {
+			if (!getAposta().isApostavalida()) {
+				super.getMessages().addWarningMessage("msg_warning_lista_emails_aposta_nao_informado");
+				return;
+			}
+			if (getAposta().getEmailsValidos().equals("")) {
+				super.getMessages().addWarningMessage("msg_warning_nenhum_email_valido_informado");
+				return;
+			}
+			super.getLotecaService().saveAllJogousuario( getJogousuarios() );
+			EmailJogousuario.enviaEmailJogousuarioParaLista(getJogousuarios(), getUsuariologado(), getAposta());
+			super.getMessages().addSucessMessage("msg_sucess_email_enviado_com_sucesso");
+		} catch (Exception e) {
+			super.getMessages().addWarningMessage(e.getMessage());
+			e.printStackTrace();
+		}
 	}
 	
 }
