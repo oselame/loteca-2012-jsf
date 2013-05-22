@@ -216,7 +216,7 @@ public class JogousuarioBean extends AbstractManegedBean<Jogousuario> implements
 	public void enviarAposta() {
 		try {
 			if (!getAposta().isApostavalida()) {
-				super.getMessages().addWarningMessage("msg_warning_lista_emails_aposta_nao_informado");
+				super.getMessages().addWarningMessage("msg_warning_dados_da_aposta_nao_informado");
 				return;
 			}
 			if (getAposta().getEmailsValidos().equals("")) {

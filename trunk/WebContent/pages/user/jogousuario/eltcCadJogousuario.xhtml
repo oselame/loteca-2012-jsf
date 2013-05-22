@@ -54,33 +54,42 @@
 			</p:panel>
 			<br/>
 			
-			<p:panel>
-				<f:facet name="header">
-					Apostas 
-				</f:facet>
-				<h:panelGrid columns="1">
-					<p:outputLabel value="Assunto"/>
+			<p:fieldset legend="Apostas Fora da Loteca" toggleable="true" toggleSpeed="500" collapsed="false">
+				<h:panelGrid style="width: 100%">
+					<p:fieldset>
+						Esta área é destinada aos colaboradores que gostam de fazer apostas paralelas.<br />
+						É enviado um e-mail para a lista de e-mails indicada abaixo.
+						<p:separator/>
+						Exemplo:<br/><br/>						
+						Eu aposto uma caixa de BUDWEISER (com alcool) com o colega XYZ que nessa rodada eu farei mais de 10 pontos.
+						<br/><br/>
+						Obs: Tem que detalhar todos os dados da aposta (hehehhehe).
+						<br/>
+					</p:fieldset>
+					<br/>
+					<p:outputLabel value="Assunto da Aposta" styleClass="negrito"/>
 					<p:inputText value="#{jogousuarioBean.aposta.deAssunto}" 
-						required="true" requiredMessage="Assunto não informado"
-						style="width:100%"/>
+						requiredMessage="Assunto não informado"
+						style="width:670px"/>
 					
-					<p:outputLabel value="Lista de e-mails, separados por virgula"/>
-					<p:inputTextarea value="#{jogousuarioBean.aposta.deListaemails}" style="width:100%" rows="4"
-						required="true" requiredMessage="Lista de e-mails não informada."></p:inputTextarea>
+					<p:outputLabel value="Lista de e-mails, separados por vírgula" styleClass="negrito"/>
+					<p:inputTextarea value="#{jogousuarioBean.aposta.deListaemails}" style="width:670px" rows="4"
+						requiredMessage="Lista de e-mails não informada."></p:inputTextarea>
 					
-					<p:outputLabel value="Texto da aposta"/>
-					<p:editor maxlength="500" value="#{jogousuarioBean.aposta.deAposta}"
-						required="true" requiredMessage="Texto da aposta não informado."
-						style="width:100%"></p:editor>
+					<p:outputLabel value="Texto da aposta" styleClass="negrito"/>
+					<p:editor value="#{jogousuarioBean.aposta.deAposta}" 
+						requiredMessage="Texto da aposta não informado."
+						width="676" height="200"
+						>
 					
+					</p:editor>					
 					<f:facet name="footer">
 						<p:commandButton value="${msg.botao_enviar_aposta}" update="growl"
 							action="#{jogousuarioBean.enviarAposta}"
 							disabled="#{not jogousuarioBean.jogohabilitado}"/>	
 					</f:facet>
 				</h:panelGrid>
-				
-			</p:panel>
+			</p:fieldset>
 			
 		</h:form>
 	</ui:define>
