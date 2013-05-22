@@ -36,6 +36,11 @@ public abstract class LtcHtmlEmailImpl implements LtcHtmlEmail {
 	}
 	
 	@Override
+	public void from(String from) throws EmailException {
+		email.setFrom(from);
+	}
+	
+	@Override
 	public void addTo(String to) throws EmailException {
 		email.addTo(to);
 	}

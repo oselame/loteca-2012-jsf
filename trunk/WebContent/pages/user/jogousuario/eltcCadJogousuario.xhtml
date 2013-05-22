@@ -52,6 +52,35 @@
 						disabled="#{not jogousuarioBean.jogohabilitado}"/>
 				</f:facet>
 			</p:panel>
+			<br/>
+			
+			<p:panel>
+				<f:facet name="header">
+					Apostas 
+				</f:facet>
+				<h:panelGrid columns="1">
+					<p:outputLabel value="Assunto"/>
+					<p:inputText value="#{jogousuarioBean.aposta.deAssunto}" 
+						required="true" requiredMessage="Assunto não informado"
+						style="width:100%"/>
+					
+					<p:outputLabel value="Lista de e-mails, separados por virgula"/>
+					<p:inputTextarea value="#{jogousuarioBean.aposta.deListaemails}" style="width:100%" rows="4"
+						required="true" requiredMessage="Lista de e-mails não informada."></p:inputTextarea>
+					
+					<p:outputLabel value="Texto da aposta"/>
+					<p:editor maxlength="500" value="#{jogousuarioBean.aposta.deAposta}"
+						required="true" requiredMessage="Texto da aposta não informado."
+						style="width:100%"></p:editor>
+					
+					<f:facet name="footer">
+						<p:commandButton value="${msg.botao_enviar_aposta}" update="growl"
+							action="#{jogousuarioBean.enviarAposta}"
+							disabled="#{not jogousuarioBean.jogohabilitado}"/>	
+					</f:facet>
+				</h:panelGrid>
+				
+			</p:panel>
 			
 		</h:form>
 	</ui:define>
