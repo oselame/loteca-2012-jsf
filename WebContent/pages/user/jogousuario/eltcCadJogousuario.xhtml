@@ -14,92 +14,94 @@
 			}
 		</style>
 		<h:form>
-			<p:growl id="growl" showDetail="true" sticky="true" />  
 			<p:messages showDetail="true" showSummary="false"/>
-			<p:panel>
-				<p:dataTable id="jogousuarios" var="row" value="#{jogousuarioBean.jogousuarios}"
-					rowKey="#{row.nuSeqjogousuario}" emptyMessage="#{msg.warning_nenhum_registro_encontrado}">
-					
-					<f:facet name="header">
-						#{msg.jogo_usuario_cadastrar}
-					</f:facet>
-										
-					<p:column headerText="#{msg.jogo_usuario_jogo_cdjogo}"  style="width:40px;" styleClass="#{row.tpJogo eq 1 ? 'linhaDuplo' : ''}">
-						<h:outputText value="#{row.jogo.cdJogo}" />
-					</p:column>				
-					<p:column headerText="#{msg.jogo_usuario_jogo_dejogo}" styleClass="#{row.tpJogo eq 1 ? 'linhaDuplo' : ''}">
-						<h:outputText value="#{row.jogo.deJogo}" />
-					</p:column>				
-					<p:column headerText="#{msg.jogo_usuario_coluna1}" style="width:80px;" styleClass="alignCenter #{row.tpJogo eq 1 ? 'linhaDuplo' : ''}">
-						<p:selectBooleanCheckbox value="#{row.blColuna1}"/>
-					</p:column>				
-					<p:column headerText="#{msg.jogo_usuario_empate}" style="width:80px;" styleClass="alignCenter #{row.tpJogo eq 1 ? 'linhaDuplo' : ''}">
-						<p:selectBooleanCheckbox value="#{row.blEmpate}"/>
-					</p:column>				
-					<p:column headerText="#{msg.jogo_usuario_coluna2}" style="width:80px;" styleClass="alignCenter #{row.tpJogo eq 1 ? 'linhaDuplo' : ''}">
-						<p:selectBooleanCheckbox value="#{row.blColuna2}"/>
-					</p:column>				
-				</p:dataTable>
-				<f:facet name="footer">
-					<p:commandButton value="#{msg.button_save}" 
-						action="#{jogousuarioBean.salvarCadJogousuario}" update="growl, jogousuarios"  ajax="true" 
-						disabled="#{not jogousuarioBean.jogohabilitado}"/>
-					<p:commandButton value="#{msg.botao_gerar_jogo_aleatorio}" 
-						action="#{jogousuarioBean.gerarCadJogousuarioAleatorio}" update="growl, jogousuarios" ajax="true" 
-						disabled="#{not jogousuarioBean.jogohabilitado}"/>
-					<p:commandButton value="${msg.botao_enviar_por_email}" update="growl"
-						action="#{jogousuarioBean.enviarJogoEmailPessoal}"
-						disabled="#{not jogousuarioBean.jogohabilitado}"/>
-				</f:facet>
-			</p:panel>
+			<p:tabView>
+				<p:tab title="Loteca">
+					<p:growl id="growl" showDetail="true" sticky="true" />  
+					<p:panel>
+						<p:dataTable id="jogousuarios" var="row" value="#{jogousuarioBean.jogousuarios}"
+							rowKey="#{row.nuSeqjogousuario}" emptyMessage="#{msg.warning_nenhum_registro_encontrado}">
+							
+							<f:facet name="header">
+								#{msg.jogo_usuario_cadastrar}
+							</f:facet>
+												
+							<p:column headerText="#{msg.jogo_usuario_jogo_cdjogo}"  style="width:40px;" styleClass="#{row.tpJogo eq 1 ? 'linhaDuplo' : ''}">
+								<h:outputText value="#{row.jogo.cdJogo}" />
+							</p:column>				
+							<p:column headerText="#{msg.jogo_usuario_jogo_dejogo}" styleClass="#{row.tpJogo eq 1 ? 'linhaDuplo' : ''}">
+								<h:outputText value="#{row.jogo.deJogo}" />
+							</p:column>				
+							<p:column headerText="#{msg.jogo_usuario_coluna1}" style="width:80px;" styleClass="alignCenter #{row.tpJogo eq 1 ? 'linhaDuplo' : ''}">
+								<p:selectBooleanCheckbox value="#{row.blColuna1}"/>
+							</p:column>				
+							<p:column headerText="#{msg.jogo_usuario_empate}" style="width:80px;" styleClass="alignCenter #{row.tpJogo eq 1 ? 'linhaDuplo' : ''}">
+								<p:selectBooleanCheckbox value="#{row.blEmpate}"/>
+							</p:column>				
+							<p:column headerText="#{msg.jogo_usuario_coluna2}" style="width:80px;" styleClass="alignCenter #{row.tpJogo eq 1 ? 'linhaDuplo' : ''}">
+								<p:selectBooleanCheckbox value="#{row.blColuna2}"/>
+							</p:column>				
+						</p:dataTable>
+						<f:facet name="footer">
+							<p:commandButton value="#{msg.button_save}" 
+								action="#{jogousuarioBean.salvarCadJogousuario}" update="growl, jogousuarios"  ajax="true" 
+								disabled="#{not jogousuarioBean.jogohabilitado}"/>
+							<p:commandButton value="#{msg.botao_gerar_jogo_aleatorio}" 
+								action="#{jogousuarioBean.gerarCadJogousuarioAleatorio}" update="growl, jogousuarios" ajax="true" 
+								disabled="#{not jogousuarioBean.jogohabilitado}"/>
+							<p:commandButton value="${msg.botao_enviar_por_email}" update="growl"
+								action="#{jogousuarioBean.enviarJogoEmailPessoal}"
+								disabled="#{not jogousuarioBean.jogohabilitado}"/>
+						</f:facet>
+					</p:panel>
+				</p:tab>
+				<p:tab title="Apostas Fora da Loteca">
+					<p:panel>
+						<h:panelGrid style="width: 100%">
+							<p:outputLabel value="Assunto da Aposta" styleClass="negrito"/>
+							<p:inputText value="#{jogousuarioBean.aposta.deAssunto}" 
+								requiredMessage="Assunto não informado"
+								style="width:640px"/>
+							
+							<p:outputLabel value="Desafiante" styleClass="negrito"/>
+							<p:inputText value="#{jogousuarioBean.aposta.deEmaildesafiante}" 
+								requiredMessage="Desafiante não informado"
+								style="width:640px">
+								<f:validator validatorId="emailValidator"></f:validator>
+							</p:inputText>
+							
+							<p:outputLabel value="Desafiado" styleClass="negrito"/>
+							<p:inputText value="#{jogousuarioBean.aposta.deEmaildesafiado}" 
+								requiredMessage="Desafiante não informado"
+								converterMessage="E-mail Inválido"
+								style="width:640px">
+								<f:validator validatorId="emailValidator"></f:validator>
+							</p:inputText>
+							
+							<p:outputLabel value="E-mail das Testemunhas separados por vírgula" styleClass="negrito"/>
+							<p:inputTextarea value="#{jogousuarioBean.aposta.deListaemails}" style="width:640px" rows="4"
+								requiredMessage="Lista de e-mails não informada."></p:inputTextarea>
+							
+							<p:outputLabel value="Teor da aposta" styleClass="negrito"/>
+							<p:editor value="#{jogousuarioBean.aposta.deAposta}" 
+								requiredMessage="Texto da aposta não informado."
+								width="648" height="200" >
+							</p:editor>					
+							
+							<p:selectBooleanCheckbox value="#{jogousuarioBean.aposta.flIncluircanhoto}" 
+								itemLabel="Incluir aposta da loteca no e-mail?"
+								label="Incluir aposta da loteca no e-mail?" styleClass="negrito">
+							</p:selectBooleanCheckbox>
+						</h:panelGrid>
+						<f:facet name="footer">
+							<p:commandButton value="${msg.botao_enviar_aposta}" update="growl"
+								action="#{jogousuarioBean.enviarAposta}"
+								disabled="#{not jogousuarioBean.jogohabilitado}"/>	
+						</f:facet>
+					</p:panel>
+				</p:tab>
+			</p:tabView>
 			<br/>
-			
-			<p:fieldset legend="Apostas Fora da Loteca" toggleable="true" toggleSpeed="500" collapsed="false">
-				<h:panelGrid style="width: 100%">
-					
-					<p:outputLabel value="Assunto da Aposta" styleClass="negrito"/>
-					<p:inputText value="#{jogousuarioBean.aposta.deAssunto}" 
-						requiredMessage="Assunto não informado"
-						style="width:670px"/>
-					
-					<p:outputLabel value="Desafiante" styleClass="negrito"/>
-					<p:inputText value="#{jogousuarioBean.aposta.deEmaildesafiante}" 
-						requiredMessage="Desafiante não informado"
-						style="width:670px">
-						<f:validator validatorId="emailValidator"></f:validator>
-					</p:inputText>
-					
-					<p:outputLabel value="Desafiado" styleClass="negrito"/>
-					<p:inputText value="#{jogousuarioBean.aposta.deEmaildesafiado}" 
-						requiredMessage="Desafiante não informado"
-						converterMessage="E-mail Inválido"
-						style="width:670px">
-						<f:validator validatorId="emailValidator"></f:validator>
-					</p:inputText>
-					
-					<p:outputLabel value="E-mail das Testemunhas separados por vírgula" styleClass="negrito"/>
-					<p:inputTextarea value="#{jogousuarioBean.aposta.deListaemails}" style="width:670px" rows="4"
-						requiredMessage="Lista de e-mails não informada."></p:inputTextarea>
-					
-					<p:outputLabel value="Teor da aposta" styleClass="negrito"/>
-					<p:editor value="#{jogousuarioBean.aposta.deAposta}" 
-						requiredMessage="Texto da aposta não informado."
-						width="676" height="200" >
-					</p:editor>					
-					
-					<p:selectBooleanCheckbox value="#{jogousuarioBean.aposta.flIncluircanhoto}" 
-						itemLabel="Incluir aposta da loteca no e-mail?"
-						label="Incluir aposta da loteca no e-mail?" styleClass="negrito">
-					</p:selectBooleanCheckbox>
-					<br/>
-					<f:facet name="footer">
-						<p:commandButton value="${msg.botao_enviar_aposta}" update="growl"
-							action="#{jogousuarioBean.enviarAposta}"
-							disabled="#{not jogousuarioBean.jogohabilitado}"/>	
-					</f:facet>
-				</h:panelGrid>
-			</p:fieldset>
-			
 		</h:form>
 	</ui:define>
 </ui:composition>

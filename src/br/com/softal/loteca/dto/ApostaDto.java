@@ -10,7 +10,7 @@ public class ApostaDto {
 	
 	private String deAposta;
 	private String deListaemails;
-	private String flIncluircanhoto;
+	private boolean flIncluircanhoto;
 
 	public String getDeAposta() {
 		return deAposta;
@@ -84,13 +84,12 @@ public class ApostaDto {
 		this.deEmaildesafiado = deEmaildesafiado;
 	}
 
-	public String getFlIncluircanhoto() {
+	public boolean isFlIncluircanhoto() {
 		return flIncluircanhoto;
 	}
 
-	public void setFlIncluircanhoto(String flIncluircanhoto) {
+	public void setFlIncluircanhoto(boolean flIncluircanhoto) {
 		this.flIncluircanhoto = flIncluircanhoto;
 	}
-	
 	
 }
