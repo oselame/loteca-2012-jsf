@@ -10,6 +10,7 @@ import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 
 import br.com.softal.base.bean.AbstractManegedBean;
+import br.com.softal.base.model.usuario.Usuario;
 import br.com.softal.base.service.ServiceException;
 import br.com.softal.base.util.DateUtil;
 import br.com.softal.base.util.EmailUtil;
@@ -152,9 +153,15 @@ public class JogousuarioBean extends AbstractManegedBean<Jogousuario> implements
 		}
 	}
 	
+	private void carregaAposta() {
+		Usuario usuario = getUsuariologado();
+		getAposta().setDeEmaildesafiante( usuario.getDeEmail() );
+	}
+	
 	public String abrirCadJogousuario() {
 		getJogousuarios().add(new Jogousuario());
 		this.carregaJogoUsuario();
+		this.carregaAposta();
 		return "/pages/user/jogousuario/eltcCadJogousuario.xhtml";
 	}
         
