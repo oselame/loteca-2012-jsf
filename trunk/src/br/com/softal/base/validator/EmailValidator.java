@@ -19,7 +19,8 @@ public class EmailValidator implements Validator {
 		String enteredEmail = (String) object;
 		if (!EmailUtil.isEmailValido( enteredEmail )) {
 			FacesMessage message = new FacesMessage();
-			message.setDetail(messages.getMessage("msg_warnig_email_invalido"));
+			message.setDetail( enteredEmail );
+			//--message.setDetail(messages.getMessage("msg_warnig_email_invalido"));
 			message.setSummary(messages.getMessage("msg_warnig_email_invalido"));
 			message.setSeverity(FacesMessage.SEVERITY_WARN);
 			throw new ValidatorException(message);

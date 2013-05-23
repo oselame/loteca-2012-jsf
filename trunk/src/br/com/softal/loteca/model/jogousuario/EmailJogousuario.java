@@ -99,31 +99,58 @@ public class EmailJogousuario {
 		html.append("<html>");
 		html.append("\t<body>");
 		
+		html.append("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
+		html.append("<tr>");
+		html.append("<td align=\"right\" style=\"width:60px;\"><strong>Desafiante: </strong></td>");
+		html.append("<td>" + aposta.getDeEmaildesafiante() + "</td>");
+		html.append("</tr>");
 		
-		html.append( aposta.getDeAposta() );
-		html.append( "<br/><br/>" );
+		html.append("<tr>");
+		html.append("<td align=\"right\"><strong>Desafiado: </strong></td>");
+		html.append("<td>" + aposta.getDeEmaildesafiado() + "</td>");
+		html.append("</tr>");
 		
-		html.append("\t\t<h3>" + data.getDeObservacao() + "</h3><br>");
-	
-		html.append("\t\t<table border=\"0\" style=\"border-style: solid; border-width: 1px;\" cellpadding=\"0\" cellspacing=\"0\">");
-		html.append("\t\t\t<tr style=\"background-color: #2b3a3c; color: white;\">");
+		html.append("<tr>");
+		html.append("<td align=\"right\"><strong>Aposta: </strong></td>");
+		html.append("<td>" + aposta.getDeAposta() + "</td>");
+		html.append("</tr>");
 		
-		html.append("\t\t\t\t<td colspan=\"2\" align=\"center\" style=\"width:40px;\">Jogo</td>");
-		html.append("\t\t\t\t<td align=\"center\" style=\"width:60px;\">Coluna 1</td>");
-		html.append("\t\t\t\t<td align=\"center\" style=\"width:60px;\">Empate</td>");
-		html.append("\t\t\t\t<td align=\"center\" style=\"width:60px;\">Coluna 2</td>");
-		html.append("\t\t\t</tr>");
+		html.append("<tr>");
+		html.append("<td align=\"right\"><strong>Testemunhas: </strong></td>");
+		html.append("<td>");
+				String[] emails = aposta.getEmailsValidos().split(",");
+				for (String e : emails) {
+					html.append(e + "<br/>");
+				}
+		html.append("</td>");
+		html.append("</tr>");
+		html.append("</table>");
+		html.append("<br/><br/>");
 		
-		for (Jogousuario j : jogos) {
-			html.append("\t\t\t<tr>");
-			html.append("\t\t\t\t<td align=\"center\" style=\"border-style: solid;border-width: 1px\">" + j.getJogo().getCdJogo() + "</td>");
-			html.append("\t\t\t\t<td align=\"left\"   style=\"border-style: solid;border-width: 1px\">&nbsp;&nbsp;" + j.getJogo().getDeJogo() + "&nbsp;&nbsp;</td>");
-			html.append("\t\t\t\t<td align=\"center\" style=\"border-style: solid;border-width: 1px\">" + (j.getFlColuna1() == 1 ? " X " : "   ") + "</td>");
-			html.append("\t\t\t\t<td align=\"center\" style=\"border-style: solid;border-width: 1px\">" + (j.getFlEmpate()  == 1 ? " X " : "   ") + "</td>");
-			html.append("\t\t\t\t<td align=\"center\" style=\"border-style: solid;border-width: 1px\">" + (j.getFlColuna2() == 1 ? " X " : "   ") + "</td>");
+		
+		if (aposta.getFlIncluircanhoto() != null) {
+			html.append("\t\t<h3>" + data.getDeObservacao() + "</h3><br>");
+		
+			html.append("\t\t<table border=\"0\" style=\"border-style: solid; border-width: 1px;\" cellpadding=\"0\" cellspacing=\"0\">");
+			html.append("\t\t\t<tr style=\"background-color: #2b3a3c; color: white;\">");
+			
+			html.append("\t\t\t\t<td colspan=\"2\" align=\"center\" style=\"width:40px;\">Jogo</td>");
+			html.append("\t\t\t\t<td align=\"center\" style=\"width:60px;\">Coluna 1</td>");
+			html.append("\t\t\t\t<td align=\"center\" style=\"width:60px;\">Empate</td>");
+			html.append("\t\t\t\t<td align=\"center\" style=\"width:60px;\">Coluna 2</td>");
 			html.append("\t\t\t</tr>");
+			
+			for (Jogousuario j : jogos) {
+				html.append("\t\t\t<tr>");
+				html.append("\t\t\t\t<td align=\"center\" style=\"border-style: solid;border-width: 1px\">" + j.getJogo().getCdJogo() + "</td>");
+				html.append("\t\t\t\t<td align=\"left\"   style=\"border-style: solid;border-width: 1px\">&nbsp;&nbsp;" + j.getJogo().getDeJogo() + "&nbsp;&nbsp;</td>");
+				html.append("\t\t\t\t<td align=\"center\" style=\"border-style: solid;border-width: 1px\">" + (j.getFlColuna1() == 1 ? " X " : "   ") + "</td>");
+				html.append("\t\t\t\t<td align=\"center\" style=\"border-style: solid;border-width: 1px\">" + (j.getFlEmpate()  == 1 ? " X " : "   ") + "</td>");
+				html.append("\t\t\t\t<td align=\"center\" style=\"border-style: solid;border-width: 1px\">" + (j.getFlColuna2() == 1 ? " X " : "   ") + "</td>");
+				html.append("\t\t\t</tr>");
+			}
+			html.append("\t\t</table>");
 		}
-		html.append("\t\t</table>");
 		html.append("\t</body>");
 		html.append("</html>");
 		return html.toString();

@@ -12,6 +12,7 @@ import javax.faces.model.SelectItem;
 import br.com.softal.base.bean.AbstractManegedBean;
 import br.com.softal.base.service.ServiceException;
 import br.com.softal.base.util.DateUtil;
+import br.com.softal.base.util.EmailUtil;
 import br.com.softal.loteca.LtcServiceLocator;
 import br.com.softal.loteca.dto.ApostaDto;
 import br.com.softal.loteca.model.data.Data;

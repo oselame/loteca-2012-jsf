@@ -56,33 +56,42 @@
 			
 			<p:fieldset legend="Apostas Fora da Loteca" toggleable="true" toggleSpeed="500" collapsed="false">
 				<h:panelGrid style="width: 100%">
-					<p:fieldset>
-						Esta área é destinada aos colaboradores que gostam de fazer apostas paralelas.<br />
-						É enviado um e-mail para a lista de e-mails indicada abaixo.
-						<p:separator/>
-						Exemplo:<br/><br/>						
-						Eu aposto uma caixa de BUDWEISER (com alcool) com o colega XYZ que nessa rodada eu farei mais de 10 pontos.
-						<br/><br/>
-						Obs: Tem que detalhar todos os dados da aposta (hehehhehe).
-						<br/>
-					</p:fieldset>
-					<br/>
+					
 					<p:outputLabel value="Assunto da Aposta" styleClass="negrito"/>
 					<p:inputText value="#{jogousuarioBean.aposta.deAssunto}" 
 						requiredMessage="Assunto não informado"
 						style="width:670px"/>
 					
-					<p:outputLabel value="Lista de e-mails, separados por vírgula" styleClass="negrito"/>
+					<p:outputLabel value="Desafiante" styleClass="negrito"/>
+					<p:inputText value="#{jogousuarioBean.aposta.deEmaildesafiante}" 
+						requiredMessage="Desafiante não informado"
+						style="width:670px">
+						<f:validator validatorId="emailValidator"></f:validator>
+					</p:inputText>
+					
+					<p:outputLabel value="Desafiado" styleClass="negrito"/>
+					<p:inputText value="#{jogousuarioBean.aposta.deEmaildesafiado}" 
+						requiredMessage="Desafiante não informado"
+						converterMessage="E-mail Inválido"
+						style="width:670px">
+						<f:validator validatorId="emailValidator"></f:validator>
+					</p:inputText>
+					
+					<p:outputLabel value="E-mail das Testemunhas separados por vírgula" styleClass="negrito"/>
 					<p:inputTextarea value="#{jogousuarioBean.aposta.deListaemails}" style="width:670px" rows="4"
 						requiredMessage="Lista de e-mails não informada."></p:inputTextarea>
 					
-					<p:outputLabel value="Texto da aposta" styleClass="negrito"/>
+					<p:outputLabel value="Teor da aposta" styleClass="negrito"/>
 					<p:editor value="#{jogousuarioBean.aposta.deAposta}" 
 						requiredMessage="Texto da aposta não informado."
-						width="676" height="200"
-						>
-					
+						width="676" height="200" >
 					</p:editor>					
+					
+					<p:selectBooleanCheckbox value="#{jogousuarioBean.aposta.flIncluircanhoto}" 
+						itemLabel="Incluir aposta da loteca no e-mail?"
+						label="Incluir aposta da loteca no e-mail?" styleClass="negrito">
+					</p:selectBooleanCheckbox>
+					<br/>
 					<f:facet name="footer">
 						<p:commandButton value="${msg.botao_enviar_aposta}" update="growl"
 							action="#{jogousuarioBean.enviarAposta}"
