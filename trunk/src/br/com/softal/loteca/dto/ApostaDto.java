@@ -4,9 +4,12 @@ import br.com.softal.base.util.EmailUtil;
 
 public class ApostaDto {
 
+	private String deAssunto;
+	private String deEmaildesafiante;
+	private String deEmaildesafiado;
+	
 	private String deAposta;
 	private String deListaemails;
-	private String deAssunto;
 
 	public String getDeAposta() {
 		return deAposta;
@@ -33,6 +36,12 @@ public class ApostaDto {
 	}
 	
 	public boolean isApostavalida() {
+		if ((this.getDeEmaildesafiante() == null) || this.getDeEmaildesafiante().equals("")) {
+			return false;
+		}
+		if ((this.getDeEmaildesafiado() == null) || this.getDeEmaildesafiado().equals("")) {
+			return false;
+		}
 		if ((this.getDeAposta() == null) || this.getDeAposta().equals("")) {
 			return false;
 		}
@@ -56,6 +65,22 @@ public class ApostaDto {
 			}
 		}
 		return retorno.length() > 1 ? retorno.substring(1) : "";
+	}
+
+	public String getDeEmaildesafiante() {
+		return deEmaildesafiante;
+	}
+
+	public void setDeEmaildesafiante(String deEmaildesafiante) {
+		this.deEmaildesafiante = deEmaildesafiante;
+	}
+
+	public String getDeEmaildesafiado() {
+		return deEmaildesafiado;
+	}
+
+	public void setDeEmaildesafiado(String deEmaildesafiado) {
+		this.deEmaildesafiado = deEmaildesafiado;
 	}
 	
 }
