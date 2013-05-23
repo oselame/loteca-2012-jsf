@@ -10,6 +10,7 @@ public class ApostaDto {
 	
 	private String deAposta;
 	private String deListaemails;
+	private String flIncluircanhoto;
 
 	public String getDeAposta() {
 		return deAposta;
@@ -82,5 +83,14 @@ public class ApostaDto {
 	public void setDeEmaildesafiado(String deEmaildesafiado) {
 		this.deEmaildesafiado = deEmaildesafiado;
 	}
+
+	public String getFlIncluircanhoto() {
+		return flIncluircanhoto;
+	}
+
+	public void setFlIncluircanhoto(String flIncluircanhoto) {
+		this.flIncluircanhoto = flIncluircanhoto;
+	}
+	
 	
 }
