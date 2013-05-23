@@ -23,46 +23,46 @@ public abstract class LtcHtmlEmailImpl implements LtcHtmlEmail {
 	public abstract void send() throws EmailException;
 	
 	public void configuraEmail(HtmlEmail email) throws EmailException {
-		email.setDebug( LtcEmailProperties.getInstance().isDebug() );
-		email.setFrom( LtcEmailProperties.getInstance().getFrom() );
-		email.setHostName(LtcEmailProperties.getInstance().getHostName() );
-		email.setAuthentication(
+		this.email.setDebug( LtcEmailProperties.getInstance().isDebug() );
+		this.email.setFrom( LtcEmailProperties.getInstance().getFrom() );
+		this.email.setHostName(LtcEmailProperties.getInstance().getHostName() );
+		this.email.setAuthentication(
 			LtcEmailProperties.getInstance().getAuthenticationUser(), 
 			LtcEmailProperties.getInstance().getAuthenticationPassword()
 		);  
-		email.setSmtpPort(LtcEmailProperties.getInstance().getPort());  
-		email.setSSL(LtcEmailProperties.getInstance().isSsl());  
-		email.setTLS(LtcEmailProperties.getInstance().isTsl());
+		this.email.setSmtpPort(LtcEmailProperties.getInstance().getPort());  
+		this.email.setSSL(LtcEmailProperties.getInstance().isSsl());  
+		this.email.setTLS(LtcEmailProperties.getInstance().isTsl());
 	}
 	
 	@Override
 	public void from(String from) throws EmailException {
-		email.setFrom(from);
+		this.email.setFrom(from);
 	}
 	
 	@Override
 	public void addTo(String to) throws EmailException {
-		email.addTo(to);
+		this.email.addTo(to);
 	}
 
 	@Override
 	public void setSubject(String subject) throws EmailException {
-		email.setSubject(subject);
+		this.email.setSubject(subject);
 	}
 
 	@Override
 	public void setHtmlMsg(String msg) throws EmailException {
-		email.setHtmlMsg(msg);
+		this.email.setHtmlMsg(msg);
 	}
 	
 	@Override
 	public void setTextMsg(String msg) throws EmailException {
-		email.setTextMsg(msg);
+		this.email.setTextMsg(msg);
 	}
 	
 	@Override
 	public void addAttach(EmailAttachment attachment) throws EmailException {
-		email.attach(attachment);		
+		this.email.attach(attachment);		
 	}
 	
 }
