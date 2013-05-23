@@ -144,11 +144,11 @@ public class EmailJogousuario {
 			
 			for (Jogousuario j : jogos) {
 				html.append("\t\t\t<tr>");
-				html.append("\t\t\t\t<td align=\"center\" style=\"border-style: solid;border-width: 1px\">" + j.getJogo().getCdJogo() + "</td>");
+				html.append("\t\t\t\t<td align=\"center\" style=\"border-style: solid;border-width: 1px\">" + j.getJogo().getCdJogo() + "&nbsp;</td>");
 				html.append("\t\t\t\t<td align=\"left\"   style=\"border-style: solid;border-width: 1px\">&nbsp;&nbsp;" + j.getJogo().getDeJogo() + "&nbsp;&nbsp;</td>");
-				html.append("\t\t\t\t<td align=\"center\" style=\"border-style: solid;border-width: 1px\">" + (j.getFlColuna1() == 1 ? " X " : "   ") + "</td>");
-				html.append("\t\t\t\t<td align=\"center\" style=\"border-style: solid;border-width: 1px\">" + (j.getFlEmpate()  == 1 ? " X " : "   ") + "</td>");
-				html.append("\t\t\t\t<td align=\"center\" style=\"border-style: solid;border-width: 1px\">" + (j.getFlColuna2() == 1 ? " X " : "   ") + "</td>");
+				html.append("\t\t\t\t<td align=\"center\" style=\"border-style: solid;border-width: 1px\">" + (j.getFlColuna1() == 1 ? " X " : "   ") + "&nbsp;</td>");
+				html.append("\t\t\t\t<td align=\"center\" style=\"border-style: solid;border-width: 1px\">" + (j.getFlEmpate()  == 1 ? " X " : "   ") + "&nbsp;</td>");
+				html.append("\t\t\t\t<td align=\"center\" style=\"border-style: solid;border-width: 1px\">" + (j.getFlColuna2() == 1 ? " X " : "   ") + "&nbsp;</td>");
 				html.append("\t\t\t</tr>");
 			}
 			html.append("\t\t</table>");
