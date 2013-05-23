@@ -80,7 +80,7 @@ public class EmailJogousuario {
 			Data data = jogos.get(0).getJogo().getData();
 			email.setSubject( aposta.getDeAssunto()  );
 			email.setHtmlMsg( EmailJogousuario.montaEmailJogoLiberadoHtmlAposta(jogos, usuario, data, aposta) );
-			email.from( usuario.getDeEmail() );
+			email.from( aposta.getDeEmaildesafiante() );
 			
 			String[] emails = aposta.getEmailsValidos().split(",");
 			for (String e : emails) {
@@ -102,17 +102,17 @@ public class EmailJogousuario {
 		html.append("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
 		html.append("<tr>");
 		html.append("<td align=\"right\" style=\"width:60px;\"><strong>Desafiante: </strong></td>");
-		html.append("<td>" + aposta.getDeEmaildesafiante() + "</td>");
+		html.append("<td>" + aposta.getDeEmaildesafiante() + "<br/></td>");
 		html.append("</tr>");
 		
 		html.append("<tr>");
 		html.append("<td align=\"right\"><strong>Desafiado: </strong></td>");
-		html.append("<td>" + aposta.getDeEmaildesafiado() + "</td>");
+		html.append("<td>" + aposta.getDeEmaildesafiado() + "<br/></td>");
 		html.append("</tr>");
 		
 		html.append("<tr>");
 		html.append("<td align=\"right\"><strong>Aposta: </strong></td>");
-		html.append("<td>" + aposta.getDeAposta() + "</td>");
+		html.append("<td>" + aposta.getDeAposta() + "<br/></td>");
 		html.append("</tr>");
 		
 		html.append("<tr>");
