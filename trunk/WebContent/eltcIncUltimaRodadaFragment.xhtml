@@ -7,21 +7,21 @@
              xmlns:f="http://java.sun.com/jsf/core" >
 		<h:panelGrid style="width:100%">
 			<h:form id="formUltimaRodada">
-				<p:dataTable id="jogo" var="row" value="#{dashboardBean.ultimadataencerrada.jogos}" 
+				<p:dataTable id="jogo" var="rowx" value="#{dashboardBean.ultimadataencerrada.jogos}" 
 					emptyMessage="#{msg.warning_nenhum_registro_encontrado}">
 					<f:facet name="header">#{dashboardBean.ultimadataencerrada.deObservacao}</f:facet>
 					
 					<p:column headerText="" style="width:10px">
-						<h:outputText value="#{row.cdJogo}" />
+						<h:outputText value="#{rowx.cdJogo}" />
 					</p:column>
 					<p:column headerText="#{msg.jogo_usuario_jogo_dejogo}">
-						<h:outputText value="#{row.deJogo}" />
+						<h:outputText value="#{rowx.deJogo}" />
 					</p:column>
-					<p:column headerText="#{msg.jogo_usuario_coluna1_sigla}" style="width:10px"  styleClass="#{row.tpResultadofinal eq 1 ? 'resultadoLoteca' : ''}">
+					<p:column headerText="#{msg.jogo_usuario_coluna1_sigla}" style="width:10px"  styleClass="#{rowx.tpResultadofinal eq 1 ? 'resultadoLoteca' : ''}">
 					</p:column>
-					<p:column headerText="#{msg.jogo_usuario_empate_sigla}" style="width:10px" styleClass="#{row.tpResultadofinal eq 0 ? 'resultadoLoteca' : ''}">
+					<p:column headerText="#{msg.jogo_usuario_empate_sigla}" style="width:10px" styleClass="#{rowx.tpResultadofinal eq 0 ? 'resultadoLoteca' : ''}">
 					</p:column>
-					<p:column headerText="#{msg.jogo_usuario_coluna2_sigla}" style="width:10px" styleClass="#{row.tpResultadofinal eq 2 ? 'resultadoLoteca' : ''}">
+					<p:column headerText="#{msg.jogo_usuario_coluna2_sigla}" style="width:10px" styleClass="#{rowx.tpResultadofinal eq 2 ? 'resultadoLoteca' : ''}">
 					</p:column>
 				</p:dataTable>
 			</h:form>

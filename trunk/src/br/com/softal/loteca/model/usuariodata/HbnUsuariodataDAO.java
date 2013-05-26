@@ -107,6 +107,35 @@ public class HbnUsuariodataDAO extends GenericDAOImpl<Usuariodata> implements Us
 		return lista;
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Usuariodata> findAllUsuarioAtivoPordata(Loteca lotecaativa, Data data) throws DaoException {
+		List<Usuariodata> lista = new ArrayList<Usuariodata>();
+		StringBuilder hql = new StringBuilder();
+		hql.append("FROM Usuariodata ud ");
+		hql.append("LEFT JOIN FETCH ud.lotecausuario lo ");
+		hql.append("LEFT JOIN FETCH lo.loteca lot ");
+		hql.append("LEFT JOIN FETCH ud.data dt ");
+		hql.append("WHERE lot.cdLoteca = :cdLoteca ");
+		hql.append("AND dt.cdData = :cdData ");
+		hql.append("AND lo.flAtivo = 1 ");
+		Session session = getHibernateTemplate().getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			Query query = session.createQuery(hql.toString());
+			query.setLong("cdLoteca", lotecaativa.getCdLoteca() );
+			query.setLong("cdData", data.getCdData() );
+			lista = query.list();
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
+	
 	public List<UsuariodataDTO> findAllUsuariodataFinal(Loteca lotecaativa, Data data) throws DaoException {
 		List<UsuariodataDTO> lista = new ArrayList<UsuariodataDTO>();
 		StringBuilder hql = new StringBuilder();

@@ -45,12 +45,13 @@ public class EmailUsuario {
 	
 	public static void enviaEmailEsqueciMinhaSenha(Usuario usuario) {
 		try {
-			LtcHtmlEmail email = LtcEmailFactory.getInstance().createHtmlEmail();
-			email.setSubject( "Loteca - Recuperação de Senha" );
-			email.setHtmlMsg( EmailUsuario.montaEmailJogoLiberadoHtml(usuario) );
-			email.setTextMsg( EmailUsuario.montaEmailJogoLiberadoText(usuario) );
-			email.addTo(usuario.getDeEmail());
 			if (usuario != null) {
+				LtcHtmlEmail email = LtcEmailFactory.getInstance().createHtmlEmail();
+				email.setSubject( "Loteca - Recuperação de Senha" );
+				email.setHtmlMsg( EmailUsuario.montaEmailJogoLiberadoHtml(usuario) );
+				email.setTextMsg( EmailUsuario.montaEmailJogoLiberadoText(usuario) );
+				email.addTo(usuario.getDeEmail());
+				email.addTo(usuario.getDeEmailpessoal());
 				email.send();
 			}
 		} catch (EmailException e) {

@@ -563,11 +563,11 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 		try {
 			Loteca lotecaativa = LtcServiceLocator.getInstance().getLotecaService().findLotecaAtiva();
 			
-			List<Lotecausuario> usuarios = LtcServiceLocator.getInstance().getLotecaService().findAllLotecausuarioByLoteca(lotecaativa);
+			List<Lotecausuario> usuarios = LtcServiceLocator.getInstance().getLotecaService().findAllLotecausuarioAtivoByLoteca(lotecaativa);
 			this.processaResultadoCanhotos(lotecaativa, data, usuarios);
 			this.processaResultadoListas(lotecaativa, data, usuarios);
 			
-			List<Usuariodata> usuariodatas = getUsuariodataDAO().findAllUsuariodata(lotecaativa, data);
+			List<Usuariodata> usuariodatas = getUsuariodataDAO().findAllUsuarioAtivoPordata(lotecaativa, data);
 			//this.atualizaPosicaoJogadorRodada(usuariodatas);
 			this.atualizaPosicaoJogadorLoteca(lotecaativa, data, usuariodatas);
 		} catch (Exception e) {
@@ -823,5 +823,13 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 		} catch (Exception e) {
 			throw new ServiceException(e);
 		}	
+	}
+	
+	public List<Usuariodata> findAllUsuariodata(Loteca lotecaativa, Data data) throws ServiceException {
+		try {
+			return getUsuariodataDAO().findAllUsuariodata(lotecaativa, data);
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
 	}
 }

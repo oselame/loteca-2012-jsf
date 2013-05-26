@@ -99,5 +99,5 @@ public class UsuariodataBean extends AbstractManegedBean<Usuariodata> implements
 			e.printStackTrace();
 		}
 	}
-
+	
 }

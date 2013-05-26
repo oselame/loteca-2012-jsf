@@ -10,28 +10,28 @@
 				<p:dataTable id="ranking" var="row" value="#{dashboardBean.ranking}" 
 					emptyMessage="#{msg.warning_nenhum_registro_encontrado}" style="width:100%">
 					
-					<p:column headerText="#{msg.dashboard_ranking_sigla_posicao}" style="width:20px" styleClass="alignCenter">
+					<p:column headerText="#{msg.dashboard_ranking_sigla_posicao}" style="width:20px" styleClass="alignCenter" >
 						<h:outputText value="#{row.nuPosicaofinal}" />
 					</p:column>
-					<p:column headerText="#{msg.dashboard_ranking_participante}" >
+					<p:column headerText="#{msg.dashboard_ranking_participante}"  >
 						<h:outputText value="#{row.lotecausuario.usuario.nmUsuario}" />
 					</p:column>
 					<p:column headerText="UR" style="width:20px" styleClass="alignCenter">
 						<h:outputText value="#{row.nuPontoscartao}" />
 					</p:column>
-					<p:column headerText="PR" style="width:20px" styleClass="alignCenter">
+					<p:column headerText="PR" style="width:20px" styleClass="alignCenter" >
 						<h:outputText value="#{row.nuPontosrodada}" />
 					</p:column>					
-					<p:column headerText="PL" style="width:20px" styleClass="alignCenter">
+					<p:column headerText="PL" style="width:20px" styleClass="alignCenter" >
 						<h:outputText value="#{row.nuPontoslista}" />
 					</p:column>
-					<p:column headerText="PT" style="width:20px" styleClass="alignCenter">
+					<p:column headerText="PT" style="width:20px" styleClass="alignCenter" >
 						<h:outputText value="#{row.nuPontosfinal}" />
 					</p:column>
 					<p:column style="width:20px" headerText="TU" >  
 						<p:commandButton id="selectButton" update=":tabView:formRanking:display" oncomplete="usuariodataDialog.show()" 
-							icon="ui-icon-search" title="Times do participante">  
-						    <f:setPropertyActionListener value="#{row}" target="#{clubeusuarioBean.usuariodata}" />
+							icon="ui-icon-search" title="Times do participante" ajax="true">  
+						     <f:setPropertyActionListener value="#{row}" target="#{clubeusuarioBean.usuariodata}" />
 						</p:commandButton>  
        				</p:column>
 				</p:dataTable>

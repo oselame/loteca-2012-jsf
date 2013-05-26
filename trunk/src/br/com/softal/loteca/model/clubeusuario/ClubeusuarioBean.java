@@ -16,11 +16,20 @@ import br.com.softal.loteca.model.usuariodata.Usuariodata;
 @RequestScoped
 public class ClubeusuarioBean extends AbstractManegedBean<Clubeusuario> {
 	
+	private Long cdUsuario;
 	private Usuariodata usuariodata;
 	private Long nuSeqlotecausuario;
 	private List<Clubeusuario> clubesclassificados;
 	private List<Clubeusuario> clubesrebaixados;
 	
+	public Long getCdUsuario() {
+		return cdUsuario;
+	}
+
+	public void setCdUsuario(Long cdUsuario) {
+		this.cdUsuario = cdUsuario;
+	}
+
 	public List<Clubeusuario> getClubesclassificados() {
 		return clubesclassificados;
 	}
