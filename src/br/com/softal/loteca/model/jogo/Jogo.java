@@ -89,6 +89,7 @@ public class Jogo extends Entity {
 		this.deJogo = deJogo;
 	}
 
+
 	public Long getTpResultadofinal() {
 		return tpResultadofinal;
 	}

@@ -14,6 +14,7 @@ public interface UsuariodataDAO extends GenericDAO<Usuariodata> {
 	Usuariodata findUsuariodata(Jogousuario jogousuario) throws DaoException;
 	Usuariodata findUsuariodata(Lotecausuario lotecausuario, Data data) throws DaoException;
 	List<Usuariodata> findAllUsuariodata(Loteca lotecaativa, Data data) throws DaoException;
+	List<Usuariodata> findAllUsuarioAtivoPordata(Loteca lotecaativa, Data data) throws DaoException;
 	List<Usuariodata> findDadosRankingLotecaAtiva(Loteca lotecaativa) throws DaoException;
 	List<Usuariodata> findAllUsuariodataSemAposta(Data data) throws DaoException;
 	Boolean existeUsuarioSemAposta(Data data) throws DaoException;

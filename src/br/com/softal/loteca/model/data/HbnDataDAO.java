@@ -50,7 +50,7 @@ public class HbnDataDAO extends GenericDAOImpl<Data> implements DataDAO {
     	StringBuilder hql = new StringBuilder();
     	hql.append("SELECT dt ");
     	hql.append("FROM Data dt ");
-    	//hql.append("LEFT JOIN fetch dt.jogos jgs ");
+    	hql.append("LEFT JOIN fetch dt.jogos jgs ");
     	hql.append("LEFT JOIN dt.loteca ltc ");
     	hql.append("WHERE ltc.cdLoteca = :cdLoteca ");
     	//hql.append("AND dt.tpSituacao = :tpSituacao ");

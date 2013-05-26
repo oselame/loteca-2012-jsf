@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition
+	template="/templates/template.xhtml">
+
+	<ui:define name="context">
+		<h:form id="comparacaoForm">
+			<p:messages showDetail="true" showSummary="false" />
+			
+			<p:panelGrid columns="2" style="width:100%" columnClasses="headerColumn alignRight bold">
+				<f:facet name="header">
+					#{msg.comparacao_titulo}
+				</f:facet>
+				<h:outputLabel value="#{msg.comparacao_concurso}:" for="cddata" />
+				<h:selectOneMenu value="#{comparacaoBean.cdData}" id="cddata" style="width: 100%" 
+					required="true" requiredMessage="#{msg.comparacao_concurso_requirido}"  >
+					<f:selectItem itemLabel="#{msg.selectonemenu_selecione}" itemValue="" />
+					<f:selectItems value="#{comparacaoBean.datas}" var="data" itemLabel="#{data.deObservacao}" itemValue="#{data.cdData}" />
+				</h:selectOneMenu>
+				
+				<h:outputLabel value="#{msg.comparacao_adversario}:" for="cdusuario" />
+				<h:selectOneMenu value="#{comparacaoBean.cdUsuario}" id="cdusuario" style="width: 100%" 
+					required="true" requiredMessage="#{msg.comparacao_adversario_requirido}"  >
+					<f:selectItem itemLabel="#{msg.selectonemenu_selecione}" itemValue="" />
+					<f:selectItems value="#{comparacaoBean.lotecausuarios}" var="usu" itemLabel="#{usu.usuario.nmUsuario}" itemValue="#{usu.usuario.cdUsuario}" />
+				</h:selectOneMenu>
+				<f:facet name="footer">
+					<p:commandButton value="#{msg.button_comparar}"
+						action="#{comparacaoBean.carregaJogousuario}" ajax="false" />
+				</f:facet>
+			</p:panelGrid>
+			<br/>
+			
+			<p:panel rendered="#{not empty comparacaoBean.deResultado}">
+				<div style="text-align: center;">
+					<p:outputLabel value="#{comparacaoBean.deResultado}" 
+						style="color: red;font-size: 20px"/>
+				</div>
+			</p:panel>
+			<br />
+			
+			<p:accordionPanel  value="#{comparacaoBean.jogos}" var="row" >
+				<p:tab title="#{row.cdJogo} - #{row.deJogo} (Resultado: #{row.tpResultadofinaldesc})" >
+					<p:dataTable var="jogo" value="#{row.jogos}">  
+						<p:column headerText="Jogadores">  
+            				<h:outputText value="#{jogo.nmUsuario}" />  
+       					</p:column>
+       					 
+						<p:column headerText="Coluna 1" style="width:50px;" 
+							styleClass="alignCenter   
+								#{row.tpResultadofinal eq 1 ? 'resultado' : ''}
+								#{row.tpResultadofinal eq 1 and jogo.flColuna1 eq 1 ? 'acertoClass' : ''}
+								#{jogo.tpJogo ne 1 and row.tpResultadofinal ne 1 and jogo.flColuna1 eq 1 ? 'erroClass' : ''}">
+							<p:graphicImage url="/images/ok.png" rendered="#{row.tpResultadofinal eq 1 and jogo.flColuna1 eq 1}" width="20"/>
+							<p:graphicImage url="/images/nok.png" rendered="#{row.tpResultadofinal ne 1 and jogo.flColuna1 eq 1}" width="20"/>
+						</p:column>	 		
+						
+						<p:column headerText="Empate" style="width:50px;" 	
+							styleClass="alignCenter   
+								#{row.tpResultadofinal eq 0 ? 'resultado' : ''}
+								#{row.tpResultadofinal eq 0 and jogo.flEmpate eq 1 ? 'acertoClass' : ''}
+								#{jogo.tpJogo ne 1 and row.tpResultadofinal ne 0 and jogo.flEmpate eq 1 ? 'erroClass' : ''}">
+							<p:graphicImage url="/images/ok.png" rendered="#{row.tpResultadofinal eq 0 and jogo.flEmpate eq 1}" width="20"/>
+							<p:graphicImage url="/images/nok.png" rendered="#{row.tpResultadofinal ne 0 and jogo.flEmpate eq 1}" width="20"/>
+						</p:column>			 
+		       					 
+		       			<p:column headerText="Coluna 2" style="width:50px;" 
+							styleClass="alignCenter   
+							#{row.tpResultadofinal eq 2 ? 'resultado' : ''}
+							#{row.tpResultadofinal eq 2 and jogo.flColuna2 eq 1 ? 'acertoClass' : ''}
+							#{row.tpJogo ne 1 and row.tpResultadofinal ne 2 and jogo.flColuna2 eq 1 ? 'erroClass' : ''}">
+							<p:graphicImage url="/images/ok.png" rendered="#{row.tpResultadofinal eq 2 and jogo.flColuna2 eq 1}" width="20"/>
+							<p:graphicImage url="/images/nok.png" rendered="#{row.tpResultadofinal ne 2 and jogo.flColuna2 eq 1}" width="20"/>
+						</p:column>	 
+       					 
+					</p:dataTable>
+				</p:tab>
+			</p:accordionPanel>
+			
+			<br/>
+			<table>
+				<tr>
+					<td class="resultado" style="border-width: 1px;border-style: solid;width: 20px;">&nbsp;</td>
+					<td style="width: 50px">Resultado</td>
+					<td class="" style="border-width: 1px;border-style: solid;width: 20px;"><p:graphicImage url="/images/ok.png" width="20"/></td>
+					<td style=": 50px">Acerto</td>
+					<td class="" style="border-width: 1px;border-style: solid;width: 20px;"><p:graphicImage url="/images/nok.png" width="20"/></td>
+					<td style="width: 50px">Erro</td>
+				</tr>
+			</table>	
+		
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
