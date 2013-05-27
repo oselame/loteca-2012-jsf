@@ -288,6 +288,7 @@ public class HbnUsuariodataDAO extends GenericDAOImpl<Usuariodata> implements Us
 		hql.append("left join eltcdata d on d.cdData = ud.cdData                                      \n"); 
 		hql.append("where lu.cdLoteca = ?		                                          			  \n"); 
 		hql.append("and d.tpSituacao = ?		                                          			  \n"); 
+		hql.append("and lu.flAtivo = 1		                                          			  	  \n"); 
 		hql.append("order by  u.nmUsuario, ud.cdData		                                          \n"); 
 		Session session = getHibernateTemplate().getSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();
@@ -343,6 +344,7 @@ public class HbnUsuariodataDAO extends GenericDAOImpl<Usuariodata> implements Us
 		hql.append("left join eltcdata d on d.cdData = ud.cdData                                      \n"); 
 		hql.append("where lu.cdLoteca = ?		                                          			  \n"); 
 		hql.append("and d.tpSituacao = ?		                                          			  \n"); 
+		hql.append("and lu.flAtivo = 1		                                          			  	  \n"); 
 		if (cdData != null) {
 			hql.append("and ud.cdData = ?		                                          			  \n"); 
 		} else {
