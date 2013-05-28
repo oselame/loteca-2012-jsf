@@ -1,0 +1,98 @@
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
+
+
+
+CREATE  TABLE IF NOT EXISTS `loteca2012`.`eltchistusuariodata` (
+
+  `nuSequsuariodata` INT(11) NOT NULL ,
+
+  `nuSequencial` INT(11) NOT NULL ,
+
+  `deBytesjogo` VARCHAR(42) NULL DEFAULT NULL ,
+
+  `dtCadastro` DATETIME NULL DEFAULT NULL ,
+
+  `flGeradoaleat` INT(11) NULL DEFAULT NULL ,
+
+  PRIMARY KEY (`nuSequsuariodata`, `nuSequencial`) ,
+
+  INDEX `fk_eltchist_eltcusuariodata1` (`nuSequsuariodata` ASC) ,
+
+  CONSTRAINT `fk_eltchist_eltcusuariodata1`
+
+    FOREIGN KEY (`nuSequsuariodata` )
+
+    REFERENCES `loteca2012`.`eltcusuariodata` (`nuSequsuariodata` )
+
+    ON DELETE NO ACTION
+
+    ON UPDATE NO ACTION)
+
+ENGINE = InnoDB
+
+DEFAULT CHARACTER SET = utf8
+
+COLLATE = utf8_general_ci;
+
+
+
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+
+
+
+
+
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
+
+
+
+ALTER TABLE `loteca2012`.`eltchistusuariodata` DROP FOREIGN KEY `fk_eltchist_eltcusuariodata1` ;
+
+
+
+ALTER TABLE `loteca2012`.`eltchistusuariodata` DROP COLUMN `nuSequsuariodata` , ADD COLUMN `nuSequsuariodata` INT(11) NOT NULL  AFTER `nuSequencial` , CHANGE COLUMN `nuSequencial` `nuSequencial` INT(11) NOT NULL AUTO_INCREMENT  , 
+
+  ADD CONSTRAINT `fk_eltchistusuariodata_eltcusuariodata1`
+
+  FOREIGN KEY (`nuSequsuariodata` )
+
+  REFERENCES `loteca2012`.`eltcusuariodata` (`nuSequsuariodata` )
+
+  ON DELETE NO ACTION
+
+  ON UPDATE NO ACTION
+
+, DROP PRIMARY KEY 
+
+, ADD PRIMARY KEY (`nuSequencial`) 
+
+, ADD INDEX `fk_eltchistusuariodata_eltcusuariodata1` (`nuSequsuariodata` ASC) 
+
+, DROP INDEX `fk_eltchist_eltcusuariodata1` ;
+
+
+
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

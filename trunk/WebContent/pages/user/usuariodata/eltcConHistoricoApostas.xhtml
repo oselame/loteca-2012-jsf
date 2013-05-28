@@ -19,7 +19,7 @@
 					required="false" requiredMessage="#{msg.lotecausuario_cdloteca_requirido}" 
 					valueChangeListener="#{usuariodataBean.carregaHistoricoApostasChange}"
 					onchange="submit()" immediate="true">
-					<f:selectItem itemLabel="#{msg.pontos_cartoes_acumulado}" itemValue="" />
+					<f:selectItem itemLabel="#{msg.selectonemenu_selecione}" itemValue="" />
 					<f:selectItems value="#{usuariodataBean.datasencerradas}" var="data" itemLabel="#{data.dtData}" itemValue="#{data.cdData}" />
 				</h:selectOneMenu>
 			</p:panelGrid>
