@@ -1,6 +1,7 @@
 package br.com.softal.loteca.service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -26,6 +27,7 @@ import br.com.softal.loteca.model.clubeusuario.Clubeusuario;
 import br.com.softal.loteca.model.clubeusuario.HbnClubeusuarioDAO;
 import br.com.softal.loteca.model.data.Data;
 import br.com.softal.loteca.model.data.HbnDataDAO;
+import br.com.softal.loteca.model.histusuariodata.Histusuariodata;
 import br.com.softal.loteca.model.jogo.Jogo;
 import br.com.softal.loteca.model.jogousuario.HbnJogousuarioDAO;
 import br.com.softal.loteca.model.jogousuario.Jogousuario;
@@ -319,6 +321,14 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 		ud.setFlApostou(1l);
 		ud.setFlGeradoaleat((aleatorio ? 1l : 0l));
 		this.update(ud);
+		
+		Histusuariodata histusuariodata = new Histusuariodata();
+		histusuariodata.setDeBytesjogo(deBytesjogo);
+		histusuariodata.setFlGeradoaleat( (aleatorio ? 1l : 0l) );
+		histusuariodata.setUsuariodata( ud );
+		Calendar c = Calendar.getInstance();
+		histusuariodata.setDtCadastro( c.getTime() );
+		this.save(histusuariodata);
 	}
 	
 	@Override
@@ -828,6 +838,14 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 	public List<Usuariodata> findAllUsuariodata(Loteca lotecaativa, Data data) throws ServiceException {
 		try {
 			return getUsuariodataDAO().findAllUsuariodata(lotecaativa, data);
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
+	}
+	
+	public List<Histusuariodata> findHistoricoUsuarioData(Usuariodata usuariodata) throws ServiceException {
+		try {
+			return getUsuariodataDAO().findHistoricoUsuarioData( usuariodata );
 		} catch (Exception e) {
 			throw new ServiceException(e);
 		}

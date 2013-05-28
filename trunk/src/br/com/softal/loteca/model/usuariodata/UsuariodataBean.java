@@ -10,9 +10,12 @@ import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 
 import br.com.softal.base.bean.AbstractManegedBean;
+import br.com.softal.base.model.usuario.Usuario;
 import br.com.softal.base.service.ServiceException;
 import br.com.softal.base.util.DateUtil;
 import br.com.softal.loteca.model.data.Data;
+import br.com.softal.loteca.model.histusuariodata.Histusuariodata;
+import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
 
 @SuppressWarnings("serial")
 @ManagedBean(name = "usuariodataBean")
@@ -23,6 +26,7 @@ public class UsuariodataBean extends AbstractManegedBean<Usuariodata> implements
 	private Long cdData;
 	private List<SelectItem> datasencerradas;
 	private List<AproveitamentoDTO> dtos;
+	private List<Histusuariodata> historicos;
 
 	public Long getCdData() {
 		return cdData;
@@ -50,6 +54,10 @@ public class UsuariodataBean extends AbstractManegedBean<Usuariodata> implements
 
 	public void setDtos(List<AproveitamentoDTO> dtos) {
 		this.dtos = dtos;
+	}
+	
+	public List<Histusuariodata> getHistoricos() {
+		return historicos;
 	}
 
 	@Override
@@ -99,5 +107,38 @@ public class UsuariodataBean extends AbstractManegedBean<Usuariodata> implements
 			e.printStackTrace();
 		}
 	}
+	
+	
+	public String abrirConHistoricoApostas() {
+		 try {
+			 setCdData( null );
+			 setRows( null );
+			 this.populaComboDatas();
+			 
+       } catch (Exception e) {
+      	 	e.printStackTrace();
+       }	
+		return "/pages/user/usuariodata/eltcConHistoricoApostas.xhtml";
+	}
+	
+	public void carregaHistoricoApostasChange(ValueChangeEvent event) {
+		try {
+			historicos = new ArrayList<Histusuariodata>();
+			Usuario usuario = super.getUsuariologado();
+			Lotecausuario lotecausuario = super.getLotecaService().findLotecausuarioAtivo(usuario);
+			Usuariodata usuariodata = new Usuariodata();
+			usuariodata.setLotecausuario(lotecausuario);
+			if ((Long)event.getNewValue() != null) {
+				long cdData = (Long) event.getNewValue();
+				Data data = super.getLotecaService().findData( cdData );
+				usuariodata.setData(data);
+				
+				historicos = super.getLotecaService().findHistoricoUsuarioData(usuariodata);
+			} 
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 }
