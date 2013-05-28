@@ -15,6 +15,8 @@ import br.com.softal.base.service.ServiceException;
 import br.com.softal.base.util.DateUtil;
 import br.com.softal.loteca.model.data.Data;
 import br.com.softal.loteca.model.histusuariodata.Histusuariodata;
+import br.com.softal.loteca.model.jogo.Jogo;
+import br.com.softal.loteca.model.jogousuario.Jogousuario;
 import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
 
 @SuppressWarnings("serial")
@@ -24,6 +26,7 @@ public class UsuariodataBean extends AbstractManegedBean<Usuariodata> implements
 		Serializable {
 
 	private Long cdData;
+	private Usuariodata usuariodata;
 	private List<SelectItem> datasencerradas;
 	private List<AproveitamentoDTO> dtos;
 	private List<Histusuariodata> historicos;
@@ -65,7 +68,7 @@ public class UsuariodataBean extends AbstractManegedBean<Usuariodata> implements
 		setEntity(new Usuariodata());
 	}
 	
-	private void populaComboDatas() {
+	private void populaComboDatasEncerradas() {
     	try {
     		getDatasencerradas().clear();
          	List<Data> datas = super.getLotecaService().findAllDatasEncerradas( this.getLotecaativa() );
@@ -78,11 +81,24 @@ public class UsuariodataBean extends AbstractManegedBean<Usuariodata> implements
         }	
     }
 	
+	private void populaComboDatasLotecaAtiva() {
+		try {
+			getDatasencerradas().clear();
+			List<Data> datas = super.getLotecaService().findAllDatas( this.getLotecaativa() );
+			for (Data data : datas) {
+				SelectItem sItem = new SelectItem(data.getCdData(), DateUtil.dateToStr( data.getDtData() ));
+				getDatasencerradas().add( sItem );
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+	}
+	
 	public String abrirConPontosCartoes() {
 		 try {
 			 setCdData( null );
 			 setRows( null );
-			 this.populaComboDatas();
+			 this.populaComboDatasEncerradas();
 			 
 			 List<AproveitamentoDTO> dtos = super.getLotecaService().findAllRanking(this.getLotecaativa().getCdLoteca(), null);
 			 setDtos( dtos );
@@ -113,7 +129,7 @@ public class UsuariodataBean extends AbstractManegedBean<Usuariodata> implements
 		 try {
 			 setCdData( null );
 			 setRows( null );
-			 this.populaComboDatas();
+			 this.populaComboDatasLotecaAtiva();
 			 
        } catch (Exception e) {
       	 	e.printStackTrace();
@@ -121,19 +137,45 @@ public class UsuariodataBean extends AbstractManegedBean<Usuariodata> implements
 		return "/pages/user/usuariodata/eltcConHistoricoApostas.xhtml";
 	}
 	
+	private void processaListaHistorico() {
+		for (Histusuariodata hdata : this.historicos) {
+			hdata.inicializaRelacionamentos();
+			
+			String deBytes = hdata.getDeBytesjogo();
+			for (Jogo jogo : usuariodata.getData().getJogos()) {
+				Jogousuario jogousuario = new Jogousuario();
+				jogousuario.setJogo(jogo);
+				
+				String aposta = deBytes.substring(0, 3);
+				jogousuario.setFlColuna1( Long.valueOf( aposta.substring(0,1) ) );
+				jogousuario.setFlEmpate( Long.valueOf(  aposta.substring(1,2) ) );
+				jogousuario.setFlColuna2( Long.valueOf( aposta.substring(2,3)) );
+				
+				hdata.getJogousuarios().add(jogousuario);
+				
+				deBytes = deBytes.substring(3);
+			}
+			
+		}
+		
+	}
+	
 	public void carregaHistoricoApostasChange(ValueChangeEvent event) {
 		try {
+			usuariodata = new Usuariodata();
 			historicos = new ArrayList<Histusuariodata>();
-			Usuario usuario = super.getUsuariologado();
-			Lotecausuario lotecausuario = super.getLotecaService().findLotecausuarioAtivo(usuario);
-			Usuariodata usuariodata = new Usuariodata();
-			usuariodata.setLotecausuario(lotecausuario);
 			if ((Long)event.getNewValue() != null) {
+				Usuario usuario = super.getUsuariologado();
+				Lotecausuario lotecausuario = super.getLotecaService().findLotecausuarioAtivo(usuario);
+				
+				usuariodata.setLotecausuario(lotecausuario);
 				long cdData = (Long) event.getNewValue();
 				Data data = super.getLotecaService().findData( cdData );
 				usuariodata.setData(data);
+				usuariodata = super.getLotecaService().findUsuariodataFecth(lotecausuario, data);
 				
 				historicos = super.getLotecaService().findHistoricoUsuarioData(usuariodata);
+				this.processaListaHistorico();
 			} 
 		} catch (ServiceException e) {
 			e.printStackTrace();

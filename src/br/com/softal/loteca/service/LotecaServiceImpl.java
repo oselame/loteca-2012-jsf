@@ -569,6 +569,17 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 	}
 	
 	@Override
+	public Usuariodata findUsuariodata(Lotecausuario lotecausuario, Data data) throws ServiceException {
+		return getUsuariodataDAO().findUsuariodata(lotecausuario, data); 
+	}
+	
+	@Override
+	public Usuariodata findUsuariodataFecth(Lotecausuario lotecausuario, Data data) throws ServiceException {
+		return getUsuariodataDAO().findUsuariodataFecth(lotecausuario, data); 
+	}
+	
+	
+	@Override
 	public void processaResultadosData(Data data) throws ServiceException {
 		try {
 			Loteca lotecaativa = LtcServiceLocator.getInstance().getLotecaService().findLotecaAtiva();
@@ -734,6 +745,14 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 	public List<Data> findAllDatasEncerradas(Loteca loteca) throws ServiceException {
 		try {
 			return getDataDAO().findAllDatasEncerradas(loteca);
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
+	}
+	@Override
+	public List<Data> findAllDatas(Loteca loteca) throws ServiceException {
+		try {
+			return getDataDAO().findAllDatas(loteca);
 		} catch (Exception e) {
 			throw new ServiceException(e);
 		}

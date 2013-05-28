@@ -1,6 +1,8 @@
 package br.com.softal.loteca.model.histusuariodata;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.FetchType;
@@ -10,11 +12,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import br.com.softal.base.model.Entity;
+import br.com.softal.loteca.model.jogo.Jogo;
+import br.com.softal.loteca.model.jogousuario.Jogousuario;
 import br.com.softal.loteca.model.usuariodata.Usuariodata;
 
 @javax.persistence.Entity
@@ -27,9 +32,6 @@ public class Histusuariodata extends Entity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "nuSequencial")
 	private long nuSequencial;
-	
-	/*@Column(name = "nuSequsuariodata")
-	private long nuSequsuariodata;*/
 	
 	@Column(name = "deBytesjogo")
 	private String deBytesjogo;
@@ -44,15 +46,10 @@ public class Histusuariodata extends Entity {
 	@JoinColumn(name = "nuSequsuariodata", insertable = true, updatable = true)
 	@Fetch(FetchMode.JOIN)
 	private Usuariodata usuariodata;
-
-	/*public long getNuSequsuariodata() {
-		return nuSequsuariodata;
-	}
-
-	public void setNuSequsuariodata(long nuSequsuariodata) {
-		this.nuSequsuariodata = nuSequsuariodata;
-	}*/
-
+	
+	@Transient
+	private List<Jogousuario> jogousuarios;
+	
 	public long getNuSequencial() {
 		return nuSequencial;
 	}
@@ -92,10 +89,20 @@ public class Histusuariodata extends Entity {
 	public void setUsuariodata(Usuariodata usuariodata) {
 		this.usuariodata = usuariodata;
 	}
+	
+
+	public List<Jogousuario> getJogousuarios() {
+		return jogousuarios;
+	}
+
+	public void setJogousuarios(List<Jogousuario> jogousuarios) {
+		this.jogousuarios = jogousuarios;
+	}
 
 	@Override
 	public void inicializaRelacionamentos() {
 		setUsuariodata(new Usuariodata());		
+		setJogousuarios(new ArrayList<Jogousuario>());
 	}
 	
 

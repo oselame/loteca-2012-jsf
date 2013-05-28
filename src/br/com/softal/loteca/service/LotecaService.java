@@ -37,6 +37,8 @@ public interface LotecaService extends DefaultService {
 	Lotecausuario findLotecausuario(Lotecausuario lotecausuario) throws ServiceException;
 	
 	List<Usuariodata> findAllUsuariodata(Loteca lotecaativa, Data data) throws ServiceException;
+	Usuariodata findUsuariodata(Lotecausuario lotecausuario, Data data) throws ServiceException;
+	Usuariodata findUsuariodataFecth(Lotecausuario lotecausuario, Data data) throws ServiceException;
 	
 	List<Clube> findAllClubeByLoteca(long cdLoteca) throws ServiceException;
 	List<Clubeusuario> findAllClubeusuario(Clubeusuario clubeusuario) throws ServiceException;
@@ -47,6 +49,7 @@ public interface LotecaService extends DefaultService {
 	List<AproveitamentoDTO> findAllRanking(Long cdLoteca, Long cdData) throws ServiceException;
 	
 	List<Data> findAllDatasEncerradas(Loteca loteca) throws ServiceException;
+	List<Data> findAllDatas(Loteca loteca) throws ServiceException;
 	Data findUltimaDataEncerrada(Loteca loteca) throws ServiceException;
 	void deleteClassifclube(Data data) throws ServiceException;
 	void processaResultadosData(Data data) throws ServiceException;
