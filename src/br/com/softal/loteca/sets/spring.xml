@@ -36,6 +36,7 @@
 				<value>br.com.softal.loteca.model.loteca.Loteca</value>
 				<value>br.com.softal.loteca.model.lotecausuario.Lotecausuario</value>
 				<value>br.com.softal.loteca.model.usuariodata.Usuariodata</value>
+				<value>br.com.softal.loteca.model.histusuariodata.Histusuariodata</value>
 			</list>
 		</property>
 		

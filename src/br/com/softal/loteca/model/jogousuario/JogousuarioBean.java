@@ -17,9 +17,11 @@ import br.com.softal.base.util.EmailUtil;
 import br.com.softal.loteca.LtcServiceLocator;
 import br.com.softal.loteca.dto.ApostaDto;
 import br.com.softal.loteca.model.data.Data;
+import br.com.softal.loteca.model.histusuariodata.Histusuariodata;
 import br.com.softal.loteca.model.loteca.Loteca;
 import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
 import br.com.softal.loteca.model.usuariodata.AproveitamentoDTO;
+import br.com.softal.loteca.model.usuariodata.Usuariodata;
 
 @SuppressWarnings("serial")
 @ManagedBean(name="jogousuarioBean")

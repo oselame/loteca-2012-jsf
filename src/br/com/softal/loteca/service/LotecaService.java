@@ -12,6 +12,7 @@ import br.com.softal.loteca.model.clube.Clube;
 import br.com.softal.loteca.model.clube.ClubeDTO;
 import br.com.softal.loteca.model.clubeusuario.Clubeusuario;
 import br.com.softal.loteca.model.data.Data;
+import br.com.softal.loteca.model.histusuariodata.Histusuariodata;
 import br.com.softal.loteca.model.jogousuario.Jogousuario;
 import br.com.softal.loteca.model.loteca.Loteca;
 import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
@@ -77,5 +78,7 @@ public interface LotecaService extends DefaultService {
 	List<ClubeDTO> findAllVotosRebaixados(long cdLoteca) throws ServiceException;
 	
 	List<AproveitamentoDTO> findAllCampeoes() throws ServiceException;
+	
+	List<Histusuariodata> findHistoricoUsuarioData(Usuariodata usuariodata) throws ServiceException;
 
 }

@@ -14,6 +14,7 @@ import org.hibernate.Transaction;
 import br.com.softal.base.dao.DaoException;
 import br.com.softal.base.dao.GenericDAOImpl;
 import br.com.softal.loteca.model.data.Data;
+import br.com.softal.loteca.model.histusuariodata.Histusuariodata;
 import br.com.softal.loteca.model.jogousuario.Jogousuario;
 import br.com.softal.loteca.model.loteca.Loteca;
 import br.com.softal.loteca.model.lotecausuario.Lotecausuario;
@@ -436,6 +437,28 @@ public class HbnUsuariodataDAO extends GenericDAOImpl<Usuariodata> implements Us
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		return lista;
+	}
+	
+	public List<Histusuariodata> findHistoricoUsuarioData(Usuariodata usuariodata) {
+		List<Histusuariodata> lista = new ArrayList<Histusuariodata>();
+		StringBuilder hql = new StringBuilder();
+		hql.append("FROM Histusuariodata ud ");
+		hql.append("WHERE ud.usuariodata.nuSequsuariodata = :nuSequsuariodata ");
+		hql.append("order by ud.nuSequencial desc ");
+		Session session = getHibernateTemplate().getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			Query query = session.createQuery(hql.toString());
+			query.setLong("nuSequsuariodata", usuariodata.getNuSequsuariodata() );
+			lista = query.list();
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
 		}
 		return lista;
 	}
