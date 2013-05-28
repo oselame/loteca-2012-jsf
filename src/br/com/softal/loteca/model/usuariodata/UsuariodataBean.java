@@ -130,7 +130,7 @@ public class UsuariodataBean extends AbstractManegedBean<Usuariodata> implements
 			 setCdData( null );
 			 setRows( null );
 			 this.populaComboDatasLotecaAtiva();
-			 
+			 historicos = new ArrayList<Histusuariodata>();
        } catch (Exception e) {
       	 	e.printStackTrace();
        }	

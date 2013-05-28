@@ -233,7 +233,7 @@ public class JogousuarioBean extends AbstractManegedBean<Jogousuario> implements
 				super.getMessages().addWarningMessage("msg_warning_nenhum_email_valido_informado");
 				return;
 			}
-			super.getLotecaService().saveAllJogousuario( getJogousuarios() );
+			//--super.getLotecaService().saveAllJogousuario( getJogousuarios() );
 			EmailJogousuario.enviaEmailJogousuarioParaLista(getJogousuarios(), getUsuariologado(), getAposta());
 			super.getMessages().addSucessMessage("msg_sucess_email_enviado_com_sucesso");
 		} catch (Exception e) {
