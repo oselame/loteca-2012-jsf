@@ -18,6 +18,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import br.com.softal.base.model.Entity;
+import br.com.softal.base.util.DateUtil;
 import br.com.softal.loteca.model.jogo.Jogo;
 import br.com.softal.loteca.model.jogousuario.Jogousuario;
 import br.com.softal.loteca.model.usuariodata.Usuariodata;
@@ -104,6 +105,15 @@ public class Histusuariodata extends Entity {
 		setUsuariodata(new Usuariodata());		
 		setJogousuarios(new ArrayList<Jogousuario>());
 	}
+	
+	public String getDtCadastrostr() {
+		return DateUtil.dateTimeToStr(getDtCadastro());
+	}
+	
+	public String getFlGeradoaleatstr() {
+		return flGeradoaleat == 1 ? "Aleatorio: Sim" : "Aleatorio: Não";
+	}
+
 	
 
 }
