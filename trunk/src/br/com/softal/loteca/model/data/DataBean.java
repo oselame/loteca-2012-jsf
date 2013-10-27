@@ -160,6 +160,9 @@ public class DataBean extends AbstractManegedBean<Data> {
 	public void processarResultados() {
 		try {
 			LtcServiceLocator.getInstance().getLotecaService().processaResultadosData(getEntity());
+			
+			LtcServiceLocator.getInstance().getLotecaService().processarHistoricoData(getEntity());
+			
 			getEntity().setFlAtualizouresultados(1l);
 			this.save();
 			super.getMessages().addSucessMessage("msg_sucess_processamento_resultado");

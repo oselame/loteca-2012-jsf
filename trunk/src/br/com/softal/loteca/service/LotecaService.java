@@ -53,6 +53,8 @@ public interface LotecaService extends DefaultService {
 	Data findUltimaDataEncerrada(Loteca loteca) throws ServiceException;
 	void deleteClassifclube(Data data) throws ServiceException;
 	void processaResultadosData(Data data) throws ServiceException;
+	void processarHistoricoData(Data data) throws ServiceException;
+	
 	Data findData(Long cdData) throws ServiceException;
 	
 	void geraClassificacao(Loteca loteca, Data data) throws ServiceException;

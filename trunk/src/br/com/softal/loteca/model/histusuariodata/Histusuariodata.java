@@ -43,6 +43,9 @@ public class Histusuariodata extends Entity {
 	@Column(name = "flGeradoaleat")
 	private long flGeradoaleat;
 	
+	@Column(name = "nuPontos")
+	private Long nuPontos;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "nuSequsuariodata", insertable = true, updatable = true)
 	@Fetch(FetchMode.JOIN)
@@ -113,7 +116,17 @@ public class Histusuariodata extends Entity {
 	public String getFlGeradoaleatstr() {
 		return flGeradoaleat == 1 ? "Aleatorio: Sim" : "Aleatorio: Não";
 	}
-
 	
+	public String getNuPontosstr() {
+		return "Pontos: " + this.getNuPontos();
+	}
 
+	public Long getNuPontos() {
+		return nuPontos;
+	}
+
+	public void setNuPontos(Long nuPontos) {
+		this.nuPontos = nuPontos;
+	}
+	
 }

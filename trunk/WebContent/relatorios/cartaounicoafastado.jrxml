@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="255" pageHeight="425" columnWidth="255" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
-	<property name="ireport.zoom" value="1.6105100000000014"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="232" pageHeight="399" columnWidth="232" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="18bf38e0-2dcb-4cd5-8fe7-1edc01fe3092">
+	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="100"/>
+	<property name="ireport.y" value="290"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -63,10 +63,17 @@
 	<field name="flLinha14Empate" class="java.lang.Long"/>
 	<field name="flLinha14Coluna2" class="java.lang.Long"/>
 	<field name="flLinha14Duplo" class="java.lang.Long"/>
+	<field name="cdData" class="java.lang.Long"/>
 	<detail>
-		<band height="398" splitType="Stretch">
+		<band height="399" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement uuid="9a76d7ba-5ee5-4602-8468-5023330b9dbe" x="0" y="0" width="232" height="399">
+					<printWhenExpression><![CDATA["1".equals("2")]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA["C:\\Java\\eclipse\\kepler\\workspace\\LotecaJsf\\WebContent\\relatorios\\digitalizar0008-y.jpg"]]></imageExpression>
+			</image>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="33" y="105" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="8c3d7e8c-51f7-4bc1-b66e-d473517c7da5" mode="Opaque" x="33" y="88" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha1Coluna1} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -74,7 +81,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="105" y="105" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="3935cf32-e14f-40ee-ae81-f8bd4a65a24b" mode="Opaque" x="105" y="88" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha1Empate} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -82,7 +89,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="178" y="105" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="c16bc11a-fb69-47b1-9a75-bbee59a5a679" mode="Opaque" x="178" y="88" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha1Coluna2} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -90,7 +97,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="196" y="105" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="cff584ad-acb6-4e84-adce-49066682d2a9" mode="Opaque" x="196" y="88" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha1Duplo} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -98,7 +105,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="105" y="119" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="0307e5f8-d7da-47dc-9820-0b859449d9ad" mode="Opaque" x="105" y="101" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha2Empate} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -106,7 +113,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="33" y="119" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="c7d93200-75c8-4b2f-9a52-bdc6e73e9aa2" mode="Opaque" x="33" y="101" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha2Coluna1} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -114,7 +121,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="196" y="119" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="1cbc7b90-5d5c-459d-99e3-5b3fa7435ef8" mode="Opaque" x="196" y="101" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha2Duplo} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -122,7 +129,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="178" y="119" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="2848acbb-4642-4ef7-9ce3-42252cc0e269" mode="Opaque" x="178" y="101" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha2Coluna2} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -130,7 +137,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="105" y="133" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="1cd01671-c749-4f1f-aafa-9c8451cd5813" mode="Opaque" x="105" y="116" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha3Empate} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -138,7 +145,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="178" y="133" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="68c0aa3d-3b31-4f7c-9bef-3aec6827e440" mode="Opaque" x="178" y="116" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha3Coluna2} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -146,7 +153,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="33" y="133" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="ea04478d-3671-40bd-8f04-203ae10dc279" mode="Opaque" x="33" y="116" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha3Coluna1} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -154,7 +161,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="196" y="133" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="f9f2534d-40e6-4d66-bb67-c4703d682f88" mode="Opaque" x="196" y="116" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha3Duplo} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -162,7 +169,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="105" y="147" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="fd0d8584-39fb-4b5f-b9a3-aff1e123811f" mode="Opaque" x="105" y="130" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha4Empate} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -170,7 +177,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="178" y="147" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="ca9f1e98-1c44-408c-ad53-68151ca255d8" mode="Opaque" x="178" y="130" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha4Coluna2} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -178,7 +185,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="33" y="147" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="c958d649-67a7-414a-93b4-211512e1e9a8" mode="Opaque" x="33" y="130" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha4Coluna1} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -186,7 +193,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="196" y="147" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="b5282bf1-8331-4c4a-be98-0f676eb920fd" mode="Opaque" x="196" y="130" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha4Duplo} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -194,7 +201,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="178" y="160" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="9390e9b3-4450-4991-aeb8-263bc71d7b02" mode="Opaque" x="178" y="143" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha5Coluna2} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -202,7 +209,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="196" y="160" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="ebd71351-eb01-45c6-92ba-d362c7083135" mode="Opaque" x="196" y="143" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha5Duplo} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -210,7 +217,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="105" y="160" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="9b4bde82-77ab-4905-bc07-e598bace7d65" mode="Opaque" x="105" y="143" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha5Empate} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -218,7 +225,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="33" y="160" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="ad4c291a-2682-4c99-8f34-bcc669edd563" mode="Opaque" x="33" y="143" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha5Coluna1} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -226,7 +233,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="178" y="174" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="6eb88b1e-930d-4305-9585-fead990e1188" mode="Opaque" x="178" y="157" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha6Coluna2} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -234,7 +241,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="105" y="174" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="c95b8739-1795-455b-9940-9ab74f265b6f" mode="Opaque" x="105" y="157" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha6Empate} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -242,7 +249,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="33" y="174" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="cf2d46bf-631c-47e3-9766-c878b76feeb1" mode="Opaque" x="33" y="157" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha6Coluna1} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -250,7 +257,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="196" y="174" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="7c69a4b8-41a2-4f42-b5df-2e1396f1393c" mode="Opaque" x="196" y="157" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha6Duplo} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -258,7 +265,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="105" y="188" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="436e9f67-360d-4a17-a6c1-e16b226d6880" mode="Opaque" x="105" y="172" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha7Empate} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -266,7 +273,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="33" y="188" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="b6c7ae99-2b81-4884-9a68-6e12746360ff" mode="Opaque" x="33" y="172" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha7Coluna1} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -274,7 +281,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="196" y="188" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="bef303be-c63c-4641-962b-a4b31df1edbe" mode="Opaque" x="196" y="172" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha7Duplo} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -282,7 +289,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="178" y="188" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="15d4a60b-ea9c-4039-bfea-ab501eb13ec4" mode="Opaque" x="178" y="172" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha7Coluna2} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -290,7 +297,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="196" y="201" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="6f1b1b1d-543b-4c24-a47f-46f143a01313" mode="Opaque" x="196" y="186" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha8Duplo} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -298,7 +305,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="105" y="201" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="c185eedc-bb68-4edb-b186-5158e65816d3" mode="Opaque" x="105" y="186" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha8Empate} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -306,7 +313,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="178" y="201" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="398348d9-9a34-49f9-b981-d95bf96bf829" mode="Opaque" x="178" y="186" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha8Coluna2} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -314,7 +321,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="33" y="201" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="cb561cb8-5dbe-4b19-898e-2c856b598986" mode="Opaque" x="33" y="186" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha8Coluna1} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -322,7 +329,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="33" y="214" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="1c636f47-4961-4a63-a27b-0562c4426438" mode="Opaque" x="33" y="199" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha9Coluna1} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -330,7 +337,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="105" y="214" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="4178471d-cee8-402e-a446-ac14a17f1e2b" mode="Opaque" x="105" y="199" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha9Empate} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -338,7 +345,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="178" y="214" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="001273b3-d46d-4a96-9d90-44c4f98da2df" mode="Opaque" x="178" y="199" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha9Coluna2} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -346,7 +353,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="196" y="214" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="260aabcf-0d8a-4838-9d4d-3834df68353d" mode="Opaque" x="196" y="199" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha9Duplo} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -354,7 +361,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="105" y="227" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="ac23f873-ef0e-4653-8770-595fcc103aa4" mode="Opaque" x="105" y="213" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha10Empate} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -362,7 +369,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="196" y="227" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="97c0628f-9b19-4b15-a5d0-a5d78cdd54ac" mode="Opaque" x="196" y="213" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha10Duplo} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -370,7 +377,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="33" y="227" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="0fb19934-6450-409a-8297-d00a67ecefa3" mode="Opaque" x="33" y="213" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha10Coluna1} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -378,7 +385,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="178" y="227" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="734079f9-648d-430f-aa1d-2b7dba5f41a6" mode="Opaque" x="178" y="213" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha10Coluna2} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -386,7 +393,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="105" y="241" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="3e1b5dd9-2211-44a9-98b2-32713eea5a9f" mode="Opaque" x="105" y="227" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha11Empate} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -394,7 +401,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="33" y="241" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="8b535352-dad3-4f37-ba17-1edae962f7b5" mode="Opaque" x="33" y="227" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha11Coluna1} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -402,7 +409,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="178" y="241" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="07241fb4-773e-4016-b7e9-e9664603108b" mode="Opaque" x="178" y="227" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha11Coluna2} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -410,7 +417,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="196" y="241" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="11cd323b-fca0-485a-96af-b87d898cd779" mode="Opaque" x="196" y="227" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha11Duplo} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -418,7 +425,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="33" y="255" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="e3d9460a-f507-45e4-93d7-6076e1ac3995" mode="Opaque" x="33" y="240" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha12Coluna1} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -426,7 +433,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="178" y="255" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="241cfd45-a0b8-46db-ae3e-e9b81046bd6c" mode="Opaque" x="178" y="240" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha12Coluna2} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -434,7 +441,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="196" y="255" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="2efa2a22-a78a-4a52-9282-e5b957105997" mode="Opaque" x="196" y="240" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha12Duplo} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -442,7 +449,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="105" y="255" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="73985e9c-745d-45fa-aee0-f1cb0df1da9a" mode="Opaque" x="105" y="240" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha12Empate} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -450,7 +457,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="105" y="268" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="4961b95f-2f71-4733-bfde-e85b75ddaca1" mode="Opaque" x="105" y="252" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha13Empate} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -458,7 +465,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="196" y="268" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="33790dee-3687-4162-8f0e-4f46d050c6ab" mode="Opaque" x="196" y="252" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha13Duplo} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -466,7 +473,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="178" y="268" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="8e86a13a-d6be-4e67-ab12-6430e58d7b6a" mode="Opaque" x="178" y="252" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha13Coluna2} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -474,7 +481,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="33" y="268" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="d1fde8c0-4b91-4b7f-91ff-aa49f9031c52" mode="Opaque" x="33" y="252" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha13Coluna1} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -482,7 +489,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="196" y="280" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="55bacc44-bf8c-4f10-a841-76b8943c3694" mode="Opaque" x="196" y="264" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha14Duplo} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -490,7 +497,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="178" y="280" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="f58a2694-7ff7-48bb-af68-123a7dd26fdc" mode="Opaque" x="178" y="264" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha14Coluna2} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -498,7 +505,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="105" y="280" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="cc0edddf-314c-41d8-8bcb-f5409ff2c306" mode="Opaque" x="105" y="264" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha14Empate} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -506,7 +513,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="2">
-				<reportElement mode="Opaque" x="33" y="280" width="8" height="5" backcolor="#000000">
+				<reportElement uuid="3d7c9b0c-0896-43fb-a871-2d5bcf564510" mode="Opaque" x="33" y="264" width="8" height="5" backcolor="#000000">
 					<printWhenExpression><![CDATA[$F{flLinha14Coluna1} == 1]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -514,9 +521,18 @@
 				</graphicElement>
 			</rectangle>
 			<textField>
-				<reportElement x="20" y="337" width="100" height="20"/>
-				<textElement/>
+				<reportElement uuid="956fb753-1d83-4335-8776-accad476ff4c" x="13" y="272" width="131" height="14"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{deLogin}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="42f34ad1-1850-4d84-83c9-987001d44453" x="144" y="272" width="73" height="14"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Conc.: " + $F{cdData}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
