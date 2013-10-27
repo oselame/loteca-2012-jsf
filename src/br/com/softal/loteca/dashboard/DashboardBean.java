@@ -177,8 +177,7 @@ public class DashboardBean implements Serializable {
 
 	private boolean carregaRanking() {
 		try {
-			setRanking(LtcServiceLocator.getInstance().getLotecaService()
-					.findAllDadosRankingLotecaAtiva());
+			setRanking(LtcServiceLocator.getInstance().getLotecaService().findAllDadosRankingLotecaAtiva());
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;

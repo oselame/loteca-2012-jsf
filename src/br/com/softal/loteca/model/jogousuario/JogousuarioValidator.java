@@ -1,9 +1,12 @@
 package br.com.softal.loteca.model.jogousuario;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import br.com.softal.base.service.ServiceException;
+import br.com.softal.loteca.model.jogo.Jogo;
+import br.com.softal.loteca.util.Enuns.TipoJogo;
 
 
 public class JogousuarioValidator {
@@ -93,5 +96,34 @@ public class JogousuarioValidator {
 			deBytes += ju.getFlColuna1().toString() + ju.getFlEmpate().toString() + ju.getFlColuna2().toString();
 		}
 		return deBytes;
+	}
+	
+	public static List<Jogousuario> getJogousuario(List<Jogo> jogos, String historico) {
+		List<Jogousuario> lista = new ArrayList<Jogousuario>();
+		int j = 0;
+		for (int i = 0; i < 14;i++) {
+			String sub = historico.substring(j, j+3);
+			
+			j = j + 3;		
+			
+			Jogousuario ju = new Jogousuario();
+			ju.setJogo( jogos.get(i) );
+			ju.setFlColuna1( Long.valueOf(sub.substring(0,1)) );
+			ju.setFlEmpate(  Long.valueOf(sub.substring(1,2)) );
+			ju.setFlColuna2( Long.valueOf(sub.substring(2,3)) );
+			
+			ju.setTpJogo( TipoJogo.SIMPLES.longValue() );
+			if (ju.getFlColuna1() == 1 && ju.getFlEmpate() == 1) {
+				ju.setTpJogo( TipoJogo.DUPLO.longValue() );
+			} 
+			if (ju.getFlColuna1() == 1 && ju.getFlColuna2() == 1) {
+				ju.setTpJogo( TipoJogo.DUPLO.longValue() );
+			}
+			if (ju.getFlEmpate() == 1 && ju.getFlColuna2() == 1) {
+				ju.setTpJogo( TipoJogo.DUPLO.longValue() );
+			}
+			lista.add( ju );
+		}
+		return lista;
 	}
 }

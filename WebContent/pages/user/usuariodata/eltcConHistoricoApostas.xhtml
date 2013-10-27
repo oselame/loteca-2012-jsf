@@ -27,7 +27,7 @@
 			
 			
 			<p:accordionPanel  value="#{usuariodataBean.historicos}" var="jogo" >
-				<p:tab title="#{jogo.dtCadastrostr} - #{jogo.flGeradoaleatstr}" >
+				<p:tab title="#{jogo.dtCadastrostr} - #{jogo.flGeradoaleatstr} - #{jogo.nuPontosstr}" >
 						<p:dataTable id="jogousuarios" var="row" value="#{jogo.jogousuarios}"
 							rowKey="#{row.nuSeqjogousuario}" emptyMessage="#{msg.warning_nenhum_registro_encontrado}">
 							<p:column headerText="#{msg.jogo_usuario_jogo_cdjogo}"  style="width:40px;" styleClass="#{row.tpJogo eq 1 ? 'linhaDuplo' : ''}">

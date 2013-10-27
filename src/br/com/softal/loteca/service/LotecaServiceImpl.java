@@ -28,6 +28,7 @@ import br.com.softal.loteca.model.clubeusuario.HbnClubeusuarioDAO;
 import br.com.softal.loteca.model.data.Data;
 import br.com.softal.loteca.model.data.HbnDataDAO;
 import br.com.softal.loteca.model.histusuariodata.Histusuariodata;
+import br.com.softal.loteca.model.jogo.HbnJogoDAO;
 import br.com.softal.loteca.model.jogo.Jogo;
 import br.com.softal.loteca.model.jogousuario.HbnJogousuarioDAO;
 import br.com.softal.loteca.model.jogousuario.Jogousuario;
@@ -57,7 +58,16 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 	private HbnJogousuarioDAO jogousuarioDAO;
 	private HbnUsuariodataDAO usuariodataDAO;
 	private HbnDataDAO dataDAO;
+	private HbnJogoDAO jogoDAO;
 	
+	private HbnJogoDAO getJogoDAO() {
+		return jogoDAO;
+	}
+
+	public void setJogoDAO(HbnJogoDAO jogoDAO) {
+		this.jogoDAO = jogoDAO;
+	}
+
 	private HbnDataDAO getDataDAO() {
 		return dataDAO;
 	}
@@ -382,60 +392,65 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 		
 	}
 	
+	private long processaResultadoCanhotosListaJogoUsuario(List<Jogousuario> jogosusuario) {
+		long nuPontoscartao = 0;
+		for (Jogousuario jogousuario : jogosusuario) {
+			/**************************** JOGO SIMPLES ****************************/
+			if (jogousuario.getTpJogo().longValue() == TipoJogo.SIMPLES.longValue()) {
+				//-- Coluna 1
+				if (jogousuario.getJogo().getTpResultadofinal().longValue() == TipoResultado.COLUNA1.longValue()  &&  jogousuario.getFlColuna1().longValue() == 1) {
+					nuPontoscartao++;
+				} else
+				//-- Empate
+				if (jogousuario.getJogo().getTpResultadofinal().longValue() == TipoResultado.EMPATE.longValue() &&  jogousuario.getFlEmpate().longValue() == 1) {
+					nuPontoscartao++;
+				} else
+				//-- Coluna 2
+				if (jogousuario.getJogo().getTpResultadofinal().longValue() == TipoResultado.COLUNA2.longValue() &&  jogousuario.getFlColuna2().longValue() == 1) {
+					nuPontoscartao++;
+				}
+			}
+			
+			/**************************** JOGO DUPLO ****************************/
+			if (jogousuario.getTpJogo().longValue() == TipoJogo.DUPLO.longValue()) {
+				//-- Coluna 1
+				if (jogousuario.getJogo().getTpResultadofinal().longValue() == TipoResultado.COLUNA1.longValue() &&  jogousuario.getFlColuna1().longValue() == 1) {
+					nuPontoscartao++;
+				} else
+				//-- Empate
+				if (jogousuario.getJogo().getTpResultadofinal().longValue() == TipoResultado.EMPATE.longValue() &&  jogousuario.getFlEmpate().longValue() == 1) {
+					nuPontoscartao++;
+				} else
+				//-- Coluna 2
+				if (jogousuario.getJogo().getTpResultadofinal().longValue() == TipoResultado.COLUNA2.longValue() &&  jogousuario.getFlColuna2().longValue() == 1) {
+					nuPontoscartao++;
+				}
+			}
+			
+			/**************************** JOGO TRIPLO ****************************/
+			if (jogousuario.getTpJogo().longValue() == TipoJogo.TRIPLO.longValue()) {
+				//-- Coluna 1
+				if (jogousuario.getFlColuna1().longValue() == 1) {
+					nuPontoscartao++;
+				} else
+				//-- Empate
+				if (jogousuario.getFlEmpate().longValue() == 1) {
+					nuPontoscartao++;
+				} else
+				//-- Coluna 2
+				if (jogousuario.getFlColuna2().longValue() == 1) {
+					nuPontoscartao++;
+				}
+			}
+		}
+		return nuPontoscartao;
+	}
+	
 	private void processaResultadoCanhotos(Loteca lotecaativa, Data data, List<Lotecausuario> usuarios) {
 		//-- Calculando o resultado dos canhotos
 		for (Lotecausuario lu : usuarios) {
 			List<Jogousuario> jogosusuario = getJogousuarioDAO().findAllJogoUsuario(data, lu);
-			long nuPontoscartao = 0;
-			for (Jogousuario jogousuario : jogosusuario) {
-				/**************************** JOGO SIMPLES ****************************/
-				if (jogousuario.getTpJogo().longValue() == TipoJogo.SIMPLES.longValue()) {
-					//-- Coluna 1
-					if (jogousuario.getJogo().getTpResultadofinal().longValue() == TipoResultado.COLUNA1.longValue()  &&  jogousuario.getFlColuna1().longValue() == 1) {
-						nuPontoscartao++;
-					} else
-					//-- Empate
-					if (jogousuario.getJogo().getTpResultadofinal().longValue() == TipoResultado.EMPATE.longValue() &&  jogousuario.getFlEmpate().longValue() == 1) {
-						nuPontoscartao++;
-					} else
-					//-- Coluna 2
-					if (jogousuario.getJogo().getTpResultadofinal().longValue() == TipoResultado.COLUNA2.longValue() &&  jogousuario.getFlColuna2().longValue() == 1) {
-						nuPontoscartao++;
-					}
-				}
-				
-				/**************************** JOGO DUPLO ****************************/
-				if (jogousuario.getTpJogo().longValue() == TipoJogo.DUPLO.longValue()) {
-					//-- Coluna 1
-					if (jogousuario.getJogo().getTpResultadofinal().longValue() == TipoResultado.COLUNA1.longValue() &&  jogousuario.getFlColuna1().longValue() == 1) {
-						nuPontoscartao++;
-					} else
-					//-- Empate
-					if (jogousuario.getJogo().getTpResultadofinal().longValue() == TipoResultado.EMPATE.longValue() &&  jogousuario.getFlEmpate().longValue() == 1) {
-						nuPontoscartao++;
-					} else
-					//-- Coluna 2
-					if (jogousuario.getJogo().getTpResultadofinal().longValue() == TipoResultado.COLUNA2.longValue() &&  jogousuario.getFlColuna2().longValue() == 1) {
-						nuPontoscartao++;
-					}
-				}
-				
-				/**************************** JOGO TRIPLO ****************************/
-				if (jogousuario.getTpJogo().longValue() == TipoJogo.TRIPLO.longValue()) {
-					//-- Coluna 1
-					if (jogousuario.getFlColuna1().longValue() == 1) {
-						nuPontoscartao++;
-					} else
-					//-- Empate
-					if (jogousuario.getFlEmpate().longValue() == 1) {
-						nuPontoscartao++;
-					} else
-					//-- Coluna 2
-					if (jogousuario.getFlColuna2().longValue() == 1) {
-						nuPontoscartao++;
-					}
-				}
-			}
+			long nuPontoscartao = this.processaResultadoCanhotosListaJogoUsuario(jogosusuario);
 			
 			//-- Atualiza Pontos Cartao Usuario
 			Usuariodata usuariodata = getUsuariodataDAO().findUsuariodata( jogosusuario.get(0) );
@@ -589,8 +604,32 @@ public class LotecaServiceImpl extends DefaultServiceImpl implements LotecaServi
 			this.processaResultadoListas(lotecaativa, data, usuarios);
 			
 			List<Usuariodata> usuariodatas = getUsuariodataDAO().findAllUsuarioAtivoPordata(lotecaativa, data);
-			//this.atualizaPosicaoJogadorRodada(usuariodatas);
 			this.atualizaPosicaoJogadorLoteca(lotecaativa, data, usuariodatas);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void processaResultadoHistorico(Loteca lotecaativa, Data data) throws DaoException {
+		List<Usuariodata> usuariodatas = getUsuariodataDAO().findAllUsuarioAtivoPordata(lotecaativa, data);
+		List<Jogo> jogos = getJogoDAO().findAllJogos(data);
+		for (Usuariodata usuariodata : usuariodatas) {
+			List<Histusuariodata> historicos = getUsuariodataDAO().findHistoricoUsuarioData( usuariodata );
+			for (Histusuariodata h : historicos) {
+				List<Jogousuario> jogosusuario = JogousuarioValidator.getJogousuario(jogos, h.getDeBytesjogo());
+				long nuPontos = this.processaResultadoCanhotosListaJogoUsuario(jogosusuario);
+				h.setNuPontos(nuPontos);
+				this.update(h);
+			}
+		}
+	}
+	
+	@Override
+	public void processarHistoricoData(Data data) throws ServiceException {
+		try {
+			Loteca lotecaativa = LtcServiceLocator.getInstance().getLotecaService().findLotecaAtiva();
+			this.processaResultadoHistorico(lotecaativa, data);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

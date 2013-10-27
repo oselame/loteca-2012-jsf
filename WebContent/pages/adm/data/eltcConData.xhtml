@@ -10,6 +10,13 @@
 
 	<ui:define name="context">
 			<h:form>
+				<h:panelGrid columns="2">
+					<p:commandButton value="#{msg.button_novo}"
+						action="#{dataBean.adicionar}" ajax="false" />
+				</h:panelGrid>
+			</h:form>
+	
+			<h:form>
 				<p:dataTable id="datas" var="row" value="#{dataBean.rows}"
 					rowKey="#{row.cdData}" selection="#{dataBean.entity}"
 					selectionMode="single" emptyMessage="#{msg.warning_nenhum_registro_encontrado}" >
@@ -39,12 +46,7 @@
 				<p:messages showDetail="true" showSummary="false" />
 			</h:form>
 
-			<h:form>
-				<h:panelGrid columns="2">
-					<p:commandButton value="#{msg.button_novo}"
-						action="#{dataBean.adicionar}" ajax="false" />
-				</h:panelGrid>
-			</h:form>
+			
 	</ui:define>
 </ui:composition>
 </html>
