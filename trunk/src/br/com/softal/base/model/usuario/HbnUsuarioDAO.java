@@ -87,14 +87,14 @@ public class HbnUsuarioDAO extends GenericDAOImpl<Usuario> implements UsuarioDAO
 		StringBuilder hql = new StringBuilder();
 		hql.append("FROM Usuario u ");
 		hql.append("LEFT JOIN FETCH u.projeto ");
-		hql.append("WHERE u.deLogin = :deLogin ");
-		hql.append("and u.deSenha = :deSenha ");
+		hql.append("WHERE upper(u.deLogin) = :deLogin ");
+		hql.append("and upper(u.deSenha) = :deSenha ");
 		Session session = getHibernateTemplate().getSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();
 		try {
 			Query query = session.createQuery( hql.toString() );
-			query.setString("deLogin", usuario.getDeLogin() );
-			query.setString("deSenha", usuario.getDeSenha() );
+			query.setString("deLogin", usuario.getDeLogin().toUpperCase() );
+			query.setString("deSenha", usuario.getDeSenha().toUpperCase() );
 			List<Usuario> lista = query.list();
 			if (lista.size() == 1) {
 				return lista.get(0);

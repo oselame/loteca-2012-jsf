@@ -194,7 +194,7 @@ public class InscricaousuarioBean extends AbstractManegedBean<Usuario> {
 			}
 			return "eltcCadUsuarioExistenteWizard.xhtml";
 		} catch (Exception e) {
-			super.getMessages().addWarningMessage("msg_warning_email_ja_cadastrado_na_base");
+			super.getMessages().addWarningMessage("msg_warning_usuario_senha_incorretos");
 			e.printStackTrace();
 		}
 		return null;
