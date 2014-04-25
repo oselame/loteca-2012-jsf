@@ -6,11 +6,26 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
+
 </h:head>	
 
 <ui:composition template="/templates/usuariotemplate.xhtml">
 	<ui:define name="context">
-		<h:form id="usuarioForm">
+	<!-- 
+	<script>
+		jQuery(document).ready(function() {
+			jQuery(".ui-orderlist-item TABLE TR TD").bind("mousedown", function( event, ui ) { 
+				jQuery(".ui-orderlist-item TABLE TR TD").each(
+					function(index, value) {
+					    var texto = jQuery(this).text().trim();
+					    console.log(index);
+					    alert(index);
+					});
+			});	
+		});
+	</script>
+	 -->
+		<h:form id="usuarioForm">			
 			<p:growl id="growl" showDetail="true" />
 			<p:panel header="Inscrição" rendered="#{!inscricaousuarioBean.existeusuario}">
 				<p:messages showDetail="true" showSummary="false" />
